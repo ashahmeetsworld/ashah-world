@@ -1,0 +1,36 @@
+---
+import site from '../data/site.json';
+import { u } from '../lib/url';
+import SocialIcons from './SocialIcons.astro';
+const year = new Date().getFullYear();
+---
+<footer>
+  <hr class="rule" />
+  <div class="wrap foot">
+    <div>
+      <p class="mono">{site.monogram}</p>
+      <p class="tag">{site.tagline}. {site.location}.</p>
+      <div class="icons"><SocialIcons /></div>
+    </div>
+    <div class="links">
+      <a href={u('/work/')}>Work</a>
+      <a href={u('/about/')}>About</a>
+      {/* <a href={u('/ubiquity/')}>Ubiquity</a>  archived 15 Oct 2026 */}
+      <a href={u('/contact/')}>Contact</a>
+      {/* <a href={u('/community/')}>Community</a>  hidden 17 Oct 2026; page kept as src/pages/_community.astro */}
+    </div>
+  </div>
+  <div class="wrap legal"><span>© {year} {site.name}</span><span>Every frame is a place you could step into.</span></div>
+</footer>
+<style>
+  footer { position: relative; padding-bottom: 40px; background: var(--midnight); }
+  .foot { display: flex; justify-content: space-between; gap: 40px; padding-block: 56px 40px; flex-wrap: wrap; }
+  .mono { font: italic 400 34px/1 var(--serif); margin: 0 0 10px; }
+  .tag { margin: 0; color: var(--ink-3); font-size: 14px; }
+  .icons { margin-top: 22px; }
+  .links { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: flex-start; max-width: 560px; }
+  .links a { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); padding: 6px 0; }
+  .links a:hover { color: var(--peach); }
+  .legal { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--ink-3); }
+  .legal span:last-child { font: italic 15px/1.2 var(--serif); }
+</style>

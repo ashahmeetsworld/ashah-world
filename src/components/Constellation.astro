@@ -1,0 +1,83 @@
+---
+// Cultural leadership, drawn: a light at the centre opens a line to each person
+// (the connector), then the lines between them light up (the conductor), and for
+// a moment the whole room flashes in sync.
+interface Props { talent: string[] }
+const { talent } = Astro.props;
+const W = 640, H = 560, CX = 320, CY = 278;
+let seed = 21;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const n = talent.length;
+const nodes = talent.map((name, i) => {
+  const a = -Math.PI / 2 + (i / n) * Math.PI * 2 + (r() - 0.5) * 0.25;
+  const rad = 195 + r() * 55;
+  const x = CX + Math.cos(a) * rad * 1.12, y = CY + Math.sin(a) * rad * 0.92;
+  return { name, x, y, right: Math.cos(a) >= 0, below: Math.sin(a) > 0.6, above: Math.sin(a) < -0.6 };
+});
+// links between people: neighbours plus a few across the room
+const links: [number, number][] = [];
+for (let i = 0; i < n; i++) links.push([i, (i + 1) % n]);
+for (let i = 0; i < n; i += 2) links.push([i, (i + 3) % n]);
+const len = (a: { x: number; y: number }, b: { x: number; y: number }) => Math.hypot(a.x - b.x, a.y - b.y).toFixed(0);
+const dust = Array.from({ length: 70 }, () => ({ x: r() * W, y: r() * H, s: r() < 0.15 ? 1.2 : 0.6, d: (r() * 6).toFixed(2) }));
+---
+<svg class="cst" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A light at the centre connecting ${talent.join(', ')}, then connecting them to each other`}>
+  <defs>
+    <radialGradient id="cst-core"><stop offset="0" stop-color="#FFF4E2" /><stop offset=".35" stop-color="#F2B48C" stop-opacity=".9" /><stop offset="1" stop-color="#D82A99" stop-opacity="0" /></radialGradient>
+    <radialGradient id="cst-halo"><stop offset="0" stop-color="#F2B48C" stop-opacity=".28" /><stop offset=".5" stop-color="#D82A99" stop-opacity=".1" /><stop offset="1" stop-color="#D82A99" stop-opacity="0" /></radialGradient>
+    <radialGradient id="cst-node"><stop offset="0" stop-color="#FFE3B8" /><stop offset=".4" stop-color="#F2B48C" stop-opacity=".7" /><stop offset="1" stop-color="#F2B48C" stop-opacity="0" /></radialGradient>
+  </defs>
+  {dust.map((d) => <circle class="dust" style={`animation-delay:-${d.d}s`} cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r={d.s} fill="#EDE6FF" />)}
+  <circle class="halo" cx={CX} cy={CY} r="210" fill="url(#cst-halo)" />
+
+  <g class="spokes" stroke="#F2B48C" stroke-linecap="round">
+    {nodes.map((p, i) => {
+      const L = len({ x: CX, y: CY }, p);
+      return <line style={`--l:${L};animation-delay:${(i * 0.32).toFixed(2)}s`} x1={CX} y1={CY} x2={p.x.toFixed(1)} y2={p.y.toFixed(1)} />;
+    })}
+  </g>
+  <g class="links" stroke="#E04BAE" stroke-linecap="round">
+    {links.map(([a, b], i) => {
+      const A = nodes[a], B = nodes[b];
+      return <line style={`--l:${len(A, B)};animation-delay:${(3.4 + i * 0.22).toFixed(2)}s`} x1={A.x.toFixed(1)} y1={A.y.toFixed(1)} x2={B.x.toFixed(1)} y2={B.y.toFixed(1)} />;
+    })}
+  </g>
+
+  {nodes.map((p, i) => (
+    <g class="node" style={`--d:${(i * 0.32 + 0.5).toFixed(2)}s`}>
+      <circle class="nglow" cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="18" fill="url(#cst-node)" />
+      <circle class="nflash" cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="30" fill="url(#cst-node)" />
+      <circle class="ncore" cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="3.2" fill="#FFF1DC" />
+      <text
+        x={(p.x + (p.above || p.below ? 0 : p.right ? 14 : -14)).toFixed(1)}
+        y={(p.y + (p.above ? -16 : p.below ? 24 : 4)).toFixed(1)}
+        text-anchor={p.above || p.below ? 'middle' : p.right ? 'start' : 'end'}
+      >{p.name}</text>
+    </g>
+  ))}
+  <circle class="core" cx={CX} cy={CY} r="34" fill="url(#cst-core)" />
+  <circle cx={CX} cy={CY} r="5" fill="#FFF8EE" />
+</svg>
+<style>
+  .cst { width: 100%; height: auto; display: block; overflow: visible; }
+  .dust { animation: dust 6s ease-in-out infinite; opacity: .5; }
+  .halo, .core { transform-box: fill-box; transform-origin: center; animation: breathe 7s ease-in-out infinite; }
+  text { font: 500 13px var(--sans); letter-spacing: .2em; text-transform: uppercase; fill: #EDE6F6; opacity: .85; }
+
+  /* one 12s cycle: spokes draw, links draw, everything flashes in sync, then it all settles */
+  .spokes line, .links line { stroke-dasharray: var(--l); stroke-dashoffset: var(--l); animation: draw 12s ease-in-out infinite; }
+  .spokes line { stroke-width: 1.2; stroke-opacity: .55; }
+  .links line { stroke-width: 1; stroke-opacity: .5; }
+  .node .nglow { transform-box: fill-box; transform-origin: center; animation: light 12s ease-in-out infinite; animation-delay: var(--d); opacity: .35; }
+  .node .ncore { animation: core 12s ease-in-out infinite; animation-delay: var(--d); }
+
+  @keyframes draw { 0% { stroke-dashoffset: var(--l); opacity: 1; } 12% { stroke-dashoffset: 0; } 70% { stroke-dashoffset: 0; opacity: 1; } 88%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+  @keyframes light { 0% { opacity: .25; transform: scale(.7); } 6% { opacity: 1; transform: scale(1.25); } 14%, 62% { opacity: .7; transform: scale(1); } 74%, 100% { opacity: .25; transform: scale(.8); } }
+  .nflash { opacity: 0; transform-box: fill-box; transform-origin: center; animation: sync 12s ease-in-out infinite; animation-delay: 4.6s; }
+  @keyframes sync { 0%, 50% { opacity: 0; transform: scale(.6); } 54% { opacity: 1; transform: scale(1.3); } 62%, 100% { opacity: 0; transform: scale(.8); } }
+  @keyframes core { 0%, 100% { opacity: .5; } 6%, 60% { opacity: 1; } }
+  @keyframes breathe { 0%, 100% { opacity: .8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+  @keyframes dust { 50% { opacity: .1; } }
+  @media (max-width: 760px) { text { font-size: 22px; letter-spacing: .12em; } }
+  @media (prefers-reduced-motion: reduce) { .spokes line, .links line { animation: none; stroke-dashoffset: 0; } }
+</style>

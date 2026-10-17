@@ -1,0 +1,21 @@
+---
+title: Project name
+summary: One sentence on what it is and why it matters.
+client: Brand name
+year: 2026
+skill: Campaign Marketing   # Creative Direction | Ecosystem Design | Cultural Leadership | Campaign Marketing
+role: What you did
+cover: /images/work/project-name/cover.webp
+coverRatio: landscape        # or portrait (4:5)
+featured: true
+order: 10
+gallery:
+  - image: /images/work/project-name/01.webp
+    caption: Optional caption
+---
+
+## The brief
+
+## The idea
+
+## The result

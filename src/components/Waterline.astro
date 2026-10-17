@@ -1,0 +1,57 @@
+---
+// Hard above the line, soft below: the city and its reflection.
+let seed = 31;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const W = 800, H = 560, L = 280;
+const b: { x: number; w: number; h: number }[] = [];
+let x = -10;
+while (x < W + 10) {
+  const w = 22 + r() * 44;
+  const c = Math.exp(-Math.pow((x - 420) / 260, 2));
+  b.push({ x, w, h: 30 + r() * 50 + c * (60 + r() * 130) });
+  x += w + (r() < 0.25 ? 4 + r() * 14 : 0);
+}
+const win: { x: number; y: number; c: string }[] = [];
+for (const k of b) for (let yy = L - k.h + 8; yy < L - 6; yy += 10) for (let xx = k.x + 4; xx < k.x + k.w - 5; xx += 8)
+  if (r() < 0.2) win.push({ x: xx, y: yy, c: r() < 0.55 ? '#F2B48C' : r() < 0.5 ? '#7FD8F0' : '#E04BAE' });
+const neon = [{ x: 210, y: L - 120, w: 3, h: 70, c: '#E04BAE' }, { x: 560, y: L - 150, w: 3, h: 90, c: '#7FD8F0' }];
+---
+<svg viewBox={`0 0 ${W} ${H}`} class="wl" aria-hidden="true">
+  <defs>
+    <linearGradient id="wl-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05081A"/><stop offset=".7" stop-color="#1A1550"/><stop offset="1" stop-color="#3A1F66"/></linearGradient>
+    <linearGradient id="wl-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22175A"/><stop offset="1" stop-color="#070B18"/></linearGradient>
+    <filter id="wl-drift" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004 0.09" numOctaves="2" seed="4">
+        <animate attributeName="baseFrequency" dur="14s" values="0.004 0.09;0.005 0.12;0.004 0.09" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" scale="16"/>
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+    <clipPath id="wl-clip"><rect width={W} height={H}/></clipPath>
+    <radialGradient id="wl-glow" cx="400" cy={L} r="380" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8A4C8E" stop-opacity=".55"/><stop offset="1" stop-color="#8A4C8E" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g clip-path="url(#wl-clip)">
+    <rect width={W} height={L} fill="url(#wl-sky)"/>
+    <rect y={L} width={W} height={H - L} fill="url(#wl-sea)"/>
+    <ellipse cx="400" cy={L} rx="420" ry="160" fill="url(#wl-glow)"/>
+    <g id="wl-city">
+      {b.map((k) => <rect x={k.x.toFixed(1)} y={(L - k.h).toFixed(1)} width={k.w.toFixed(1)} height={k.h.toFixed(1)} fill="#060A1C"/>)}
+      {win.map((w) => <rect x={w.x.toFixed(1)} y={w.y.toFixed(1)} width="3" height="4" fill={w.c} opacity=".9"/>)}
+      {neon.map((n) => <rect x={n.x} y={n.y} width={n.w} height={n.h} fill={n.c} style={`filter:drop-shadow(0 0 6px ${n.c})`}/>)}
+    </g>
+    <g filter="url(#wl-drift)" opacity=".6">
+      <g transform={`translate(0 ${2 * L}) scale(1 -1)`}>
+        {b.map((k) => <rect x={k.x.toFixed(1)} y={(L - k.h).toFixed(1)} width={k.w.toFixed(1)} height={k.h.toFixed(1)} fill="#0A0F2C"/>)}
+        {win.map((w) => <rect x={w.x.toFixed(1)} y={w.y.toFixed(1)} width="4" height="5" fill={w.c} opacity=".8"/>)}
+        {neon.map((n) => <rect x={n.x - 2} y={n.y} width={n.w + 4} height={n.h} fill={n.c}/>)}
+      </g>
+    </g>
+    <rect y={L} width={W} height="1.2" fill="#F2B48C" opacity=".8"/>
+  </g>
+</svg>
+<style>
+  .wl { width: 100%; height: auto; display: block; }
+  .t { font: italic 400 28px var(--serif); fill: #EEEAF6; }
+  .soft { fill: #7FD8F0; }
+  .line { font: 500 11px var(--sans); letter-spacing: .24em; text-transform: uppercase; fill: #F2B48C; }
+</style>

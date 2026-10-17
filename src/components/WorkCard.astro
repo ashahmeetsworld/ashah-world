@@ -1,0 +1,29 @@
+---
+import { u, skillColour } from '../lib/url';
+interface Props { entry: any; size?: 'large' | 'normal'; }
+const { entry, size = 'normal' } = Astro.props;
+const d = entry.data;
+---
+<a class={`wc ${size} ${d.coverRatio}`} href={u(`/work/${entry.id}/`)} style={`--accent:${skillColour[d.skill]}`}>
+  <div class="frame">
+    <img src={u(d.cover)} alt={d.title} loading="lazy" decoding="async" />
+  </div>
+  <div class="meta">
+    <h3><i aria-hidden="true"></i>{d.title}</h3>
+    <p class="sum">{d.summary}</p>
+  </div>
+</a>
+<style>
+  .wc { display: grid; gap: 22px; }
+  .frame { position: relative; overflow: hidden; background: var(--deep); border: 1px solid var(--line); }
+  .frame::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), inset 0 -80px 120px -60px rgba(7,11,24,.6); pointer-events: none; }
+  .landscape .frame { aspect-ratio: 16 / 9; }
+  .portrait .frame { aspect-ratio: 4 / 5; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease), filter .8s; filter: saturate(.92); }
+  .wc:hover img { transform: scale(1.035); filter: saturate(1.08); }
+  .wc:hover .frame { box-shadow: 0 30px 80px -40px var(--accent); }
+  h3 { margin-bottom: 8px; transition: color .3s; display: flex; align-items: center; gap: 14px; }
+  h3 i { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
+  .wc:hover h3 { color: var(--peach); }
+  .sum { color: var(--ink-2); margin: 0; max-width: 52ch; font-size: 15.5px; }
+</style>

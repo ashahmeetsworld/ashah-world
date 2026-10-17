@@ -1,0 +1,70 @@
+---
+// The relay: each skill card sends its light down into one prism, which sends a single beam into the work below.
+// Beams stretch with the 4-column grid (x = 12.5 / 37.5 / 62.5 / 87.5 %); the prism stays a fixed shape in the centre.
+const H = 260;                      // height of the band
+const apex = 95, base = 180, half = 48; // prism (px, in the 160-wide glass box, centred)
+const REF = 1200;                    // grid width the face offsets are tuned for
+const face = (y: number) => ((y - apex) / (base - apex)) * half; // half-width of the prism at height y
+const enter = [150, 124, 124, 150];  // where each light meets a face
+const side = [-1, -1, 1, 1];
+const cols = ['var(--cd)', 'var(--eco)', 'var(--cul)', 'var(--cam)'];
+const beams = cols.map((c, i) => {
+  const dx = side[i] * face(enter[i]);
+  return { c, x: 12.5 + i * 25, tx: 50 + (dx / REF) * 100, ty: enter[i], gx: 80 + dx, out: side[i] * 4 };
+});
+---
+<div class="relay" aria-hidden="true" style={`height:${H}px`}>
+  <!-- coloured lights: stretch with the grid -->
+  <svg class="beams" viewBox={`0 0 100 ${H}`} preserveAspectRatio="none">
+    <defs>
+      <filter id="rl-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4" /></filter>
+    </defs>
+    {beams.map((b, i) => (
+      <g style={`--d:${(i * 0.45).toFixed(2)}s`}>
+        <path class="glow" d={`M${b.x} 0 C ${b.x} ${H * 0.38}, ${b.tx + b.out} ${b.ty - 34}, ${b.tx} ${b.ty}`} stroke={b.c} />
+        <path class="core" d={`M${b.x} 0 C ${b.x} ${H * 0.38}, ${b.tx + b.out} ${b.ty - 34}, ${b.tx} ${b.ty}`} stroke={b.c} />
+        <path class="pulse" d={`M${b.x} 0 C ${b.x} ${H * 0.38}, ${b.tx + b.out} ${b.ty - 34}, ${b.tx} ${b.ty}`} stroke={b.c} pathLength="100" />
+      </g>
+    ))}
+  </svg>
+  <!-- the prism and the one beam: fixed shape, centred -->
+  <svg class="glass" viewBox="0 0 160 260" style={`height:${H}px`}>
+    <defs>
+      <linearGradient id="rl-glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#A9EAF7" stop-opacity=".22" />
+        <stop offset=".5" stop-color="#8FB4F6" stop-opacity=".07" />
+        <stop offset="1" stop-color="#A996FF" stop-opacity=".2" />
+      </linearGradient>
+      <linearGradient id="rl-out" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95" />
+        <stop offset=".45" stop-color="#E9F6FF" stop-opacity=".4" />
+        <stop offset="1" stop-color="#E9F6FF" stop-opacity="0" />
+      </linearGradient>
+      <radialGradient id="rl-halo"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".5" /><stop offset=".45" stop-color="#A9EAF7" stop-opacity=".14" /><stop offset="1" stop-color="#A9EAF7" stop-opacity="0" /></radialGradient>
+      <filter id="rl-soft" x="-80%" y="-10%" width="260%" height="120%"><feGaussianBlur stdDeviation="5" /></filter>
+    </defs>
+    <circle cx="80" cy={base - 18} r="70" fill="url(#rl-halo)" class="halo-pulse" />
+    <path d={`M80 ${apex} L${80 + half} ${base} L${80 - half} ${base} Z`} fill="url(#rl-glass)" stroke="#CFE6FF" stroke-opacity=".5" stroke-width="1" />
+    <!-- the lights bend inside the glass and meet at the base -->
+    {beams.map((b) => <path d={`M${b.gx.toFixed(1)} ${b.ty} L80 ${base}`} stroke={b.c} stroke-width="1.1" opacity=".6" />)}
+    <path d={`M80 ${apex} L90 ${base}`} stroke="#FFFFFF" stroke-opacity=".12" stroke-width="1" />
+    <!-- one beam out, reaching down toward the work -->
+    <path d={`M73 ${base} L87 ${base} L94 258 L66 258 Z`} fill="url(#rl-out)" filter="url(#rl-soft)" opacity=".7" />
+    <path d={`M78.4 ${base} L81.6 ${base} L82.4 258 L77.6 258 Z`} fill="url(#rl-out)" />
+  </svg>
+</div>
+
+<style>
+  .relay { position: relative; width: 100%; margin-top: -2px; pointer-events: none; }
+  .beams { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .beams path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+  .beams .glow { stroke-width: 7; opacity: .22; filter: url(#rl-blur); }
+  .beams .core { stroke-width: 1.4; opacity: .55; }
+  .beams .pulse { stroke-width: 2.2; stroke-dasharray: 9 91; opacity: .95; animation: rl-flow 4.2s linear infinite; animation-delay: var(--d); }
+  .glass { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: auto; overflow: visible; }
+  .halo-pulse { animation: rl-halo 4.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes rl-flow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+  @keyframes rl-halo { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+  @media (max-width: 860px) { .relay { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .beams .pulse, .halo-pulse { animation: none; } .beams .pulse { opacity: 0; } }
+</style>

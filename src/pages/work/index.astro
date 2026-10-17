@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Work" description="Selected work by Ashah Meets World: creative direction, worldbuilding and content systems.">
+  <section class="page-head">
+    <div class="halo" style="width:600px;height:400px;left:50%;top:-80px;transform:translateX(-50%);background:var(--sapphire)"></div>
+    <div class="wrap">
+      <p class="eyebrow">The work</p>
+      <h1>Proof of work.</h1>
+      <p class="lede">Nobody swims open ocean on day one. A portfolio in motion, one lap further every session.</p>
+    </div>
+  </section>
+  <section class="wrap list">
+    {work.map((w) => <div class="item" data-skill={w.data.skill}><WorkCard entry={w} /></div>)}
+  </section>
+</Base>
+<style>
+  .page-head { position: relative; padding: 180px 0 70px; overflow: hidden; }
+  .page-head h1 { font-size: clamp(56px, 9vw, 120px); margin-bottom: 22px; position: relative; }
+  .lede { position: relative; }
+  .list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 72px 48px; padding-bottom: 160px; }
+  .item[hidden] { display: none; }
+  @media (max-width: 760px) { .list { grid-template-columns: 1fr; gap: 56px; } }
+</style>

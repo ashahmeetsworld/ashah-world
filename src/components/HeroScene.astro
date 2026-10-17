@@ -1,0 +1,269 @@
+---
+// The establishing shot, elevated (18 Oct 2026). Same world as before (a city of lights on night water,
+// the moon, one small figure on a jetty) built as layers so each part can breathe, drift and move with you.
+// Layers are positioned in % with CSS variables, so desktop and phone each get their own composition.
+let seed = 11;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+
+// ── sky ──
+const stars = Array.from({ length: 230 }, () => ({
+  x: r() * 1600, y: Math.pow(r(), 1.35) * 640,
+  s: r() < 0.05 ? 1.9 : r() < 0.3 ? 1.15 : 0.65, o: 0.3 + r() * 0.7, tw: r() < 0.3, d: (r() * 7).toFixed(2), dur: (3.5 + r() * 4).toFixed(2),
+}));
+
+// ── city: one strip holding skyline above the line (y < 300) and its reflection below ──
+const CW = 2400, CH = 600, HZ = 300;
+const towers = (far: boolean) => {
+  const out: { x: number; w: number; h: number }[] = [];
+  let x = -30;
+  while (x < CW + 30) {
+    const w = far ? 40 + r() * 90 : 26 + r() * 62;
+    // the city lives on the right, densest beneath the moon's side; the left stays open for the words
+    const peak = Math.exp(-Math.pow((x - (far ? 1980 : 2120)) / (far ? 420 : 300), 2));
+    const base = x < 1500 ? 3 + r() * (far ? 14 : 10) : 10 + r() * 34;
+    const h = far ? base + peak * (60 + r() * 110) : base + peak * (80 + r() * 190);
+    out.push({ x, w, h });
+    x += w + (r() < 0.22 ? 4 + r() * 18 : 0);
+  }
+  return out;
+};
+const far = towers(true);
+const near = towers(false);
+const windows: { x: number; y: number; c: string; f: boolean; d: string }[] = [];
+for (const b of near) {
+  if (b.h < 40) continue;
+  for (let yy = HZ - b.h + 9; yy < HZ - 7; yy += 10.5) {
+    for (let xx = b.x + 5; xx < b.x + b.w - 6; xx += 8.5) {
+      if (r() < 0.17) windows.push({ x: xx, y: yy, c: r() < 0.6 ? '#F2B48C' : r() < 0.55 ? '#A9EAF7' : '#E08C7E', f: r() < 0.07, d: (r() * 9).toFixed(2) });
+    }
+  }
+}
+// reflections: the lights on the water become long soft streaks, broken by the swell
+const streaks = windows.filter(() => r() < 0.55).map((w) => {
+  const dist = HZ - w.y;
+  return { x: w.x, y: HZ + 4 + dist * (0.35 + r() * 0.25), h: 6 + r() * 22 + dist * 0.12, c: w.c, o: 0.18 + r() * 0.35, g: Math.floor(r() * 3) };
+});
+const beacons = near.filter((b, i) => b.h > 150 && i % 3 === 0);
+
+// ── water ──
+const ripples = Array.from({ length: 90 }, () => {
+  const y = Math.pow(r(), 1.25) * 100;
+  return { x: r() * 100, y, w: 0.5 + r() * 1.6 * (1 + y / 70), o: (0.1 + r() * 0.28) * (1 - y / 180), c: r() < 0.55 ? '#F2B48C' : r() < 0.6 ? '#7FD8F0' : '#A996FF', d: (r() * 6).toFixed(2) };
+});
+const glints = Array.from({ length: 34 }, (_, i) => {
+  const t = i / 33;
+  return { y: 0.6 + Math.pow(t, 1.5) * 92, w: 3 + t * 26 * (0.35 + r() * 0.65), x: 50 + (r() - 0.5) * (6 + t * 40), o: (0.75 - t * 0.5) * (0.6 + r() * 0.4), d: (r() * 4).toFixed(2) };
+});
+const motes = Array.from({ length: 16 }, () => ({ x: 4 + r() * 92, y: 52 + r() * 42, s: 1.5 + r() * 2.2, d: (r() * 14).toFixed(2), dur: (11 + r() * 9).toFixed(1), c: r() < 0.55 ? '#F2B48C' : '#A9EAF7' }));
+---
+<div class="hs" aria-hidden="true">
+  <!-- the air -->
+  <div class="hs-air"></div>
+
+  <div class="hs-layer" data-depth="0.08">
+    <svg class="hs-stars" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMin slice">
+      {stars.map((s) => (
+        <circle cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r={s.s} fill="#fff" opacity={s.o.toFixed(2)}
+          class={s.tw ? 'tw' : undefined} style={s.tw ? `animation-delay:-${s.d}s;animation-duration:${s.dur}s` : undefined} />
+      ))}
+    </svg>
+    <span class="hs-shoot"></span>
+  </div>
+
+  <!-- aurora curtains, drifting slowly behind the moon -->
+  <div class="hs-layer hs-aurora-wrap" data-depth="0.12">
+    <svg class="hs-aurora" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMin slice">
+      <defs>
+        <linearGradient id="hs-au1" x1="0" x2="1"><stop offset="0" stop-color="#7FD8F0" stop-opacity="0" /><stop offset=".25" stop-color="#7FD8F0" /><stop offset=".55" stop-color="#8FB4F6" /><stop offset=".8" stop-color="#A996FF" /><stop offset="1" stop-color="#A996FF" stop-opacity="0" /></linearGradient>
+        <linearGradient id="hs-au2" x1="0" x2="1"><stop offset="0" stop-color="#6FE3A6" stop-opacity="0" /><stop offset=".35" stop-color="#6FE3A6" /><stop offset=".7" stop-color="#7FD8F0" /><stop offset="1" stop-color="#7FD8F0" stop-opacity="0" /></linearGradient>
+        <linearGradient id="hs-veil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset=".35" stop-color="#fff" stop-opacity="1" /><stop offset="1" stop-color="#fff" stop-opacity="0" /></linearGradient>
+        <mask id="hs-curtain" maskUnits="userSpaceOnUse" x="-400" y="-400" width="2400" height="1500"><rect x="-400" width="2400" height="700" fill="url(#hs-veil)" /></mask>
+        <filter id="hs-au-blur" filterUnits="userSpaceOnUse" x="-400" y="-400" width="2400" height="1500"><feGaussianBlur stdDeviation="22" /></filter>
+      </defs>
+      <g mask="url(#hs-curtain)" filter="url(#hs-au-blur)">
+        <path class="au a1" d="M-100 250 C 250 120, 520 300, 820 190 S 1360 90, 1720 210" stroke="url(#hs-au1)" stroke-width="120" fill="none" />
+        <path class="au a2" d="M-100 330 C 300 230, 600 380, 900 270 S 1400 200, 1720 300" stroke="url(#hs-au2)" stroke-width="70" fill="none" />
+        <path class="au a3" d="M200 160 C 480 90, 760 210, 1060 130 S 1460 60, 1760 140" stroke="url(#hs-au1)" stroke-width="54" fill="none" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- the one light source -->
+  <div class="hs-layer" data-depth="0.16">
+    <div class="hs-moon"><span class="halo"></span><span class="bloom"></span><span class="disc"></span></div>
+  </div>
+
+  <!-- the city and its reflection, one strip so the lights and their reflections always line up -->
+  <div class="hs-layer hs-city-wrap" data-depth="0.3">
+    <svg class="hs-city" viewBox={`0 0 ${CW} ${CH}`} preserveAspectRatio="xMaxYMid slice">
+      <defs>
+        <linearGradient id="hs-far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2466" /><stop offset="1" stop-color="#1A1850" /></linearGradient>
+        <linearGradient id="hs-mirror" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55" /><stop offset="1" stop-color="#000" stop-opacity="0" /></linearGradient>
+        <filter id="hs-streak" filterUnits="userSpaceOnUse" x="-100" y="250" width="2600" height="400"><feGaussianBlur stdDeviation="1.6 3.4" /></filter>
+        <filter id="hs-haze" filterUnits="userSpaceOnUse" x="-100" y="-100" width="2600" height="500"><feGaussianBlur stdDeviation="2.5" /></filter>
+      </defs>
+      <!-- far skyline, softened by distance -->
+      <g filter="url(#hs-haze)" opacity=".8">{far.map((b) => <rect x={b.x.toFixed(1)} y={(HZ - b.h).toFixed(1)} width={b.w.toFixed(1)} height={b.h.toFixed(1)} fill="url(#hs-far)" />)}</g>
+      <!-- near skyline -->
+      <g>{near.map((b) => <rect x={b.x.toFixed(1)} y={(HZ - b.h).toFixed(1)} width={b.w.toFixed(1)} height={b.h.toFixed(1)} fill="#060A1C" />)}</g>
+      <g>{near.filter((_, i) => i % 6 === 2 && _.h > 60).map((b) => <rect x={(b.x + b.w / 2 - 1).toFixed(1)} y={(HZ - b.h - 24).toFixed(1)} width="2" height="24" fill="#060A1C" />)}</g>
+      <g>{windows.map((w) => <rect x={w.x.toFixed(1)} y={w.y.toFixed(1)} width="3.2" height="4.2" fill={w.c} opacity=".88" class={w.f ? 'flick' : undefined} style={w.f ? `animation-delay:-${w.d}s` : undefined} />)}</g>
+      <g>{beacons.map((b, i) => <circle class="beacon" cx={(b.x + b.w / 2).toFixed(1)} cy={(HZ - b.h - 24).toFixed(1)} r="2.6" fill="#E04BAE" style={`animation-delay:-${i * 0.7}s`} />)}</g>
+      <!-- the mirror: dark shapes, then the lights stretched into the water -->
+      <g opacity=".5">{near.map((b) => <rect x={b.x.toFixed(1)} y={HZ} width={b.w.toFixed(1)} height={(b.h * 0.6).toFixed(1)} fill="url(#hs-mirror)" />)}</g>
+      {[0, 1, 2].map((g) => (
+        <g class={`sway s${g}`} filter="url(#hs-streak)">
+          {streaks.filter((s) => s.g === g).map((s) => <rect x={s.x.toFixed(1)} y={s.y.toFixed(1)} width="3" height={s.h.toFixed(1)} rx="1.5" fill={s.c} opacity={s.o.toFixed(2)} />)}
+        </g>
+      ))}
+      <rect y={HZ - 0.6} width={CW} height="1.2" fill="#A9EAF7" opacity=".28" />
+    </svg>
+  </div>
+
+  <!-- the sea -->
+  <div class="hs-sea"></div>
+  <div class="hs-layer hs-water" data-depth="0.4">
+    <svg class="hs-ripples" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {ripples.map((p) => <rect class="rip" x={p.x.toFixed(2)} y={p.y.toFixed(2)} width={p.w.toFixed(2)} height=".28" rx=".14" fill={p.c} opacity={p.o.toFixed(2)} style={`animation-delay:-${p.d}s`} />)}
+    </svg>
+    <!-- the moon's road across the water -->
+    <div class="hs-pillar"></div>
+    <svg class="hs-road" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {glints.map((g) => <rect class="glint" x={(g.x - g.w / 2).toFixed(2)} y={g.y.toFixed(2)} width={g.w.toFixed(2)} height={(0.35 + g.y / 160).toFixed(2)} rx=".3" fill="#EAF1FF" opacity={g.o.toFixed(2)} style={`animation-delay:-${g.d}s`} />)}
+    </svg>
+  </div>
+
+  <!-- mist along the horizon -->
+  <div class="hs-mist"><span></span><span></span></div>
+
+  <!-- small figure, big world -->
+  <div class="hs-layer hs-figure-wrap" data-depth="0.55">
+    <svg class="hs-figure" viewBox="-220 -60 440 130">
+      <rect x="-210" y="0" width="420" height="5" fill="#03050F" />
+      <rect x="-190" y="5" width="4" height="60" fill="#03050F" />
+      <rect x="186" y="5" width="4" height="60" fill="#03050F" />
+      <rect x="-40" y="5" width="3" height="60" fill="#03050F" />
+      <path d="M0 -44 a5.6 5.6 0 1 1 0.01 0 Z" fill="#03050F" />
+      <path d="M-6 -33 C -9 -20, -12 -8, -13 0 L 13 0 C 12 -8, 9 -20, 6 -33 Z" fill="#03050F" />
+    </svg>
+    <span class="hs-figure-glow"></span>
+  </div>
+
+  <!-- a few lights drifting up off the water -->
+  <div class="hs-motes">
+    {motes.map((m) => <i style={`left:${m.x.toFixed(1)}%;top:${m.y.toFixed(1)}%;width:${m.s.toFixed(1)}px;height:${m.s.toFixed(1)}px;--c:${m.c};animation-delay:-${m.d}s;animation-duration:${m.dur}s`}></i>)}
+  </div>
+
+  <div class="hs-vignette"></div>
+</div>
+
+<script>
+  // Depth: layers drift at their own pace as you scroll, and lean gently toward the pointer on desktop.
+  const root = document.querySelector('.hs') as HTMLElement | null;
+  if (root && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const layers = [...root.querySelectorAll<HTMLElement>('[data-depth]')].map((el) => ({ el, d: parseFloat(el.dataset.depth || '0') }));
+    let sy = 0, px = 0, py = 0, tx = 0, ty = 0, raf = 0;
+    const fine = matchMedia('(pointer: fine)').matches;
+    const paint = () => {
+      raf = 0; px += (tx - px) * 0.06; py += (ty - py) * 0.06;
+      for (const { el, d } of layers) el.style.transform = `translate3d(${(px * d * 26).toFixed(2)}px, ${(sy * d * 0.55 + py * d * 14).toFixed(2)}px, 0)`;
+      if (Math.abs(tx - px) > 0.002 || Math.abs(ty - py) > 0.002) raf = requestAnimationFrame(paint);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    addEventListener('scroll', () => { sy = Math.min(scrollY, innerHeight * 1.2); kick(); }, { passive: true });
+    if (fine) addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; kick(); }, { passive: true });
+    sy = scrollY; kick();
+  }
+</script>
+
+<style>
+  .hs { --hz: 70%; --mx: 59%; --my: 19%; --moon: clamp(64px, 6.4vw, 96px); --city-h: 26%;
+    position: absolute; inset: 0; overflow: hidden; background: #05081A; z-index: 0; isolation: isolate; pointer-events: none; }
+  @media (max-width: 760px) { .hs { --hz: 44%; --mx: 68%; --my: 13%; --moon: 54px; --city-h: 15%; } }
+
+  .hs-layer { position: absolute; inset: 0; will-change: transform; }
+  .hs-air { position: absolute; inset: 0 0 calc(100% - var(--hz)) 0;
+    background: linear-gradient(180deg, #04061A 0%, #0B1640 34%, #1B1A5C 62%, #2F1D64 84%, #452470 100%); }
+
+  /* stars */
+  .hs-stars { position: absolute; left: 0; top: 0; width: 100%; height: var(--hz); }
+  .tw { animation: hs-tw 5s ease-in-out infinite; }
+  @keyframes hs-tw { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+  .hs-shoot { position: absolute; left: 22%; top: 12%; width: 140px; height: 1.4px; border-radius: 2px; opacity: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0), #fff 70%, #fff); box-shadow: 0 0 10px rgba(169, 234, 247, .8);
+    transform: rotate(-24deg) translateX(0); animation: hs-shoot 13s ease-in 4s infinite; }
+  @keyframes hs-shoot { 0%, 93% { opacity: 0; transform: rotate(-24deg) translateX(0); } 94% { opacity: 1; } 100% { opacity: 0; transform: rotate(-24deg) translateX(-360px); } }
+
+  /* aurora */
+  .hs-aurora { position: absolute; left: -4%; top: 0; width: 108%; height: var(--hz); opacity: .7; mix-blend-mode: screen; }
+  .au { opacity: .55; transform-box: fill-box; transform-origin: center; }
+  .a1 { animation: hs-au1 26s ease-in-out infinite alternate; }
+  .a2 { animation: hs-au2 32s ease-in-out infinite alternate; opacity: .4; }
+  .a3 { animation: hs-au3 21s ease-in-out infinite alternate; opacity: .35; }
+  @keyframes hs-au1 { from { transform: translateX(-3%) scaleY(1); opacity: .35; } to { transform: translateX(4%) scaleY(1.25); opacity: .65; } }
+  @keyframes hs-au2 { from { transform: translateX(3%) scaleY(.9); opacity: .25; } to { transform: translateX(-4%) scaleY(1.2); opacity: .5; } }
+  @keyframes hs-au3 { from { transform: translateX(-2%); opacity: .15; } to { transform: translateX(3%); opacity: .45; } }
+
+  /* moon */
+  .hs-moon { position: absolute; left: var(--mx); top: var(--my); width: var(--moon); height: var(--moon); transform: translate(-50%, -50%); }
+  .hs-moon span { position: absolute; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .hs-moon .halo { width: 900%; height: 900%; background: radial-gradient(closest-side, rgba(221, 232, 255, .28), rgba(127, 216, 240, .12) 30%, rgba(58, 31, 102, .1) 58%, transparent 100%); animation: hs-breathe 9s ease-in-out infinite; }
+  .hs-moon .bloom { width: 240%; height: 240%; background: radial-gradient(closest-side, rgba(255, 255, 255, .55), rgba(221, 232, 255, .18) 55%, transparent 100%); }
+  .hs-moon .disc { width: 100%; height: 100%; background: radial-gradient(circle at 42% 40%, #fff, #EEF2FF 62%, #C9D6F5); box-shadow: 0 0 40px rgba(221, 232, 255, .55), inset -6px -6px 18px rgba(169, 182, 230, .35); }
+  @keyframes hs-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .85; } 50% { transform: translate(-50%, -50%) scale(1.07); opacity: 1; } }
+
+  /* city strip: the line sits exactly on the horizon */
+  .hs-city { position: absolute; left: 0; width: 100%; height: calc(var(--city-h) * 2); top: calc(var(--hz) - var(--city-h)); }
+  .flick { animation: hs-flick 8s steps(1) infinite; }
+  @keyframes hs-flick { 0%, 60% { opacity: .88; } 61%, 69% { opacity: .1; } 70% { opacity: .88; } }
+  .beacon { animation: hs-beacon 3s ease-in-out infinite; }
+  @keyframes hs-beacon { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+  .sway { transform-box: fill-box; transform-origin: top center; }
+  .s0 { animation: hs-sway 5.5s ease-in-out infinite alternate; }
+  .s1 { animation: hs-sway 7s ease-in-out -2s infinite alternate-reverse; }
+  .s2 { animation: hs-sway 6.2s ease-in-out -4s infinite alternate; }
+  @keyframes hs-sway { from { transform: translateX(-3px) scaleY(.94); opacity: .75; } to { transform: translateX(3px) scaleY(1.06); opacity: 1; } }
+
+  /* sea */
+  .hs-sea { position: absolute; left: 0; right: 0; top: var(--hz); bottom: 0;
+    background: linear-gradient(180deg, rgba(42, 30, 96, .9) 0%, #0E1440 18%, #070B22 60%, #04061A 100%); }
+  .hs-city-wrap { z-index: 1; }
+  .hs-water { z-index: 2; }
+  .hs-ripples { position: absolute; left: 0; top: calc(var(--hz) + 1%); width: 100%; height: calc(100% - var(--hz)); }
+  .rip { animation: hs-drift 7s ease-in-out infinite alternate; }
+  @keyframes hs-drift { from { transform: translateX(-.6px); } to { transform: translateX(.8px); } }
+  .hs-road { position: absolute; left: calc(var(--mx) - 22%); width: 44%; top: calc(var(--hz) + .4%); height: calc(100% - var(--hz)); }
+  @media (max-width: 760px) { .hs-road { left: calc(var(--mx) - 34%); width: 68%; } }
+  .hs-road { filter: blur(1.1px); mix-blend-mode: screen; opacity: .85; }
+  .hs-ripples { filter: blur(.6px); }
+  .hs-pillar { position: absolute; left: calc(var(--mx) - 9%); width: 18%; top: var(--hz); height: calc(100% - var(--hz)); filter: blur(18px);
+    background: radial-gradient(50% 100% at 50% 0%, rgba(221, 232, 255, .22), rgba(127, 216, 240, .06) 60%, transparent 100%); }
+  .glint { animation: hs-glint 3.4s ease-in-out infinite alternate; }
+  @keyframes hs-glint { from { transform: translateX(-.8px); opacity: .25; } to { transform: translateX(.9px); } }
+
+  /* mist */
+  .hs-mist { position: absolute; left: 0; right: 0; top: calc(var(--hz) - 7%); height: 12%; z-index: 3; pointer-events: none; }
+  .hs-mist span { position: absolute; top: 0; height: 100%; width: 70%; border-radius: 50%; filter: blur(34px);
+    background: radial-gradient(closest-side, rgba(169, 150, 255, .2), transparent); }
+  .hs-mist span:first-child { left: -10%; animation: hs-mist 48s ease-in-out infinite alternate; }
+  .hs-mist span:last-child { left: 45%; background: radial-gradient(closest-side, rgba(127, 216, 240, .14), transparent); animation: hs-mist 62s ease-in-out -20s infinite alternate-reverse; }
+  @keyframes hs-mist { from { transform: translateX(-12%); } to { transform: translateX(16%); } }
+
+  /* figure on the jetty */
+  .hs-figure-wrap { z-index: 4; }
+  .hs-figure { position: absolute; left: 47.5%; top: calc(var(--hz) + 4.2%); width: clamp(220px, 27vw, 400px); transform: translateX(-50%); }
+  .hs-figure-glow { position: absolute; left: 47.5%; top: calc(var(--hz) + 1%); width: 160px; height: 90px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(221, 232, 255, .1), transparent); }
+  @media (max-width: 760px) { .hs-figure-wrap { display: none; } }
+
+  /* motes */
+  .hs-motes { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+  .hs-motes i { position: absolute; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px 2px var(--c); opacity: 0; animation: hs-rise 14s ease-in-out infinite; }
+  @keyframes hs-rise { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .55; } 80% { opacity: .35; } 100% { opacity: 0; transform: translate(14px, -120px); } }
+  @media (max-width: 760px) { .hs-motes i:nth-child(n+9) { display: none; } }
+
+  .hs-vignette { position: absolute; inset: 0; z-index: 6; pointer-events: none;
+    background: radial-gradient(120% 90% at 60% 35%, transparent 55%, rgba(3, 4, 14, .55) 100%); }
+
+  @media (prefers-reduced-motion: reduce) { .hs * { animation: none !important; } }
+</style>

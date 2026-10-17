@@ -1,0 +1,176 @@
+---
+// Ubiquity hero: the meteor shower. Rare, everywhere at once, impossible
+// to ignore, and everyone on the shore looks up at the same time.
+// Awe and spectacle overhead; below, a dark night ocean and the shore,
+// lit only by bioluminescence where the waves land.
+let seed = 23;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const W = 1600, H = 1000, HZ = 872;
+
+const stars = Array.from({ length: 340 }, () => ({
+  x: r() * W, y: Math.pow(r(), 1.2) * (HZ - 30), s: r() < 0.06 ? 1.7 : r() < 0.3 ? 1.1 : 0.65, o: 0.25 + r() * 0.65, tw: r() < 0.3, d: (r() * 6).toFixed(2),
+}));
+// the milky way: dense dust along one diagonal
+const dust = Array.from({ length: 620 }, () => {
+  const t = r(), spread = (r() + r() + r() - 1.5) * 90;
+  const x = -100 + t * 1800, y = 640 - t * 84 + spread * 0.7;
+  return { x, y, s: r() < 0.05 ? 1.1 : 0.55, o: 0.15 + r() * 0.45 };
+});
+const sparkles = Array.from({ length: 9 }, () => ({ x: 60 + r() * 1480, y: 30 + r() * 620, k: 5 + r() * 6, d: (r() * 5).toFixed(2) }));
+// parallel streaks from one radiant (upper left), a few bright fireballs among them
+const meteors = Array.from({ length: 26 }, (_, i) => {
+  const big = i % 8 === 0;
+  const l = big ? 300 + r() * 160 : 90 + r() * 200;
+  return { x: 80 + r() * 1500, y: -80 + r() * 660, l, w: big ? 2.6 : 0.7 + r() * 1.3, big, d: (r() * 12).toFixed(2), dur: (big ? 9 : 6) + r() * 6 };
+});
+// the shore at night: dark open water, and bioluminescence where the waves land
+const specks = Array.from({ length: 150 }, () => {
+  const x = r() * W; const band = Math.sin(x / 140) * 8 + Math.sin(x / 57) * 4;
+  return { x, y: H - 70 + band + (r() - 0.6) * 90, s: r() < 0.12 ? 1.6 : 0.6 + r() * 0.7, c: r() < 0.6 ? '#7FF6F0' : r() < 0.6 ? '#3FD6E8' : '#B8FFF8', d: (r() * 6).toFixed(2), dur: (2.5 + r() * 4).toFixed(2) };
+});
+const foam = (y0: number, amp: number, ph: number) => { let d = `M-40 ${y0}`; for (let x = -40; x <= W + 40; x += 20) d += ` L${x} ${(y0 + Math.sin(x / 140 + ph) * amp + Math.sin(x / 57 + ph * 2) * amp * 0.5).toFixed(1)}`; return d; };
+---
+<svg class="ev" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="ev-sky" x1="0" y1="0" x2="0" y2={HZ} gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#03050C" />
+      <stop offset=".5" stop-color="#070F28" />
+      <stop offset=".84" stop-color="#0D1E4A" />
+      <stop offset=".93" stop-color="#0E1C44" />
+      <stop offset="1" stop-color="#070C1E" />
+    </linearGradient>
+    <linearGradient id="ev-sea" x1="0" y1={HZ} x2="0" y2={H} gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#070C1E" />
+      <stop offset="1" stop-color="#03040A" />
+    </linearGradient>
+    <filter id="ev-bio" x="-5%" y="-200%" width="110%" height="500%"><feGaussianBlur stdDeviation="5" /></filter>
+    <linearGradient id="ev-lag" x1="0" y1={HZ - 110} x2="0" y2={HZ} gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7FC8F0" stop-opacity="0" />
+      <stop offset="1" stop-color="#9FDCF5" stop-opacity=".28" />
+    </linearGradient>
+    <linearGradient id="ev-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9D6F0" stop-opacity="0" />
+      <stop offset=".35" stop-color="#C9D6F0" stop-opacity=".13" />
+      <stop offset=".6" stop-color="#B8C4F0" stop-opacity=".11" />
+      <stop offset="1" stop-color="#B8C4F0" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="ev-glow" cx="800" cy="440" r="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#BFE9FF" stop-opacity=".08" />
+      <stop offset=".55" stop-color="#7FD8F0" stop-opacity=".04" />
+      <stop offset="1" stop-color="#7FD8F0" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="ev-tail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7FD8F0" stop-opacity="0" />
+      <stop offset=".6" stop-color="#FFE7C4" stop-opacity=".55" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="ev-au1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#03A2FF" stop-opacity="0" />
+      <stop offset=".25" stop-color="#3FD6E8" stop-opacity=".55" />
+      <stop offset=".55" stop-color="#4A6CFF" stop-opacity=".5" />
+      <stop offset=".8" stop-color="#8A4CD8" stop-opacity=".45" />
+      <stop offset="1" stop-color="#8A4C8E" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="ev-au2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0" />
+      <stop offset=".3" stop-color="#7C5CFF" stop-opacity=".4" />
+      <stop offset=".6" stop-color="#7FD8F0" stop-opacity=".38" />
+      <stop offset="1" stop-color="#16367A" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="ev-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0" />
+      <stop offset=".55" stop-color="#fff" stop-opacity=".9" />
+      <stop offset="1" stop-color="#fff" stop-opacity=".15" />
+    </linearGradient>
+    <mask id="ev-curtain" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#ev-fade)" /></mask>
+    <filter id="ev-au" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14" /></filter>
+    <filter id="ev-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22" /></filter>
+    <filter id="ev-bloom" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4" /></filter>
+  </defs>
+
+  <rect width={W} height={H} fill="url(#ev-sky)" />
+
+  <!-- milky way -->
+  <g transform="rotate(-3 800 600)">
+    <ellipse cx="800" cy="600" rx="1200" ry="95" fill="url(#ev-band)" filter="url(#ev-soft)" />
+    <ellipse cx="760" cy="606" rx="900" ry="40" fill="url(#ev-band)" filter="url(#ev-soft)" opacity=".9" />
+  </g>
+  {dust.map((p) => <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r={p.s} fill="#EAF6FF" opacity={p.o.toFixed(2)} />)}
+
+  <rect width={W} height={HZ} fill="url(#ev-glow)" />
+  <!-- aurora: slow curtains of blue and violet drifting through -->
+  <g class="au a1" filter="url(#ev-au)" opacity=".75">
+    <path mask="url(#ev-curtain)" fill="url(#ev-au1)" d="M-200 330 C 150 210, 420 300, 700 230 S 1250 140, 1800 240 L 1800 330 C 1250 230, 960 330, 700 320 S 150 300, -200 420 Z" />
+  </g>
+  <g class="au a2" filter="url(#ev-au)" opacity=".55">
+    <path mask="url(#ev-curtain)" fill="url(#ev-au2)" d="M-200 470 C 200 360, 520 450, 860 380 S 1400 330, 1800 410 L 1800 480 C 1400 410, 1100 500, 840 470 S 260 460, -200 560 Z" />
+  </g>
+
+
+  {stars.map((s) => (
+    <circle cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r={s.s} fill="#fff" opacity={s.o.toFixed(2)}
+      class={s.tw ? 'tw' : undefined} style={s.tw ? `animation-delay:-${s.d}s` : undefined} />
+  ))}
+  {sparkles.map((p) => (
+    <path class="sp" style={`animation-delay:-${p.d}s`} fill="#FFF6EC"
+      d={`M${p.x} ${p.y - p.k} L${p.x + p.k * 0.18} ${p.y - p.k * 0.18} L${p.x + p.k} ${p.y} L${p.x + p.k * 0.18} ${p.y + p.k * 0.18} L${p.x} ${p.y + p.k} L${p.x - p.k * 0.18} ${p.y + p.k * 0.18} L${p.x - p.k} ${p.y} L${p.x - p.k * 0.18} ${p.y - p.k * 0.18} Z`} />
+  ))}
+
+  <g>
+    {meteors.map((m) => (
+      <g class="met" style={`animation-delay:-${m.d}s;animation-duration:${m.dur.toFixed(2)}s`} transform={`translate(${m.x.toFixed(0)} ${m.y.toFixed(0)})`}>
+        {m.big && <line x1={(-m.l * 0.82).toFixed(1)} y1={(-m.l * 0.57).toFixed(1)} x2="0" y2="0" stroke="#FFE7C4" stroke-width="7" stroke-linecap="round" opacity=".35" filter="url(#ev-bloom)" />}
+        <line x1={(-m.l * 0.82).toFixed(1)} y1={(-m.l * 0.57).toFixed(1)} x2="0" y2="0" stroke="url(#ev-tail)" stroke-width={m.w.toFixed(2)} stroke-linecap="round" />
+        <circle r={(m.w * 1.15).toFixed(2)} fill="#fff" />
+        {m.big && <circle r="9" fill="#FFE7C4" opacity=".35" filter="url(#ev-bloom)" />}
+      </g>
+    ))}
+  </g>
+
+  <!-- the shore: dark water to the horizon, bioluminescence where the waves land -->
+  <rect y={HZ} width={W} height={H - HZ} fill="url(#ev-sea)" />
+  <path d={`${foam(H - 46, 6, 0)} L ${W + 40} ${H} L -40 ${H} Z`} fill="#02040A" />
+  <g class="lap" style="animation-delay:-0.0s;animation-duration:6.0s">
+    <path d={foam(HZ - 20 + 0 * ((H - 66) - (HZ - 20)) / 4, 4.0, 0.6)} fill="none" stroke="#7C5CFF" stroke-width="8" opacity="0.12" filter="url(#ev-bio)" />
+    <path d={foam(HZ - 20 + 0 * ((H - 66) - (HZ - 20)) / 4, 4.0, 0.6)} fill="none" stroke="#C8B8FF" stroke-width="1.0" opacity="0.18" />
+  </g>
+  <g class="lap" style="animation-delay:-1.4s;animation-duration:6.8s">
+    <path d={foam(HZ - 20 + 1 * ((H - 66) - (HZ - 20)) / 4, 4.8, 1.9)} fill="none" stroke="#4A6CFF" stroke-width="10" opacity="0.27" filter="url(#ev-bio)" />
+    <path d={foam(HZ - 20 + 1 * ((H - 66) - (HZ - 20)) / 4, 4.8, 1.9)} fill="none" stroke="#B8C8FF" stroke-width="1.1" opacity="0.37" />
+  </g>
+  <g class="lap" style="animation-delay:-2.8s;animation-duration:7.6s">
+    <path d={foam(HZ - 20 + 2 * ((H - 66) - (HZ - 20)) / 4, 5.5, 3.2)} fill="none" stroke="#3FA8FF" stroke-width="11" opacity="0.41" filter="url(#ev-bio)" />
+    <path d={foam(HZ - 20 + 2 * ((H - 66) - (HZ - 20)) / 4, 5.5, 3.2)} fill="none" stroke="#9FE8FF" stroke-width="1.3" opacity="0.56" />
+  </g>
+  <g class="lap" style="animation-delay:-4.2s;animation-duration:8.4s">
+    <path d={foam(HZ - 20 + 3 * ((H - 66) - (HZ - 20)) / 4, 6.2, 4.5)} fill="none" stroke="#2FC8F0" stroke-width="12" opacity="0.55" filter="url(#ev-bio)" />
+    <path d={foam(HZ - 20 + 3 * ((H - 66) - (HZ - 20)) / 4, 6.2, 4.5)} fill="none" stroke="#B8F4FF" stroke-width="1.4" opacity="0.76" />
+  </g>
+  <g class="lap" style="animation-delay:-5.6s;animation-duration:9.2s">
+    <path d={foam(HZ - 20 + 4 * ((H - 66) - (HZ - 20)) / 4, 7.0, 5.8)} fill="none" stroke="#2FE0E0" stroke-width="12" opacity="0.42" filter="url(#ev-bio)" />
+    <path d={foam(HZ - 20 + 4 * ((H - 66) - (HZ - 20)) / 4, 7.0, 5.8)} fill="none" stroke="#C8FFFA" stroke-width="1.4" opacity="0.62" />
+  </g>
+  {specks.map((p) => <circle class="bio" style={`animation-delay:-${p.d}s;animation-duration:${p.dur}s`} cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r={p.s.toFixed(2)} fill={p.c} />)}
+</svg>
+<style>
+  .ev { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .tw { animation: tw 5s ease-in-out infinite; }
+  @keyframes tw { 50% { opacity: .15; } }
+  .sp { transform-box: fill-box; transform-origin: center; animation: sp 4.5s ease-in-out infinite; }
+  @keyframes sp { 0%, 100% { opacity: .25; transform: scale(.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.1) rotate(20deg); } }
+  .au { animation: au 22s ease-in-out infinite alternate; }
+  .a2 { animation-duration: 28s; animation-direction: alternate-reverse; }
+  @keyframes au { 0% { transform: translateX(-60px) skewX(-4deg); } 50% { opacity: .7; } 100% { transform: translateX(60px) skewX(4deg); } }
+  .lap { animation: lap 6s ease-in-out infinite; }
+  .l2 { animation-duration: 8s; animation-delay: -3s; }
+  @keyframes lap { 0%, 100% { transform: translateY(0); opacity: .7; } 45% { transform: translateY(-7px); opacity: 1; } }
+  .bio { animation: bio 4s ease-in-out infinite; }
+  @keyframes bio { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+  .met { animation: fall 8s linear infinite; opacity: 0; }
+  @keyframes fall {
+    0% { opacity: 0; translate: 0 0; }
+    5% { opacity: 1; }
+    17% { opacity: 0; translate: 320px 222px; }
+    100% { opacity: 0; translate: 320px 222px; }
+  }
+</style>
