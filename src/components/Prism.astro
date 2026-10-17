@@ -1,0 +1,65 @@
+---
+// Four lights, one beam: the four skill colours enter a glass prism and leave as one white beam. No text.
+const W = 640, H = 360;
+const cx = 300, top = 70, base = 300;               // prism apex x, apex y, base y
+const half = 118;                                  // half the base width
+const inY = [150, 176, 202, 228];                   // where each light meets the left face
+const lights = [
+  { c: 'var(--cd)', y0: 96 },
+  { c: 'var(--eco)', y0: 152 },
+  { c: 'var(--cul)', y0: 208 },
+  { c: 'var(--cam)', y0: 264 },
+];
+// a point on the left face at height y
+const leftX = (y: number) => cx - ((y - top) / (base - top)) * half;
+const outY = 196, outX = cx + ((outY - top) / (base - top)) * half;
+---
+<svg class="prism" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+  <defs>
+    <linearGradient id="pr-glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9EAF7" stop-opacity=".22" />
+      <stop offset=".5" stop-color="#8FB4F6" stop-opacity=".08" />
+      <stop offset="1" stop-color="#A996FF" stop-opacity=".2" />
+    </linearGradient>
+    <linearGradient id="pr-beam" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95" />
+      <stop offset=".55" stop-color="#E9F6FF" stop-opacity=".55" />
+      <stop offset="1" stop-color="#E9F6FF" stop-opacity="0" />
+    </linearGradient>
+    <filter id="pr-blur" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="7" /></filter>
+    <filter id="pr-soft" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="2.2" /></filter>
+    <radialGradient id="pr-halo"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".55" /><stop offset=".4" stop-color="#A9EAF7" stop-opacity=".18" /><stop offset="1" stop-color="#A9EAF7" stop-opacity="0" /></radialGradient>
+  </defs>
+
+  <!-- the four lights, converging on the glass -->
+  {lights.map((l, i) => {
+    const x1 = leftX(inY[i]);
+    return (
+      <g class="light" style={`--d:${(i * 0.35).toFixed(2)}s`}>
+        <path d={`M0 ${l.y0} L${x1.toFixed(1)} ${inY[i]}`} stroke={l.c} stroke-width="10" opacity=".45" filter="url(#pr-blur)" />
+        <path d={`M0 ${l.y0} L${x1.toFixed(1)} ${inY[i]}`} stroke={l.c} stroke-width="2.4" filter="url(#pr-soft)" />
+        <path d={`M${x1.toFixed(1)} ${inY[i]} L${(outX - 4).toFixed(1)} ${outY + (i - 1.5) * 3}`} stroke={l.c} stroke-width="1.6" opacity=".55" />
+      </g>
+    );
+  })}
+
+  <!-- the prism -->
+  <path d={`M${cx} ${top} L${cx + half} ${base} L${cx - half} ${base} Z`} fill="url(#pr-glass)" stroke="#CFE6FF" stroke-opacity=".55" stroke-width="1.2" />
+  <path d={`M${cx} ${top} L${cx + 26} ${base}`} stroke="#FFFFFF" stroke-opacity=".12" stroke-width="1" />
+
+  <!-- one beam out -->
+  <g class="beam">
+    <path d={`M${outX.toFixed(1)} ${outY} L${W} ${outY - 26} L${W} ${outY + 26} Z`} fill="url(#pr-beam)" filter="url(#pr-blur)" opacity=".7" />
+    <path d={`M${outX.toFixed(1)} ${outY} L${W} ${outY - 6} L${W} ${outY + 6} Z`} fill="url(#pr-beam)" />
+    <circle cx={outX.toFixed(1)} cy={outY} r="46" fill="url(#pr-halo)" />
+  </g>
+</svg>
+
+<style>
+  .prism { width: 100%; height: auto; display: block; overflow: visible; }
+  .light { animation: pr-pulse 4.5s ease-in-out infinite; animation-delay: var(--d); }
+  .beam { animation: pr-beam 4.5s ease-in-out infinite; transform-origin: 46% 54%; }
+  @keyframes pr-pulse { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+  @keyframes pr-beam { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .light, .beam { animation: none; } }
+</style>

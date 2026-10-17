@@ -1,0 +1,65 @@
+---
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+import { u } from '../lib/url';
+
+interface Props { title?: string; description?: string; image?: string; bodyClass?: string; }
+const { title, description = site.description, image = '/images/work/brand-deck/01.webp', bodyClass } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(u(image), Astro.site);
+---
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#070B18" />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body class={bodyClass}>
+    <Header />
+    <main><slot /></main>
+    <Footer />
+    <script is:inline>
+      // Every new page opens at the top (back/forward still returns you to where you were; #anchors still jump).
+      (function () {
+        var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        if (location.hash || (nav && nav.type === 'back_forward')) return;
+        var top = function () {
+          // 'instant' beats the site's smooth scrolling, which can otherwise leave a page mid-scroll
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          // some previews scroll an outer frame instead of the page itself
+          try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {}
+        };
+        top(); addEventListener('DOMContentLoaded', top); addEventListener('load', top);
+      })();
+    </script>
+    <script>
+      // gentle reveal: only things below the first screen wait for the scroll
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver((es) => es.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); }
+        }), { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.rv').forEach((el) => {
+          if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); }
+        });
+      }
+    </script>
+  </body>
+</html>

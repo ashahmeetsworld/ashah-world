@@ -1,0 +1,67 @@
+{
+  "eyebrow": "About · Ashah",
+  "title": "Where the light crosses.",
+  "lede": "I'm Ashah Peters, a creative director and worldbuilder from Melbourne.",
+  "portrait": "",
+  "portraitCaption": "",
+  "story": {
+    "title": "The story so far.",
+    "chapters": [
+      {
+        "label": "Wonder",
+        "years": "",
+        "title": "The glow of a screen",
+        "text": "It started in a bedroom, lit by a screen. A kid making videos and pulling worlds out of software, finding out you could build a feeling from nothing and send it out into the dark to see who'd feel it too."
+      },
+      {
+        "label": "Desire",
+        "years": "",
+        "title": "The ones who built worlds",
+        "text": "Then came the people who did it at full scale. Artists who turned an album into an era, designers who made a product feel like a belief, producers who could make a whole room go quiet. I didn't just want their work. I wanted to see the way they saw."
+      },
+      {
+        "label": "Energy",
+        "years": "",
+        "title": "Trial, error, everything",
+        "text": "Years of trying things. Experiments that went nowhere, detours that taught me something, late nights searching for the thing that was mine. Not a straight line. A long, restless search for direction."
+      },
+      {
+        "label": "Possibility",
+        "years": "",
+        "title": "It could be me",
+        "text": "I'd always known I was going to build something significant. Somewhere in the search I finally saw its shape: a world of city nights and open water, where the light crosses, and a way to build one for anyone ready to step inside."
+      },
+      {
+        "label": "Courage",
+        "years": "",
+        "title": "No safety net",
+        "text": "So I'm betting on it. On my vision, on what I can make, and on figuring out the rest as I go. No safety net, on purpose. This is the part where I lock in."
+      }
+    ],
+    "eyebrow": "My journey"
+  },
+  "positioning": {
+    "title": "The luminary.",
+    "text": "A luminary is a light other people find their way by. That's the energy I bring into every room: a clear north star, high standards, and the kind of belief that lights the path for everyone around me.\n\nI bring brands out of the dark and connect every touchpoint until people can see the whole constellation, then turn the launch into a moment that lights up the whole sky at once.",
+    "points": [
+      {
+        "label": "Who it's for",
+        "text": "Independent, founder-led labels with the craft already in place and demand starting to build. Melbourne first."
+      },
+      {
+        "label": "What I make",
+        "text": "Brand worlds, drop concepts and rollouts, content systems, and artist × brand collaborations."
+      },
+      {
+        "label": "Why me",
+        "text": "I build my own world in public first, so you can watch the playbook work in real time."
+      }
+    ],
+    "eyebrow": "The positioning"
+  },
+  "mission": "My mission is to transmit the feeling of being fully alive, by opening doors and orchestrating the best in culture to create larger-than-life work.",
+  "intro": [
+    "I've been making things on screens since I was eleven, and I've never stopped. Music, fashion, film, the artists and brands that shaped who I am. I'm obsessed with how culture makes people feel, and I've built my life around creating that feeling on purpose.",
+    "I'm still a student of the people I look up to, and I share what I learn as I go. If you're building something you believe in, I'd love to see it."
+  ]
+}

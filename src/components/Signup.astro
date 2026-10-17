@@ -1,0 +1,58 @@
+---
+// Email list sign-up. Paste Brevo's embed code into site.json → newsletterEmbed,
+// or its hosted form link into newsletterUrl. Until then a placeholder shows.
+import site from '../data/site.json';
+interface Props { title?: string; text?: string; }
+const { title = 'Letters from the world', text = 'What I\'m learning, making and noticing, for founders and creatives building something of their own. Occasional, never noise.' } = Astro.props;
+---
+<div class="signup">
+  <h3>{title}</h3>
+  <p class="body">{text}</p>
+  {site.newsletterEmbed ? (
+    <div class="embed" set:html={site.newsletterEmbed} />
+  ) : site.newsletterUrl.includes('sibforms.com') ? (
+    <form class="row brevo" action={site.newsletterUrl} method="post">
+      <label class="field"><span>Email</span><input id="nl-email" type="email" name="EMAIL" placeholder="you@yourbrand.com" autocomplete="email" required /></label>
+      <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
+      <input type="hidden" name="locale" value="en" />
+      <button class="btn ember" type="submit"><span>Join the list</span></button>
+      <p class="note status" role="status" aria-live="polite"></p>
+    </form>
+  ) : site.newsletterUrl ? (
+    <a class="btn ember" href={site.newsletterUrl} rel="noopener"><span>Join the list</span></a>
+  ) : (
+    <form class="row" onsubmit="return false">
+      <label class="field"><span>Email</span><input type="email" placeholder="you@yourbrand.com" disabled /></label>
+      <button class="btn" disabled>Join the list</button>
+      <p class="note">Sign-up opens once the Brevo list is connected.</p>
+    </form>
+  )}
+</div>
+<script>
+  // Post to Brevo in the background and confirm in place.
+  document.querySelectorAll<HTMLFormElement>('form.brevo').forEach((f) => {
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = f.querySelector('button') as HTMLButtonElement;
+      const status = f.querySelector('.status') as HTMLElement;
+      btn.disabled = true; btn.querySelector('span')!.textContent = 'Joining…';
+      try {
+        await fetch(f.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' });
+        f.reset(); btn.querySelector('span')!.textContent = 'You’re in';
+        status.textContent = 'Check your inbox to confirm your email.';
+      } catch {
+        btn.disabled = false; btn.querySelector('span')!.textContent = 'Join the list';
+        status.textContent = 'That didn’t go through. Please try again.';
+      }
+    });
+  });
+</script>
+<style>
+  .signup h3 { margin-bottom: 12px; }
+  .signup .body { margin: 0 0 26px; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; }
+  .row .note { grid-column: 1 / -1; margin: 4px 0 0; }
+  .row .note:empty { display: none; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+</style>
