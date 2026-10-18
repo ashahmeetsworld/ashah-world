@@ -49,3 +49,5 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Home "Hello" section: the mission sits beside the intro in the quote style; only the background borrows the About page's MissionSky stars and ripples (faded edges, soft violet glow).
 - Prism relay: built, currently off (`SHOW_RELAY` in index.astro). Ashah's note: the beams read as wires, not light.
 - Home hero: elevated layered scene in `HeroScene.astro` (switch `ELEVATED_HERO` in index.astro; false = the original `Sky` night scene). Details in DESIGN.md.
+- Home closing sunset: elevated layered scene in `DuskScene.astro` (switch `ELEVATED_DUSK` in index.astro; false = the original `Sky` dawn scene).
+- Pop-up (`OsNudge.astro`, in Base.astro): once per visitor, not on Contact/Community, ends 17 Jan 2027, `?popup=force` shows it. No product name yet. Inline sign-up posts to a Brevo embedded form; paste the form action URL into `BREVO_FORM_ACTION` (empty = "opens soon", sends nothing).

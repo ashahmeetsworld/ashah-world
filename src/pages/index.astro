@@ -10,6 +10,7 @@ import Flame from '../components/Flame.astro';
 import Prism from '../components/Prism.astro';
 import Relay from '../components/Relay.astro';
 import HeroScene from '../components/HeroScene.astro';
+import DuskScene from '../components/DuskScene.astro';
 import MissionSky from '../components/MissionSky.astro';
 import Signup from '../components/Signup.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
@@ -27,6 +28,8 @@ const SHOW_PRISM = false;
 const SHOW_RELAY = false;
 // The elevated hero (HeroScene.astro, 18 Oct 2026). Set false to go back to the original night sky.
 const ELEVATED_HERO = true;
+// The elevated closing sunset (DuskScene.astro, 18 Oct 2026). Set false to go back to the original dawn scene.
+const ELEVATED_DUSK = true;
 const ubiquity = SHOW_OFFER ? await getEntry('offers', 'ubiquity') : undefined;
 const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 
@@ -203,7 +206,7 @@ const skills = [
         {site.discordUrl && <a class="go" href={site.discordUrl} rel="noopener">Join the Discord <Arrow /></a>}
       </div>
     </div>
-    <div class="scene"><Sky variant="dawn" id="dawn-sky" /></div>
+    <div class={ELEVATED_DUSK ? 'scene scene-dusk' : 'scene'}>{ELEVATED_DUSK ? <DuskScene /> : <Sky variant="dawn" id="dawn-sky" />}</div>
     <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
   </section>
 </Base>
@@ -311,6 +314,11 @@ const skills = [
   .finale-copy .ctas { justify-content: center; }
   .scene { position: relative; aspect-ratio: 16 / 7; min-height: 340px; max-height: 720px; width: 100%; margin-top: -40px; }
   .scene::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--midnight) 0%, transparent 30%, transparent 70%, var(--midnight) 100%); }
+  .scene-dusk { aspect-ratio: 16 / 8; max-height: 820px; }
+  .scene-dusk::after { z-index: 7; background: linear-gradient(180deg, var(--midnight) 0%, transparent 24%, transparent 76%, var(--midnight) 100%); }
+  .finale:has(.scene-dusk) .big { text-shadow: 0 0 50px rgba(242, 180, 140, .3), 0 0 120px rgba(224, 140, 126, .18); }
+  .finale:has(.scene-dusk) .panel { box-shadow: 0 40px 120px -40px rgba(242, 180, 140, .28); }
+  @media (max-width: 760px) { .scene-dusk { aspect-ratio: auto; height: 460px; } }
   .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
   .big { font-size: clamp(60px, 10vw, 140px); line-height: .95; margin-bottom: 22px; text-shadow: 0 0 50px rgba(242, 180, 140, .25); }
   .finale .lede { color: var(--ink); margin: 0 0 30px; max-width: 30ch; }

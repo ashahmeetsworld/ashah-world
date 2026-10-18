@@ -1,0 +1,226 @@
+---
+// Once-only slide-in card offering this month's free resource, with an inline email sign-up (18 Oct 2026).
+// No product name yet (it waits on Business Development). Plan: website-popup/popup-plan.md
+// Sign-ups go to a Brevo embedded form posting to the "OS lead magnet" list, tagged SIGNUP_SOURCE=popup.
+// Setup: website-popup/brevo-signup-setup.md
+// >>> PASTE THE BREVO FORM ACTION URL HERE (looks like https://xxxx.sibforms.com/serve/MUIF...). <<<
+// Until it's filled in, the form shows a gentle "opens soon" note and sends nothing.
+const BREVO_FORM_ACTION = '';
+const live = /^https:\/\/[a-z0-9.-]+\.sibforms\.com\/serve\//i.test(BREVO_FORM_ACTION);
+---
+
+
+<aside id="os-nudge" class="os-nudge" aria-labelledby="os-nudge-title" hidden>
+  <button class="os-nudge__close" type="button" aria-label="Close">&times;</button>
+  <p class="os-nudge__eyebrow">FREE · FOR FOUNDERS</p>
+  <h2 id="os-nudge-title" class="os-nudge__title">Your operating system.<br />Ready when you are.</h2>
+  <p class="os-nudge__line">
+    A small team for your business, set up around you in Claude, built from your own answers. Leave your email and it comes to you.
+  </p>
+  <form class="os-nudge__form" action={live ? BREVO_FORM_ACTION : undefined} method="post" data-live={live ? '1' : '0'} novalidate>
+    <label class="os-nudge__field">
+      <span class="sr">Email</span>
+      <input type="email" name="EMAIL" placeholder="you@yourbrand.com" autocomplete="email" required />
+    </label>
+    <input type="hidden" name="SIGNUP_SOURCE" value="popup" />
+    <input type="hidden" name="locale" value="en" />
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="os-nudge__hp" />
+    <button class="os-nudge__cta" type="submit"><span>Send it to me</span></button>
+    <p class="os-nudge__status" role="status" aria-live="polite"></p>
+  </form>
+  <button class="os-nudge__later" type="button">Not now</button>
+</aside>
+
+<script>
+  const KEY = 'amw-os-nudge'; // 'shown' | 'clicked' | 'joined'
+  const ENDS = new Date('2027-01-17T00:00:00+11:00'); // OS lead magnet window
+  const MIN_SECONDS = 25; // time on site before it may appear
+  const SCROLL_DEPTH = 0.5; // share of the page read
+
+  const el = document.getElementById('os-nudge');
+  const path = location.pathname;
+  const params = new URLSearchParams(location.search);
+
+  const store = {
+    get() { try { return localStorage.getItem(KEY); } catch { return 'blocked'; } },
+    set(v) { try { localStorage.setItem(KEY, v); } catch {} },
+  };
+  const track = (name) => { if (typeof gtag === 'function') gtag('event', name, { nudge: 'os' }); };
+
+  // Never on these pages, and never for people who already came from an email.
+  const QUIET = ['/contact', '/community'];
+  const quiet = QUIET.some((p) => path.includes(p));
+  const force = params.get('popup') === 'force'; // preview: show straight away, ignore the once-only memory
+  if (path.includes('/thanks')) store.set('joined');
+  if (params.get('utm_medium') === 'email') store.set('joined');
+
+  // Count pages seen this visit; it can appear from the second page on.
+  let pages = 1;
+  try {
+    pages = Number(sessionStorage.getItem('amw-pages') || 0) + 1;
+    sessionStorage.setItem('amw-pages', String(pages));
+  } catch {}
+
+  const eligible = el && !quiet && new Date() < ENDS && (force || !store.get());
+
+  if (eligible) {
+    const start = Date.now();
+    let fired = false;
+
+    const show = () => {
+      if (fired) return;
+      fired = true;
+      store.set('shown'); // once, ever, in this browser
+      el.hidden = false;
+      requestAnimationFrame(() => el.classList.add('is-in'));
+      track('os_nudge_shown');
+      window.removeEventListener('scroll', onScroll);
+    };
+
+    const ready = () => (Date.now() - start) / 1000 >= MIN_SECONDS;
+    const readEnough = () =>
+      (scrollY + innerHeight) / document.documentElement.scrollHeight >= SCROLL_DEPTH;
+
+    const onScroll = () => { if (ready() && readEnough()) show(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Second page of the visit: a shorter wait is enough, no scroll needed.
+    setTimeout(() => { if (pages >= 2 || readEnough()) show(); }, (pages >= 2 ? 8 : MIN_SECONDS) * 1000);
+    if (force) setTimeout(show, 600);
+
+    // Desktop only: leaving the tab before the timer counts as the moment.
+    document.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget && e.clientY <= 0 && (Date.now() - start) / 1000 >= 10) show();
+    });
+
+    const hide = (reason) => {
+      el.classList.remove('is-in');
+      setTimeout(() => { el.hidden = true; }, 400);
+      track(`os_nudge_${reason}`);
+    };
+    el.querySelector('.os-nudge__close').addEventListener('click', () => hide('dismissed'));
+    el.querySelector('.os-nudge__later').addEventListener('click', () => hide('dismissed'));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.hidden) hide('dismissed'); });
+
+    // Inline sign-up. Posts to Brevo in the background and confirms in place; until the form URL is set, says so and sends nothing.
+    const form = el.querySelector('.os-nudge__form');
+    const btn = form.querySelector('button');
+    const label = btn.querySelector('span');
+    const status = form.querySelector('.os-nudge__status');
+    const input = form.querySelector('input[type=email]');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!input.value || !input.checkValidity()) { status.textContent = 'That email doesn’t look quite right.'; input.focus(); return; }
+      if (form.dataset.live !== '1') { status.textContent = 'Sign-ups open very soon. Thank you for wanting in.'; return; }
+      btn.disabled = true; label.textContent = 'Sending…';
+      track('os_nudge_clicked');
+      try {
+        await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        store.set('joined');
+        form.reset(); label.textContent = 'You’re in';
+        status.textContent = 'Check your inbox to confirm your email.';
+        setTimeout(() => hide('joined'), 4000);
+      } catch {
+        btn.disabled = false; label.textContent = 'Send it to me';
+        status.textContent = 'That didn’t go through. Please try again.';
+      }
+    });
+  }
+</script>
+
+<style>
+  .os-nudge {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 50;
+    width: min(360px, calc(100vw - 32px));
+    padding: 28px 28px 22px;
+    border-radius: 18px;
+    color: #f6f1e7;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(127, 216, 240, 0.22), rgba(143, 180, 246, 0.1) 40%, rgba(169, 150, 255, 0) 70%),
+      rgba(7, 11, 24, 0.86);
+    border: 1px solid rgba(246, 241, 231, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 80px rgba(143, 180, 246, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .os-nudge.is-in { opacity: 1; transform: none; }
+  .os-nudge__eyebrow {
+    margin: 0 0 14px;
+    font: 500 11px/1 'DM Sans', sans-serif;
+    letter-spacing: 0.32em;
+    color: #7fd8f0;
+  }
+  .os-nudge__title {
+    margin: 0 0 12px;
+    font: italic 500 30px/1.08 'Cormorant Garamond', serif;
+  }
+  .os-nudge__line {
+    margin: 0 0 22px;
+    font: 400 14px/1.55 'DM Sans', sans-serif;
+    color: rgba(246, 241, 231, 0.78);
+  }
+  .os-nudge__form { display: grid; gap: 10px; margin: 0; }
+  .os-nudge__field input {
+    width: 100%; box-sizing: border-box; padding: 13px 18px; border-radius: 999px;
+    border: 1px solid rgba(246, 241, 231, 0.22); background: rgba(7, 11, 24, 0.55); color: #f6f1e7;
+    font: 400 14px/1.2 'DM Sans', sans-serif;
+  }
+  .os-nudge__field input::placeholder { color: rgba(246, 241, 231, 0.42); }
+  .os-nudge__field input:focus-visible { outline: 2px solid #7fd8f0; outline-offset: 2px; }
+  .os-nudge__status { margin: 2px 0 0; font: 400 12.5px/1.45 'DM Sans', sans-serif; color: #a9eaf7; text-align: center; }
+  .os-nudge__status:empty { display: none; }
+  .os-nudge__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .os-nudge__cta {
+    display: block; width: 100%; border: 0; cursor: pointer;
+    padding: 14px 18px;
+    border-radius: 999px;
+    text-align: center;
+    text-decoration: none;
+    font: 500 12px/1 'DM Sans', sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #070b18;
+    background: #8fb4f6;
+    background: linear-gradient(90deg, #7fd8f0, #8fb4f6, #a996ff);
+    box-shadow: 0 0 28px rgba(143, 180, 246, 0.45);
+  }
+  .os-nudge__later {
+    display: block;
+    margin: 12px auto 0;
+    padding: 4px 8px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: 400 12px/1 'DM Sans', sans-serif;
+    color: rgba(246, 241, 231, 0.55);
+  }
+  .os-nudge__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(246, 241, 231, 0.6);
+  }
+  .os-nudge button:focus-visible { outline: 2px solid #7fd8f0; outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    .os-nudge { right: 16px; left: 16px; bottom: 16px; width: auto; padding: 22px 22px 16px; }
+    .os-nudge__title { font-size: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .os-nudge { transition: opacity 0.2s linear; transform: none; }
+  }
+</style>
