@@ -17,7 +17,7 @@ const verbs = ['making', 'building', 'creating', 'living'];
     <OrbitScene />
     <div class="wrap o-copy">
       <p class="eyebrow">Free · Orbit</p>
-      <h1>Your world keeps turning. <span class="l2">You keep <span class="verb" data-verbs={verbs.join(',')}><span class="w">{verbs[0]}</span>.</span></span></h1>
+      <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
       <p class="lede">Six helpers circle your work, built around you in Claude. You stay at the centre.</p>
       <OrbitSignup source="orbit-page-top" />
       <p class="note">Free, for good. Leave any time.</p>
@@ -87,16 +87,15 @@ const verbs = ['making', 'building', 'creating', 'living'];
 </Base>
 
 <script>
-  // the hero's last word: making, building, creating, living
-  const v = document.querySelector<HTMLElement>('.verb');
-  const w = v?.querySelector<HTMLElement>('.w');
-  const words = (v?.dataset.verbs || '').split(',');
-  if (v && w && words.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // the hero's last word: making, building, creating, living (all stacked in one spot, so nothing jumps)
+  const ws = [...document.querySelectorAll<HTMLElement>('.verb .w')];
+  if (ws.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let i = 0;
     setInterval(() => {
-      v.classList.add('out');
-      setTimeout(() => { i = (i + 1) % words.length; w.textContent = words[i]; v.classList.remove('out'); }, 550);
-    }, 2800);
+      ws[i].classList.remove('on'); ws[i].setAttribute('aria-hidden', 'true');
+      i = (i + 1) % ws.length;
+      ws[i].classList.add('on'); ws[i].removeAttribute('aria-hidden');
+    }, 3600);
   }
   // the hero scene leans gently toward the pointer
   const scene = document.querySelector<HTMLElement>('.o-hero .os-scene');
@@ -119,9 +118,12 @@ const verbs = ['making', 'building', 'creating', 'living'];
   .o-copy { display: grid; gap: 22px; justify-items: start; }
   .o-copy h1 { font-size: clamp(46px, 6.2vw, 92px); line-height: .98; max-width: 14ch; }
   .o-copy h1 .l2 { display: block; }
-  .verb { display: inline-block; background: linear-gradient(100deg, #7FD8F0, #8FB4F6 35%, #A996FF 65%, #6FE3A6 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .08em;
-    animation: o-shimmer 6s ease-in-out infinite alternate; transition: opacity .55s var(--ease), filter .55s var(--ease), transform .55s var(--ease); }
-  .verb.out { opacity: 0; filter: blur(8px); transform: translateY(.12em); }
+  .o-copy h1 .l2 { white-space: nowrap; }
+  .verb { display: grid; }
+  .verb .w { grid-area: 1 / 1; justify-self: start; padding: 0 .1em .16em 0; margin-bottom: -.16em; opacity: 0; filter: blur(10px); transform: translateY(.1em);
+    background: linear-gradient(100deg, #7FD8F0, #8FB4F6 35%, #A996FF 65%, #6FE3A6 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: o-shimmer 6s ease-in-out infinite alternate; transition: opacity .9s var(--ease), filter .9s var(--ease), transform .9s var(--ease); }
+  .verb .w.on { opacity: 1; filter: none; transform: none; }
   @keyframes o-shimmer { to { background-position: 100% 0; } }
   .o-copy .lede { max-width: 30ch; margin: 0; }
   .o-copy .eyebrow { margin: 0; }
