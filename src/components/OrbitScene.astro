@@ -1,0 +1,83 @@
+---
+// Orbit hero scene: an aurora night, one light at the centre (you), six small
+// moons travelling their own orbits around it. The analogy: your world keeps
+// turning, you stay at the centre and make.
+let seed = 7;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const W = 1200, H = 900, CX = 600, CY = 470;
+const stars = Array.from({ length: 140 }, () => ({
+  x: (r() * W).toFixed(1), y: (r() * H * 0.9).toFixed(1),
+  s: r() < 0.12 ? 1.4 : 0.7, o: (0.25 + r() * 0.6).toFixed(2), d: (r() * 6).toFixed(2),
+}));
+// three tilted rings, two moons on each, travelling at different speeds
+const rings = [
+  { rx: 190, ry: 62, tilt: -12, dur: 26 },
+  { rx: 300, ry: 98, tilt: -12, dur: 40 },
+  { rx: 420, ry: 138, tilt: -12, dur: 58 },
+];
+const moons = rings.flatMap((g, i) => [
+  { ring: i, size: 5.5 - i, delay: 0 },
+  { ring: i, size: 4.2 - i * 0.6, delay: -g.dur / 2 },
+]);
+const ell = (g: { rx: number; ry: number }) =>
+  `M ${CX - g.rx} ${CY} a ${g.rx} ${g.ry} 0 1 0 ${g.rx * 2} 0 a ${g.rx} ${g.ry} 0 1 0 ${-g.rx * 2} 0`;
+---
+<div class="os-scene" aria-hidden="true">
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="os-core"><stop offset="0" stop-color="#FFFFFF" /><stop offset=".25" stop-color="#E9F7FF" stop-opacity=".95" /><stop offset=".6" stop-color="#8FB4F6" stop-opacity=".35" /><stop offset="1" stop-color="#A996FF" stop-opacity="0" /></radialGradient>
+      <radialGradient id="os-halo"><stop offset="0" stop-color="#7FD8F0" stop-opacity=".32" /><stop offset=".45" stop-color="#8FB4F6" stop-opacity=".12" /><stop offset="1" stop-color="#A996FF" stop-opacity="0" /></radialGradient>
+      <radialGradient id="os-moon"><stop offset="0" stop-color="#FFFFFF" /><stop offset=".4" stop-color="#BFEFFF" stop-opacity=".8" /><stop offset="1" stop-color="#7FD8F0" stop-opacity="0" /></radialGradient>
+      <linearGradient id="os-ring" x1="0" x2="1"><stop offset="0" stop-color="#7FD8F0" stop-opacity=".05" /><stop offset=".5" stop-color="#A996FF" stop-opacity=".45" /><stop offset="1" stop-color="#7FD8F0" stop-opacity=".05" /></linearGradient>
+    </defs>
+    {stars.map((s) => <circle class="st" style={`animation-delay:-${s.d}s`} cx={s.x} cy={s.y} r={s.s} fill="#EDE6FF" opacity={s.o} />)}
+    <circle class="breathe" cx={CX} cy={CY} r="300" fill="url(#os-halo)" />
+    <g transform={`rotate(${rings[0].tilt} ${CX} ${CY})`}>
+      {rings.map((g, i) => <path id={`os-path-${i}`} d={ell(g)} fill="none" stroke="url(#os-ring)" stroke-width="1" />)}
+      {moons.map((m) => {
+        const g = rings[m.ring];
+        return (
+          <g>
+            <circle r={m.size * 3.2} fill="url(#os-moon)" opacity=".5">
+              <animateMotion dur={`${g.dur}s`} begin={`${m.delay}s`} repeatCount="indefinite"><mpath href={`#os-path-${m.ring}`} /></animateMotion>
+            </circle>
+            <circle r={m.size * 0.7} fill="#F6FBFF">
+              <animateMotion dur={`${g.dur}s`} begin={`${m.delay}s`} repeatCount="indefinite"><mpath href={`#os-path-${m.ring}`} /></animateMotion>
+            </circle>
+          </g>
+        );
+      })}
+    </g>
+    <circle cx={CX} cy={CY} r="46" fill="url(#os-core)" />
+    <circle cx={CX} cy={CY} r="6" fill="#FFFFFF" />
+  </svg>
+  <div class="shoot"></div>
+  <div class="fade"></div>
+</div>
+
+<style>
+  .os-scene { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .os-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .aurora { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .32; mix-blend-mode: screen; animation: os-drift 22s ease-in-out infinite alternate; }
+  .a1 { width: 70vw; height: 26vw; left: -10vw; top: 2%; background: linear-gradient(100deg, #7FD8F0, #8FB4F6); transform: rotate(-8deg); }
+  .a2 { width: 60vw; height: 22vw; right: -12vw; top: 10%; background: linear-gradient(100deg, #8FB4F6, #A996FF); animation-duration: 28s; animation-delay: -6s; }
+  .a3 { width: 40vw; height: 12vw; left: 22vw; top: 22%; background: #6FE3A6; opacity: .14; animation-duration: 34s; }
+  .fade { position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(transparent, var(--midnight)); }
+  .shoot { position: absolute; top: 14%; left: 62%; width: 140px; height: 1px; background: linear-gradient(90deg, rgba(233,247,255,0), #E9F7FF); transform: rotate(-24deg); opacity: 0; animation: os-shoot 11s ease-in 3s infinite; }
+  @keyframes os-shoot { 0% { opacity: 0; translate: 0 0; } 2% { opacity: .9; } 7% { opacity: 0; translate: -260px 120px; } 100% { opacity: 0; translate: -260px 120px; } }
+  .st { animation: os-tw 6s ease-in-out infinite; }
+  .breathe { transform-origin: 600px 470px; animation: os-breathe 7s ease-in-out infinite; }
+  @keyframes os-drift { to { transform: translate(4vw, 2vw) rotate(-3deg); } }
+  @keyframes os-tw { 50% { opacity: .15; } }
+  @keyframes os-breathe { 50% { transform: scale(1.08); opacity: .8; } }
+  @media (min-width: 861px) {
+    .os-scene svg { left: 26%; width: 90%; }
+  }
+  @media (max-width: 860px) {
+    .os-scene svg { height: 44%; top: 0; }
+    .aurora { filter: blur(50px); }
+  }
+</style>

@@ -1,0 +1,167 @@
+---
+// Orbit: the free OS lead magnet (17 Oct 2026 to about 17 Jan 2027).
+// Look: aurora (never mixed with ember/firefly). One ask: sign up for Orbit.
+// Linked from the footer only, not the header.
+import Base from '../layouts/Base.astro';
+import OrbitScene from '../components/OrbitScene.astro';
+import OrbitSignup from '../components/OrbitSignup.astro';
+import AnklesScene from '../components/AnklesScene.astro';
+import OrbitTeam from '../components/OrbitTeam.astro';
+
+// the hero's last word cycles through these
+const verbs = ['making', 'building', 'creating', 'living'];
+---
+<Base title="Orbit" description="Six helpers circle your work, built around you in Claude. You stay at the centre. Free, for good." bodyClass="orbit">
+  <!-- Hero: the light at the centre -->
+  <section class="o-hero">
+    <OrbitScene />
+    <div class="wrap o-copy">
+      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit</span></p>
+      <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
+      <p class="lede">Six helpers circle your work, built around you in Claude. You stay at the centre.</p>
+      <OrbitSignup source="orbit-page-top" />
+      <p class="note"><strong>Free, for good.</strong> Leave any time.</p>
+    </div>
+  </section>
+
+  <!-- Right now: from the booklet -->
+  <section class="o-now">
+    <div class="wrap now-copy rv">
+      <p class="eyebrow big"><i></i>Right now</p>
+      <h2>Up to your ankles<br /><span class="soft">in everything.</span></h2>
+      <p class="body">A hundred small lights, all within reach, all asking for you. You never know which to pick up first, and it’s always the ones you have to, not the ones you want to.</p>
+      <p class="never">Never deep in anything.</p>
+    </div>
+    <AnklesScene />
+  </section>
+
+  <!-- Slot: the transformational outcome goes here, before the team (to come). -->
+
+  <!-- The six: click a moon -->
+  <section class="pad o-six">
+    <div class="halo" style="width:560px;height:560px;right:-180px;top:12%;background:#3A1F66"></div>
+    <div class="wrap">
+      <div class="rv head">
+        <p class="eyebrow big"><i></i>Your team</p>
+        <h2>Six moons. One world.</h2>
+      </div>
+      <OrbitTeam />
+    </div>
+  </section>
+
+  <!-- Trust, learning, setup -->
+  <section class="pad o-trust">
+    <div class="wrap trio">
+      <article class="rv">
+        <p class="label">You’re in charge</p>
+        <h3>Nothing goes out without your yes.</h3>
+        <p class="body">Orbit drafts. You decide. Nothing is sent, posted, paid for or agreed until you say so. And nothing is made up: if it doesn’t know, it asks.</p>
+      </article>
+      <article class="rv" style="transition-delay:90ms">
+        <p class="label">It learns you</p>
+        <h3>Tell it once.</h3>
+        <p class="body">Every chat ends with one small question: anything I should do differently next time? Shorter, warmer, more like this. Month by month, it sounds more like you.</p>
+      </article>
+      <article class="rv" style="transition-delay:180ms">
+        <p class="label">Getting there</p>
+        <h3>About an hour.</h3>
+        <p class="body">Download Orbit, open it in Claude and type “start”. You talk about yourself and your work. Claude builds your six helpers and walks you through every step.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- The ask, again, in the aurora -->
+  <section class="pad o-cta">
+    <div class="wrap">
+      <div class="cta-card rv">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <div class="cta-copy">
+          <p class="eyebrow big"><i></i>Free, for good</p>
+          <h2>Set your world in motion.</h2>
+          <p class="body">Orbit lands in your inbox as one download. Built once, it keeps learning.</p>
+        </div>
+        <OrbitSignup source="orbit-page-bottom" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // the hero's last word: making, building, creating, living (all stacked in one spot, so nothing jumps)
+  const ws = [...document.querySelectorAll<HTMLElement>('.verb .w')];
+  if (ws.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => {
+      ws[i].classList.remove('on'); ws[i].setAttribute('aria-hidden', 'true');
+      i = (i + 1) % ws.length;
+      ws[i].classList.add('on'); ws[i].removeAttribute('aria-hidden');
+    }, 3600);
+  }
+  // the hero scene leans gently toward the pointer
+  const scene = document.querySelector<HTMLElement>('.o-hero .os-scene');
+  if (scene && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    addEventListener('pointermove', (e) => {
+      const x = (e.clientX / innerWidth - 0.5) * 18, y = (e.clientY / innerHeight - 0.5) * 12;
+      scene.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  :global(body.orbit .eyebrow) { color: var(--aqua); }
+  .eyebrow.big { font-size: clamp(14px, 1.3vw, 18px); letter-spacing: .34em; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .eyebrow.big i { width: 7px; height: 7px; border-radius: 50%; background: #E9F7FF; box-shadow: 0 0 12px #7FD8F0, 0 0 24px rgba(169, 150, 255, .7); animation: o-pulse 3s ease-in-out infinite; }
+  @keyframes o-pulse { 50% { box-shadow: 0 0 18px #7FD8F0, 0 0 36px rgba(169, 150, 255, .9); } }
+
+  .tag { display: flex; align-items: center; gap: 16px; }
+  .free { position: relative; display: inline-block; padding: 8px 16px 8px 18px; border-radius: 999px; font-size: 14px; letter-spacing: .34em; color: #fff;
+    background: linear-gradient(100deg, rgba(127, 216, 240, .22), rgba(169, 150, 255, .22)); box-shadow: inset 0 0 0 1px rgba(207, 230, 255, .45), 0 0 24px rgba(127, 216, 240, .28), 0 0 50px rgba(169, 150, 255, .18);
+    text-shadow: 0 0 12px rgba(207, 230, 255, .8); animation: o-free 4s ease-in-out infinite; }
+  @keyframes o-free { 50% { box-shadow: inset 0 0 0 1px rgba(207, 230, 255, .6), 0 0 34px rgba(127, 216, 240, .45), 0 0 70px rgba(169, 150, 255, .28); } }
+  .o-copy .note strong { font-weight: 500; color: #CFE6FF; }
+  .o-hero { min-height: 100svh; display: flex; align-items: center; padding-block: 120px 70px; }
+  :global(.o-hero .os-scene) { transition: transform 1.2s var(--ease); }
+  .o-copy { display: grid; gap: 22px; justify-items: start; }
+  .o-copy h1 { font-size: clamp(46px, 6.2vw, 92px); line-height: .98; max-width: 14ch; }
+  .o-copy h1 .l2 { display: block; }
+  .o-copy h1 .l2 { white-space: nowrap; }
+  .verb { display: grid; }
+  .verb .w { grid-area: 1 / 1; justify-self: start; padding: 0 .1em .16em 0; margin-bottom: -.16em; opacity: 0; filter: blur(10px); transform: translateY(.1em);
+    background: linear-gradient(100deg, #7FD8F0, #8FB4F6 35%, #A996FF 65%, #6FE3A6 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: o-shimmer 6s ease-in-out infinite alternate; transition: opacity .9s var(--ease), filter .9s var(--ease), transform .9s var(--ease); }
+  .verb .w.on { opacity: 1; filter: none; transform: none; }
+  @keyframes o-shimmer { to { background-position: 100% 0; } }
+  .o-copy .lede { max-width: 30ch; margin: 0; }
+  .o-copy .eyebrow { margin: 0; }
+
+  .o-now { padding-top: clamp(80px, 9vw, 120px); }
+  .now-copy { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; margin-bottom: clamp(-60px, -4vw, -20px); }
+  .now-copy h2 { font-size: clamp(44px, 6vw, 80px); margin-bottom: 22px; }
+  .now-copy .soft { color: #A9B8F6; }
+  .now-copy .body { max-width: 52ch; margin: 0 0 16px; }
+  .never { margin: 0; font: italic 400 clamp(22px, 2.2vw, 28px)/1.3 var(--serif); color: #A9B8F6; }
+
+  .o-six .head { margin-bottom: clamp(30px, 4vw, 50px); }
+
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .trio article { padding: 32px 28px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, rgba(127, 216, 240, .05), rgba(7, 11, 24, 0) 60%), rgba(11, 18, 48, .4); transition: border-color .5s, transform .5s var(--ease); }
+  .trio article:hover { border-color: rgba(169, 150, 255, .4); transform: translateY(-3px); }
+  .trio .label { color: var(--aqua); margin: 0 0 16px; }
+  .trio h3 { margin-bottom: 14px; }
+  .trio .body { margin: 0; font-size: 16px; }
+
+  .cta-card { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; padding: clamp(36px, 6vw, 72px); border-radius: 22px; border: 1px solid rgba(169, 150, 255, .25); background: rgba(7, 11, 24, .7); }
+  .cta-glow { position: absolute; inset: -30%; z-index: -1; background: radial-gradient(40% 50% at 20% 30%, rgba(127, 216, 240, .32), transparent 70%), radial-gradient(45% 55% at 75% 60%, rgba(169, 150, 255, .3), transparent 70%), radial-gradient(30% 30% at 50% 100%, rgba(111, 227, 166, .14), transparent 70%); filter: blur(30px); animation: o-glow 16s ease-in-out infinite alternate; }
+  .cta-copy h2 { margin-bottom: 16px; }
+  @keyframes o-glow { to { transform: translate(4%, -3%) scale(1.05); } }
+
+  @media (max-width: 860px) {
+    .cta-card { grid-template-columns: 1fr; }
+    .trio { grid-template-columns: 1fr; }
+    .o-hero { align-items: flex-end; padding-top: 40svh; }
+  }
+  @media (max-width: 560px) {
+    .o-hero { padding-bottom: 56px; }
+    .now-copy { text-align: left; justify-items: start; }
+  }
+</style>
