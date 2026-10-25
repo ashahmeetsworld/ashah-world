@@ -34,8 +34,14 @@ const year = new Date().getFullYear();
   .mono { font: italic 400 34px/1 var(--serif); margin: 0 0 10px; }
   .tag { margin: 0; color: var(--ink-3); font-size: 14px; }
   .icons { margin-top: 22px; }
-  .nav-col { display: flex; flex-direction: column; align-items: flex-start; }
-  .links { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: flex-start; }
+  /* two rows on the page's right margin (desktop): site links, then magnets, offers and ventures; Orbit sits under Contact */
+  .nav-col { display: flex; flex-direction: column; align-items: flex-end; }
+  .links { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: flex-start; justify-content: flex-end; }
+  @media (max-width: 700px) {
+    /* phone: the footer stacks, so both rows sit on the left margin */
+    .nav-col { align-items: flex-start; }
+    .links { justify-content: flex-start; }
+  }
   .ventures { margin-top: 12px; }
   .links a { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); padding: 6px 0; }
   .links a:hover { color: var(--peach); }
