@@ -54,6 +54,7 @@ const ell = (g: { rx: number; ry: number }) =>
     <circle cx={CX} cy={CY} r="46" fill="url(#os-core)" />
     <circle cx={CX} cy={CY} r="6" fill="#FFFFFF" />
   </svg>
+  <div class="shoot"></div>
   <div class="fade"></div>
 </div>
 
@@ -65,6 +66,8 @@ const ell = (g: { rx: number; ry: number }) =>
   .a2 { width: 60vw; height: 22vw; right: -12vw; top: 10%; background: linear-gradient(100deg, #8FB4F6, #A996FF); animation-duration: 28s; animation-delay: -6s; }
   .a3 { width: 40vw; height: 12vw; left: 22vw; top: 22%; background: #6FE3A6; opacity: .14; animation-duration: 34s; }
   .fade { position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(transparent, var(--midnight)); }
+  .shoot { position: absolute; top: 14%; left: 62%; width: 140px; height: 1px; background: linear-gradient(90deg, rgba(233,247,255,0), #E9F7FF); transform: rotate(-24deg); opacity: 0; animation: os-shoot 11s ease-in 3s infinite; }
+  @keyframes os-shoot { 0% { opacity: 0; translate: 0 0; } 2% { opacity: .9; } 7% { opacity: 0; translate: -260px 120px; } 100% { opacity: 0; translate: -260px 120px; } }
   .st { animation: os-tw 6s ease-in-out infinite; }
   .breathe { transform-origin: 600px 470px; animation: os-breathe 7s ease-in-out infinite; }
   @keyframes os-drift { to { transform: translate(4vw, 2vw) rotate(-3deg); } }

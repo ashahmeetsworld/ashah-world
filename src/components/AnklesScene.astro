@@ -1,0 +1,92 @@
+---
+// "Up to your ankles in everything": from the Orbit booklet. A small figure stands
+// in shallow water among a hundred small lights, each one a job asking for them.
+// Far off on the horizon, one door glows: the work you love.
+let seed = 11;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const W = 1200, H = 720, HZ = 250; // horizon
+const FX = 430, FY = 560; // the figure's feet
+const DX = 900; // the door
+const depth = (y: number) => (y - HZ) / (H - HZ); // 0 at the horizon, 1 at the front
+const words = [
+  { t: 'invoices', x: 330, y: 470 }, { t: 'posts', x: 395, y: 540 }, { t: 'emails', x: 545, y: 525 },
+  { t: 'follow-ups', x: 600, y: 580 }, { t: 'admin', x: 355, y: 610 }, { t: 'the website', x: 680, y: 640 },
+  { t: 'DMs', x: 470, y: 665 }, { t: 'pricing', x: 1000, y: 650 },
+];
+const lights = [
+  ...words.map((w) => ({ x: w.x, y: w.y, t: w.t })),
+  ...Array.from({ length: 64 }, () => {
+    const y = HZ + 14 + Math.pow(r(), 0.8) * (H - HZ - 20);
+    return { x: r() * W, y, t: '' };
+  }),
+].map((l, i) => ({ ...l, s: 1.2 + depth(l.y) * 4.2, d: (r() * 5).toFixed(2), b: (3 + r() * 3).toFixed(2), i }));
+const stars = Array.from({ length: 70 }, () => ({ x: (r() * W).toFixed(0), y: (r() * (HZ - 30)).toFixed(0), o: (0.2 + r() * 0.5).toFixed(2) }));
+---
+<div class="ankles" aria-hidden="true">
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="ak-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#070B18" /><stop offset=".55" stop-color="#1A1446" /><stop offset="1" stop-color="#3A1F66" />
+      </linearGradient>
+      <linearGradient id="ak-sea" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2A1E5C" /><stop offset=".25" stop-color="#121A3E" /><stop offset="1" stop-color="#070B18" />
+      </linearGradient>
+      <radialGradient id="ak-light"><stop offset="0" stop-color="#FFFFFF" /><stop offset=".25" stop-color="#E9F7FF" stop-opacity=".9" /><stop offset="1" stop-color="#8FB4F6" stop-opacity="0" /></radialGradient>
+      <radialGradient id="ak-door"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95" /><stop offset=".2" stop-color="#CFE6FF" stop-opacity=".6" /><stop offset="1" stop-color="#A996FF" stop-opacity="0" /></radialGradient>
+      <linearGradient id="ak-road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9F7FF" stop-opacity=".55" /><stop offset="1" stop-color="#8FB4F6" stop-opacity="0" /></linearGradient>
+      <filter id="ak-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" /></filter>
+    </defs>
+    <rect width={W} height={HZ} fill="url(#ak-sky)" />
+    {stars.map((s) => <circle cx={s.x} cy={s.y} r=".8" fill="#EDE6FF" opacity={s.o} />)}
+    <rect y={HZ} width={W} height={H - HZ} fill="url(#ak-sea)" />
+    <rect y={HZ - 2} width={W} height="4" fill="#A996FF" opacity=".35" filter="url(#ak-blur)" />
+    {Array.from({ length: 14 }, (_, i) => {
+      const y = HZ + 10 + Math.pow(i / 14, 1.6) * (H - HZ);
+      return <line x1="0" x2={W} y1={y.toFixed(0)} y2={y.toFixed(0)} stroke="#8FB4F6" stroke-opacity={(0.03 + i * 0.004).toFixed(3)} />;
+    })}
+
+    <!-- the door, far away -->
+    <g class="door">
+      <circle cx={DX} cy={HZ - 14} r="70" fill="url(#ak-door)" />
+      <rect x={DX - 4} y={HZ - 30} width="8" height="28" rx="1" fill="#FFFFFF" />
+      <polygon class="road" points={`${DX - 4},${HZ} ${DX + 4},${HZ} ${DX + 20},${H} ${DX - 20},${H}`} fill="url(#ak-road)" filter="url(#ak-blur)" />
+      <text x={DX} y={HZ - 46} text-anchor="middle" class="far">the work you love</text>
+    </g>
+
+    <!-- the lights -->
+    {lights.map((l) => (
+      <g class="lt" style={`animation-delay:-${l.d}s;animation-duration:${l.b}s`}>
+        <circle cx={l.x.toFixed(1)} cy={l.y.toFixed(1)} r={(l.s * 4).toFixed(1)} fill="url(#ak-light)" opacity=".55" />
+        <circle cx={l.x.toFixed(1)} cy={l.y.toFixed(1)} r={(l.s * 0.7).toFixed(1)} fill="#FFFFFF" />
+        {l.t && <text x={l.x.toFixed(0)} y={(l.y + 22).toFixed(0)} text-anchor="middle" class="word">{l.t}</text>}
+      </g>
+    ))}
+
+    <!-- small figure, ankle-deep, reaching for the nearest light -->
+    <g class="fig" fill="#05070F">
+      <circle cx={FX} cy={FY - 74} r="7" />
+      <path d={`M${FX - 9} ${FY - 64} Q${FX} ${FY - 68} ${FX + 9} ${FY - 64} L${FX + 8} ${FY - 30} L${FX + 5} ${FY} L${FX + 1} ${FY} L${FX} ${FY - 28} L${FX - 1} ${FY} L${FX - 5} ${FY} L${FX - 8} ${FY - 30} Z`} />
+      <path d={`M${FX + 8} ${FY - 60} Q${FX + 22} ${FY - 46} ${FX + 32} ${FY - 34}`} stroke="#05070F" stroke-width="4" stroke-linecap="round" fill="none" />
+      <path d={`M${FX - 8} ${FY - 60} Q${FX - 14} ${FY - 44} ${FX - 13} ${FY - 30}`} stroke="#05070F" stroke-width="4" stroke-linecap="round" fill="none" />
+      <ellipse cx={FX} cy={FY + 2} rx="22" ry="3" fill="#8FB4F6" opacity=".18" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  .ankles { position: relative; width: 100%; aspect-ratio: 1200 / 720; max-height: 760px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 85%, transparent);
+            mask-image: linear-gradient(transparent, #000 12%, #000 85%, transparent); }
+  .ankles svg { width: 100%; height: 100%; display: block; }
+  .word { font: italic 400 15px/1 'Cormorant Garamond', serif; fill: #B9BED6; opacity: .8; }
+  .far { font: italic 400 16px/1 'Cormorant Garamond', serif; fill: #E9F7FF; opacity: .8; }
+  .lt { animation: ak-bob 4s ease-in-out infinite alternate; transform-box: fill-box; }
+  .door { animation: ak-door 6s ease-in-out infinite; }
+  @keyframes ak-bob { from { transform: translateY(-2px); opacity: .7; } to { transform: translateY(2px); opacity: 1; } }
+  @keyframes ak-door { 50% { opacity: .75; } }
+  @media (max-width: 700px) {
+    .ankles { aspect-ratio: 1 / 1; }
+    .word { font-size: 22px; }
+    .far { font-size: 22px; }
+  }
+</style>
