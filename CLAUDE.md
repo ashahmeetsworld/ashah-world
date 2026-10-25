@@ -49,3 +49,8 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Home "Hello" section: the mission sits beside the intro in the quote style; only the background borrows the About page's MissionSky stars and ripples (faded edges, soft violet glow).
 - Prism relay: built, currently off (`SHOW_RELAY` in index.astro). Ashah's note: the beams read as wires, not light.
 - Home hero: elevated layered scene in `HeroScene.astro` (switch `ELEVATED_HERO` in index.astro; false = the original `Sky` night scene). Details in DESIGN.md.
+
+## Orbit (live 25 Oct 2026)
+- Free lead magnet page `/orbit/` (`src/pages/orbit.astro`), linked from the footer's second row (magnets, offers, ventures) only, never the header. Aurora look; never mixed with ember/firefly.
+- Sign-ups: `OrbitSignup.astro` (page, redirects home after 8 s) and `OsNudge.astro` (site pop-up, confirms in place). Both post to the Brevo form in `site.json` → `orbitFormUrl`; empty = preview mode (confirms without sending).
+- The download is `public/os/Orbit-v<version>.zip`; the Brevo emails link to it, so update them when the file name changes.

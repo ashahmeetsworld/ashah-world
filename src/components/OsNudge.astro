@@ -1,0 +1,225 @@
+---
+// OS lead magnet pop-up (approved look: popup-preview branch, 548c1dc).
+// A once-only corner card with an email box that posts to the Brevo form
+// "OS sign-up" (double opt-in, list "OS lead magnet", hidden SIGNUP_SOURCE=popup).
+// Plan: website-popup/popup-plan.md · Brevo setup: website-popup/brevo-signup-setup.md
+import { u } from '../lib/url';
+
+import site from '../data/site.json';
+// Brevo form "OS sign-up": its URL lives in site.json → orbitFormUrl (shared with the Orbit page).
+// Empty = preview mode: the form confirms without sending anything.
+const BREVO_FORM_ACTION = site.orbitFormUrl;
+
+const quiet = [u('/contact'), u('/community'), u('/orbit')];
+---
+
+
+<aside id="os-nudge" data-quiet={quiet.join(',')} class="os-nudge" aria-labelledby="os-nudge-title" hidden>
+  <button class="os-nudge__close" type="button" aria-label="Close">&times;</button>
+  <p class="os-nudge__eyebrow">FREE · ORBIT</p>
+  <h2 id="os-nudge-title" class="os-nudge__title">Your world keeps turning.<br />You keep making.</h2>
+  <p class="os-nudge__line">Six helpers circle your work, built around you in Claude. You stay at the centre.</p>
+  <form class="os-nudge__form" action={BREVO_FORM_ACTION || undefined} method="post" novalidate={!BREVO_FORM_ACTION}>
+    <label class="os-nudge__field"><span>First name</span><input type="text" name="FIRSTNAME" autocomplete="given-name" required /></label>
+    <label class="os-nudge__field"><span>Email</span><input type="email" name="EMAIL" placeholder="you@yourworld.com" autocomplete="email" required /></label>
+    <input type="hidden" name="SIGNUP_SOURCE" value="popup" />
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="os-nudge__hp" />
+    <input type="hidden" name="locale" value="en" />
+    <button class="os-nudge__cta btn aurora" type="submit"><span>Send me Orbit</span></button>
+    <p class="os-nudge__status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="os-nudge__done" hidden>
+    <p class="os-nudge__title">Orbit is on its way.</p>
+    <p class="os-nudge__line">Check your inbox and confirm your email. The download is waiting on the other side.</p>
+  </div>
+  <button class="os-nudge__later" type="button">Not now</button>
+</aside>
+
+<script>
+  const KEY = 'amw-os-nudge'; // 'shown' | 'clicked' | 'joined'
+  const ENDS = new Date('2027-01-17T00:00:00+11:00'); // OS lead magnet window
+  const MIN_SECONDS = 25; // time on site before it may appear
+  const SCROLL_DEPTH = 0.5; // share of the page read
+
+  const el = document.getElementById('os-nudge');
+  const path = location.pathname;
+  const params = new URLSearchParams(location.search);
+
+  const store = {
+    get() { try { return localStorage.getItem(KEY); } catch { return 'blocked'; } },
+    set(v) { try { localStorage.setItem(KEY, v); } catch {} },
+  };
+  const track = (name) => { if (typeof gtag === 'function') gtag('event', name, { nudge: 'os' }); };
+
+  // Never on these pages, and never for people who already came from an email.
+  const QUIET = (el?.dataset.quiet || '').split(',').filter(Boolean);
+  const quiet = QUIET.some((p) => path.startsWith(p));
+  if (path.includes('/thanks')) store.set('joined');
+  if (params.get('utm_medium') === 'email') store.set('joined');
+
+  // Count pages seen this visit; it can appear from the second page on.
+  let pages = 1;
+  try {
+    pages = Number(sessionStorage.getItem('amw-pages') || 0) + 1;
+    sessionStorage.setItem('amw-pages', String(pages));
+  } catch {}
+
+  const eligible = el && !quiet && !store.get() && new Date() < ENDS;
+
+  if (eligible) {
+    const start = Date.now();
+    let fired = false;
+
+    const show = () => {
+      if (fired) return;
+      fired = true;
+      store.set('shown'); // once, ever, in this browser
+      el.hidden = false;
+      requestAnimationFrame(() => el.classList.add('is-in'));
+      track('os_nudge_shown');
+      window.removeEventListener('scroll', onScroll);
+    };
+
+    const ready = () => (Date.now() - start) / 1000 >= MIN_SECONDS;
+    const readEnough = () =>
+      (scrollY + innerHeight) / document.documentElement.scrollHeight >= SCROLL_DEPTH;
+
+    const onScroll = () => { if (ready() && readEnough()) show(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Second page of the visit: a shorter wait is enough, no scroll needed.
+    setTimeout(() => { if (pages >= 2 || readEnough()) show(); }, (pages >= 2 ? 8 : MIN_SECONDS) * 1000);
+
+    // Desktop only: leaving the tab before the timer counts as the moment.
+    document.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget && e.clientY <= 0 && (Date.now() - start) / 1000 >= 10) show();
+    });
+
+    const hide = (reason) => {
+      el.classList.remove('is-in');
+      setTimeout(() => { el.hidden = true; }, 400);
+      track(`os_nudge_${reason}`);
+    };
+    el.querySelector('.os-nudge__close').addEventListener('click', () => hide('dismissed'));
+    el.querySelector('.os-nudge__later').addEventListener('click', () => hide('dismissed'));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.hidden) hide('dismissed'); });
+    const form = el.querySelector<HTMLFormElement>('.os-nudge__form');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('.os-nudge__status') as HTMLElement;
+      if (!form.checkValidity()) { status.textContent = 'Add your first name and email.'; return; }
+      const btn = form.querySelector('button') as HTMLButtonElement;
+      const label = btn.querySelector('span')!;
+      btn.disabled = true; label.textContent = 'Sending…'; status.textContent = '';
+      try {
+        if (form.getAttribute('action')) {
+          await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        }
+        store.set('joined'); track('os_nudge_clicked');
+        // confirm in place, then slip away
+        form.hidden = true; el.classList.add('is-done');
+        el.querySelector('.os-nudge__later')?.setAttribute('hidden', '');
+        (el.querySelector('.os-nudge__done') as HTMLElement).hidden = false;
+        setTimeout(() => hide('joined'), 4500);
+      } catch {
+        btn.disabled = false; label.textContent = 'Send me Orbit';
+        status.textContent = 'That didn’t go through. Please try again.';
+      }
+    });
+  }
+</script>
+
+<style>
+  .os-nudge[hidden] { display: none; }
+  .os-nudge {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 50;
+    width: min(360px, calc(100vw - 32px));
+    padding: 28px 28px 22px;
+    border-radius: 18px;
+    color: #f6f1e7;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(127, 216, 240, 0.22), rgba(143, 180, 246, 0.1) 40%, rgba(169, 150, 255, 0) 70%),
+      rgba(7, 11, 24, 0.86);
+    border: 1px solid rgba(246, 241, 231, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 80px rgba(143, 180, 246, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .os-nudge.is-in { opacity: 1; transform: none; }
+  .os-nudge__eyebrow {
+    margin: 0 0 14px;
+    font: 500 11px/1 'DM Sans', sans-serif;
+    letter-spacing: 0.32em;
+    color: #7fd8f0;
+  }
+  .os-nudge__title {
+    margin: 0 0 12px;
+    font: italic 500 30px/1.08 'Cormorant Garamond', serif;
+  }
+  .os-nudge__line {
+    margin: 0 0 22px;
+    font: 400 14px/1.55 'DM Sans', sans-serif;
+    color: rgba(246, 241, 231, 0.78);
+  }
+  .os-nudge__form { display: grid; gap: 10px; }
+  .os-nudge__form[hidden], .os-nudge__done[hidden], .os-nudge__later[hidden] { display: none; }
+  .os-nudge__done { padding: 6px 0 8px; }
+  .os-nudge.is-done > .os-nudge__title, .os-nudge.is-done > .os-nudge__line { display: none; }
+  .os-nudge__field span { display: block; margin: 0 0 6px; font: 500 11px/1 'DM Sans', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(246, 241, 231, 0.6); }
+  .os-nudge__field input { width: 100%; box-sizing: border-box; padding: 12px 16px; border-radius: 999px; border: 1px solid rgba(246, 241, 231, 0.2); background: rgba(7, 11, 24, 0.6); color: #f6f1e7; font: 400 16px/1.2 'DM Sans', sans-serif; }
+  .os-nudge__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .os-nudge__status { margin: 4px 0 0; min-height: 1em; font: 400 13px/1.4 'DM Sans', sans-serif; color: #7fd8f0; text-align: center; }
+  .os-nudge__cta {
+    display: flex; width: 100%;
+    padding: 14px 18px;
+    border-radius: 999px;
+    text-align: center;
+    text-decoration: none;
+    font: 500 12px/1 'DM Sans', sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #070b18;
+    background: #8fb4f6;
+    background: linear-gradient(90deg, #7fd8f0, #8fb4f6, #a996ff);
+    box-shadow: 0 0 28px rgba(143, 180, 246, 0.45);
+  }
+  .os-nudge__later {
+    display: block;
+    margin: 12px auto 0;
+    padding: 4px 8px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: 400 12px/1 'DM Sans', sans-serif;
+    color: rgba(246, 241, 231, 0.55);
+  }
+  .os-nudge__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(246, 241, 231, 0.6);
+  }
+  .os-nudge a:focus-visible,
+  .os-nudge button:focus-visible { outline: 2px solid #7fd8f0; outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    .os-nudge { right: 16px; left: 16px; bottom: 16px; width: auto; padding: 22px 22px 16px; }
+    .os-nudge__title { font-size: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .os-nudge { transition: opacity 0.2s linear; transform: none; }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+// Orbit sign-up: first name + email, posts to the Brevo form "OS sign-up".
+// On success it shows a confirmation in place, then sends people on after a few seconds.
+import { u } from '../lib/url';
+
+import site from '../data/site.json';
+// Brevo form "OS sign-up": paste its sibforms.com/serve/... URL into site.json → orbitFormUrl.
+// Empty = preview mode: the form shows the confirmation without sending anything.
+const BREVO_FORM_ACTION = site.orbitFormUrl;
+// Where people go after signing up. Later: the sales page.
+const REDIRECT_TO = u('/');
+const REDIRECT_SECONDS = 8;
+
+interface Props { source?: string; button?: string }
+const { source = 'orbit-page', button = 'Send me Orbit' } = Astro.props;
+---
+<div class="orbit-signup" data-redirect={REDIRECT_TO} data-seconds={REDIRECT_SECONDS}>
+  <form class="os-form" action={BREVO_FORM_ACTION || undefined} method="post" novalidate={!BREVO_FORM_ACTION}>
+    <label class="field"><span>First name</span><input type="text" name="FIRSTNAME" autocomplete="given-name" required /></label>
+    <label class="field"><span>Email</span><input type="email" name="EMAIL" placeholder="you@yourworld.com" autocomplete="email" required /></label>
+    <input type="hidden" name="SIGNUP_SOURCE" value={source} />
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
+    <input type="hidden" name="locale" value="en" />
+    <button class="btn aurora" type="submit"><span>{button}</span></button>
+    <p class="os-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="os-done" hidden>
+    <p class="os-done__eyebrow">You're in</p>
+    <p class="os-done__title">Orbit is on its way.</p>
+    <p class="os-done__line">Check your inbox and confirm your email. The download is waiting on the other side.</p>
+    <p class="os-done__count">Taking you home in <span>{REDIRECT_SECONDS}</span></p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.orbit-signup').forEach((box) => {
+    const form = box.querySelector<HTMLFormElement>('.os-form')!;
+    const done = box.querySelector<HTMLElement>('.os-done')!;
+    const status = form.querySelector<HTMLElement>('.os-status')!;
+    const btn = form.querySelector('button')!;
+    const label = btn.querySelector('span')!;
+    const original = label.textContent;
+    const track = (name: string) => { if (typeof (window as any).gtag === 'function') (window as any).gtag('event', name, { magnet: 'orbit' }); };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { status.textContent = 'Add your first name and email.'; return; }
+      btn.disabled = true; label.textContent = 'Sending…'; status.textContent = '';
+      try {
+        if (form.action && form.getAttribute('action')) {
+          await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        }
+        track('orbit_signup');
+        try { localStorage.setItem('amw-os-nudge', 'joined'); } catch {}
+        form.hidden = true; done.hidden = false;
+        requestAnimationFrame(() => done.classList.add('is-in'));
+        let left = Number(box.dataset.seconds || 8);
+        const n = done.querySelector('.os-done__count span')!;
+        const t = setInterval(() => {
+          left -= 1; n.textContent = String(left);
+          if (left <= 0) { clearInterval(t); location.href = box.dataset.redirect || '/'; }
+        }, 1000);
+      } catch {
+        btn.disabled = false; label.textContent = original;
+        status.textContent = 'That didn’t go through. Please try again.';
+      }
+    });
+  });
+</script>
+
+<style>
+  .orbit-signup { width: 100%; max-width: 520px; }
+  .os-form { display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px; align-items: end; }
+  .os-form .btn { grid-column: 1 / -1; justify-self: start; }
+  .os-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; font-size: 14px; color: var(--ink-3); }
+  .os-form[hidden], .os-done[hidden] { display: none; }
+  .hp { position: absolute; left: -9999px; }
+  .os-done { opacity: 0; transform: translateY(10px); transition: opacity .8s var(--ease), transform .8s var(--ease); padding: 22px 0 6px; }
+  .os-done.is-in { opacity: 1; transform: none; }
+  .os-done__eyebrow { margin: 0 0 12px; font: 500 11px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; color: var(--aqua); }
+  .os-done__title { margin: 0 0 10px; font: italic 400 clamp(34px, 4vw, 46px)/1.05 var(--serif); }
+  .os-done__line { margin: 0 0 18px; color: var(--ink-2); max-width: 42ch; }
+  .os-done__count { margin: 0; font: 500 11px/1 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3); }
+  @media (max-width: 560px) {
+    .os-form { grid-template-columns: 1fr; }
+    .os-form .btn { justify-self: stretch; }
+  }
+</style>

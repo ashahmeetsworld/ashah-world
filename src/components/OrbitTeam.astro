@@ -1,0 +1,133 @@
+---
+// The six helpers as moons around one light. Click (or tap) a moon: it lights up,
+// a beam reaches it from the centre, and the panel on the left changes to that helper.
+// Until someone chooses, it drifts through them on its own.
+const team = [
+  { n: 'Business Development', feel: 'Curious, warm', says: 'Who lights up when you talk about your work? I’ll find more of them.',
+    job: 'Finds the people who’d love your work, and brings their words home.',
+    does: ['A short list of the right people each week, each with a reason', 'First messages in your voice that prove you looked', 'Prep before a conversation, and a debrief after'] },
+  { n: 'Client Success', feel: 'Calm, gentle', says: 'I start where a sale ends.',
+    job: 'Makes buying from you feel like being looked after, so people come back and bring friends.',
+    does: ['A welcome that lands, drafted for your yes', 'Check-ins at the right moment, so nobody is forgotten', 'Kind words gathered properly, with permission'] },
+  { n: 'Funnel', feel: 'Precise, dry', says: 'Somewhere between hello and paid, people wander off. I find where.',
+    job: 'Makes it easy to go from “who’s this?” to “I’m in”, a little better every month.',
+    does: ['A sign-up page for a free thing, and the thank-you email', 'A welcome email series, built as a draft', 'A monthly check: the biggest drop-off, and one small fix'] },
+  { n: 'Content', feel: 'Energetic, playful', says: 'Say it out loud. I’ll catch it.',
+    job: 'Turns what you say into posts that are unmistakably yours.',
+    does: ['A monthly idea sheet you answer by voice memo', 'One idea turned into a long piece, then cut-downs for each platform', 'Posts scheduled only after your yes'] },
+  { n: 'Creative Director', feel: 'Few words', says: 'Keep what’s yours. Take out the rest.',
+    job: 'Keeps everything looking and sounding like you.',
+    does: ['Your brand, kept as one living guide every helper follows', 'Briefs for shoots, releases and campaigns', 'A check on key pieces before they reach you'] },
+  { n: 'Operations', feel: 'Steady, dry humour', says: 'If I’m doing this well, you’ll barely notice me.',
+    job: 'Keeps it all running, and guards your days off.',
+    does: ['A ten-minute weekly sync: what’s due, what needs your yes', 'Recurring jobs that rise to the top when they’re due', 'Your small tweaks folded into better instructions'] },
+];
+const pos = team.map((_, i) => {
+  const a = -Math.PI / 2 + (i / team.length) * Math.PI * 2;
+  return { x: 50 + Math.cos(a) * 40, y: 50 + Math.sin(a) * 40 };
+});
+---
+<div class="team" data-team>
+  <div class="panel" aria-live="polite">
+    {team.map((t, i) => (
+      <div class:list={['card', { on: i === 0 }]} data-card={i} hidden={i !== 0}>
+        <p class="feel">{t.feel}</p>
+        <h3>{t.n}</h3>
+        <p class="says">“{t.says}”</p>
+        <p class="job">{t.job}</p>
+        <ul>{t.does.map((d) => <li>{d}</li>)}</ul>
+      </div>
+    ))}
+    <p class="hint">Tap a moon to meet them.</p>
+  </div>
+
+  <div class="ring">
+    <svg class="beams" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="40" class="path" />
+      <circle cx="50" cy="50" r="40" class="comet" />
+      {pos.map((p, i) => <line class:list={['beam', { on: i === 0 }]} data-beam={i} x1="50" y1="50" x2={p.x.toFixed(2)} y2={p.y.toFixed(2)} />)}
+    </svg>
+    <div class="core"><span>you</span></div>
+    {team.map((t, i) => (
+      <button type="button" class:list={['moon', { on: i === 0 }]} data-moon={i} style={`left:${pos[i].x}%;top:${pos[i].y}%;--d:${(i * 0.6).toFixed(1)}s`} aria-pressed={i === 0 ? 'true' : 'false'}>
+        <i></i><b>{t.n}</b>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-team]').forEach((root) => {
+    const moons = [...root.querySelectorAll<HTMLButtonElement>('[data-moon]')];
+    const cards = [...root.querySelectorAll<HTMLElement>('[data-card]')];
+    const beams = [...root.querySelectorAll<SVGElement>('[data-beam]')];
+    let cur = 0;
+    let auto: number | undefined;
+    const pick = (i: number) => {
+      if (i === cur) return;
+      const prev = cards[cur];
+      prev.classList.remove('on');
+      setTimeout(() => { prev.hidden = true; cards[i].hidden = false; requestAnimationFrame(() => cards[i].classList.add('on')); }, 260);
+      moons.forEach((m, k) => { m.classList.toggle('on', k === i); m.setAttribute('aria-pressed', String(k === i)); });
+      beams.forEach((b, k) => b.classList.toggle('on', k === i));
+      cur = i;
+    };
+    moons.forEach((m, i) => m.addEventListener('click', () => {
+      clearInterval(auto); auto = undefined; root.classList.add('chosen'); pick(i);
+    }));
+    // drift through the six until someone chooses, only while it's on screen
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        if (root.classList.contains('chosen')) return;
+        if (e.isIntersecting && !auto) auto = window.setInterval(() => pick((cur + 1) % moons.length), 4200);
+        if (!e.isIntersecting && auto) { clearInterval(auto); auto = undefined; }
+      }, { threshold: 0.4 }).observe(root);
+    }
+  });
+</script>
+
+<style>
+  .team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 80px); align-items: center; }
+  .panel { position: relative; min-height: 380px; }
+  .card { opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+  .card.on { opacity: 1; transform: none; }
+  .feel { margin: 0 0 12px; font: 500 12px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--aqua); }
+  .card h3 { font-size: clamp(34px, 3.6vw, 48px); margin-bottom: 18px; }
+  .says { margin: 0 0 18px; padding-left: 18px; border-left: 1px solid rgba(169, 150, 255, .6); font: italic 400 clamp(21px, 2vw, 25px)/1.4 var(--serif); color: #CFE6FF; max-width: 30ch; }
+  .job { margin: 0 0 16px; color: var(--ink); max-width: 44ch; }
+  .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .card li { position: relative; padding-left: 22px; color: var(--ink-2); font-size: 15.5px; max-width: 46ch; }
+  .card li::before { content: ''; position: absolute; left: 2px; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: #E9F7FF; box-shadow: 0 0 10px #7FD8F0; }
+  .hint { margin: 26px 0 0; font: 500 11px/1 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3); transition: opacity .6s; }
+  .team.chosen .hint { opacity: 0; }
+
+  .ring { position: relative; aspect-ratio: 1; width: 100%; max-width: 540px; justify-self: center; }
+  .beams { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .path { fill: none; stroke: rgba(169, 150, 255, .28); stroke-width: .25; }
+  .comet { fill: none; stroke: #CFE6FF; stroke-width: .5; stroke-linecap: round; stroke-dasharray: 6 245; filter: drop-shadow(0 0 1.2px #7FD8F0); transform-origin: 50px 50px; animation: tm-orbit 14s linear infinite; }
+  .beam { stroke: #CFE6FF; stroke-width: .35; stroke-linecap: round; opacity: 0; stroke-dasharray: 60; stroke-dashoffset: 60; transition: opacity .5s, stroke-dashoffset .9s var(--ease); filter: drop-shadow(0 0 1px #7FD8F0); }
+  .beam.on { opacity: .7; stroke-dashoffset: 0; }
+  .core { position: absolute; left: 50%; top: 50%; width: 110px; height: 110px; transform: translate(-50%, -50%); border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle, #fff 0 9%, rgba(207, 230, 255, .7) 16%, rgba(143, 180, 246, .3) 38%, transparent 70%); animation: tm-breathe 6s ease-in-out infinite; }
+  .core span { margin-top: 84px; font: 500 11px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--ink-2); }
+  .moon { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 10px; width: 130px; padding: 8px; border: 0; background: none; cursor: pointer; color: var(--ink-2); font: inherit; }
+  .moon i { width: 12px; height: 12px; border-radius: 50%; background: #DDEBFF; box-shadow: 0 0 10px rgba(127, 216, 240, .6); transition: transform .5s var(--ease), box-shadow .5s, background .5s; animation: tm-pulse 3.6s ease-in-out infinite; animation-delay: var(--d); }
+  .moon b { font: 500 10.5px/1.35 var(--sans); letter-spacing: .2em; text-transform: uppercase; transition: color .4s; }
+  .moon:hover i { transform: scale(1.4); }
+  .moon:hover b { color: var(--ink); }
+  .moon.on i { transform: scale(2); background: #fff; box-shadow: 0 0 16px #fff, 0 0 40px #7FD8F0, 0 0 80px rgba(169, 150, 255, .7); animation: none; }
+  .moon.on b { color: #fff; }
+  .moon:focus-visible { outline: 1px solid var(--aqua); outline-offset: 4px; border-radius: 6px; }
+  @keyframes tm-orbit { to { transform: rotate(360deg); } }
+  @keyframes tm-breathe { 50% { transform: translate(-50%, -50%) scale(1.08); } }
+  @keyframes tm-pulse { 50% { box-shadow: 0 0 18px rgba(127, 216, 240, .9); } }
+
+  @media (max-width: 860px) {
+    .team { grid-template-columns: 1fr; }
+    .ring { order: -1; max-width: 380px; }
+    .moon { width: 96px; }
+    .moon b { font-size: 9.5px; letter-spacing: .14em; }
+    .panel { min-height: 0; }
+  }
+</style>
