@@ -3,9 +3,10 @@
 // On success it shows a confirmation in place, then sends people on after a few seconds.
 import { u } from '../lib/url';
 
-// ==== BREVO FORM ACTION: paste the sibforms.com/serve/... URL here. ====
+import site from '../data/site.json';
+// Brevo form "OS sign-up": paste its sibforms.com/serve/... URL into site.json → orbitFormUrl.
 // Empty = preview mode: the form shows the confirmation without sending anything.
-export const BREVO_FORM_ACTION = '';
+const BREVO_FORM_ACTION = site.orbitFormUrl;
 // Where people go after signing up. Later: the sales page.
 const REDIRECT_TO = u('/');
 const REDIRECT_SECONDS = 8;

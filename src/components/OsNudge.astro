@@ -5,8 +5,10 @@
 // Plan: website-popup/popup-plan.md · Brevo setup: website-popup/brevo-signup-setup.md
 import { u } from '../lib/url';
 
-// ==== BREVO FORM ACTION: paste the sibforms.com/serve/... URL here. Empty = "Sign-ups open very soon". ====
-const BREVO_FORM_ACTION = '';
+import site from '../data/site.json';
+// Brevo form "OS sign-up": its URL lives in site.json → orbitFormUrl (shared with the Orbit page).
+// Empty = preview mode: the form confirms without sending anything.
+const BREVO_FORM_ACTION = site.orbitFormUrl;
 
 const quiet = [u('/contact'), u('/community'), u('/orbit')];
 ---
@@ -14,24 +16,22 @@ const quiet = [u('/contact'), u('/community'), u('/orbit')];
 
 <aside id="os-nudge" data-quiet={quiet.join(',')} class="os-nudge" aria-labelledby="os-nudge-title" hidden>
   <button class="os-nudge__close" type="button" aria-label="Close">&times;</button>
-  <p class="os-nudge__eyebrow">FREE · [PRODUCT NAME]</p>
-  <h2 id="os-nudge-title" class="os-nudge__title">Your operating system.<br />Ready when you are.</h2>
-  <p class="os-nudge__line">
-    A small team for your business, set up around you in Claude, built from your own answers.
-  </p>
-  <!-- [WHY FREE] line waits on Business Development. Leave out until it's settled. -->
-  {BREVO_FORM_ACTION ? (
-    <form class="os-nudge__form" action={BREVO_FORM_ACTION} method="post">
-      <label class="os-nudge__field"><span>Email</span><input type="email" name="EMAIL" placeholder="you@yourbrand.com" autocomplete="email" required /></label>
-      <input type="hidden" name="SIGNUP_SOURCE" value="popup" />
-      <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="os-nudge__hp" />
-      <input type="hidden" name="locale" value="en" />
-      <button class="os-nudge__cta btn aurora" type="submit"><span>Send it to me</span></button>
-      <p class="os-nudge__status" role="status" aria-live="polite"></p>
-    </form>
-  ) : (
-    <p class="os-nudge__status">Sign-ups open very soon.</p>
-  )}
+  <p class="os-nudge__eyebrow">FREE · ORBIT</p>
+  <h2 id="os-nudge-title" class="os-nudge__title">Your world keeps turning.<br />You keep making.</h2>
+  <p class="os-nudge__line">Six helpers circle your work, built around you in Claude. You stay at the centre.</p>
+  <form class="os-nudge__form" action={BREVO_FORM_ACTION || undefined} method="post" novalidate={!BREVO_FORM_ACTION}>
+    <label class="os-nudge__field"><span>First name</span><input type="text" name="FIRSTNAME" autocomplete="given-name" required /></label>
+    <label class="os-nudge__field"><span>Email</span><input type="email" name="EMAIL" placeholder="you@yourworld.com" autocomplete="email" required /></label>
+    <input type="hidden" name="SIGNUP_SOURCE" value="popup" />
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="os-nudge__hp" />
+    <input type="hidden" name="locale" value="en" />
+    <button class="os-nudge__cta btn aurora" type="submit"><span>Send me Orbit</span></button>
+    <p class="os-nudge__status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="os-nudge__done" hidden>
+    <p class="os-nudge__title">Orbit is on its way.</p>
+    <p class="os-nudge__line">Check your inbox and confirm your email. The download is waiting on the other side.</p>
+  </div>
   <button class="os-nudge__later" type="button">Not now</button>
 </aside>
 
@@ -106,17 +106,23 @@ const quiet = [u('/contact'), u('/community'), u('/orbit')];
     const form = el.querySelector<HTMLFormElement>('.os-nudge__form');
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const status = form.querySelector('.os-nudge__status') as HTMLElement;
+      if (!form.checkValidity()) { status.textContent = 'Add your first name and email.'; return; }
       const btn = form.querySelector('button') as HTMLButtonElement;
       const label = btn.querySelector('span')!;
-      const status = form.querySelector('.os-nudge__status') as HTMLElement;
-      btn.disabled = true; label.textContent = 'Sending…';
+      btn.disabled = true; label.textContent = 'Sending…'; status.textContent = '';
       try {
-        await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        if (form.getAttribute('action')) {
+          await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        }
         store.set('joined'); track('os_nudge_clicked');
-        form.reset(); label.textContent = 'On its way';
-        status.textContent = 'Check your inbox to confirm your email.';
+        // confirm in place, then slip away
+        form.hidden = true; el.classList.add('is-done');
+        el.querySelector('.os-nudge__later')?.setAttribute('hidden', '');
+        (el.querySelector('.os-nudge__done') as HTMLElement).hidden = false;
+        setTimeout(() => hide('joined'), 4500);
       } catch {
-        btn.disabled = false; label.textContent = 'Send it to me';
+        btn.disabled = false; label.textContent = 'Send me Orbit';
         status.textContent = 'That didn’t go through. Please try again.';
       }
     });
@@ -162,6 +168,9 @@ const quiet = [u('/contact'), u('/community'), u('/orbit')];
     color: rgba(246, 241, 231, 0.78);
   }
   .os-nudge__form { display: grid; gap: 10px; }
+  .os-nudge__form[hidden], .os-nudge__done[hidden], .os-nudge__later[hidden] { display: none; }
+  .os-nudge__done { padding: 6px 0 8px; }
+  .os-nudge.is-done > .os-nudge__title, .os-nudge.is-done > .os-nudge__line { display: none; }
   .os-nudge__field span { display: block; margin: 0 0 6px; font: 500 11px/1 'DM Sans', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(246, 241, 231, 0.6); }
   .os-nudge__field input { width: 100%; box-sizing: border-box; padding: 12px 16px; border-radius: 999px; border: 1px solid rgba(246, 241, 231, 0.2); background: rgba(7, 11, 24, 0.6); color: #f6f1e7; font: 400 16px/1.2 'DM Sans', sans-serif; }
   .os-nudge__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
