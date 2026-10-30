@@ -279,7 +279,9 @@ const skills = [
 <style>
   /* hero */
   .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; }
-  .hero-fade { position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(transparent, var(--midnight)); }
+  /* the hero melts into the sky behind the page: no solid band, so no hard line where it ends */
+  .hero :global(.hs) { -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%); }
+  .hero-fade { display: none; }
   .hero-copy { position: relative; z-index: 2; padding-bottom: clamp(96px, 16vh, 170px); }
   .hero-fade, .hero .scroll { z-index: 1; }
   .hero h1 { text-shadow: 0 0 60px rgba(127, 216, 240, .18); }
@@ -381,6 +383,7 @@ const skills = [
   .finale-copy .ctas { justify-content: center; }
   .scene { position: relative; aspect-ratio: 16 / 7; min-height: 340px; max-height: 720px; width: 100%; margin-top: -40px; }
   /* the night passes: the dawn scene melts into the warmed sky above it instead of a midnight band */
+  .scene :global(svg) { filter: brightness(.62) saturate(.7) hue-rotate(-12deg); }
   .scene { -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 72%, transparent 100%); }
   .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
   .big { font-size: clamp(60px, 10vw, 140px); line-height: .95; margin-bottom: 22px; text-shadow: 0 0 50px rgba(242, 180, 140, .25); }
