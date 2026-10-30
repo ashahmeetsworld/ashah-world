@@ -14,6 +14,7 @@ import MissionSky from '../components/MissionSky.astro';
 import DawnScene from '../components/DawnScene.astro';
 import Signup from '../components/Signup.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
+import Ambient from '../components/Ambient.astro';
 import NightPass from '../components/NightPass.astro';
 import site from '../data/site.json';
 import about from '../data/about.json';
@@ -141,6 +142,7 @@ const skills = [
 
   <!-- ─── Selected work ─── -->
   <section class="pad work" id="work">
+    <Ambient mood="work" />
     <div class="wrap">
       <div class="row-head rv">
         <div>
@@ -208,6 +210,7 @@ const skills = [
 
   <!-- ─── From the feed (live Instagram) ─── -->
   <section class="pad notes" id="feed">
+    <Ambient mood="feed" />
     <div class="wrap row-head rv">
       <div>
         <p class="eyebrow">From the feed</p>
@@ -298,6 +301,10 @@ const skills = [
     background: radial-gradient(60% 65% at 45% 50%, rgba(58, 31, 102, .34), transparent 72%); }
   .mission-mini :global(.ms) { z-index: -1; opacity: .75; left: -14%; width: 128%; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); }
   .skills, .notes, .offer { overflow: hidden; }
+  /* quiet weather behind Proof of work and the feed (Ambient.astro); content sits above it */
+  .work, .notes { position: relative; }
+  .work { overflow: hidden; }
+  .work > :global(.wrap), .notes > :global(.wrap), .notes > :global(.strip) { position: relative; z-index: 1; }
   /* soft, layered night light behind Windows and doors: no single colour, no edges */
   .thesis .ambient { position: absolute; inset: 0; pointer-events: none;
     background:
