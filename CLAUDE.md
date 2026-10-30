@@ -58,5 +58,5 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 ## Orbit v0.4 page (30 Oct 2026)
 - `/orbit/` now runs the v0.4 sections built as a mock-up: `src/orbit/sections-a.html` / `sections-b.html` (markup, split around the bottom `OrbitSignup`), `sections.js` (inline scripts) and `src/styles/orbit-v04.css` (scoped under `.nx`). Images and the sample hub (`hub-demo.html`, the real hub on made-up data) are in `public/orbit/`; `__BASE__` in the markup becomes the base path.
 - Problem headline: "Spread thin across everything. Deep in nothing." The door in `AnklesScene.astro` sits lower, on its own horizon line; the lights are a faint algae blue.
-- The tag reads "Orbit v0.4" (Ashah's call, 30 Oct) while the download is still `Orbit-v0.3.3.zip`.
+- The tag reads "Orbit v0.4" and the download is `public/os/Orbit-v0.4.zip` (30 Oct). `Orbit-v0.3.3.zip` stays so links in emails already sent keep working.
 - Never use people's names in sample content (Ashah's standing rule).
