@@ -77,7 +77,9 @@ document.querySelectorAll(".dt").forEach(b=>b.onclick=()=>{document.querySelecto
 function pick(b){hs.forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('[data-room]').forEach(im=>im.hidden=im.dataset.room!==b.dataset.h);}
 hs.forEach(b=>b.onclick=()=>{stopped=true;clearInterval(auto);pick(b);});
 
-const fl=document.getElementById('float'),hero=document.querySelector('.o-hero'),close=document.getElementById('close');let past=false,at=false;const set=()=>fl.classList.toggle('on',past&&!at);
+const fl=document.getElementById('float'),hero=document.querySelector('.o-hero'),close=document.getElementById('close');let past=false,at=false,reading=false;const set=()=>fl.classList.toggle('on',past&&!at&&!reading);
+// Phones: the button tucks away while you scroll down to read, and comes back when you scroll up.
+const phone=matchMedia('(max-width:860px)');let ly=scrollY;addEventListener('scroll',()=>{const y=scrollY,d=y-ly;if(Math.abs(d)<6)return;reading=phone.matches&&d>0;ly=y;set();},{passive:true});
 new IntersectionObserver(([e])=>{past=!e.isIntersecting;set()}).observe(hero);new IntersectionObserver(([e])=>{at=e.isIntersecting;set()}).observe(close);
 })();
 
