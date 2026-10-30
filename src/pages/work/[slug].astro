@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
 import { u, skillColour } from '../../lib/url';
+import { LIVE_FROM_INSTAGRAM } from '../../lib/live';
+import site from '../../data/site.json';
 
 export async function getStaticPaths() {
   const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
@@ -11,6 +13,8 @@ export async function getStaticPaths() {
 const { entry, next } = Astro.props;
 const d = entry.data;
 const { Content } = await render(entry);
+const live = LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
+const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 ---
 <Base title={d.title} description={d.summary} image={d.cover}>
   <article style={`--accent:${skillColour[d.skill]}`}>
@@ -28,10 +32,19 @@ const { Content } = await render(entry);
         </dl>
       </div>
     </header>
-    <div class={`wrap cover ${d.coverRatio}`}><img src={u(d.cover)} alt={d.title} /></div>
+    <div class={`wrap cover ${d.coverRatio}`}><img src={u(d.cover)} alt={d.title} data-live-cover={live || undefined} /></div>
     <div class="wrap prose"><Content /></div>
+    {live && (
+      <section class="wrap live" data-feed={live} hidden>
+        <div class="live-head">
+          <p class="eyebrow">Latest on Instagram</p>
+          {ig && <a class="go" href={ig} rel="noopener" target="_blank">Follow along <Arrow /></a>}
+        </div>
+        <div class="live-list"></div>
+      </section>
+    )}
     {d.gallery.length > 0 && (
-      <div class={`wrap gallery ${d.coverRatio}`}>
+      <div class={`wrap gallery ${d.coverRatio}`} data-fallback={live ? '1' : undefined}>
         {d.gallery.map((g) => (
           <figure>
             <img src={u(g.image)} alt={g.caption || d.title} loading="lazy" decoding="async" />
@@ -46,6 +59,30 @@ const { Content } = await render(entry);
     </nav>
   </article>
 </Base>
+<script>
+  import { loadFeed, carousels, slidesOf, firstLine, esc } from '../../lib/feed';
+  import { carouselHtml, wireAll } from '../../lib/carousel';
+  // Live entries (Field Notes): the real posts, straight from Instagram, newest first. Each one swipes sideways.
+  // If Instagram can't be reached, the gallery from the markdown file shows instead.
+  const live = document.querySelector<HTMLElement>('.live[data-feed]');
+  const cover = document.querySelector<HTMLImageElement>('img[data-live-cover]');
+  if (live) (async () => {
+    try {
+      const posts = carousels(await loadFeed(live.dataset.feed!)).slice(0, 8);
+      if (!posts.length) return;
+      if (cover) cover.src = slidesOf(posts[0])[0] || cover.src;
+      const fmt = (t?: string) => (t ? new Date(t).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : '');
+      live.querySelector('.live-list')!.innerHTML = posts.map((p) => {
+        const cap = firstLine(p);
+        return `<article class="lp">${carouselHtml(slidesOf(p).map(esc), esc(cap || 'Field Notes'))}
+          <div class="lp-meta"><p class="lp-cap">${esc(cap)}</p><p class="label">${fmt(p.timestamp)} · <a href="${esc(p.permalink)}" target="_blank" rel="noopener">On Instagram ↗</a></p></div></article>`;
+      }).join('');
+      live.hidden = false;
+      document.querySelector<HTMLElement>('.gallery[data-fallback]')?.setAttribute('hidden', '');
+      wireAll(live);
+    } catch { /* the gallery stays */ }
+  })();
+</script>
 <style>
   .cs-head { position: relative; padding: 170px 0 60px; overflow: hidden; }
   .back { display: inline-block; margin-bottom: 40px; color: var(--ink-3); }
@@ -75,5 +112,24 @@ const { Content } = await render(entry);
   .next .serif { font-size: clamp(38px, 6vw, 72px); transition: color .3s; }
   .next a:hover .serif { color: var(--peach); }
   .next :global(svg) { width: 34px; height: 18px; }
+  .gallery[hidden], .live[hidden] { display: none; }
+  .live { padding-block: 40px 100px; }
+  .live-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
+  .live-head .eyebrow { margin: 0; }
+  .live-list { display: grid; gap: 72px; }
+  .live :global(.lp) { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+  .live :global(.car-track) { gap: 14px; background: none; }
+  .live :global(.car-slide) { flex-basis: min(340px, 80%); border: 1px solid var(--line); }
+  .live :global(.car-dots) { justify-content: flex-start; }
+  .live :global(.lp-cap) { font: italic 24px/1.3 var(--serif); margin: 0 0 12px; }
+  .live :global(.lp-meta a) { color: var(--peach); }
+  @media (max-width: 760px) {
+    .live :global(.lp) { grid-template-columns: 1fr; gap: 14px; }
+    .live :global(.car) { margin-inline: calc(-1 * var(--gutter)); }
+    .live :global(.car-track) { gap: 0; }
+    .live :global(.car-slide) { flex-basis: 100%; border: 0; }
+    .live :global(.car-dots) { justify-content: center; }
+    .live :global(.lp-cap) { font-size: 21px; }
+  }
   @media (max-width: 760px) { .gallery.landscape, .gallery.portrait { grid-template-columns: 1fr; } .gallery.portrait { grid-template-columns: 1fr 1fr; } }
 </style>

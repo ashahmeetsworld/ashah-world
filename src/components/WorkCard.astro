@@ -1,18 +1,32 @@
 ---
 import { u, skillColour } from '../lib/url';
+import { LIVE_FROM_INSTAGRAM } from '../lib/live';
+import site from '../data/site.json';
 interface Props { entry: any; size?: 'large' | 'normal'; }
 const { entry, size = 'normal' } = Astro.props;
 const d = entry.data;
+const live = LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
 ---
 <a class={`wc ${size} ${d.coverRatio}`} href={u(`/work/${entry.id}/`)} style={`--accent:${skillColour[d.skill]}`}>
   <div class="frame">
-    <img src={u(d.cover)} alt={d.title} loading="lazy" decoding="async" />
+    <img src={u(d.cover)} alt={d.title} loading="lazy" decoding="async" data-live-cover={live || undefined} />
   </div>
   <div class="meta">
     <h3><i aria-hidden="true"></i>{d.title}</h3>
     <p class="sum">{d.summary}</p>
   </div>
 </a>
+<script>
+  import { loadFeed, carousels, slidesOf } from '../lib/feed';
+  // Live entries (Field Notes) use the first slide of the latest Instagram carousel as their cover.
+  document.querySelectorAll<HTMLImageElement>('img[data-live-cover]').forEach(async (img) => {
+    try {
+      const latest = carousels(await loadFeed(img.dataset.liveCover!))[0];
+      const src = latest && slidesOf(latest)[0];
+      if (src) img.src = src;
+    } catch { /* keep the cover that shipped with the page */ }
+  });
+</script>
 <style>
   .wc { display: grid; gap: 22px; }
   .frame { position: relative; overflow: hidden; background: var(--deep); border: 1px solid var(--line); }
