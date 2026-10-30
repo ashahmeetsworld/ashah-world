@@ -11,11 +11,9 @@ import Prism from '../components/Prism.astro';
 import Relay from '../components/Relay.astro';
 import HeroScene from '../components/HeroScene.astro';
 import MissionSky from '../components/MissionSky.astro';
-import DawnScene from '../components/DawnScene.astro';
-import Signup from '../components/Signup.astro';
+import FirstLight from '../components/FirstLight.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import Ambient from '../components/Ambient.astro';
-import NightPass from '../components/NightPass.astro';
 import site from '../data/site.json';
 import about from '../data/about.json';
 import { u, skillColour } from '../lib/url';
@@ -41,8 +39,7 @@ const skills = [
   { name: 'Campaign Marketing', key: '--cam', metaphor: 'The meteor shower', role: 'makes it impossible to miss', text: 'Ubiquity and spectacle that turn a world into a moment, and a moment into attention, desire and sales.' },
 ];
 ---
-<Base>
-  <NightPass />
+<Base night>
 
   <!-- ─── Hero: city lights on water ─── -->
   <section class="hero">
@@ -222,11 +219,7 @@ const skills = [
     <InstagramFeed />
   </section>
 
-  <!-- ─── First light: the sunset, then the newsletter ─── -->
-  <section class="finale">
-    <div class="scene"><DawnScene /></div>
-    <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
-  </section>
+  <FirstLight />
 </Base>
 
 <script>
@@ -375,19 +368,6 @@ const skills = [
   .notes :global(.cap b) { font: 500 11px var(--sans); letter-spacing: .2em; color: var(--peach); }
 
 
-  .finale { position: relative; overflow: hidden; padding-top: 0; padding-bottom: 90px; }
-  /* the footer sits in the first light too, on this page only */
-  :global(body:has(.np) footer) { background: linear-gradient(180deg, transparent, rgba(7, 11, 24, .55)); }
-  .finale-copy { position: relative; text-align: center; display: grid; justify-items: center; z-index: 1; }
-  .finale-copy .ctas { justify-content: center; }
-  .scene { position: relative; aspect-ratio: 16 / 6; min-height: 300px; max-height: 480px; width: 100%; margin-top: 0; }
-  /* the night passes: the dawn scene melts into the warmed sky above it instead of a midnight band */
-  .scene { -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); }
-  .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
-  .big { font-size: clamp(60px, 10vw, 140px); line-height: .95; margin-bottom: 22px; text-shadow: 0 0 50px rgba(242, 180, 140, .25); }
-  .finale .lede { color: var(--ink); margin: 0 0 30px; max-width: 30ch; }
-  .panel { padding: 34px; background: rgba(7, 11, 24, .62); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-
   @media (max-width: 980px) {
     .cards { grid-template-columns: 1fr 1fr; }
     .stack { grid-template-columns: 1fr 1fr; }
@@ -436,8 +416,5 @@ const skills = [
     .row-head { gap: 18px; }
     .stack li { border-right: 0; border-top: 1px solid var(--line); }
     .indent { padding-left: 0; }
-    .panel { padding: 24px; }
-    .scene { min-height: 340px; }
-    .finale .panel { margin-top: -56px; }
   }
 </style>

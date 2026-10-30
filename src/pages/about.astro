@@ -1,4 +1,5 @@
 ---
+import FirstLight from '../components/FirstLight.astro';
 import Base from '../layouts/Base.astro';
 import Arrow from '../components/Arrow.astro';
 import Waterline from '../components/Waterline.astro';
@@ -10,7 +11,7 @@ import about from '../data/about.json';
 import site from '../data/site.json';
 import { u } from '../lib/url';
 ---
-<Base title="About" description={about.lede}>
+<Base night title="About" description={about.lede}>
   <!-- ─── Hero ─── -->
   <section class="a-hero">
     <div class="halo" style="width:700px;height:460px;right:-180px;top:-80px;background:var(--violet);opacity:.55"></div>
@@ -93,6 +94,7 @@ import { u } from '../lib/url';
       </div>
     </div>
   </section>
+  <FirstLight />
 </Base>
 <style>
   .a-hero { position: relative; overflow: hidden; padding: 170px 0 clamp(60px, 8vw, 100px); }

@@ -1,0 +1,22 @@
+---
+// First light: the sunset, then Letters from the world. The way the night ends on every page, so the sunset is a
+// motif across the site rather than a one-off. Needs the page to use night (Base's `night` prop) so the sky above it warms to meet it.
+import DawnScene from './DawnScene.astro';
+import Signup from './Signup.astro';
+---
+<section class="finale">
+  <div class="scene"><DawnScene /></div>
+  <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
+</section>
+
+<style>
+  .finale { position: relative; overflow: hidden; padding-top: 0; padding-bottom: 90px; }
+  .scene { position: relative; aspect-ratio: 16 / 6; min-height: 300px; max-height: 480px; width: 100%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); }
+  .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
+  .panel { padding: 34px; background: rgba(7, 11, 24, .62); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  @media (max-width: 760px) {
+    .scene { min-height: 340px; }
+    .finale .panel { margin-top: -56px; padding: 24px; }
+  }
+</style>

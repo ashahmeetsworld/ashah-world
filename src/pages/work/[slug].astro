@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import FirstLight from '../../components/FirstLight.astro';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
 import { u, skillColour } from '../../lib/url';
@@ -16,7 +17,7 @@ const { Content } = await render(entry);
 const live = LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
 const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 ---
-<Base title={d.title} description={d.summary} image={d.cover}>
+<Base night title={d.title} description={d.summary} image={d.cover}>
   <article style={`--accent:${skillColour[d.skill]}`}>
     <header class="cs-head">
       <div class="halo" style="width:680px;height:420px;right:-160px;top:-60px;background:var(--accent);opacity:.28"></div>
@@ -58,6 +59,7 @@ const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
       <a href={u(`/work/${next.id}/`)}><span class="serif">{next.data.title}</span> <Arrow /></a>
     </nav>
   </article>
+  <FirstLight />
 </Base>
 <script>
   import { loadFeed, carousels, slidesOf, firstLine, esc } from '../../lib/feed';

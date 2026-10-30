@@ -70,6 +70,8 @@
 </script>
 
 <style>
+  /* the footer sits in the first light too */
+  :global(body:has(.np) footer) { background: linear-gradient(180deg, transparent, rgba(7, 11, 24, .55)); }
   .np { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
   .np-sky { position: absolute; inset: 0; background: linear-gradient(180deg, var(--np-top, #070B18) 0%, var(--np-top, #070B18) 35%, var(--np-bot, #070B18) 100%); }
   .np-stars { position: absolute; inset: 0; width: 100%; height: 100%; opacity: calc(1 - var(--np-p, 0) * 1.05); }

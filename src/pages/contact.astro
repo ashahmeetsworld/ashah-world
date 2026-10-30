@@ -1,11 +1,11 @@
 ---
+import FirstLight from '../components/FirstLight.astro';
 import Base from '../layouts/Base.astro';
-import Signup from '../components/Signup.astro';
 import site from '../data/site.json';
 import SocialIcons from '../components/SocialIcons.astro';
 const socials = site.socials.filter((s) => s.url);
 ---
-<Base title="Contact" description="Collabs, freelance projects, questions or just hello. Ashah Meets World, Melbourne.">
+<Base night title="Contact" description="Collabs, freelance projects, questions or just hello. Ashah Meets World, Melbourne.">
   <section class="c-wrap">
     <div class="halo" style="width:620px;height:480px;right:-140px;top:-60px;background:var(--violet);opacity:.6"></div>
     <div class="halo" style="width:420px;height:320px;left:-120px;bottom:10%;background:var(--sapphire);opacity:.45"></div>
@@ -48,12 +48,7 @@ const socials = site.socials.filter((s) => s.url);
       </div>
     </div>
   </section>
-  <!-- Letters from the world: a soft dusk glow, like the fireflies, so the list feels like part of the community -->
-  <section class="news">
-    <div class="halo" style="width:640px;height:420px;left:-120px;top:60px;background:var(--mauve);opacity:.26"></div>
-    <div class="halo" style="width:420px;height:280px;left:12%;top:170px;background:#C2605A;opacity:.16"></div>
-    <div class="wrap"><hr class="rule" /><div class="news-in"><Signup /></div></div>
-  </section>
+  <FirstLight />
 </Base>
 <script>
   // Send without leaving the page (Formspree answers JSON when asked).
@@ -91,8 +86,5 @@ const socials = site.socials.filter((s) => s.url);
   form .btn { justify-self: start; margin-top: 6px; }
   .note { margin: 0; }
   .embed :global(iframe) { width: 100%; min-height: 620px; border: 0; }
-  .news { position: relative; padding-bottom: 120px; }
-  .news .halo { filter: blur(90px); }
-  .news-in { position: relative; max-width: 640px; padding-top: 80px; }
   @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
 </style>
