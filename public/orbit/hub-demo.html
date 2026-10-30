@@ -196,7 +196,7 @@ function demoNote(t){let n=document.getElementById('demoNote');if(!n){n=document
 window.fetch=async(u,o)=>{u=String(u);const J=x=>new Response(JSON.stringify(x),{headers:{'Content-Type':'application/json'}});
  if(u.startsWith('/api/hub'))return J(Object.assign(JSON.parse(JSON.stringify(DEMO_DATA)),{chat:true}));
  if(u.startsWith('/api/doc/'))return J(DEMO_DOC);
- if(u.startsWith('/api/chat')){const b=JSON.parse((o&&o.body)||'{}');return J({sid:'demo',text:b.seat==='mentor-lesson'?'**Sample lesson.** In your hub, the Mentor teaches here, live, one layer at a time, on your own Claude plan.':'Sample hub: in yours, this helper replies right here, on your own Claude plan.'});}
+ if(u.startsWith('/api/chat')){const b=JSON.parse((o&&o.body)||'{}');return J({sid:'demo',text:b.seat==='mentor-lesson'?'**Sample lesson.** In your hub, the Mentor teaches here, live, one layer at a time, on your own Claude plan.\nRECO: Add short daily recall to your learning plan | Curriculum':'Sample hub: in yours, this helper replies right here, on your own Claude plan.\nRECO: Turn this weekly question into a routine | Routine'});}
  if(o&&o.method==='POST'){demoNote('Sample hub: in yours, this saves for real.');return J({ok:true});}
  return J({});};
 window.open=()=>{demoNote('Sample hub: in yours, this opens a chat with that helper.');return null;};
@@ -1265,6 +1265,30 @@ function lessonPage(view) {
 }
 
 
+
+/* Suggestions come up inside a chat whenever they're relevant; one click adds them to Recos. */
+const RECO_KINDS = ["Routine", "Skill", "Memory", "Hub", "Tool", "Process", "Curriculum"];
+function splitReco(text) {
+  const m = text.match(/\n?\s*RECO:\s*(.+?)\s*(?:\|\s*(\w+))?\s*$/);
+  if (!m) return { text, reco: null };
+  return { text: text.slice(0, m.index).trim(), reco: { t: m[1], k: RECO_KINDS.includes(m[2]) ? m[2] : "Process" } };
+}
+const seatLabel = s => { const d = DEPTS.find(x => x.skill === s); return d ? d.name : s === "amw-mentor" ? "Mentor" : s === "amw-advisory-board" ? "Advisory Board" : "Front Desk"; };
+const recoHTML = (m, i) => m.reco ? `<div class="lreco${m.reco.done ? " done" : ""}">${ic("bulb", 13)}<div><span class="caps">Suggestion · ${esc(m.reco.k)}</span><p>${esc(m.reco.t)}</p>
+  ${m.reco.done ? `<em>${esc(m.reco.done)}</em>` : `<div class="pills"><button class="pill on" data-reco="${i}">${ic("compass", 13)}Add to Recos</button><button class="pill quiet" data-noreco="${i}">Not now</button></div>`}</div></div>` : "";
+function wireRecos2(view, list, seat, redraw, say) {
+  view.querySelectorAll("[data-reco]").forEach(b => b.onclick = async () => {
+    const m = list[+b.dataset.reco]; b.disabled = true;
+    if (!DATA.writes || !DATA.chat) {
+      if (DATA.chat) { m.reco.done = "Asked in this chat"; redraw(); return say(`Please add this to my Recos table in Notion (Status New, Kind ${m.reco.k}, Seat ${seatLabel(seat)}): ${m.reco.t}`); }
+      m.reco.done = "Switch on hub writes (HUB_WRITES=on) to add it from here"; return redraw();
+    }
+    const r = await fetch("/api/reco", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ text: m.reco.t, kind: m.reco.k, seat: seatLabel(seat) }) });
+    m.reco.done = r.ok ? "Added to Recos" : "Couldn't add: " + (await r.text()); redraw();
+  });
+  view.querySelectorAll("[data-noreco]").forEach(b => b.onclick = () => { list[+b.dataset.noreco].reco = null; redraw(); });
+}
+
 /* ---------- a lesson, inside the hub ----------
    The chat runs through Claude Code on this PC (you's own plan, no API). The Mentor explains one layer
    through an analogy, draws it on the left, then asks one question. A proven layer is ticked in the Curriculum. */
@@ -1298,8 +1322,8 @@ async function lessonSay(view, msg, shown) {
   try {
     const r = await fetch("/api/chat", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ seat: "mentor-lesson", msg, sid: L.sid }) });
     if (!r.ok) throw new Error(await r.text());
-    const out = await r.json(), p = splitReply(out.text);
-    L.sid = out.sid; L.msgs.push({ t: p.text });
+    const out = await r.json(), p = splitReply(out.text), rc = splitReco(p.text);
+    L.sid = out.sid; L.msgs.push({ t: rc.text, reco: rc.reco });
     if (p.svg) { L.svg = p.svg; L.title = (p.text.match(/^\*\*(.+?)\*\*/) || [])[1] || L.title; }
     if (p.proven) L.proven = true;
   } catch (e) { L.msgs.push({ t: "Couldn't reach Claude: " + e.message, err: 1 }); }
@@ -1311,7 +1335,7 @@ function lessonDraw(view) {
     + `<div class="lchat enter"><div class="lstage"><span class="caps"><span class="leaf"></span>The analogy</span><h3 class="serif">${esc(L.title.replace(/^.*?:\s*/, "")) || "&nbsp;"}</h3>
       <div class="lpic">${L.svg || `<p class="empty">${L.busy ? "Drawing the analogy…" : "The picture appears here."}</p>`}</div>
       <div class="lstep">${[1, 2, 3].map(k => `<i class="${k < L.layer || (k === L.layer && L.proven) ? "on" : k === L.layer ? "now" : ""}"></i>`).join("")}<span class="caps">Layer ${L.layer} of 3</span></div></div>
-    <div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}Your Mentor is an AI: Claude, teaching one layer at a time.</div>${L.msgs.map(m => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">Mentor</span>`}${md(m.t)}</div>`).join("")}${L.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
+    <div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}Your Mentor is an AI: Claude, teaching one layer at a time.</div>${L.msgs.map((m, i) => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">Mentor</span>`}${md(m.t)}</div>${recoHTML(m, i)}`).join("")}${L.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
       ${L.proven ? `<div class="lproven">${ic("spark", 14)}<b class="serif">Layer ${L.layer} proven</b>${L.rowId && DATA.writes && !L.ticked ? `<button class="pill on" data-tick>${ic("check", 13)}Tick it in your path</button>` : L.ticked ? `<span class="caps">Ticked in Notion</span>` : ""}${L.layer < 3 ? `<button class="pill" data-next>Next layer</button>` : ""}</div>` : ""}
       <form class="lform"><textarea name="a" rows="2" placeholder="${L.msgs.length ? "Your answer…" : ""}" ${L.busy || !L.msgs.length ? "disabled" : ""}></textarea><button class="pill on" ${L.busy || !L.msgs.length ? "disabled" : ""}>${ic("door", 13)}Send</button></form>
       <div class="lfoot">${PLAN_NOTE}<a href="#mentor/lesson" data-end>End lesson</a></div></div></div>`;
@@ -1323,6 +1347,7 @@ function lessonDraw(view) {
   view.querySelector("[data-end]").onclick = () => { LESSON = null; saveLesson(); };
   const t = view.querySelector("[data-tick]");
   if (t) t.onclick = async () => { t.disabled = true; const r = await fetch("/api/tick", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ id: L.rowId, layer: L.layer }) }); if (r.ok) { L.ticked = true; saveLesson(); lessonDraw(view); } else { t.disabled = false; t.textContent = "Couldn't tick: " + (await r.text()); } };
+  wireRecos2(view, L.msgs, "amw-mentor", () => { saveLesson(); lessonDraw(view); }, a => lessonSay(view, a));
   const n = view.querySelector("[data-next]");
   if (n) n.onclick = () => startLesson(L.topic, L.layer + 1, L.rowId);
 }
@@ -1351,14 +1376,14 @@ function startChat(skill, text) {
 }
 async function chatSay(view, msg) {
   const C = CHAT; C.msgs.push({ u: 1, t: msg }); C.draft = ""; C.busy = true; saveChat(); chatDraw(view);
-  try { const out = await chatPost(C.skill, msg, C.sid); C.sid = out.sid; C.msgs.push({ t: out.text }); }
+  try { const out = await chatPost(C.skill, msg, C.sid), rc = splitReco(out.text); C.sid = out.sid; C.msgs.push({ t: rc.text, reco: rc.reco }); }
   catch (e) { C.msgs.push({ t: "Couldn't reach Claude: " + e.message, err: 1 }); }
   C.busy = false; saveChat(); if (CHAT === C && location.hash === "#chat") chatDraw(view);
 }
 function chatDraw(view) {
   const C = CHAT, who = skillName(C.skill), c = seatColOfSkill(C.skill);
   view.innerHTML = pageHead(`${ic("chat", 12)}In the hub · ${esc(who)}`, "chat", who[0].toUpperCase() + who.slice(1), "", back(C.back, "Back"))
-    + `<div class="lchat solo enter" style="--m:${c}"><div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}You're chatting with an AI: Claude, working as ${esc(who)}. It runs only when you press Send.</div>${C.msgs.map(m => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">${esc(who)}</span>`}${md(m.t)}</div>`).join("")}${C.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
+    + `<div class="lchat solo enter" style="--m:${c}"><div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}You're chatting with an AI: Claude, working as ${esc(who)}. It runs only when you press Send.</div>${C.msgs.map((m, i) => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">${esc(who)}</span>`}${md(m.t)}</div>${recoHTML(m, i)}`).join("")}${C.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
       ${DATA.chat ? "" : SETUP_CARD("Start this chat in Claude instead")}
       <form class="lform"><textarea name="a" rows="${C.msgs.length ? 2 : 5}" ${C.busy ? "disabled" : ""}>${esc(C.draft || "")}</textarea><button class="pill on" ${C.busy ? "disabled" : ""}>${ic("door", 13)}Send</button></form>
       <div class="lfoot">${PLAN_NOTE}<span><a href="#" data-out>Open in Claude instead</a> · <a href="#" data-new>New chat</a></span></div></div></div>`;
@@ -1368,6 +1393,7 @@ function chatDraw(view) {
   f.onsubmit = ev => { ev.preventDefault(); const a = ta.value.trim(); if (!DATA.chat) return _openClaudeOut(C.skill, a); if (a && !C.busy) chatSay(view, a); };
   ta.onkeydown = ev => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); f.requestSubmit(); } };
   if (!C.busy) ta.focus();
+  wireRecos2(view, C.msgs, C.skill, () => { saveChat(); chatDraw(view); }, a => chatSay(view, a));
   view.querySelectorAll("[data-out]").forEach(o => o.onclick = ev => { ev.preventDefault(); _openClaudeOut(C.skill, ta.value); });
   view.querySelector("[data-new]").onclick = ev => { ev.preventDefault(); startChat(C.skill, ""); };
 }
@@ -1426,7 +1452,7 @@ wire = function (el) {
 const _routePages = route;
 route = function () {
   const h = location.hash.replace("#", ""), [top, a, b] = h.split("/");
-  const askBar = document.getElementById("ask"); if (askBar) askBar.hidden = top === "chat" || (top === "mentor" && a === "learn");
+  const askBar = document.getElementById("ask"); const inChat = top === "chat" || (top === "mentor" && a === "learn"); if (askBar) askBar.hidden = inChat; document.body.classList.toggle("in-chat", inChat);
   const isPage = ["doc", "skill", "tab", "bench", "chat"].includes(top) || (["mentor", "board"].includes(top) && a);
   if (!DATA || DATA.setup || !isPage) return _routePages();
   if (!_extrasDone) { _extrasDone = true; applyFont(); showUsage(); setTimeout(showNotes, 700); }
@@ -1577,6 +1603,8 @@ a[target="_blank"]:not(.pill):not(.ref):hover{animation:none;box-shadow:none;tex
 .lsetup{display:flex;gap:12px;border:1px dashed var(--m,#8FDDB2);border-radius:12px;padding:12px 14px;font-size:13.5px}.lsetup b{font-size:18px;font-weight:400;font-style:italic}.lsetup p{margin:6px 0 0;opacity:.85}.lsetup a{color:inherit}
 a.item.ilink{display:block;color:inherit;text-decoration:none;border-radius:10px;transition:background .2s}a.item.ilink:hover{background:rgba(255,255,255,.04)}a.item.ilink h4{text-decoration:none}
 .mo-pop{margin-top:12px}.mo-pop .k{display:flex;align-items:center}.mo-pop [data-x]{margin-left:auto;padding:2px 10px}.mo-track{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 14px;font-size:13px;opacity:.85}.mo-track span{display:flex;align-items:center;gap:6px}.mo-track i{width:9px;height:9px;border-radius:50%;border:1px solid currentColor}.mo-track .on i{background:currentColor}.mo-track .now i{box-shadow:0 0 0 3px rgba(255,255,255,.15)}.year .mo.pick span{box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.lreco{align-self:flex-start;max-width:92%;display:flex;gap:10px;border:1px dashed rgba(255,214,140,.45);border-radius:12px;padding:9px 12px;font-size:13.5px;color:#FFE2B0;animation:rise .4s ease both}.lreco p{margin:2px 0 6px;color:inherit}.lreco .caps{font-size:9.5px;opacity:.8}.lreco em{font-style:normal;font-size:12px;opacity:.8}.lreco.done{opacity:.7}
+body.in-chat .notes{display:none}
 .lchat.solo{grid-template-columns:1fr;max-width:900px}.lchat.solo .lside{border:0}.lfoot a{color:inherit}
 .lfoot{display:flex;justify-content:space-between;gap:10px;font-size:12px;opacity:.7}.lfoot .caps{font-size:9.5px}
 
