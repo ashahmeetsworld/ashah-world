@@ -142,3 +142,6 @@ section > .wrap, header > .wrap { position: relative; z-index: 1; }
 
 /* Phones: room for the floating nav at the bottom */
 @media (max-width: 760px) { body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
+
+/* scenes that are off screen stand still (see the observer in Base.astro) */
+.off, .off * { animation-play-state: paused !important; }

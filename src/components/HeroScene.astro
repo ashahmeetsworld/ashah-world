@@ -265,5 +265,7 @@ const motes = Array.from({ length: 16 }, () => ({ x: 4 + r() * 92, y: 52 + r() *
   .hs-vignette { position: absolute; inset: 0; z-index: 6; pointer-events: none;
     background: radial-gradient(120% 90% at 60% 35%, transparent 55%, rgba(3, 4, 14, .55) 100%); }
 
+  /* phones and touch screens: keep the big moves (moon, aurora, mist, motes) and drop the ~150 tiny shimmer loops on the water and the city lights */
+  @media (max-width: 760px), (pointer: coarse) { .rip, .glint, .sway, .flick, .beacon { animation: none; } }
   @media (prefers-reduced-motion: reduce) { .hs * { animation: none !important; } }
 </style>

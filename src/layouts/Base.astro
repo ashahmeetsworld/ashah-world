@@ -65,5 +65,13 @@ const ogImage = new URL(u(image), Astro.site);
         });
       }
     </script>
+    <script>
+      // Pause what nobody can see: the hero, the sunset and the quiet weather only animate while they're (nearly) on screen.
+      // Hundreds of looping shapes at once is what made scrolling heavy on phones.
+      if ('IntersectionObserver' in window) {
+        const live = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('off', !e.isIntersecting)), { rootMargin: '300px 0px' });
+        document.querySelectorAll('.hs, .ds, .amb').forEach((el) => live.observe(el));
+      }
+    </script>
   </body>
 </html>
