@@ -851,8 +851,8 @@ function showUsage() {
   const due = m.filter(r => (r.props["Last done"] && r.props["Last done"] >= wk) || (r.props["Next due"] && r.props["Next due"] >= wk && r.props["Next due"] <= t)).length;
   const s = DATA.studio || { spent: 0, cap: 10 };
   document.body.insertAdjacentHTML("beforeend", `<div class="usage"><button class="uchip"><span class="ud"></span>This week · ${plural(ran, "routine")} · $${s.spent.toFixed(2)}</button><div class="upanel card"><div class="k">${ic("coin", 13)}<span class="caps">Usage and cost</span></div>
-    <div class="ml"><span>Routines that ran</span><i>${ran} of ${due} due this week</i></div><div class="ml"><span>Paid generation</span><i>$${s.spent.toFixed(2)} of $${s.cap.toFixed(2)} this month</i></div><div class="ml"><span>Next paid job</span><i>quoted before it runs</i></div>
-    <div class="ml"><span>Claude plan usage</span><i><a href="https://claude.ai/settings/usage" target="_blank" rel="noopener">claude.ai › Settings › Usage</a></i></div><p class="hint">Your Claude plan's own meter can't be read from outside claude.ai, so the hub links to it rather than guessing.</p></div></div>`);
+    <div class="ml"><span>Routines that ran</span><i>${ran} of ${due} due this week</i></div><div class="ml"><span>Paid add-ons</span><i>$${s.spent.toFixed(2)} this month</i></div>
+    <div class="ml"><span>Claude plan usage</span><i><a href="https://claude.ai/settings/usage" target="_blank" rel="noopener">claude.ai › Settings › Usage</a></i></div><p class="hint">Orbit costs nothing beyond your Claude plan. Paid add-ons are only the tools or connectors you choose to add that charge; Operations logs them here. Your plan's own meter lives on claude.ai, so the hub links to it.</p></div></div>`);
   document.querySelector(".uchip").onclick = () => document.querySelector(".usage").classList.toggle("open");
 }
 
