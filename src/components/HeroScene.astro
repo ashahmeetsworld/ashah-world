@@ -162,17 +162,17 @@ const motes = Array.from({ length: 16 }, () => ({ x: 4 + r() * 92, y: 52 + r() *
   const root = document.querySelector('.hs') as HTMLElement | null;
   if (root && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const layers = [...root.querySelectorAll<HTMLElement>('[data-depth]')].map((el) => ({ el, d: parseFloat(el.dataset.depth || '0') }));
-    let sy = 0, px = 0, py = 0, tx = 0, ty = 0, raf = 0;
+    let px = 0, py = 0, tx = 0, ty = 0, raf = 0;
     const fine = matchMedia('(pointer: fine)').matches;
     const paint = () => {
       raf = 0; px += (tx - px) * 0.06; py += (ty - py) * 0.06;
-      for (const { el, d } of layers) el.style.transform = `translate3d(${(px * d * 26).toFixed(2)}px, ${(sy * d * 0.55 + py * d * 14).toFixed(2)}px, 0)`;
+      for (const { el, d } of layers) el.style.transform = `translate3d(${(px * d * 26).toFixed(2)}px, ${(py * d * 14).toFixed(2)}px, 0)`;
       if (Math.abs(tx - px) > 0.002 || Math.abs(ty - py) > 0.002) raf = requestAnimationFrame(paint);
     };
     const kick = () => { if (!raf) raf = requestAnimationFrame(paint); };
-    addEventListener('scroll', () => { sy = Math.min(scrollY, innerHeight * 1.2); kick(); }, { passive: true });
+    // No scroll parallax: layers sliding at their own pace pulled the city off the horizon and read as a glitch.
     if (fine) addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; kick(); }, { passive: true });
-    sy = scrollY; kick();
+    kick();
   }
 </script>
 
@@ -265,5 +265,7 @@ const motes = Array.from({ length: 16 }, () => ({ x: 4 + r() * 92, y: 52 + r() *
   .hs-vignette { position: absolute; inset: 0; z-index: 6; pointer-events: none;
     background: radial-gradient(120% 90% at 60% 35%, transparent 55%, rgba(3, 4, 14, .55) 100%); }
 
+  /* phones and touch screens: keep the big moves (moon, aurora, mist, motes) and drop the ~150 tiny shimmer loops on the water and the city lights */
+  @media (max-width: 760px), (pointer: coarse) { .rip, .glint, .sway, .flick, .beacon { animation: none; } }
   @media (prefers-reduced-motion: reduce) { .hs * { animation: none !important; } }
 </style>

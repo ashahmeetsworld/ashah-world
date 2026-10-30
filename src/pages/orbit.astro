@@ -6,7 +6,15 @@ import Base from '../layouts/Base.astro';
 import OrbitScene from '../components/OrbitScene.astro';
 import OrbitSignup from '../components/OrbitSignup.astro';
 import AnklesScene from '../components/AnklesScene.astro';
-import OrbitTeam from '../components/OrbitTeam.astro';
+import sectionsA from '../orbit/sections-a.html?raw';
+import sectionsB from '../orbit/sections-b.html?raw';
+import sectionsJs from '../orbit/sections.js?raw';
+import '../styles/orbit-v04.css';
+
+// v0.4 sections were built as a mock-up; their images and the sample hub live in public/orbit/
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const withBase = (h: string) => h.replaceAll('__BASE__', base);
+const hubUrl = base + 'orbit/hub-demo.html';
 
 // the hero's last word cycles through these
 const verbs = ['making', 'building', 'creating', 'living'];
@@ -16,11 +24,12 @@ const verbs = ['making', 'building', 'creating', 'living'];
   <section class="o-hero">
     <OrbitScene />
     <div class="wrap o-copy">
-      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit</span></p>
+      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit v0.4</span></p>
+      <p class="req"><i></i>Runs on Claude Code. Requires a paid Claude subscription.</p>
       <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
-      <p class="lede">Six helpers circle your work, built around you in Claude. You stay at the centre.</p>
+      <p class="lede">Six AI helpers circle your work, built around you in Claude. You stay at the centre.</p>
       <OrbitSignup source="orbit-page-top" />
-      <p class="note"><strong>Free, for good.</strong> Leave any time.</p>
+      <p class="note"><strong>Free, for good.</strong> There’s a hub demo inside, so you can look around before you start.</p>
     </div>
   </section>
 
@@ -28,63 +37,20 @@ const verbs = ['making', 'building', 'creating', 'living'];
   <section class="o-now">
     <div class="wrap now-copy rv">
       <p class="eyebrow big"><i></i>Right now</p>
-      <h2>Up to your ankles<br /><span class="soft">in everything.</span></h2>
+      <h2>Spread thin across everything.<br /><span class="soft">Deep in nothing.</span></h2>
       <p class="body">A hundred small lights, all within reach, all asking for you. You never know which to pick up first, and it’s always the ones you have to, not the ones you want to.</p>
-      <p class="never">Never deep in anything.</p>
     </div>
     <AnklesScene />
   </section>
 
-  <!-- Slot: the transformational outcome goes here, before the team (to come). -->
-
-  <!-- The six: click a moon -->
-  <section class="pad o-six">
-    <div class="halo" style="width:560px;height:560px;right:-180px;top:12%;background:#3A1F66"></div>
-    <div class="wrap">
-      <div class="rv head">
-        <p class="eyebrow big"><i></i>Your team</p>
-        <h2>Six moons. One world.</h2>
-      </div>
-      <OrbitTeam />
-    </div>
-  </section>
-
-  <!-- Trust, learning, setup -->
-  <section class="pad o-trust">
-    <div class="wrap trio">
-      <article class="rv">
-        <p class="label">You’re in charge</p>
-        <h3>Nothing goes out without your yes.</h3>
-        <p class="body">Orbit drafts. You decide. Nothing is sent, posted, paid for or agreed until you say so. And nothing is made up: if it doesn’t know, it asks.</p>
-      </article>
-      <article class="rv" style="transition-delay:90ms">
-        <p class="label">It learns you</p>
-        <h3>Tell it once.</h3>
-        <p class="body">Every chat ends with one small question: anything I should do differently next time? Shorter, warmer, more like this. Month by month, it sounds more like you.</p>
-      </article>
-      <article class="rv" style="transition-delay:180ms">
-        <p class="label">Getting there</p>
-        <h3>About an hour.</h3>
-        <p class="body">Download Orbit, open it in Claude and type “start”. You talk about yourself and your work. Claude builds your six helpers and walks you through every step.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- The ask, again, in the aurora -->
-  <section class="pad o-cta">
-    <div class="wrap">
-      <div class="cta-card rv">
-        <div class="cta-glow" aria-hidden="true"></div>
-        <div class="cta-copy">
-          <p class="eyebrow big"><i></i>Free, for good</p>
-          <h2>Set your world in motion.</h2>
-          <p class="body">Orbit lands in your inbox as one download. Built once, it keeps learning.</p>
-        </div>
-        <OrbitSignup source="orbit-page-bottom" />
-      </div>
-    </div>
-  </section>
+  <!-- v0.4: the hub, the team, the basics, staying in charge, the Council, the ask -->
+  <Fragment set:html={withBase(sectionsA)} />
+  <OrbitSignup source="orbit-page-bottom" />
+  <Fragment set:html={withBase(sectionsB)} />
 </Base>
+
+<script is:inline define:vars={{ hubUrl }}>window.ORBIT_HUB = hubUrl;</script>
+<script is:inline set:html={sectionsJs}></script>
 
 <script>
   // the hero's last word: making, building, creating, living (all stacked in one spot, so nothing jumps)

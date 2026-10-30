@@ -127,3 +127,21 @@ section > .wrap, header > .wrap { position: relative; z-index: 1; }
 @keyframes tinsel { 0% { transform: translateX(-120%); } 35%, 100% { transform: translateX(120%); } }
 @keyframes ember-breathe { 0%, 100% { box-shadow: 0 0 22px rgba(242, 180, 140, .28), 0 0 50px rgba(224, 140, 126, .14); } 50% { box-shadow: 0 0 38px rgba(242, 180, 140, .5), 0 0 80px rgba(216, 42, 153, .2); } }
 @media (prefers-reduced-motion: reduce) { .btn.ember, .btn.aurora, .btn.ember::after, .btn.aurora::after { animation: none; } }
+
+/* Sideways carousels (src/lib/carousel.ts): one slide at a time, swipe or tap the dots. No numbers, just dots. */
+.car { position: relative; }
+.car-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; background: var(--deep); }
+.car-track::-webkit-scrollbar { display: none; }
+.car-slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; aspect-ratio: var(--ratio, 4 / 5); }
+.car-slide img { width: 100%; height: 100%; object-fit: cover; }
+.car-dots, .dots { display: flex; justify-content: center; gap: 2px; margin-top: 12px; }
+.car-dots[hidden], .dots[hidden] { display: none; }
+.car-dots button, .dots button { width: 22px; height: 26px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+.car-dots i, .dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); opacity: .5; transition: width .4s var(--ease), background .4s, opacity .4s, box-shadow .4s; }
+.car-dots button.on i, .dots button.on i { width: 20px; border-radius: 3px; background: var(--peach); opacity: 1; box-shadow: 0 0 10px rgba(242, 180, 140, .55); }
+
+/* Phones: room for the floating nav at the bottom */
+@media (max-width: 760px) { body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
+
+/* scenes that are off screen stand still (see the observer in Base.astro) */
+.off, .off * { animation-play-state: paused !important; }

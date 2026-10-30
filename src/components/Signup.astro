@@ -39,7 +39,7 @@ const { title = 'Letters from the world', text = 'What I\'m learning, making and
       try {
         await fetch(f.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' });
         f.reset(); btn.querySelector('span')!.textContent = 'You’re in';
-        status.textContent = 'You’re in. Your first letter is on its way (check junk if it hides).';
+        status.textContent = 'Check your inbox to confirm your email.';
       } catch {
         btn.disabled = false; btn.querySelector('span')!.textContent = 'Join the list';
         status.textContent = 'That didn’t go through. Please try again.';

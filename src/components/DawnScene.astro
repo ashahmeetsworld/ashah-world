@@ -1,0 +1,183 @@
+---
+// The sunset (sandbox, 30 Oct 2026), rebuilt to the hero's level: layered and moving, with one light source and a halo.
+// A big low sun with rose bars, slow god-rays, little clouds lit from below on an open horizon, a sun road of glints on the sea,
+// a few birds and drifting embers. No palm trees. Layers lean gently toward the pointer on desktop, like the hero.
+let seed = 31;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+
+const stars = Array.from({ length: 50 }, () => ({
+  x: r() * 1600, y: Math.pow(r(), 1.7) * 200,
+  s: r() < 0.06 ? 1.5 : r() < 0.3 ? 1 : 0.6, o: 0.2 + r() * 0.45, tw: r() < 0.35, d: (r() * 7).toFixed(2),
+}));
+const ripples = Array.from({ length: 80 }, () => {
+  const y = Math.pow(r(), 1.2) * 100;
+  return { x: r() * 100, y, w: 0.5 + r() * 1.8 * (1 + y / 70), o: (0.12 + r() * 0.3) * (1 - y / 190), c: r() < 0.55 ? '#FFC9A0' : r() < 0.6 ? '#F08A8A' : '#B79CFF', d: (r() * 6).toFixed(2) };
+});
+const glints = Array.from({ length: 36 }, (_, i) => {
+  const t = i / 35;
+  return { y: 0.6 + Math.pow(t, 1.45) * 92, w: 3 + t * 28 * (0.35 + r() * 0.65), x: 50 + (r() - 0.5) * (6 + t * 38), o: (0.9 - t * 0.5) * (0.6 + r() * 0.4), d: (r() * 4).toFixed(2) };
+});
+const motes = Array.from({ length: 14 }, () => ({ x: 4 + r() * 92, y: 50 + r() * 44, s: 1.5 + r() * 2.4, d: (r() * 14).toFixed(2), dur: (11 + r() * 9).toFixed(1), c: r() < 0.7 ? '#FFD2A6' : '#FFB4B4' }));
+// little clouds: smaller and flatter toward the horizon, so the sea of sky feels vast
+const puffs = Array.from({ length: 11 }, (_, i) => {
+  const t = i / 10;
+  return { x: 4 + r() * 88, y: 18 + t * 32 + r() * 3, s: 0.45 + t * 1.15 + r() * 0.3, o: 0.55 + r() * 0.4, dur: 90 + r() * 80, d: -r() * 120, dir: r() < 0.5 ? 'alternate' : 'alternate-reverse' };
+});
+const birds = [
+  { y: 26, s: 1, d: 0, t: 38 }, { y: 31, s: .7, d: -6, t: 44 }, { y: 22, s: .55, d: -17, t: 50 }, { y: 35, s: .8, d: -26, t: 41 },
+];
+---
+<div class="ds" aria-hidden="true">
+  <div class="ds-air"></div>
+
+  <div class="ds-layer" data-depth="0.06">
+    <svg class="ds-stars" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMin slice">
+      {stars.map((s) => <circle cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r={s.s} fill="#fff" opacity={s.o.toFixed(2)} class={s.tw ? 'tw' : undefined} style={s.tw ? `animation-delay:-${s.d}s` : undefined} />)}
+    </svg>
+  </div>
+
+  <!-- slow rays of light fanning from the sun -->
+  <div class="ds-layer ds-rays-wrap" data-depth="0.1"><div class="ds-rays"></div></div>
+
+  <!-- clouds, lit from below, drifting -->
+  <div class="ds-layer" data-depth="0.14">
+    <span class="cl c1"></span><span class="cl c2"></span><span class="cl c3"></span><span class="cl c4"></span><span class="cl c5"></span>
+  </div>
+
+  <!-- the one light source -->
+  <div class="ds-layer" data-depth="0.18">
+    <div class="ds-sun">
+      <span class="halo"></span><span class="bloom"></span>
+      <span class="disc"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <!-- birds crossing the light -->
+  <div class="ds-layer" data-depth="0.24">
+    {birds.map((b) => (
+      <svg class="bird" viewBox="0 0 24 10" style={`top:${b.y}%;width:${(22 * b.s).toFixed(0)}px;animation-duration:${b.t}s;animation-delay:${b.d}s`}>
+        <path d="M1 7 Q 6 0 12 6 Q 18 0 23 7" fill="none" stroke="#2A1346" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    ))}
+  </div>
+
+  <!-- little clouds on a wide horizon -->
+  <div class="ds-layer" data-depth="0.3">
+    <svg class="ds-puffs" width="0" height="0" aria-hidden="true">
+      <defs>
+        <linearGradient id="ds-puff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E5090" /><stop offset=".55" stop-color="#F08C8C" /><stop offset="1" stop-color="#FFD0A0" /></linearGradient>
+        <symbol id="ds-cloud" viewBox="0 0 120 40"><path d="M6 34 C 0 34, 0 26, 9 25 C 8 16, 22 12, 28 19 C 32 8, 52 6, 58 17 C 66 10, 84 12, 86 24 C 98 20, 112 26, 108 34 Z" fill="url(#ds-puff)" /></symbol>
+      </defs>
+    </svg>
+    {puffs.map((c) => (
+      <svg class="puff" viewBox="0 0 120 40" style={`left:${c.x.toFixed(1)}%;top:${c.y.toFixed(1)}%;width:${(110 * c.s).toFixed(0)}px;opacity:${c.o.toFixed(2)};animation-duration:${c.dur.toFixed(0)}s;animation-delay:${c.d.toFixed(0)}s;animation-direction:${c.dir}`}><use href="#ds-cloud" /></svg>
+    ))}
+  </div>
+
+  <div class="ds-sea"></div>
+  <div class="ds-layer ds-water" data-depth="0.4">
+    <svg class="ds-ripples" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {ripples.map((p) => <rect class="rip" x={p.x.toFixed(2)} y={p.y.toFixed(2)} width={p.w.toFixed(2)} height=".28" rx=".14" fill={p.c} opacity={p.o.toFixed(2)} style={`animation-delay:-${p.d}s`} />)}
+    </svg>
+    <div class="ds-pillar"></div>
+    <svg class="ds-road" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {glints.map((g) => <rect class="glint" x={(g.x - g.w / 2).toFixed(2)} y={g.y.toFixed(2)} width={g.w.toFixed(2)} height={(0.35 + g.y / 150).toFixed(2)} rx=".3" fill="#FFE6C8" opacity={g.o.toFixed(2)} style={`animation-delay:-${g.d}s`} />)}
+    </svg>
+  </div>
+
+  <div class="ds-mist"><span></span><span></span></div>
+  <div class="ds-motes">
+    {motes.map((m) => <i style={`left:${m.x.toFixed(1)}%;top:${m.y.toFixed(1)}%;width:${m.s.toFixed(1)}px;height:${m.s.toFixed(1)}px;--c:${m.c};animation-delay:-${m.d}s;animation-duration:${m.dur}s`}></i>)}
+  </div>
+  <div class="ds-vignette"></div>
+</div>
+
+<script>
+  // The same gentle lean toward the pointer as the hero. No scroll movement.
+  const root = document.querySelector('.ds') as HTMLElement | null;
+  if (root && !matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(pointer: fine)').matches) {
+    const layers = [...root.querySelectorAll<HTMLElement>('[data-depth]')].map((el) => ({ el, d: parseFloat(el.dataset.depth || '0') }));
+    let px = 0, py = 0, tx = 0, ty = 0, raf = 0;
+    const paint = () => {
+      raf = 0; px += (tx - px) * 0.06; py += (ty - py) * 0.06;
+      for (const { el, d } of layers) el.style.transform = `translate3d(${(px * d * 26).toFixed(2)}px, ${(py * d * 14).toFixed(2)}px, 0)`;
+      if (Math.abs(tx - px) > 0.002 || Math.abs(ty - py) > 0.002) raf = requestAnimationFrame(paint);
+    };
+    addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; if (!raf) raf = requestAnimationFrame(paint); }, { passive: true });
+  }
+</script>
+
+<style>
+  .ds { --hz: 64%; --sx: 50%; --sun: clamp(110px, 12vw, 180px);
+    position: absolute; inset: 0; overflow: hidden; z-index: 0; isolation: isolate; pointer-events: none; }
+  @media (max-width: 760px) { .ds { --hz: 60%; --sun: 96px; } }
+
+  .ds-layer { position: absolute; inset: 0; will-change: transform; }
+  .ds-air { position: absolute; inset: 0 0 calc(100% - var(--hz)) 0;
+    background: linear-gradient(180deg, #170F48 0%, #3A2070 22%, #8A468C 46%, #E0807C 68%, #F6AE86 84%, #FFD6A6 100%); }
+
+  .ds-stars { position: absolute; left: 0; top: 0; width: 100%; height: var(--hz); opacity: .6; }
+  .tw { animation: ds-tw 5s ease-in-out infinite; }
+  @keyframes ds-tw { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+
+  /* god-rays: a wide conic fan from the sun, masked so it only glows near it, turning very slowly */
+  .ds-rays-wrap { overflow: hidden; }
+  .ds-rays { position: absolute; left: calc(var(--sx) - 70%); width: 140%; top: calc(var(--hz) - 140%); height: 280%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255, 214, 170, .16) 0deg 4deg, transparent 4deg 11deg);
+    -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.6) 18%, transparent 52%); mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.6) 18%, transparent 52%);
+    mix-blend-mode: screen; animation: ds-turn 120s linear infinite; }
+  @keyframes ds-turn { to { transform: rotate(360deg); } }
+
+  .cl { position: absolute; height: 5.5%; border-radius: 50%; filter: blur(12px);
+    background: linear-gradient(180deg, rgba(110, 66, 140, .6), rgba(255, 172, 150, .7) 70%, rgba(255, 214, 170, .75)); animation: ds-cloud 70s ease-in-out infinite alternate; }
+  .c1 { left: 2%; top: 30%; width: 46%; } .c2 { left: 52%; top: 22%; width: 44%; height: 4.5%; animation-duration: 90s; animation-direction: alternate-reverse; }
+  .c3 { left: 18%; top: 44%; width: 36%; height: 4%; opacity: .85; animation-duration: 80s; } .c4 { left: 60%; top: 40%; width: 34%; height: 4%; opacity: .8; animation-duration: 100s; animation-direction: alternate-reverse; }
+  .c5 { left: 30%; top: 14%; width: 40%; height: 3.5%; opacity: .55; animation-duration: 110s; }
+  @keyframes ds-cloud { from { transform: translateX(-6%); } to { transform: translateX(8%); } }
+
+  .ds-sun { position: absolute; left: var(--sx); top: calc(var(--hz) - var(--sun) * .12); width: var(--sun); height: var(--sun); transform: translate(-50%, -50%); }
+  .ds-sun span { position: absolute; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .ds-sun .halo { width: 640%; height: 640%; background: radial-gradient(closest-side, rgba(255, 196, 140, .72), rgba(244, 128, 128, .36) 30%, rgba(150, 70, 140, .16) 58%, transparent 100%); animation: ds-breathe 8s ease-in-out infinite; }
+  .ds-sun .bloom { width: 230%; height: 230%; background: radial-gradient(closest-side, rgba(255, 246, 230, .95), rgba(255, 210, 160, .45) 50%, transparent 100%); }
+  .ds-sun .disc { width: 100%; height: 100%; overflow: hidden; background: radial-gradient(circle at 46% 44%, #FFFBF2, #FFE3C0 55%, #FFC08A); box-shadow: 0 0 60px rgba(255, 214, 170, .85), 0 0 140px rgba(255, 150, 120, .5); }
+  .ds-sun .disc i { position: absolute; left: -2%; right: -2%; background: #E4787E; opacity: .9; }
+  .ds-sun .disc i:nth-child(1) { top: 58%; height: 4%; } .ds-sun .disc i:nth-child(2) { top: 69%; height: 6%; } .ds-sun .disc i:nth-child(3) { top: 81%; height: 8%; } .ds-sun .disc i:nth-child(4) { top: 93%; height: 10%; }
+  @keyframes ds-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .9; } 50% { transform: translate(-50%, -50%) scale(1.07); opacity: 1; } }
+
+  .bird { position: absolute; left: -6%; height: auto; opacity: .8; animation: ds-fly linear infinite; }
+  @keyframes ds-fly { from { transform: translate(0, 0); } 50% { transform: translate(60vw, -12px); } to { transform: translate(115vw, 6px); } }
+
+  .ds-puffs { position: absolute; }
+  .puff { position: absolute; height: auto; filter: blur(.7px); animation: ds-puff ease-in-out infinite; z-index: 1; }
+  @media (max-width: 760px) { .puff { max-width: 24vw; } .puff:nth-child(n+8) { display: none; } }
+  @keyframes ds-puff { from { transform: translateX(-30px); } to { transform: translateX(40px); } }
+
+  .ds-sea { position: absolute; left: 0; right: 0; top: var(--hz); bottom: 0; z-index: 1;
+    background: linear-gradient(180deg, #F29A84 0%, #B8648C 14%, #5A3382 38%, #231A5E 72%, #120F3C 100%); }
+  .ds-water { z-index: 2; }
+  .ds-ripples { position: absolute; left: 0; top: calc(var(--hz) + 1%); width: 100%; height: calc(100% - var(--hz)); filter: blur(.6px); }
+  .rip { animation: ds-drift 7s ease-in-out infinite alternate; }
+  @keyframes ds-drift { from { transform: translateX(-.6px); } to { transform: translateX(.8px); } }
+  .ds-road { position: absolute; left: calc(var(--sx) - 22%); width: 44%; top: calc(var(--hz) + .4%); height: calc(100% - var(--hz)); filter: blur(1px); mix-blend-mode: screen; }
+  @media (max-width: 760px) { .ds-road { left: calc(var(--sx) - 36%); width: 72%; } }
+  .ds-pillar { position: absolute; left: calc(var(--sx) - 11%); width: 22%; top: var(--hz); height: calc(100% - var(--hz)); filter: blur(16px);
+    background: radial-gradient(50% 100% at 50% 0%, rgba(255, 214, 170, .65), rgba(244, 128, 128, .2) 55%, transparent 100%); }
+  .glint { animation: ds-glint 3s ease-in-out infinite alternate; }
+  @keyframes ds-glint { from { transform: translateX(-.9px); opacity: .3; } to { transform: translateX(1px); } }
+
+  .ds-mist { position: absolute; left: 0; right: 0; top: calc(var(--hz) - 7%); height: 13%; z-index: 3; }
+  .ds-mist span { position: absolute; top: 0; height: 100%; width: 70%; border-radius: 50%; filter: blur(30px);
+    background: radial-gradient(closest-side, rgba(255, 180, 160, .38), transparent); }
+  .ds-mist span:first-child { left: -10%; animation: ds-mist 48s ease-in-out infinite alternate; }
+  .ds-mist span:last-child { left: 40%; background: radial-gradient(closest-side, rgba(200, 150, 255, .26), transparent); animation: ds-mist 62s ease-in-out -20s infinite alternate-reverse; }
+  @keyframes ds-mist { from { transform: translateX(-12%); } to { transform: translateX(16%); } }
+
+  .ds-motes { position: absolute; inset: 0; z-index: 5; }
+  .ds-motes i { position: absolute; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px 2px var(--c); opacity: 0; animation: ds-rise 14s ease-in-out infinite; }
+  @keyframes ds-rise { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .6; } 80% { opacity: .35; } 100% { opacity: 0; transform: translate(14px, -110px); } }
+  @media (max-width: 760px) { .ds-motes i:nth-child(n+8) { display: none; } }
+
+  .ds-vignette { position: absolute; inset: 0; z-index: 6; background: radial-gradient(110% 95% at 50% 62%, transparent 62%, rgba(10, 6, 28, .4) 100%); }
+  @media (max-width: 760px), (pointer: coarse) { .rip, .glint { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .ds * { animation: none !important; } }
+</style>
