@@ -219,17 +219,8 @@ const skills = [
     <InstagramFeed />
   </section>
 
-  <!-- ─── Meet the world ─── -->
+  <!-- ─── First light: the sunset, then the newsletter ─── -->
   <section class="finale">
-    <div class="wrap finale-copy rv">
-      <p class="eyebrow">Step inside</p>
-      <h2 class="big">Meet the world.</h2>
-      <p class="lede">Field notes, experiments and the story of building a world in public. Follow along, or say hello.</p>
-      <div class="ctas">
-        <a class="go glow" href={u('/contact/')}>Say hello <Arrow /></a>
-        {site.discordUrl && <a class="go" href={site.discordUrl} rel="noopener">Join the Discord <Arrow /></a>}
-      </div>
-    </div>
     <div class="scene"><DawnScene /></div>
     <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
   </section>
@@ -377,12 +368,12 @@ const skills = [
   .notes :global(.cap b) { font: 500 11px var(--sans); letter-spacing: .2em; color: var(--peach); }
 
 
-  .finale { position: relative; overflow: hidden; padding-top: clamp(40px, 6vw, 80px); padding-bottom: 90px; }
+  .finale { position: relative; overflow: hidden; padding-top: 0; padding-bottom: 90px; }
   /* the footer sits in the first light too, on this page only */
   :global(body:has(.np) footer) { background: linear-gradient(180deg, transparent, rgba(7, 11, 24, .55)); }
   .finale-copy { position: relative; text-align: center; display: grid; justify-items: center; z-index: 1; }
   .finale-copy .ctas { justify-content: center; }
-  .scene { position: relative; aspect-ratio: 16 / 6; min-height: 300px; max-height: 480px; width: 100%; margin-top: -40px; }
+  .scene { position: relative; aspect-ratio: 16 / 6; min-height: 300px; max-height: 480px; width: 100%; margin-top: 0; }
   /* the night passes: the dawn scene melts into the warmed sky above it instead of a midnight band */
   .scene { -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); }
   .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
