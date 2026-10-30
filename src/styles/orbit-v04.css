@@ -370,3 +370,29 @@
 .nx .head{margin-bottom:26px}
 .nx section:last-of-type{padding-bottom:clamp(56px,6vw,88px)}
 .ver{margin-left:.5em;padding:3px 9px;border-radius:99px;border:1px solid rgba(127,216,240,.45);font-size:.85em;letter-spacing:.18em;color:#CFE6FF}
+
+/* It learns you: the path (moons waxing) and the Recos card */
+.nx .learns .lw-lede{max-width:640px;margin:16px auto 0;color:var(--s);font-size:17px;line-height:1.6}
+.nx .lw{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:start;margin-top:8px}
+.nx .lw-path{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;position:relative}
+.nx .lw-path::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:1px;background:linear-gradient(#7FD8F0,#A996FF);opacity:.35}
+.nx .lw-path li{display:grid;grid-template-columns:44px 1fr;column-gap:20px;padding:14px 0;position:relative}
+.nx .lw-path li>*:not(.lw-moon){grid-column:2}
+.nx .lw-path .caps{margin:0 0 4px;font-size:11px;letter-spacing:.28em;color:var(--aqua,#7FD8F0)}
+.nx .lw-path b{font:italic 400 26px/1.15 var(--serif);color:var(--t)}
+.nx .lw-path span:not(.lw-moon){font-size:15px;line-height:1.55;color:var(--s);margin-top:4px}
+.nx .lw-moon{grid-row:1 / span 3;width:44px;height:44px;border-radius:50%;position:relative;overflow:hidden;background:#0b1226;border:1px solid rgba(169,190,255,.3);box-shadow:0 0 calc(30px * var(--f)) rgba(143,180,246,calc(.55 * var(--f)))}
+.nx .lw-moon::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F6F1E7,#BFD3FF 55%,#8FB4F6);clip-path:inset(0 0 0 calc(100% - 100% * var(--f)))}
+.nx .lw-recos{border:1px solid rgba(143,180,246,.28);border-radius:16px;padding:18px;background:radial-gradient(120% 80% at 50% 0%,#12233a,#060a16 75%);box-shadow:0 20px 60px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:10px}
+.nx .lw-rt{margin:0 0 4px;font-size:11px;letter-spacing:.3em;color:#8FB4F6}.nx .lw-rt em{font-style:normal;color:var(--s);letter-spacing:.12em;text-transform:none}
+.nx .lw-r{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:12px;row-gap:8px;padding:12px 14px;border:1px solid rgba(143,180,246,.2);border-radius:12px;background:rgba(14,26,56,.55)}
+.nx .lw-r div{grid-row:1 / span 2}
+.nx .lw-r .caps{margin:0 0 3px;font-size:10px;letter-spacing:.24em;color:#8FB4F6}
+.nx .lw-r b{display:block;font:italic 400 18px/1.25 var(--serif);color:var(--t)}
+.nx .lw-r small{font-size:13px;color:var(--s)}
+.nx .lw-sz{font-size:12px;color:var(--s);text-align:right}
+.nx .lw-add{align-self:end;font-size:12px;color:var(--t);border:1px solid rgba(143,180,246,.4);border-radius:99px;padding:5px 12px;white-space:nowrap}
+.nx .lw-add.on{color:#070B18;background:linear-gradient(90deg,#7FD8F0,#8FB4F6,#A996FF);border-color:transparent}
+.nx .lw-co{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:13px;color:var(--s)}
+.nx .lw-go{color:var(--t);border:1px solid rgba(143,180,246,.45);border-radius:99px;padding:7px 14px;box-shadow:0 0 18px rgba(143,180,246,.25)}
+@media (max-width:860px){.nx .lw{grid-template-columns:1fr}}
