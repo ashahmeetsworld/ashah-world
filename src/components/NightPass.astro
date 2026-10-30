@@ -1,30 +1,18 @@
 ---
 // The night passes (sandbox, 30 Oct 2026): the home page is one night, from midnight at the hero to first light
 // at "Letters from the world". A fixed sky sits behind every section and warms as you scroll; the stars fade out.
-// Desktop gets a quiet clock rail on the right whose last mark, First light, is the newsletter.
-// Phones get a thin line of light along the top instead (the bottom nav already lives at the bottom).
+// Phones also get a thin line of light along the top that warms as the night passes.
 ---
 <div class="np" aria-hidden="true">
   <div class="np-sky"></div>
   <canvas class="np-stars"></canvas>
   <div class="np-glow"></div>
 </div>
-<nav class="np-rail" aria-label="The night, from midnight to first light">
-  <span class="np-track"><span class="np-fill"></span></span>
-  <ol>
-    <li data-at="0"><span>Midnight</span></li>
-    <li data-at=".34"><span>Deep night</span></li>
-    <li data-at=".67"><span>Violet hour</span></li>
-    <li data-at="1" class="np-dawn"><a href="#letters"><i></i><span>First light<small> · Letters from the world</small></span></a></li>
-  </ol>
-</nav>
 <div class="np-line" aria-hidden="true"></div>
 
 <script>
   const root = document.documentElement;
   const end = document.getElementById('letters');
-  const rail = document.querySelector<HTMLElement>('.np-rail');
-  const marks = Array.from(document.querySelectorAll<HTMLElement>('.np-rail li'));
   // sky colours through the night: [p, top, bottom, horizon glow alpha]
   const STOPS: [number, number[], number[], number][] = [
     [0, [7, 11, 24], [7, 11, 24], 0],
@@ -52,9 +40,6 @@
     root.style.setProperty('--np-top', `rgb(${c.top})`);
     root.style.setProperty('--np-bot', `rgb(${c.bot})`);
     root.style.setProperty('--np-glow', c.glow.toFixed(3));
-    marks.forEach((m) => m.classList.toggle('past', p >= parseFloat(m.dataset.at!) - 0.001));
-    // the rail rests while the hero has the stage, and once you've reached first light
-    rail?.classList.toggle('on', p > 0.04 && p < 0.995);
   };
   const ask = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
   addEventListener('scroll', ask, { passive: true });
@@ -92,31 +77,8 @@
     background: radial-gradient(50% 55% at 50% 100%, rgba(168, 98, 142, 1), rgba(120, 70, 130, .5) 40%, transparent 75%);
     opacity: var(--np-glow, 0); }
 
-  /* desktop: the clock rail. A hairline at the very edge; the hour it's at is written down its side */
-  .np-rail { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 40; width: 1px; height: min(52vh, 420px);
-    opacity: 0; pointer-events: none; transition: opacity .8s var(--ease); }
-  .np-rail.on { opacity: 1; pointer-events: auto; }
-  .np-track { position: absolute; inset: 0; background: var(--line); }
-  .np-fill { position: absolute; inset: 0 0 auto 0; height: calc(var(--np-p, 0) * 100%);
-    background: linear-gradient(180deg, var(--aqua), var(--mauve) 60%, var(--peach)); box-shadow: 0 0 10px rgba(242, 180, 140, .5); }
-  .np-rail ol { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
-  .np-rail li { position: absolute; left: 0; top: calc(var(--at) * 100%); font: 500 9.5px/1 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3); }
-  .np-rail li:nth-child(1) { --at: 0; } .np-rail li:nth-child(2) { --at: .34; } .np-rail li:nth-child(3) { --at: .67; } .np-rail li:nth-child(4) { --at: 1; }
-  .np-rail li::before { content: ''; position: absolute; left: -3px; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--midnight); border: 1px solid currentColor; }
-  .np-rail li.past::before { background: currentColor; }
-  .np-rail li span { position: absolute; right: 8px; bottom: 10px; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; opacity: 0; transition: opacity .5s; }
-  .np-rail li.past:not(:has(~ li.past)) span, .np-rail:hover li span { opacity: 1; color: var(--ink-2); }
-  .np-rail li.np-dawn::before { display: none; }
-  .np-dawn a { position: absolute; left: -7px; top: -7px; width: 15px; height: 15px; }
-  .np-dawn i { position: absolute; inset: 2px; border-radius: 50%; background: var(--peach);
-    box-shadow: 0 0 calc(6px + var(--np-p, 0) * 22px) rgba(242, 180, 140, calc(.35 + var(--np-p, 0) * .6)); }
-  .np-dawn a span { right: 15px; bottom: 8px; color: var(--peach) !important; opacity: 1; }
-  .np-dawn small { display: none; }
-  .np-dawn a:hover small, .np-dawn a:focus-visible small { display: inline; margin-top: 10px; font: italic 400 14px/1 var(--serif); letter-spacing: 0; text-transform: none; color: var(--ink-2); }
-
   /* phones: a line of light along the top that warms as the night passes */
   .np-line { display: none; }
-  @media (max-width: 1000px) { .np-rail { display: none; } }
   @media (max-width: 760px) {
     .np-line { display: block; position: fixed; top: 0; left: 0; height: 2px; z-index: 60; width: calc(var(--np-p, 0) * 100%);
       background: linear-gradient(90deg, var(--aqua), var(--mauve) 60%, var(--peach)); box-shadow: 0 0 12px rgba(242, 180, 140, .55); pointer-events: none; }
