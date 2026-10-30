@@ -13,6 +13,7 @@ import HeroScene from '../components/HeroScene.astro';
 import MissionSky from '../components/MissionSky.astro';
 import Signup from '../components/Signup.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
+import NightPass from '../components/NightPass.astro';
 import site from '../data/site.json';
 import about from '../data/about.json';
 import { u, skillColour } from '../lib/url';
@@ -39,6 +40,8 @@ const skills = [
 ];
 ---
 <Base>
+  <NightPass />
+
   <!-- ─── Hero: city lights on water ─── -->
   <section class="hero">
     {ELEVATED_HERO ? <HeroScene /> : <Sky variant="night" id="hero-sky" />}
@@ -367,15 +370,18 @@ const skills = [
   .notes :global(.note-card) { scroll-snap-align: start; position: relative; display: block; border: 1px solid var(--line); overflow: hidden; }
   .notes :global(.note-card img) { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
   .notes :global(.note-card:hover img) { transform: scale(1.04); }
-  .notes :global(.cap) { display: flex; gap: 10px; align-items: baseline; padding: 14px 4px 0; font: italic 19px/1.2 var(--serif); color: var(--ink-2); background: var(--midnight); }
+  .notes :global(.cap) { display: flex; gap: 10px; align-items: baseline; padding: 14px 4px 0; font: italic 19px/1.2 var(--serif); color: var(--ink-2); }
   .notes :global(.cap b) { font: 500 11px var(--sans); letter-spacing: .2em; color: var(--peach); }
 
 
-  .finale { position: relative; overflow: hidden; padding-top: clamp(40px, 6vw, 80px); padding-bottom: 90px; background: var(--midnight); }
+  .finale { position: relative; overflow: hidden; padding-top: clamp(40px, 6vw, 80px); padding-bottom: 90px; }
+  /* the footer sits in the first light too, on this page only */
+  :global(body:has(.np) footer) { background: linear-gradient(180deg, transparent, rgba(7, 11, 24, .55)); }
   .finale-copy { position: relative; text-align: center; display: grid; justify-items: center; z-index: 1; }
   .finale-copy .ctas { justify-content: center; }
   .scene { position: relative; aspect-ratio: 16 / 7; min-height: 340px; max-height: 720px; width: 100%; margin-top: -40px; }
-  .scene::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--midnight) 0%, transparent 30%, transparent 70%, var(--midnight) 100%); }
+  /* the night passes: the dawn scene melts into the warmed sky above it instead of a midnight band */
+  .scene { -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 72%, transparent 100%); }
   .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
   .big { font-size: clamp(60px, 10vw, 140px); line-height: .95; margin-bottom: 22px; text-shadow: 0 0 50px rgba(242, 180, 140, .25); }
   .finale .lede { color: var(--ink); margin: 0 0 30px; max-width: 30ch; }
