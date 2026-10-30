@@ -1,5 +1,5 @@
 ---
-// "Up to your ankles in everything": from the Orbit booklet. A small figure stands
+// "Spread thin across everything. Deep in nothing.": from the Orbit booklet. A small figure stands
 // in shallow water among a hundred small lights, each one a job asking for them.
 // Far off on the horizon, one door glows: the work you love.
 let seed = 11;
@@ -23,7 +23,7 @@ const lights = [
 const stars = Array.from({ length: 70 }, () => ({ x: (r() * W).toFixed(0), y: (r() * (HZ - 30)).toFixed(0), o: (0.2 + r() * 0.5).toFixed(2) }));
 ---
 <div class="ankles" aria-hidden="true">
-  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice">
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
     <defs>
       <linearGradient id="ak-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#070B18" /><stop offset=".55" stop-color="#1A1446" /><stop offset="1" stop-color="#3A1F66" />
@@ -31,7 +31,9 @@ const stars = Array.from({ length: 70 }, () => ({ x: (r() * W).toFixed(0), y: (r
       <linearGradient id="ak-sea" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#2A1E5C" /><stop offset=".25" stop-color="#121A3E" /><stop offset="1" stop-color="#070B18" />
       </linearGradient>
-      <radialGradient id="ak-light"><stop offset="0" stop-color="#FFFFFF" /><stop offset=".25" stop-color="#E9F7FF" stop-opacity=".9" /><stop offset="1" stop-color="#8FB4F6" stop-opacity="0" /></radialGradient>
+      <radialGradient id="ak-light"><stop offset="0" stop-color="#7FD6EE" stop-opacity=".5" /><stop offset=".3" stop-color="#3FA8D8" stop-opacity=".2" /><stop offset="1" stop-color="#1E6FB8" stop-opacity="0" /></radialGradient>
+      <linearGradient id="ak-hz2" x1="0" x2="1"><stop offset=".5" stop-color="#8FB4F6" stop-opacity="0" /><stop offset=".62" stop-color="#8FB4F6" stop-opacity=".3" /><stop offset=".75" stop-color="#E9F7FF" stop-opacity=".7" /><stop offset="1" stop-color="#8FB4F6" stop-opacity="0" /></linearGradient>
+      <linearGradient id="ak-sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05070f" stop-opacity="0" /><stop offset="1" stop-color="#05070f" stop-opacity=".55" /></linearGradient>
       <radialGradient id="ak-door"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95" /><stop offset=".2" stop-color="#CFE6FF" stop-opacity=".6" /><stop offset="1" stop-color="#A996FF" stop-opacity="0" /></radialGradient>
       <linearGradient id="ak-road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9F7FF" stop-opacity=".55" /><stop offset="1" stop-color="#8FB4F6" stop-opacity="0" /></linearGradient>
       <filter id="ak-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" /></filter>
@@ -45,19 +47,22 @@ const stars = Array.from({ length: 70 }, () => ({ x: (r() * W).toFixed(0), y: (r
       return <line x1="0" x2={W} y1={y.toFixed(0)} y2={y.toFixed(0)} stroke="#8FB4F6" stroke-opacity={(0.03 + i * 0.004).toFixed(3)} />;
     })}
 
-    <!-- the door, far away -->
-    <g class="door">
+    <!-- the door, far away, on its own horizon line (lowered so it stays in view) -->
+    <rect x="0" y="300" width={W} height="150" fill="url(#ak-sky2)" />
+    <rect x="0" y="448.5" width={W} height="1.4" fill="url(#ak-hz2)" />
+    <ellipse cx={DX} cy="449" rx="150" ry="6" fill="#E9F7FF" opacity=".22" filter="url(#ak-blur)" />
+    <g transform="translate(0,200)"><g class="door">
       <circle cx={DX} cy={HZ - 14} r="70" fill="url(#ak-door)" />
       <rect x={DX - 4} y={HZ - 30} width="8" height="28" rx="1" fill="#FFFFFF" />
       <polygon class="road" points={`${DX - 4},${HZ} ${DX + 4},${HZ} ${DX + 20},${H} ${DX - 20},${H}`} fill="url(#ak-road)" filter="url(#ak-blur)" />
       <text x={DX} y={HZ - 46} text-anchor="middle" class="far">the work you love</text>
-    </g>
+    </g></g>
 
     <!-- the lights -->
     {lights.map((l) => (
       <g class="lt" style={`animation-delay:-${l.d}s;animation-duration:${l.b}s`}>
         <circle cx={l.x.toFixed(1)} cy={l.y.toFixed(1)} r={(l.s * 4).toFixed(1)} fill="url(#ak-light)" opacity=".55" />
-        <circle cx={l.x.toFixed(1)} cy={l.y.toFixed(1)} r={(l.s * 0.7).toFixed(1)} fill="#FFFFFF" />
+        <circle cx={l.x.toFixed(1)} cy={l.y.toFixed(1)} r={(l.s * 0.7).toFixed(1)} fill="#8FDCF0" fill-opacity=".45" />
         {l.t && <text x={l.x.toFixed(0)} y={(l.y + 22).toFixed(0)} text-anchor="middle" class="word">{l.t}</text>}
       </g>
     ))}
