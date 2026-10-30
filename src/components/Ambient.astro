@@ -1,0 +1,62 @@
+---
+// Quiet weather behind a section (sandbox round 2, 30 Oct 2026). Sits under the content and never takes the eye:
+// slow cloud banks, a few lights drifting up, and, for the feed, a warm haze rising from the bottom edge
+// so the page eases into the sunset instead of arriving at it. mood="work": cool, violet. mood="feed": dusk, rose-lit.
+interface Props { mood?: 'work' | 'feed'; }
+const { mood = 'work' } = Astro.props;
+let seed = mood === 'work' ? 5 : 17;
+const r = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const banks = Array.from({ length: mood === 'work' ? 5 : 6 }, (_, i) => ({
+  x: -10 + r() * 90, y: 4 + (i / 6) * 84 + r() * 8, w: 38 + r() * 40, h: 7 + r() * 8, o: 0.5 + r() * 0.5, dur: 80 + r() * 90, d: -r() * 120, dir: r() < 0.5 ? 'alternate' : 'alternate-reverse',
+}));
+// little clouds drifting in early: cool wisps in the work, rose-lit puffs in the feed, so the sunset's clouds aren't a surprise
+const puffs = Array.from({ length: mood === 'work' ? 4 : 8 }, (_, i) => ({
+  x: 2 + r() * 90, y: mood === 'work' ? 58 + r() * 34 : 50 + (i / 8) * 40 + r() * 4, s: 0.5 + r() * 0.9, o: mood === 'work' ? 0.25 + r() * 0.2 : 0.4 + r() * 0.4, dur: 100 + r() * 90, d: -r() * 140, dir: r() < 0.5 ? 'alternate' : 'alternate-reverse',
+}));
+const lights = Array.from({ length: 12 }, () => ({ x: 3 + r() * 94, y: 30 + r() * 66, s: 1.4 + r() * 2.2, d: -r() * 16, dur: 12 + r() * 10 }));
+---
+<div class={`amb amb-${mood}`} aria-hidden="true">
+  {banks.map((b) => <span class="bank" style={`left:${b.x.toFixed(1)}%;top:${b.y.toFixed(1)}%;width:${b.w.toFixed(1)}%;height:${b.h.toFixed(1)}%;opacity:${b.o.toFixed(2)};animation-duration:${b.dur.toFixed(0)}s;animation-delay:${b.d.toFixed(0)}s;animation-direction:${b.dir}`}></span>)}
+  <svg class="amb-defs" width="0" height="0"><defs>
+    <linearGradient id={`amb-pf-${mood}`} x1="0" y1="0" x2="0" y2="1">{mood === 'work'
+      ? <><stop offset="0" stop-color="#3A3A9A" /><stop offset="1" stop-color="#7A66D6" /></>
+      : <><stop offset="0" stop-color="#8E5090" /><stop offset=".6" stop-color="#F08C8C" /><stop offset="1" stop-color="#FFD0A0" /></>}</linearGradient>
+    <symbol id={`amb-cloud-${mood}`} viewBox="0 0 120 40"><path d="M6 34 C 0 34, 0 26, 9 25 C 8 16, 22 12, 28 19 C 32 8, 52 6, 58 17 C 66 10, 84 12, 86 24 C 98 20, 112 26, 108 34 Z" fill={`url(#amb-pf-${mood})`} /></symbol>
+  </defs></svg>
+  {puffs.map((c) => <svg class="apuff" viewBox="0 0 120 40" style={`left:${c.x.toFixed(1)}%;top:${c.y.toFixed(1)}%;width:${(110 * c.s).toFixed(0)}px;opacity:${c.o.toFixed(2)};animation-duration:${c.dur.toFixed(0)}s;animation-delay:${c.d.toFixed(0)}s;animation-direction:${c.dir}`}><use href={`#amb-cloud-${mood}`} /></svg>)}
+  {mood === 'feed' && <span class="rise"></span>}
+  {mood === 'work' && <span class="meteor"></span>}
+  {lights.map((l) => <i style={`left:${l.x.toFixed(1)}%;top:${l.y.toFixed(1)}%;width:${l.s.toFixed(1)}px;height:${l.s.toFixed(1)}px;animation-delay:${l.d.toFixed(0)}s;animation-duration:${l.dur.toFixed(0)}s`}></i>)}
+</div>
+
+<style>
+  .amb { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .amb-work { --c1: rgba(124, 92, 255, .3); --c2: rgba(127, 216, 240, .1); --li: #A9EAF7; }
+  .amb-feed { --c1: rgba(224, 140, 126, .3); --c2: rgba(138, 76, 142, .26); --li: #F2B48C; }
+
+  .bank { position: absolute; border-radius: 50%; filter: blur(36px);
+    background: radial-gradient(closest-side, var(--c1), var(--c2) 60%, transparent 100%); animation: amb-drift ease-in-out infinite; }
+  @keyframes amb-drift { from { transform: translateX(-7%); } to { transform: translateX(9%); } }
+
+  /* the feed: first light gathering at the bottom edge, the sunset's glow arriving early */
+  .rise { position: absolute; left: -10%; right: -10%; bottom: 0; height: 70%;
+    background: radial-gradient(60% 100% at 50% 100%, rgba(242, 160, 140, .34), rgba(190, 100, 140, .2) 40%, transparent 78%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 66%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 66%, transparent 100%);
+    animation: amb-breathe 12s ease-in-out infinite alternate; }
+  @keyframes amb-breathe { from { opacity: .7; transform: scaleY(.94); } to { opacity: 1; transform: scaleY(1.06); } }
+
+  .amb-defs { position: absolute; }
+  .apuff { position: absolute; height: auto; filter: blur(1px); animation: amb-puff ease-in-out infinite; }
+  @keyframes amb-puff { from { transform: translateX(-36px); } to { transform: translateX(48px); } }
+  @media (max-width: 760px) { .apuff:nth-of-type(n+5) { display: none; } .apuff { max-width: 26vw; } }
+
+  .meteor { position: absolute; left: 70%; top: 12%; width: 150px; height: 1.4px; border-radius: 2px; opacity: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0), #fff 70%, #fff); box-shadow: 0 0 10px rgba(169, 234, 247, .7);
+    transform: rotate(-24deg); animation: amb-meteor 19s ease-in 6s infinite; }
+  @keyframes amb-meteor { 0%, 94% { opacity: 0; transform: rotate(-24deg) translateX(0); } 95% { opacity: .9; } 100% { opacity: 0; transform: rotate(-24deg) translateX(-380px); } }
+
+  .amb i { position: absolute; border-radius: 50%; background: var(--li); box-shadow: 0 0 8px 2px var(--li); opacity: 0; animation: amb-rise 14s ease-in-out infinite; }
+  @keyframes amb-rise { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .55; } 80% { opacity: .3; } 100% { opacity: 0; transform: translate(16px, -140px); } }
+  @media (max-width: 760px) { .amb i:nth-of-type(n+7) { display: none; } .bank:nth-child(n+5) { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .amb * { animation: none !important; } }
+</style>
