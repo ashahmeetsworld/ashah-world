@@ -395,4 +395,15 @@
 .nx .lw-add.on{color:#070B18;background:linear-gradient(90deg,#7FD8F0,#8FB4F6,#A996FF);border-color:transparent}
 .nx .lw-co{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:13px;color:var(--s)}
 .nx .lw-go{color:var(--t);border:1px solid rgba(143,180,246,.45);border-radius:99px;padding:7px 14px;box-shadow:0 0 18px rgba(143,180,246,.25)}
-@media (max-width:860px){.nx .lw{grid-template-columns:1fr}}
+@media (max-width:860px){
+  .nx .lw{grid-template-columns:1fr;gap:22px}
+  .nx .learns .lw-lede{font-size:16px}
+  /* phones: the four steps become one sideways swipe row, moons on a horizontal line */
+  .nx .lw-path{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;gap:12px;margin:0 -16px;padding:0 16px 6px}
+  .nx .lw-path::-webkit-scrollbar{display:none}
+  .nx .lw-path::before{left:16px;right:16px;top:36px;bottom:auto;width:auto;height:1px;background:linear-gradient(90deg,#7FD8F0,#A996FF)}
+  .nx .lw-path li{flex:0 0 72%;scroll-snap-align:start;display:flex;flex-direction:column;padding:14px 16px 16px;border:1px solid rgba(143,180,246,.18);border-radius:14px;background:rgba(8,14,32,.75)}
+  .nx .lw-moon{width:40px;height:40px;margin-bottom:12px;flex:none}
+  .nx .lw-path b{font-size:23px}
+  .nx .lw-r:nth-of-type(3){display:none}
+}
