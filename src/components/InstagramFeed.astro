@@ -8,7 +8,7 @@ const ig = site.socials.find((s) => s.label === 'Instagram')?.url ?? '';
 const handle = ig.replace(/\/+$/, '').split('/').pop() ?? '';
 const feed = (site as { instagramFeedUrl?: string }).instagramFeedUrl ?? '';
 ---
-<div class="strip ig-strip" tabindex="0" aria-label="Latest Instagram posts" data-feed={feed} data-ig={ig}>
+<div class="strip ig-strip" id="feed-row" tabindex="0" aria-label="Latest Instagram posts" data-feed={feed} data-ig={ig}>
   {Array.from({ length: 8 }, (_, i) => (
     <a class="note-card ph" href={ig || undefined} rel="noopener" style={`--i:${i}`} aria-label={`@${handle} on Instagram`}>
       <span class="ph-art" aria-hidden="true"></span>

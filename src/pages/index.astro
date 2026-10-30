@@ -118,7 +118,7 @@ const skills = [
       </div>
       {SHOW_PRISM && <div class="prism-wrap rv"><Prism /></div>}
       </div>
-      <div class="cards">
+      <div class="cards swipe" id="skill-row" aria-label="The four skills">
         {skills.map((s, i) => (
           <article class="card rv" style={`--a:var(${s.key});transition-delay:${i * 90}ms`}>
             <div class="icon"><SkillIcon skill={s.name} /></div>
@@ -129,6 +129,7 @@ const skills = [
           </article>
         ))}
       </div>
+      <div class="dots" data-for="skill-row" aria-hidden="true"></div>
     {SHOW_RELAY && <Relay />}
     </div>
   </section>
@@ -143,11 +144,12 @@ const skills = [
         </div>
         <a class="go" href={u('/work/')}>All work <Arrow /></a>
       </div>
-      <div class={`work-grid${work.length >= 3 ? ' lead' : ' even'}`}>
+      <div class={`work-grid swipe${work.length >= 3 ? ' lead' : ' even'}`} id="work-row" aria-label="Selected work">
         {work.slice(0, 3).map((w, i) => (
           <div class={`rv w${i}`}><WorkCard entry={w} /></div>
         ))}
       </div>
+      <div class="dots" data-for="work-row" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -190,6 +192,7 @@ const skills = [
       {ig && <a class="go" href={ig} rel="noopener">Follow on Instagram <Arrow /></a>}
     </div>
     <InstagramFeed />
+    <div class="wrap"><div class="dots" data-for="feed-row" aria-hidden="true"></div></div>
   </section>
 
   <!-- ─── Meet the world ─── -->
@@ -207,6 +210,42 @@ const skills = [
     <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
   </section>
 </Base>
+
+<script>
+  // Phone swipe rows: a row of dots under each one shows where you are; tap a dot to jump to that card.
+  // The dots only show when the row actually scrolls sideways (phones), so desktop is unchanged.
+  document.querySelectorAll<HTMLElement>('.dots[data-for]').forEach((dots) => {
+    const row = document.getElementById(dots.dataset.for!);
+    if (!row) return;
+    let n = -1;
+    const items = () => Array.from(row.children) as HTMLElement[];
+    const update = () => {
+      const kids = items();
+      const scrolls = row.scrollWidth > row.clientWidth + 4;
+      dots.hidden = !scrolls;
+      if (!scrolls) return;
+      if (kids.length !== n) {
+        n = kids.length;
+        dots.innerHTML = kids.map((_, i) => `<button type="button" tabindex="-1" aria-label="Show card ${i + 1}"><i></i></button>`).join('');
+        dots.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
+          const pad = parseFloat(getComputedStyle(row).scrollPaddingLeft) || 0;
+          row.scrollTo({ left: row.scrollLeft + kids[i].getBoundingClientRect().left - row.getBoundingClientRect().left - pad, behavior: 'smooth' });
+        }));
+      }
+      const pad = parseFloat(getComputedStyle(row).scrollPaddingLeft) || 0;
+      const edge = row.getBoundingClientRect().left + pad;
+      const atEnd = row.scrollLeft >= row.scrollWidth - row.clientWidth - 4;
+      let active = 0, best = Infinity;
+      kids.forEach((k, i) => { const d = Math.abs(k.getBoundingClientRect().left - edge); if (d < best) { best = d; active = i; } });
+      if (atEnd) active = n - 1;
+      dots.querySelectorAll('button').forEach((b, i) => b.classList.toggle('on', i === active));
+    };
+    row.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    new MutationObserver(update).observe(row, { childList: true });
+    update();
+  });
+</script>
 
 <style>
   /* hero */
@@ -322,11 +361,35 @@ const skills = [
     .stack li:nth-child(2) { border-right: 0; }
     .stack li:nth-child(n + 3) { border-top: 1px solid var(--line); }
   }
+  /* swipe dots: hidden until a row scrolls sideways (phones) */
+  .dots { display: flex; justify-content: center; gap: 2px; margin-top: 18px; }
+  .dots[hidden] { display: none; }
+  .dots :global(button) { width: 26px; height: 26px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+  .dots :global(i) { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); opacity: .5; transition: width .4s var(--ease), background .4s, opacity .4s, box-shadow .4s; }
+  .dots :global(button.on i) { width: 22px; border-radius: 3px; background: var(--peach); opacity: 1; box-shadow: 0 0 10px rgba(242, 180, 140, .55); }
+
   @media (max-width: 760px) {
     .grid-2 { grid-template-columns: 1fr; }
-    .work-grid { grid-template-columns: 1fr; }
-    .work-grid .w0 { grid-row: auto; }
-    .cards, .stack { grid-template-columns: 1fr; }
+    .stack { grid-template-columns: 1fr; }
+    /* Phones: the skill cards, the work and the feed each become one swipe row, so every section reads as its own room.
+       Headlines stay put; only the cards move sideways. The next card peeks in from the edge so it's clear there's more. */
+    .swipe { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; gap: 14px;
+      overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+      margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+    .swipe::-webkit-scrollbar { display: none; }
+    .swipe > * { scroll-snap-align: start; scroll-snap-stop: always; min-width: 0; }
+    .work-grid.swipe { gap: 16px; }
+    .work-grid.lead .w0 { grid-row: auto; }
+    .work-grid :global(.frame) { aspect-ratio: 4 / 5 !important; }
+    .card { padding: 26px 22px 28px; }
+    .notes :global(.strip) { grid-auto-columns: 72%; gap: 12px; scrollbar-width: none; padding-bottom: 0; }
+    .notes :global(.strip::-webkit-scrollbar) { display: none; }
+    /* a soft line of light marks where each section begins */
+    .skills, .work, .notes { position: relative; }
+    .skills::before, .work::before, .notes::before { content: ''; position: absolute; top: 0; left: 50%; width: 64%; height: 1px; transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(242, 180, 140, .5), transparent); box-shadow: 0 0 18px rgba(242, 180, 140, .35); }
+    .pad.skills, .pad.work, .pad.notes { padding-block: 64px; }
+    .row-head, .head, .skills-top { margin-bottom: 30px; }
     .stack li { border-right: 0; border-top: 1px solid var(--line); }
     .indent { padding-left: 0; }
     .panel { padding: 24px; }
