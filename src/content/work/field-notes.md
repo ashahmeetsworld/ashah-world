@@ -5,7 +5,7 @@ client: Ashah Meets World
 year: 2026
 skill: Ecosystem Design
 role: Concept, art direction, copy, illustration, content system
-cover: /images/notes/01-kill-80-percent.webp
+cover: /images/work/field-notes/18-01.webp
 coverRatio: portrait
 featured: true
 order: 1
