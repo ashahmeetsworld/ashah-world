@@ -65,3 +65,6 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - The offer's landing page is a standalone file: `public/passage/index.html` (served at /passage/). No site header, footer or mobile nav; the A·M·W mark is the only way back. It's generated outside this repo (Business Development project, `passage/source/build_final.py`), so edit the generator, not the HTML, when you can.
 - Links: header nav (first, then Orbit, then the white links) and footer second row, left of Orbit. Look: nocturnal blue-violet text gradient (`.passage-link`), a counterpoint to Orbit's aurora.
 - Applications post to Formspree (`https://formspree.io/f/xqpeqoab`, same as the contact form; emails Ashah, subject "Passage application: <brand>") and, in parallel, to the Google Apps Script relay ("Passage relay", bound to the Sheet "Passage applications (from ashah.world)"), which appends a row. A scheduled Claude task copies new rows into the Notion board "Passage applications" in NEW Central Hub.
+
+## Field Notes (31 Oct 2026)
+- Field Notes images load live from Instagram (`src/lib/feed.ts`, `src/lib/live.ts`): carousel posts, newest first. The series ends with the November 2026 posts, so carousels posted from 1 Dec 2026 (Melbourne) are never counted (`FIELD_NOTES_END`).
