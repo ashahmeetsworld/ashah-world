@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en-AU" data-home="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Passage by A·M·W</title>
+<meta name="description" content="Passage by A·M·W. For creative, culture-led founders and brands. A day at the threshold, then a season side by side to make your next drop the one you always thought it would be.">
+<meta property="og:title" content="Passage by A·M·W">
+<meta property="og:description" content="For creative, culture-led founders and brands.">
+<meta name="theme-color" content="#070B18">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--night:#070B18;--deep:#0C1230;--line:#2E3566;--cream:#FFF6EC;--text:#F6F1E7;--soft:#C9C4DA;--muted:#8E8AA8;--aqua:#7FD8F0;--peach:#F2B48C;--mint:#B5F0D2;--violet:#C9BCFF;
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--night);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.5;margin:0}
+p,h1,h2,h3{margin:0}
+.wrap{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));max-width:1440px;margin:0 auto}
+.eyebrow{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--aqua);font-weight:500}
+.eyebrow.dim{color:var(--muted)}
+.title{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--cream);line-height:1.08;text-wrap:balance}
+.sub{color:var(--soft);font-size:19px;max-width:38ch}
+.peach{color:var(--peach)}.aqua{color:var(--aqua)}.mint{color:var(--mint)}.violet{color:var(--violet)}.muted{color:var(--muted)}.soft{color:var(--soft)}
+.btn{display:inline-block;padding:16px 28px;border-radius:999px;background:var(--cream);color:var(--night);text-decoration:none;font-weight:500;font-size:15px;letter-spacing:.04em;box-shadow:0 0 40px rgba(242,180,140,.35)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding-block:18px;background:linear-gradient(var(--night),rgba(7,11,24,0))}
+.nav .mark{letter-spacing:.3em;font-size:14px;color:var(--soft)}
+.nav a.btn{padding:10px 20px;font-size:13px}
+.key .k-small,.k-small{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.k-title{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--cream);line-height:1.15}
+.k-text{color:var(--soft);font-size:16px}
+.k-price{font-family:var(--serif);font-style:italic;font-size:64px;line-height:1;color:var(--peach)}
+.keys{display:grid;gap:28px}
+.keys .key{display:flex;flex-direction:column;gap:6px;min-width:0}
+.foot{color:var(--muted);font-size:14px}
+.root{display:flex;flex-direction:column;gap:10px}
+.short{padding-block:120px;background:radial-gradient(circle at 50% 0%,#16224F 0%,var(--night) 55%)}
+.short .wrap{display:flex;flex-direction:column;gap:64px}
+.band{display:flex;flex-direction:column;gap:28px}
+.band-title{font-family:var(--serif);font-style:italic;font-weight:500;font-size:56px;color:var(--cream)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.card{display:flex;flex-direction:column;gap:12px}
+.card .mini{width:100%;height:auto;aspect-ratio:520/280;display:block}
+.card-line{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.2;color:var(--text)}
+.final{padding-block:140px 40px;background:radial-gradient(circle at 80% 60%,#22175A 0%,var(--night) 55%)}
+.final-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.final-copy{display:flex;flex-direction:column;gap:22px}
+.final .title{font-size:72px}
+.final .mini{width:100%;height:auto;aspect-ratio:520/280}
+.dm{color:var(--soft)}.dm span{color:var(--cream);user-select:all}
+.footer{display:flex;justify-content:space-between;margin-top:120px;padding-block:24px;color:var(--muted);letter-spacing:.3em;font-size:13px;border-top:1px solid var(--line)}
+@media (max-width:760px){.cards,.final-grid{grid-template-columns:1fr}.final .title{font-size:44px}.band-title{font-size:40px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.scene{position:relative;container-type:inline-size;width:100%}
+.art{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+.art .art-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.o{position:absolute;margin:0}
+.lbl{font-size:max(10px,1.25cqw);letter-spacing:.2em;text-transform:uppercase}
+.c{text-align:center}.r{text-align:right}.l{text-align:left}
+.num{font-family:var(--serif);font-style:italic;font-size:2.9cqw;line-height:1;color:var(--soft)}
+.num.hi{color:var(--cream)}
+.okey{display:flex;flex-direction:column;gap:.4cqw}
+.okey.c{align-items:center}.okey.r{align-items:flex-end}
+.o-title{font-family:var(--serif);font-style:italic;font-size:2.3cqw;color:var(--cream);line-height:1.15}
+.o-text{font-size:1.25cqw;color:var(--soft);line-height:1.4}
+.o-small{font-size:max(10px,1.25cqw);letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.o-price{font-family:var(--serif);font-style:italic;font-size:6.25cqw;line-height:1;color:var(--peach)}
+.copy{position:absolute;left:6.667%;top:11.85%;width:62%;display:flex;flex-direction:column;gap:1.1cqw}
+.copy .eyebrow{font-size:max(11px,1.25cqw)}
+.copy .title{font-size:3.75cqw}
+.copy .title.big{font-size:5cqw}
+.copy .sub{font-size:1.67cqw;max-width:none}
+.rootpos{position:absolute;left:6.667%;top:76.8%;width:70%}
+.rootpos .eyebrow{font-size:max(11px,1.25cqw)}
+.rootpos .title{font-size:3.75cqw}
+.footpos{position:absolute;left:6.667%;top:88.9%;width:86%;font-size:max(11px,1.25cqw)}
+.hero .copy{top:auto;bottom:11.85%}
+.hero .hero-title{font-family:var(--serif);font-style:italic;font-weight:500;font-size:11.5cqw;line-height:1;color:var(--cream)}
+.hero .hero-sub{font-family:var(--serif);font-style:italic;font-size:2.3cqw;color:#E9E3F2}
+.hero .nav{position:absolute;top:0;left:0;right:0}
+@media (max-width:760px){
+ .copy,.rootpos,.footpos{position:static;width:auto!important;padding:28px max(20px,env(safe-area-inset-left,0px)) 16px}
+ .copy .title{font-size:34px}.copy .title.big{font-size:40px}.copy .sub{font-size:17px}
+ .rootpos .title{font-size:30px}
+ .scene{display:flex;flex-direction:column}
+ .copy{order:1}.art{order:2}.rootpos{order:3}.footpos{order:5;font-size:13px}
+ .okey,.num{display:none}
+ .mkeys{display:grid!important;order:4;padding:20px max(20px,env(safe-area-inset-left,0px));grid-template-columns:1fr 1fr}
+ .hero .copy{order:2}.hero .hero-title{font-size:72px}.hero .hero-sub{font-size:20px}
+}
+.mkeys{display:none}
+
+
+a.mark{color:inherit;text-decoration:none}
+.float-apply.float-apply{gap:14px;padding:12px 26px 12px 20px;background:linear-gradient(110deg,#FFF6EC,#F2B48C);border:none;color:#140A0E;font-weight:500;box-shadow:0 0 0 1px rgba(255,246,236,.35),0 10px 40px rgba(242,180,140,.45),0 0 90px rgba(224,140,126,.3)}
+.float-apply.show{animation:fa-breathe 3.2s ease-in-out infinite}
+.float-apply.float-apply::before{background:linear-gradient(#5A3B8E,#22175A);box-shadow:none;width:9px;height:16px}
+.float-apply span{display:block}
+.float-apply .fa-main{font-size:15px;letter-spacing:.14em}
+.float-apply .fa-sub{font-size:11px;letter-spacing:.08em;text-transform:none;opacity:.75;margin-top:2px}
+.float-apply{flex-direction:row}
+.float-apply .fa-wrap{display:flex;flex-direction:column}
+.float-apply:hover{box-shadow:0 0 0 1px rgba(255,246,236,.5),0 10px 50px rgba(242,180,140,.65),0 0 120px rgba(224,140,126,.4)}
+@keyframes fa-breathe{0%,100%{box-shadow:0 0 0 1px rgba(255,246,236,.35),0 10px 40px rgba(242,180,140,.4),0 0 80px rgba(224,140,126,.25)}50%{box-shadow:0 0 0 1px rgba(255,246,236,.5),0 10px 55px rgba(242,180,140,.7),0 0 130px rgba(224,140,126,.45)}}
+@media (prefers-reduced-motion:reduce){.float-apply.show{animation:none}}
+@media (max-width:760px){.float-apply.float-apply{left:50%;right:auto;transform:translate(-50%,16px);bottom:calc(18px + env(safe-area-inset-bottom,0px))}.float-apply.float-apply.show{transform:translate(-50%,0)}}
+
+
+.copy.skyR{left:52%;width:41%}
+.copy .root{display:flex;flex-direction:column;gap:.8cqw;padding-top:1.6cqw;margin-top:.6cqw;border-top:1px solid rgba(46,53,102,.8)}
+.copy .root .eyebrow{font-size:max(11px,1.1cqw)}
+.copy .root .title{font-size:2.6cqw}
+#guarantee .footpos{top:90%;color:var(--muted)}
+.prices{display:grid;grid-template-columns:1fr 1px 1fr;column-gap:clamp(32px,6vw,112px);padding-top:clamp(8px,1vw,16px);padding-bottom:clamp(64px,8vw,128px);position:relative;z-index:1}
+.pcol{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pdiv{background:linear-gradient(to bottom,rgba(127,216,240,0),rgba(127,216,240,.45),rgba(127,216,240,0))}
+.p-step{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--peach)}
+.pcol:last-child .p-step{color:var(--aqua)}
+.p-price{font-family:var(--serif);font-style:italic;font-size:clamp(56px,6vw,96px);line-height:1;color:var(--peach);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.p-price.moon{color:var(--cream)}
+.p-price span{font-family:var(--sans);font-style:normal;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.p-name{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(28px,2.4vw,38px);color:var(--cream);line-height:1.1;margin-top:6px}
+.p-line{color:var(--soft);font-size:17px;line-height:1.55;max-width:38ch}
+.p-terms{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.p-terms li{position:relative;padding-left:22px;font-size:15px;color:var(--cream)}
+.p-terms li::before{content:"";position:absolute;left:0;top:.5em;width:7px;height:7px;border-radius:50%;background:var(--peach);box-shadow:0 0 10px rgba(242,180,140,.7)}
+.pcol:last-child .p-terms li::before{background:var(--aqua);box-shadow:0 0 10px rgba(127,216,240,.7)}
+.scene.invest .art{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%)}
+@media (min-width:761px){.scene.invest+.prices{margin-top:-9vw}}
+@media (max-width:760px){.prices{grid-template-columns:1fr;row-gap:40px}.pdiv{height:1px;background:linear-gradient(to right,rgba(127,216,240,0),rgba(127,216,240,.45),rgba(127,216,240,0))}.copy.skyR{width:auto}.copy .root .title{font-size:28px}.copy .root .eyebrow{font-size:12px}.copy .root{gap:8px;padding-top:16px;margin-top:8px}}
+
+.wrap{max-width:none;padding-left:max(24px,6.667vw,env(safe-area-inset-left,0px));padding-right:max(24px,6.667vw,env(safe-area-inset-right,0px))}
+.hero .nav{padding-left:max(24px,6.667vw,env(safe-area-inset-left,0px));padding-right:max(24px,6.667vw,env(safe-area-inset-right,0px))}
+.split{gap:6.667vw;padding-block:clamp(40px,5vw,80px)}
+.text{gap:20px}
+.text .keys{column-gap:32px;row-gap:24px}
+.footer{margin-top:0}
+.copy .eyebrow,.rootpos .eyebrow{font-size:13px}
+.scene .art{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 80%,transparent 100%)}
+.scene.hero .art{-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0,#000 78%,transparent 100%)}
+.plate .art-svg{border-radius:0;box-shadow:none;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);mask-composite:intersect}
+.footer{border-top:none}
+.deeper{max-width:52ch}
+.deeper summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--aqua);padding-block:6px}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary::before{content:"";width:18px;height:18px;border-radius:50%;border:1px solid currentColor;background:radial-gradient(circle,currentColor 0 2px,transparent 3px);transition:transform .4s ease,box-shadow .4s ease}
+.deeper[open] summary::before{box-shadow:0 0 18px rgba(127,216,240,.6);transform:scale(1.1)}
+.deeper summary:focus-visible{outline:2px solid var(--aqua);outline-offset:4px;border-radius:4px}
+.deeper p{color:var(--soft);font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.4;padding-top:10px}
+.copy .deeper p{font-size:max(17px,1.5cqw)}
+.terms{list-style:none;margin:0;padding:12px 0 0;display:flex;flex-direction:column}
+.terms li{display:grid;grid-template-columns:9.5em 1fr;gap:16px;padding:12px 0;border-bottom:1px solid rgba(46,53,102,.7);font-size:16px;color:var(--soft)}
+.terms li:first-child{border-top:1px solid rgba(46,53,102,.7)}
+.terms li span:first-child{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);padding-top:3px}
+#apply .copy{width:52%}
+@media (max-width:860px){.split .plate{order:-1}}
+.text .keys.list{display:flex;flex-direction:column;gap:0;position:relative;padding-left:4px}
+.keys.list .key{position:relative;padding:0 0 26px 40px;gap:4px}
+.keys.list .key:last-child{padding-bottom:0}
+.keys.list .key::before{content:"";position:absolute;left:0;top:4px;width:12px;height:12px;border-radius:50%;background:var(--peach);box-shadow:0 0 14px rgba(242,180,140,.8)}
+.keys.list .key:not(:first-child)::before{background:#3A3F66;box-shadow:none;border:1px solid #6A6F94;width:10px;height:10px}
+.keys.list .key:not(:last-child)::after{content:"";position:absolute;left:5.5px;top:22px;bottom:4px;border-left:1px dashed #4A5288}
+.keys.list .k-small{color:var(--muted);font-size:12px}
+.keys.list .k-title{font-size:34px;line-height:1.15}
+.text .keys.n2{grid-template-columns:auto auto;justify-content:start;column-gap:56px}
+.text .keys.n2 .k-small{white-space:nowrap}
+@media (max-width:560px){.text .keys.n2{grid-template-columns:1fr}}
+.tiers{display:flex;flex-direction:column;gap:0;padding-top:8px}
+.tier{display:grid;grid-template-columns:7.2em 1fr;gap:24px;align-items:start;padding:22px 0;border-top:1px solid rgba(46,53,102,.8)}
+.tier:last-child{border-bottom:1px solid rgba(46,53,102,.8)}
+.tier-price{font-family:var(--serif);font-style:italic;font-size:52px;line-height:1;color:var(--peach);white-space:nowrap}
+.tier-price span{display:block;font-size:16px;font-style:normal;font-family:var(--sans);letter-spacing:.08em;color:var(--soft);margin-top:8px}
+.tier-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.tier-step{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.tier-name{font-family:var(--serif);font-style:italic;font-weight:500;font-size:32px;color:var(--cream);line-height:1.1}
+.tier-line{color:var(--soft);font-size:16px;line-height:1.5}
+.tier-credit{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:14px;color:var(--aqua);border-top:1px solid rgba(46,53,102,.8)}
+.tier-credit::before{content:"↓";font-size:16px}
+@media (max-width:560px){.tier{grid-template-columns:1fr;gap:10px}.tier-price{font-size:44px}}
+.split .plate{align-self:start}
+@media (min-width:861px){.split .plate .art-svg{height:100%;aspect-ratio:auto}}
+.split .text{gap:18px}
+@media (max-width:760px){.scene .art .lbl{display:none}.mkeys{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;text-align:center}.mkeys .k-title{font-size:21px}.mkeys .k-small{font-size:10px;letter-spacing:.18em}}
+.deeppos{position:absolute;right:6.667%;top:11.85%;width:30%;z-index:2}
+.deeppos .deeper p{font-size:20px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:760px){.deeppos{position:static;width:auto;order:3;padding:16px max(20px,env(safe-area-inset-left,0px)) 0}.terms li{grid-template-columns:7.5em 1fr}}
+.split,.how{position:relative;isolation:isolate}
+.split::before,.how::before{content:"";position:absolute;inset:-6% 0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(9,13,32,.96) 0%,rgba(9,13,32,.85) 45%,rgba(7,11,24,0) 100%)}
+.text,.how-head{text-shadow:0 1px 18px rgba(7,11,24,.8)}
+#sky{opacity:.75;position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+body>section,body>footer,body>nav{position:relative;z-index:1}
+.float-apply{position:fixed;z-index:20;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;background:rgba(12,18,48,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(242,180,140,.45);color:var(--cream);text-decoration:none;font-size:14px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 0 40px rgba(242,180,140,.25);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .5s ease,transform .5s ease}
+.float-apply::before{content:"";width:8px;height:14px;border-radius:1px;background:linear-gradient(#FFF6EC,#F2B48C);box-shadow:0 0 12px #F2B48C}
+.float-apply.show{opacity:1;transform:none;pointer-events:auto}
+.float-apply:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+.how{padding-block:clamp(40px,5.5vw,88px);display:flex;flex-direction:column;gap:56px}
+.how-head{display:flex;flex-direction:column;gap:20px}
+.how-head .title{font-size:56px}
+.how-grid{display:grid;grid-template-columns:1fr 64px 3fr;align-items:start;gap:0}
+.how .k-title{font-weight:500}
+.how-thr{padding-top:104px}
+.how-umbrella{height:96px;justify-content:flex-end}
+.how-thr,.how-act{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
+.how-door,.how-moon{width:min(200px,100%);height:auto;aspect-ratio:1}
+.how-link{height:0;border-top:2px dotted #6A6F94;margin-top:204px;opacity:.8}
+.how-season{display:flex;flex-direction:column;gap:8px;min-width:0}
+.how-umbrella{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative}
+.how-umbrella .k-small{order:-1}
+.how-arc{width:100%;height:56px;display:block}
+.how-acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.how-rhythm{color:var(--soft);font-family:var(--serif);font-style:italic;font-size:24px;max-width:none}
+@media (max-width:760px){.how-grid{grid-template-columns:1fr;gap:28px}.how-thr{padding-top:0}.how-link{display:none}.how-acts{grid-template-columns:1fr}.how-head .title{font-size:38px}.how-door,.how-moon{width:150px}}
+@media (max-width:760px){.wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}.hero .nav{padding-left:20px;padding-right:20px}}
+.split{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:start;padding-block:120px}
+.split.flip{grid-template-columns:7fr 5fr}
+.split.flip .text{order:2}
+.text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.text .title{font-size:52px}
+.text .title.big{font-size:60px}
+.text .keys{grid-template-columns:1fr 1fr}
+.text .root{padding-top:18px;border-top:1px solid var(--line)}
+.text .root .title{font-size:38px}
+.text .k-price{font-size:60px}
+.plate{position:relative;min-width:0;container-type:inline-size}
+.plate .art-svg{width:100%;height:auto;aspect-ratio:16/9;display:block;border-radius:4px;box-shadow:0 40px 120px rgba(0,0,0,.55)}
+.plate .lbl{font-size:max(10px,1.6cqw)}
+.scene.statement .copy{width:60%}
+@media (max-width:860px){.split,.split.flip{grid-template-columns:1fr;gap:28px;padding-block:64px}.split.flip .text{order:0}.text .title,.text .title.big{font-size:36px}}
+.ap[hidden]{display:none}
+.ap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,7,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:apin .5s ease}
+@keyframes apin{from{opacity:0}to{opacity:1}}
+.ap-glow{position:absolute;left:50%;bottom:-30vh;width:120vh;height:80vh;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(242,180,140,.22),rgba(242,180,140,0) 65%);pointer-events:none}
+.ap-close{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));right:max(20px,env(safe-area-inset-right,0px));background:none;border:1px solid var(--line);color:var(--soft);border-radius:999px;padding:10px 18px;font:inherit;font-size:13px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.ap-form{position:relative;width:min(720px,100%);display:flex;flex-direction:column;gap:28px}
+.ap-step{display:flex;flex-direction:column;gap:20px;animation:apstep .45s ease}
+@keyframes apstep{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ap-q{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.12;color:var(--cream);text-wrap:balance}
+.ap-in{width:100%;background:transparent;border:none;border-bottom:1px solid #3A3F66;color:var(--text);font:inherit;font-size:22px;padding:12px 2px;outline:none;resize:vertical;transition:border-color .3s}
+.ap-in.small{font-size:17px}
+.ap-in:focus{border-bottom-color:var(--peach)}
+.ap-in::placeholder{color:#5E6288}
+.ap-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ap-choices label{cursor:pointer}
+.ap-choices input{position:absolute;opacity:0;pointer-events:none}
+.ap-choices span{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:12px;color:var(--soft);transition:all .25s}
+.ap-choices input:checked+span{border-color:var(--peach);color:var(--cream);box-shadow:0 0 30px rgba(242,180,140,.25)}
+.ap-choices input:focus-visible+span{outline:2px solid var(--aqua);outline-offset:2px}
+.ap-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ap-nav .btn{border:none;cursor:pointer;font:inherit;font-size:15px}
+.ap-nav .btn.ghost{border:1px solid var(--line)}
+.ap-hint{color:var(--muted);font-size:13px}
+.ap-error{color:var(--peach);font-size:15px;min-height:1.2em}
+.ap-note{color:var(--soft);font-size:19px}.ap-note.dim{color:var(--muted);font-size:15px}.ap-note a{color:var(--aqua)}
+.ap-progress{display:flex;gap:10px}
+.ap-progress span{width:8px;height:8px;border-radius:50%;background:#2E3566;transition:all .4s}
+.ap-progress span.on{background:var(--peach);box-shadow:0 0 12px var(--peach)}
+@media (max-width:560px){.ap-choices{grid-template-columns:1fr}.ap-hint{display:none}}
+</style>
+</head>
+<body>
+
+<section class="scene hero"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A lit doorway on a night shoreline, a small figure standing in its light" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.6" stop-color="#101845"/><stop offset="1" stop-color="#2A1B62"/></linearGradient>
+<linearGradient id="hero-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="hero-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.6"/><stop offset="0.35" stop-color="#E08C7E" stop-opacity="0.2"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<linearGradient id="hero-door" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6EC"/><stop offset="1" stop-color="#F2B48C"/></linearGradient>
+<linearGradient id="hero-spill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.4"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<radialGradient id="hero-vig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.7"/></radialGradient>
+</defs>
+<rect width="1920" height="780" fill="url(#hero-sky)"/>
+<rect y="780" width="1920" height="300" fill="url(#hero-sea)"/>
+<rect y="730" width="1920" height="60" fill="#8FB4F6" opacity="0.06"/>
+<g fill="#F6F1E7">
+<circle cx="140" cy="90" r="1.6" opacity="0.7"/><circle cx="310" cy="210" r="1.2" opacity="0.5"/><circle cx="520" cy="70" r="1.8" opacity="0.8"/><circle cx="690" cy="260" r="1.1" opacity="0.4"/><circle cx="860" cy="130" r="1.4" opacity="0.6"/><circle cx="1010" cy="300" r="1" opacity="0.4"/><circle cx="1150" cy="80" r="1.6" opacity="0.7"/><circle cx="1290" cy="190" r="1.2" opacity="0.5"/><circle cx="1480" cy="110" r="2" opacity="0.8"/><circle cx="1630" cy="250" r="1.2" opacity="0.5"/><circle cx="1790" cy="60" r="1.5" opacity="0.6"/><circle cx="1860" cy="330" r="1" opacity="0.4"/><circle cx="420" cy="360" r="1" opacity="0.35"/><circle cx="780" cy="400" r="1.2" opacity="0.35"/><circle cx="1720" cy="420" r="1.1" opacity="0.35"/><circle cx="230" cy="470" r="1" opacity="0.3"/><circle cx="1100" cy="460" r="1" opacity="0.3"/><circle cx="960" cy="40" r="1.3" opacity="0.6"/>
+</g>
+<circle cx="1460" cy="680" r="460" fill="url(#hero-glow)"/>
+<polygon points="1400,780 1520,780 1700,1080 1220,1080" fill="url(#hero-spill)"/>
+<g fill="#F2B48C">
+<rect x="1430" y="808" width="70" height="3" opacity="0.5"/><rect x="1405" y="842" width="110" height="3" opacity="0.4"/><rect x="1440" y="880" width="60" height="3" opacity="0.45"/><rect x="1380" y="925" width="150" height="4" opacity="0.3"/><rect x="1450" y="972" width="90" height="4" opacity="0.3"/><rect x="1350" y="1030" width="200" height="4" opacity="0.2"/>
+</g>
+<rect x="1400" y="560" width="120" height="220" fill="url(#hero-door)"/>
+<rect x="1392" y="552" width="136" height="228" fill="none" stroke="#2A1B62" stroke-width="8"/>
+<g fill="#05070F">
+<circle cx="1458" cy="722" r="7"/>
+<path d="M1450 731 h16 l3 30 h-5 l-2 19 h-4 l-1 -16 l-1 16 h-4 l-2 -19 h-5 z"/>
+</g>
+<rect width="1920" height="1080" fill="url(#hero-vig)"/>
+</svg></div><nav class="nav wrap"><a class="mark" href="../" aria-label="A·M·W home">A·M·W</a><a class="btn" href="#apply">Apply</a></nav><div class="copy"><p class="eyebrow">An offer by A·M·W</p><h1 class="hero-title">Passage</h1><p class="hero-sub">For creative, culture-led founders and brands.</p><div class="ctas"><a class="btn" href="#apply">Apply for a mini-Threshold</a><a class="btn ghost" href="#how">How it works</a></div></div></section><section class="scene" id="problem"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A single firework bursts over the sea on launch day, then the sky to the right stays dark and empty" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="problem-psky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.7" stop-color="#0E1438"/><stop offset="1" stop-color="#1A1550"/></linearGradient>
+<linearGradient id="problem-psea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1030"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="problem-pglow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFF6EC" stop-opacity="0.7"/><stop offset="0.25" stop-color="#F2B48C" stop-opacity="0.35"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<linearGradient id="problem-pref" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.5"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<radialGradient id="problem-pvig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.7"/></radialGradient>
+</defs>
+<rect width="1920" height="780" fill="url(#problem-psky)"/>
+<rect y="780" width="1920" height="300" fill="url(#problem-psea)"/>
+<g fill="#F6F1E7"><circle cx="1210" cy="140" r="1.2" opacity="0.4"/><circle cx="1420" cy="260" r="1" opacity="0.3"/><circle cx="1650" cy="120" r="1.4" opacity="0.4"/><circle cx="1800" cy="380" r="1" opacity="0.3"/><circle cx="1320" cy="480" r="1" opacity="0.25"/><circle cx="1560" cy="560" r="1.1" opacity="0.25"/><circle cx="1740" cy="620" r="1" opacity="0.2"/></g>
+<circle cx="560" cy="470" r="330" fill="url(#problem-pglow)"/>
+<g stroke="#F2B48C" stroke-width="3" stroke-linecap="round" opacity="0.85">
+<line x1="600" y1="470" x2="760" y2="470"/><line x1="597" y1="485" x2="745" y2="547"/><line x1="588" y1="498" x2="701" y2="611"/><line x1="575" y1="507" x2="637" y2="655"/><line x1="560" y1="510" x2="560" y2="670"/><line x1="545" y1="507" x2="483" y2="655"/><line x1="532" y1="498" x2="419" y2="611"/><line x1="523" y1="485" x2="375" y2="547"/><line x1="520" y1="470" x2="360" y2="470"/><line x1="523" y1="455" x2="375" y2="393"/><line x1="532" y1="442" x2="419" y2="329"/><line x1="545" y1="433" x2="483" y2="285"/><line x1="560" y1="430" x2="560" y2="270"/><line x1="575" y1="433" x2="637" y2="285"/><line x1="588" y1="442" x2="701" y2="329"/><line x1="597" y1="455" x2="745" y2="393"/>
+</g>
+<g fill="#FFF6EC"><circle cx="560" cy="470" r="10"/><circle cx="772" cy="470" r="4"/><circle cx="756" cy="551" r="4"/><circle cx="710" cy="620" r="4"/><circle cx="642" cy="667" r="4"/><circle cx="560" cy="682" r="4"/><circle cx="478" cy="667" r="4"/><circle cx="410" cy="620" r="4"/><circle cx="364" cy="551" r="4"/><circle cx="348" cy="470" r="4"/><circle cx="364" cy="389" r="4"/><circle cx="410" cy="320" r="4"/><circle cx="478" cy="273" r="4"/><circle cx="560" cy="258" r="4"/><circle cx="642" cy="273" r="4"/><circle cx="710" cy="320" r="4"/><circle cx="756" cy="389" r="4"/></g>
+<polygon points="520,782 600,782 680,1080 440,1080" fill="url(#problem-pref)"/>
+<g fill="#F2B48C"><rect x="510" y="810" width="100" height="3" opacity="0.6"/><rect x="480" y="850" width="160" height="3" opacity="0.4"/><rect x="520" y="895" width="80" height="3" opacity="0.5"/></g>
+<line x1="128" y1="960" x2="1792" y2="960" stroke="#2E3566" stroke-width="2"/>
+<circle cx="560" cy="960" r="7" fill="#F2B48C"/>
+<g fill="#3A3F66"><circle cx="1000" cy="960" r="5"/><circle cx="1300" cy="960" r="5"/><circle cx="1600" cy="960" r="5"/></g>
+<rect width="1920" height="1080" fill="url(#problem-pvig)"/>
+</svg><p class="o lbl peach c" style="left:21.354%;top:91.111%;width:15.625%">Launch day</p><p class="o lbl muted c" style="left:59.896%;top:91.111%;width:31.250%">The weeks after</p></div><div class="copy skyR"><p class="eyebrow">Sound familiar?</p><h2 class="title">“I thought this would be the one. Why can’t I crack it?”</h2><p class="sub">World-class product. A launch that flares, and then nothing is left behind.</p><div class="root"><p class="eyebrow dim">The root cause</p><p class="title">Your drops don’t touch culture.</p></div></div></section><section class="scene statement" id="promise"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A small lantern on the left shore and, three months across the water, a lighthouse sweeping its beam over the night" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="promise-rsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.7" stop-color="#101845"/><stop offset="1" stop-color="#22175A"/></linearGradient>
+<linearGradient id="promise-rsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="promise-rlamp" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFF6EC" stop-opacity="0.95"/><stop offset="0.2" stop-color="#F2B48C" stop-opacity="0.5"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<radialGradient id="promise-rlan" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.6"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></radialGradient>
+<linearGradient id="promise-rbeamR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF6EC" stop-opacity="0.45"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<linearGradient id="promise-rbeamL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#FFF6EC" stop-opacity="0.3"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<linearGradient id="promise-rtower" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A2F55"/><stop offset="1" stop-color="#121633"/></linearGradient>
+<linearGradient id="promise-rref" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.45"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<radialGradient id="promise-rvig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.65"/></radialGradient>
+</defs>
+<rect width="1920" height="780" fill="url(#promise-rsky)"/>
+<rect y="780" width="1920" height="300" fill="url(#promise-rsea)"/>
+<g fill="#F6F1E7"><circle cx="1150" cy="110" r="1.4" opacity="0.6"/><circle cx="1350" cy="200" r="1.1" opacity="0.4"/><circle cx="1700" cy="90" r="1.6" opacity="0.6"/><circle cx="1840" cy="240" r="1" opacity="0.4"/><circle cx="420" cy="420" r="1" opacity="0.3"/><circle cx="900" cy="380" r="1.1" opacity="0.35"/><circle cx="200" cy="520" r="1" opacity="0.3"/></g>
+<polygon points="1500,392 1920,250 1920,470 1500,410" fill="url(#promise-rbeamR)"/>
+<polygon points="1500,398 860,450 860,560 1500,410" fill="url(#promise-rbeamL)"/>
+<circle cx="1500" cy="400" r="280" fill="url(#promise-rlamp)"/>
+<path d="M1400 790 Q1420 760 1470 762 L1560 760 Q1610 764 1630 790 Z" fill="#05070F"/>
+<polygon points="1470,762 1530,762 1518,420 1482,420" fill="url(#promise-rtower)"/>
+<rect x="1478" y="380" width="44" height="40" fill="#FFF6EC"/>
+<polygon points="1470,382 1530,382 1500,350" fill="#121633"/>
+<rect x="1474" y="418" width="52" height="6" fill="#121633"/>
+<polygon points="1470,792 1530,792 1600,1080 1400,1080" fill="url(#promise-rref)"/>
+<circle cx="380" cy="760" r="90" fill="url(#promise-rlan)"/>
+<rect x="372" y="748" width="16" height="22" rx="3" fill="#FBD3B4"/>
+<path d="M330 790 Q350 776 380 776 Q410 776 430 790 Z" fill="#05070F"/>
+<line x1="470" y1="740" x2="1380" y2="740" stroke="#B8B3CC" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+<polygon points="1380,733 1396,740 1380,747" fill="#B8B3CC"/>
+<rect width="1920" height="1080" fill="url(#promise-rvig)"/>
+</svg><p class="o lbl muted c" style="left:40.365%;top:63.889%;width:15.625%">Three months</p><p class="o lbl soft c" style="left:10.417%;top:76.852%;width:18.750%">A drop that passes</p><p class="o lbl peach c" style="left:67.708%;top:76.852%;width:20.833%">A drop people carry</p></div><div class="copy"><p class="eyebrow">The promise</p><h2 class="title">Three months to make your next drop the one you always thought it would be.</h2><p class="sub">I work alongside you, side by side, to turn your next drop into a moment.</p></div></section><section class="wrap how" id="how"><div class="how-head"><p class="eyebrow">How it works</p><h2 class="title">A door, then a season.</h2></div><div class="how-grid"><div class="how-thr"><svg class="how-door" viewBox="0 0 240 240" role="img" aria-label="A single lit door"><defs><radialGradient id="hw-g" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.6"/><stop offset="0.45" stop-color="#E08C7E" stop-opacity="0.15"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient><linearGradient id="hw-d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6EC"/><stop offset="1" stop-color="#F2B48C"/></linearGradient><linearGradient id="hw-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.4"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#hw-g)"/><rect x="96" y="64" width="48" height="104" fill="url(#hw-d)"/><polygon points="96,170 144,170 176,236 64,236" fill="url(#hw-r)"/></svg><p class="k-small peach">One day, 4 hours</p><h3 class="k-title">The Threshold</h3><p class="k-text">Bottleneck Diagnosis + Drop Map</p></div><div class="how-link" aria-hidden="true"></div><div class="how-season"><div class="how-umbrella"><svg class="how-arc" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ha" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7FD8F0" stop-opacity="0.15"/><stop offset="0.5" stop-color="#A996FF" stop-opacity="0.9"/><stop offset="1" stop-color="#7FD8F0" stop-opacity="0.15"/></linearGradient></defs><path d="M6 68 C 60 6, 940 6, 994 68" fill="none" stroke="url(#ha)" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg><p class="k-small aqua">The Passage · one season, three months</p></div><div class="how-acts"><div class="how-act"><svg class="how-moon" viewBox="0 0 240 240" role="img" aria-label="crescent moon"><defs><radialGradient id="hm0" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#8FB4F6" stop-opacity="0.45"/><stop offset="1" stop-color="#8FB4F6" stop-opacity="0"/></radialGradient></defs><circle cx="120" cy="120" r="110" fill="url(#hm0)"/><circle cx="120" cy="120" r="40" fill="none" stroke="#F6F1E7" stroke-opacity="0.22" stroke-width="2"/><path d="M120 80 A40 40 0 0 1 120 160 A24 40 0 0 0 120 80 Z" fill="#F6F1E7"/></svg><p class="k-small">Act 1</p><h3 class="k-title">Plan</h3><p class="k-text">World DNA</p></div><div class="how-act"><svg class="how-moon" viewBox="0 0 240 240" role="img" aria-label="half moon"><defs><radialGradient id="hm1" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#8FB4F6" stop-opacity="0.45"/><stop offset="1" stop-color="#8FB4F6" stop-opacity="0"/></radialGradient></defs><circle cx="120" cy="120" r="110" fill="url(#hm1)"/><circle cx="120" cy="120" r="40" fill="none" stroke="#F6F1E7" stroke-opacity="0.22" stroke-width="2"/><path d="M120 80 A40 40 0 0 1 120 160 Z" fill="#F6F1E7"/></svg><p class="k-small">Act 2</p><h3 class="k-title">Launch</h3><p class="k-text">Rollout Plan + Ecosystem Map</p></div><div class="how-act"><svg class="how-moon" viewBox="0 0 240 240" role="img" aria-label="full moon"><defs><radialGradient id="hm2" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#8FB4F6" stop-opacity="0.45"/><stop offset="1" stop-color="#8FB4F6" stop-opacity="0"/></radialGradient></defs><circle cx="120" cy="120" r="110" fill="url(#hm2)"/><circle cx="120" cy="120" r="40" fill="#FFF6EC"/></svg><p class="k-small">Act 3</p><h3 class="k-title">Iterate</h3><p class="k-text">Season Review + the seed of the next drop</p></div></div></div></div><details class="deeper"><summary>What a month looks like</summary><p>A 60–90 minute strategy session, a 30 minute check-in, and ongoing care in between.</p></details></section><section class="scene invest" id="investment"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A lit door on the left with an arc of light carrying its fee into three moons on the right: one day, then a three-month season" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="investment-xsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.75" stop-color="#101845"/><stop offset="1" stop-color="#1E1752"/></linearGradient>
+<linearGradient id="investment-xsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="investment-xdg" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.6"/><stop offset="0.4" stop-color="#E08C7E" stop-opacity="0.15"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<linearGradient id="investment-xdr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6EC"/><stop offset="1" stop-color="#F2B48C"/></linearGradient>
+<radialGradient id="investment-xmg" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#8FB4F6" stop-opacity="0.4"/><stop offset="1" stop-color="#8FB4F6" stop-opacity="0"/></radialGradient>
+<linearGradient id="investment-xarc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F2B48C"/><stop offset="1" stop-color="#8FB4F6"/></linearGradient>
+<radialGradient id="investment-xvig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.65"/></radialGradient>
+</defs>
+<rect width="1920" height="760" fill="url(#investment-xsky)"/>
+<rect y="760" width="1920" height="320" fill="url(#investment-xsea)"/>
+<g fill="#F6F1E7"><circle cx="1200" cy="150" r="1.4" opacity="0.5"/><circle cx="1650" cy="110" r="1.5" opacity="0.6"/><circle cx="1820" cy="300" r="1" opacity="0.4"/><circle cx="700" cy="640" r="1" opacity="0.3"/></g>
+<circle cx="380" cy="640" r="240" fill="url(#investment-xdg)"/>
+<path d="M240 760 Q280 742 340 742 L420 742 Q480 744 520 760 Z" fill="#05070F"/>
+<rect x="330" y="540" width="100" height="204" fill="url(#investment-xdr)"/>
+<path d="M440 540 Q700 330 960 450" fill="none" stroke="url(#investment-xarc)" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/>
+<polygon points="952,438 972,456 946,460" fill="#8FB4F6"/>
+<circle cx="1060" cy="470" r="120" fill="url(#investment-xmg)"/>
+<circle cx="1060" cy="470" r="44" fill="#E9E3F2"/>
+<circle cx="1300" cy="470" r="120" fill="url(#investment-xmg)"/>
+<circle cx="1300" cy="470" r="44" fill="#E9E3F2"/>
+<circle cx="1540" cy="470" r="120" fill="url(#investment-xmg)"/>
+<circle cx="1540" cy="470" r="44" fill="#FFF6EC"/>
+<rect width="1920" height="1080" fill="url(#investment-xvig)"/>
+</svg><p class="o lbl peach c" style="left:27.083%;top:41.667%;width:20.833%">Fee credited</p></div><div class="copy"><p class="eyebrow">The investment</p><h2 class="title">Step in for a day. Stay for a season.</h2><p class="sub">Designed so your best drop pays for the whole season, many times over.</p></div></section><div class="wrap prices"><div class="pcol"><p class="p-step">Step 1 · One day, 4 hours</p><p class="p-price">$1.5k</p><h3 class="p-name">The Threshold</h3><p class="p-line">A one-day intensive. You leave with a Bottleneck Diagnosis and a Drop Map.</p><ul class="p-terms"><li>One-off fee</li><li>Credited towards your season</li></ul></div><div class="pdiv" aria-hidden="true"></div><div class="pcol"><p class="p-step">Step 2 · Three months</p><p class="p-price moon">$2.5k<span>a month</span></p><h3 class="p-name">The Passage</h3><p class="p-line">A season side by side, in three acts: Plan, Launch, Iterate.</p><ul class="p-terms"><li>Paid monthly</li><li>Renew each act, no lock-in</li></ul></div></div><section class="scene" id="guarantee"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Three lanterns along a path over the water: one blazing, then two smaller lights as fallbacks" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="guarantee-gsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.75" stop-color="#101845"/><stop offset="1" stop-color="#1E1752"/></linearGradient>
+<linearGradient id="guarantee-gsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="guarantee-gbig" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFF6EC" stop-opacity="0.95"/><stop offset="0.2" stop-color="#F2B48C" stop-opacity="0.5"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<radialGradient id="guarantee-gsm" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.45"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></radialGradient>
+<linearGradient id="guarantee-gref" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.4"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<radialGradient id="guarantee-gvig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.65"/></radialGradient>
+</defs>
+<rect fill="url(#guarantee-gsky)"/>
+<rect y="640" width="1920" height="440" fill="url(#guarantee-gsea)"/>
+<g fill="#F6F1E7"><circle cx="1300" cy="120" r="1.4" opacity="0.5"/><circle cx="1700" cy="200" r="1.2" opacity="0.5"/><circle cx="1500" cy="420" r="1" opacity="0.3"/></g>
+<line x1="500" y1="560" x2="880" y2="560" stroke="#6A6F94" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+<line x1="1040" y1="560" x2="1420" y2="560" stroke="#6A6F94" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+<circle cx="420" cy="560" r="230" fill="url(#guarantee-gbig)"/>
+<rect x="404" y="536" width="32" height="46" rx="6" fill="#FFF6EC"/>
+<polygon points="390,644 450,644 540,1000 300,1000" fill="url(#guarantee-gref)"/>
+<circle cx="960" cy="560" r="120" fill="url(#guarantee-gsm)"/>
+<rect x="950" y="546" width="20" height="28" rx="4" fill="#F2B48C"/>
+<rect x="944" y="660" width="32" height="140" fill="url(#guarantee-gref)" opacity="0.6"/>
+<circle cx="1500" cy="560" r="100" fill="url(#guarantee-gsm)" opacity="0.8"/>
+<rect x="1491" y="548" width="18" height="26" rx="4" fill="#E08C7E"/>
+<rect x="1486" y="660" width="28" height="110" fill="url(#guarantee-gref)" opacity="0.45"/>
+<rect width="1920" height="1080" fill="url(#guarantee-gvig)"/>
+</svg><div class="o okey c" style="left:11.458%;top:64.815%;width:20.833%"><p class="o-small">The aim</p><p class="o-title">Your best drop yet</p></div><div class="o okey c" style="left:39.583%;top:64.815%;width:20.833%"><p class="o-small">If we miss</p><p class="o-title">Another month, free</p></div><div class="o okey c" style="left:67.708%;top:64.815%;width:20.833%"><p class="o-small">If we still miss</p><p class="o-title">50% refund</p></div></div><div class="copy"><p class="eyebrow">The guarantee</p><h2 class="title">Your best drop yet, or I keep going.</h2></div><div class="keys mkeys n3"><div class="key"><p class="k-small">The aim</p><p class="k-title">Your best drop yet</p></div><div class="key"><p class="k-small">If we miss</p><p class="k-title">Another month, free</p></div><div class="key"><p class="k-small">If we still miss</p><p class="k-title">50% refund</p></div></div><p class="footpos foot">Conditions: a baseline from your last 2–3 drops, and the plan implemented.</p></section><section class="scene statement" id="apply"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three doors along the shore, each taller and brighter than the last" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="apply-isky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.75" stop-color="#101845"/><stop offset="1" stop-color="#22175A"/></linearGradient>
+<linearGradient id="apply-isea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
+<radialGradient id="apply-ig" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.55"/><stop offset="0.4" stop-color="#E08C7E" stop-opacity="0.15"/><stop offset="1" stop-color="#E08C7E" stop-opacity="0"/></radialGradient>
+<linearGradient id="apply-idr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6EC"/><stop offset="1" stop-color="#F2B48C"/></linearGradient>
+<linearGradient id="apply-iref" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B48C" stop-opacity="0.4"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></linearGradient>
+<radialGradient id="apply-ivig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#04060D" stop-opacity="0"/><stop offset="1" stop-color="#04060D" stop-opacity="0.65"/></radialGradient>
+</defs>
+<rect width="1920" height="760" fill="url(#apply-isky)"/>
+<rect y="760" width="1920" height="320" fill="url(#apply-isea)"/>
+<g fill="#F6F1E7"><circle cx="1250" cy="140" r="1.4" opacity="0.5"/><circle cx="1650" cy="90" r="1.5" opacity="0.6"/><circle cx="1820" cy="330" r="1" opacity="0.4"/><circle cx="380" cy="480" r="1" opacity="0.3"/></g>
+<path d="M0 760 L0 748 Q400 736 960 742 Q1500 734 1920 744 L1920 760 Z" fill="#05070F"/>
+<circle cx="420" cy="700" r="110" fill="url(#apply-ig)" opacity="0.7"/>
+<rect x="398" y="660" width="44" height="84" fill="url(#apply-idr)" opacity="0.6"/>
+<polygon points="398,762 442,762 480,880 360,880" fill="url(#apply-iref)" opacity="0.5"/>
+<circle cx="960" cy="660" r="170" fill="url(#apply-ig)" opacity="0.85"/>
+<rect x="926" y="604" width="68" height="140" fill="url(#apply-idr)" opacity="0.85"/>
+<polygon points="926,762 994,762 1050,950 870,950" fill="url(#apply-iref)" opacity="0.75"/>
+<circle cx="1500" cy="620" r="250" fill="url(#apply-ig)"/>
+<rect x="1450" y="540" width="100" height="204" fill="url(#apply-idr)"/>
+<polygon points="1450,762 1550,762 1640,1080 1360,1080" fill="url(#apply-iref)"/>
+<line x1="470" y1="720" x2="890" y2="720" stroke="#6A6F94" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+<line x1="1030" y1="720" x2="1420" y2="720" stroke="#6A6F94" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+<rect width="1920" height="1080" fill="url(#apply-ivig)"/>
+</svg><div class="o okey c" style="left:11.458%;top:73.148%;width:20.833%"><p class="o-small">Free</p><p class="o-title">Mini-Threshold</p></div><div class="o okey c" style="left:39.583%;top:73.148%;width:20.833%"><p class="o-small">One day</p><p class="o-title">The Threshold</p></div><div class="o okey c" style="left:67.708%;top:73.148%;width:20.833%"><p class="o-small">A season</p><p class="o-title">The Passage</p></div></div><div class="copy"><p class="eyebrow">The way in</p><h2 class="title">By invitation. Start with a free mini-Threshold.</h2><p class="sub">Tell me about your last drop: what it made, what it cost, and what you hoped it would be.</p><div class="ctas"><a class="btn" href="#apply">Apply</a><p class="dm">Or DM <span>@ashah.world</span></p></div></div><p class="footpos foot">For founders with taste, craft and cultural ambition. Shortlisted by application, for potential and an A-player attitude.</p><div class="keys mkeys n3"><div class="key"><p class="k-small">Free</p><p class="k-title">Mini-Threshold</p></div><div class="key"><p class="k-small">One day</p><p class="k-title">The Threshold</p></div><div class="key"><p class="k-small">A season</p><p class="k-title">The Passage</p></div></div></section><footer class="wrap footer"><a class="mark" href="../" aria-label="A·M·W home">A·M·W</a><p>Melbourne</p></footer>
+<canvas id="sky" aria-hidden="true"></canvas>
+<a class="float-apply" href="#apply" id="float-apply"><span class="fa-wrap"><span class="fa-main">Apply</span><span class="fa-sub">Free mini-Threshold</span></span></a>
+<script>
+(function(){
+  var c=document.getElementById('sky'),x=c.getContext('2d'),stars=[],glows=[],W,H,dpr=Math.min(window.devicePixelRatio||1,2);
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lastW=0;function size(){if(c.clientWidth===lastW&&stars.length){H=c.clientHeight;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);return;}lastW=c.clientWidth;W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    stars=[];var n=Math.round(W*H/14000);for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.3,p:Math.random()*6.28,s:Math.random()*.8+.2,warm:Math.random()<.12});
+    glows=[{x:.15,y:.3,r:.45,c:'34,23,90',a:.22,v:.00004},{x:.85,y:.7,r:.5,c:'22,54,122',a:.18,v:-.00003},{x:.5,y:1.0,r:.4,c:'58,31,102',a:.16,v:.00005}];}
+  function draw(t){x.clearRect(0,0,W,H);
+    glows.forEach(function(g,i){var gx=(g.x+Math.sin(t*g.v+i)*.08)*W,gy=(g.y+Math.cos(t*g.v*1.3+i)*.06)*H,R=g.r*Math.max(W,H);
+      var gr=x.createRadialGradient(gx,gy,0,gx,gy,R);gr.addColorStop(0,'rgba('+g.c+','+g.a+')');gr.addColorStop(1,'rgba('+g.c+',0)');x.fillStyle=gr;x.fillRect(0,0,W,H);});
+    stars.forEach(function(s){var a=.15+.45*(.5+.5*Math.sin(t*.001*s.s+s.p));x.globalAlpha=a;x.fillStyle=s.warm?'#F2B48C':'#F6F1E7';x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();});
+    x.globalAlpha=1;}
+  var last=0;function loop(t){if(!document.hidden&&t-last>33){draw(t);last=t;}requestAnimationFrame(loop);}
+  size();draw(0);addEventListener('resize',function(){size();draw(performance.now());});
+  if(!still)requestAnimationFrame(loop);
+
+  var fa=document.getElementById('float-apply'),hero=document.querySelector('.hero'),ap=document.getElementById('apply'),ft=document.querySelector('.footer'),heroIn=true,apIn=false,ftIn=false;
+  function upd(){fa.classList.toggle('show',!heroIn&&!apIn&&!ftIn);}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){heroIn=e[0].isIntersecting;upd();},{threshold:.15}).observe(hero);
+    new IntersectionObserver(function(e){apIn=e[0].isIntersecting;upd();},{threshold:.2}).observe(ap);
+    new IntersectionObserver(function(e){ftIn=e[0].isIntersecting;upd();}).observe(ft);
+  }
+})();
+</script>
+<div class="ap" id="ap" hidden role="dialog" aria-modal="true" aria-labelledby="ap-q">
+  <div class="ap-glow" aria-hidden="true"></div>
+  <button class="ap-close" type="button" id="ap-close" aria-label="Close the application">Close</button>
+  <form class="ap-form" id="ap-form" novalidate>
+    <div class="ap-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ap-step" data-step="0">
+      <p class="eyebrow">Apply · 1 of 6</p>
+      <label class="ap-q" for="ap-name" id="ap-q">First, what should I call you?</label>
+      <input class="ap-in" id="ap-name" name="name" autocomplete="given-name" required placeholder="Your name">
+    </div>
+    <div class="ap-step" data-step="1" hidden>
+      <p class="eyebrow">Apply · 2 of 6</p>
+      <label class="ap-q" for="ap-brand">And your brand?</label>
+      <input class="ap-in" id="ap-brand" name="brand" required placeholder="Brand name">
+      <input class="ap-in small" id="ap-handle" name="handle" placeholder="@instagram (optional)">
+    </div>
+    <div class="ap-step" data-step="2" hidden>
+      <p class="eyebrow">Apply · 3 of 6</p>
+      <label class="ap-q" for="ap-last">Tell me about your last drop. What did it make, and what did it cost?</label>
+      <textarea class="ap-in" id="ap-last" name="last_drop" rows="3" required placeholder="Rough numbers are fine"></textarea>
+    </div>
+    <div class="ap-step" data-step="3" hidden>
+      <p class="eyebrow">Apply · 4 of 6</p>
+      <label class="ap-q" for="ap-hope">What did you hope it would be?</label>
+      <textarea class="ap-in" id="ap-hope" name="hope" rows="3" required></textarea>
+    </div>
+    <div class="ap-step" data-step="4" hidden>
+      <p class="eyebrow">Apply · 5 of 6</p>
+      <p class="ap-q">When is your next drop?</p>
+      <div class="ap-choices" role="radiogroup" aria-label="When is your next drop?">
+        <label><input type="radio" name="next_drop" id="ap-n1" value="Within a month" required><span>Within a month</span></label>
+        <label><input type="radio" name="next_drop" id="ap-n2" value="1–3 months"><span>1–3 months</span></label>
+        <label><input type="radio" name="next_drop" id="ap-n3" value="3–6 months"><span>3–6 months</span></label>
+        <label><input type="radio" name="next_drop" id="ap-n4" value="Not set yet"><span>Not set yet</span></label>
+      </div>
+    </div>
+    <div class="ap-step" data-step="5" hidden>
+      <p class="eyebrow">Apply · 6 of 6</p>
+      <label class="ap-q" for="ap-email">Where can I reach you?</label>
+      <input class="ap-in" id="ap-email" name="email" type="email" autocomplete="email" required placeholder="you@brand.com">
+    </div>
+    <div class="ap-step ap-done" data-step="6" hidden>
+      <p class="eyebrow">Received</p>
+      <p class="ap-q">Thank you. Your application is in.</p>
+      <p class="ap-note">If it’s a fit, I’ll be in touch about a free mini-Threshold.</p>
+      <p class="ap-note dim" id="ap-back">Taking you back to <a href="https://ashah.world" target="_blank" rel="noopener">ashah.world</a>…</p>
+    </div>
+    <p class="ap-error" id="ap-error" role="alert"></p>
+    <div class="ap-nav" id="ap-nav">
+      <button type="button" class="btn ghost" id="ap-prev">Back</button>
+      <button type="submit" class="btn" id="ap-next">Continue</button>
+      <span class="ap-hint">or press Enter</span>
+    </div>
+  </form>
+</div>
+<script>
+(function(){
+  // Live: applications post to Formspree (emails Ashah). REDIRECT goes back to the site's home page.
+  var SUBMIT='https://formspree.io/f/xqpeqoab',REDIRECT=(document.documentElement.dataset.home||'../'),sending=false;
+  var ap=document.getElementById('ap'),form=document.getElementById('ap-form'),steps=[].slice.call(ap.querySelectorAll('.ap-step')),
+      dots=[].slice.call(ap.querySelectorAll('.ap-progress span')),err=document.getElementById('ap-error'),
+      prev=document.getElementById('ap-prev'),next=document.getElementById('ap-next'),nav=document.getElementById('ap-nav'),i=0,opener=null;
+  function show(n){i=n;steps.forEach(function(s,k){s.hidden=k!==n;});dots.forEach(function(d,k){d.classList.toggle('on',k<=n);});
+    prev.style.visibility=n>0&&n<6?'visible':'hidden';next.textContent=n===5?'Send application':'Continue';nav.hidden=n===6;err.textContent='';
+    var f=steps[n].querySelector('input,textarea');if(f)setTimeout(function(){f.focus();},60);}
+  function valid(){var ok=true;steps[i].querySelectorAll('[required]').forEach(function(f){
+      if(f.type==='radio'){if(!form.querySelector('input[name="'+f.name+'"]:checked'))ok=false;}
+      else if(!f.value.trim()||(f.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value.trim())))ok=false;});
+    if(!ok)err.textContent=steps[i].querySelector('[type=email]')?'Add an email address I can reply to.':'Add a quick answer to keep going.';return ok;}
+  function open(e){if(e)e.preventDefault();opener=document.activeElement;ap.hidden=false;document.body.style.overflow='hidden';show(i===6?0:i);}
+  function close(){ap.hidden=true;document.body.style.overflow='';if(opener&&opener.focus)opener.focus();}
+  document.querySelectorAll('a[href="#apply"]').forEach(function(a){a.addEventListener('click',open);});
+  document.getElementById('ap-close').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(!ap.hidden&&e.key==='Escape')close();});
+  prev.addEventListener('click',function(){if(i>0)show(i-1);});
+  ap.querySelectorAll('.ap-choices input').forEach(function(r){r.addEventListener('change',function(){setTimeout(function(){if(i===4)show(5);},250);});});
+  form.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='TEXTAREA'&&!e.shiftKey){e.preventDefault();form.requestSubmit?form.requestSubmit():next.click();}});
+  form.addEventListener('submit',function(e){e.preventDefault();if(!valid())return;
+    if(i<5){show(i+1);return;}
+    if(sending)return;sending=true;next.disabled=true;next.textContent='Sending…';
+    var fd=new FormData(form);fd.append('_subject','Passage application: '+(fd.get('brand')||fd.get('name')||'new'));fd.append('form','Passage application');
+    fetch(SUBMIT,{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error();
+      show(6);form.reset();setTimeout(function(){try{window.top.location.href=REDIRECT;}catch(x){location.href=REDIRECT;}},4500);
+    }).catch(function(){err.textContent='That didn’t go through. Try again, or DM @ashah.world on Instagram.';next.textContent='Send application';
+    }).then(function(){sending=false;next.disabled=false;});});
+})();
+</script>
+
+</body>
+</html>
