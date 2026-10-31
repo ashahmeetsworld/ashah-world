@@ -51,7 +51,7 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Home hero: elevated layered scene in `HeroScene.astro` (switch `ELEVATED_HERO` in index.astro; false = the original `Sky` night scene). Details in DESIGN.md.
 
 ## Orbit (live 25 Oct 2026)
-- Free lead magnet page `/orbit/` (`src/pages/orbit.astro`), linked from the footer's second row (magnets, offers, ventures) only, never the header. Aurora look; never mixed with ember/firefly.
+- Free lead magnet page `/orbit/` (`src/pages/orbit.astro`), linked from the footer's second row (magnets, offers, ventures) and, since 31 Oct 2026, the header nav (Passage, Orbit, then Work, About, Contact). Aurora look; never mixed with ember/firefly.
 - Sign-ups: `OrbitSignup.astro` (page, redirects home after 8 s) and `OsNudge.astro` (site pop-up, confirms in place). Both post to the Brevo form in `site.json` → `orbitFormUrl`; empty = preview mode (confirms without sending).
 - The download is `public/os/Orbit-v<version>.zip`; the Brevo emails link to it, so update them when the file name changes.
 
@@ -63,5 +63,5 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 
 ## Passage (live 31 Oct 2026)
 - The offer's landing page is a standalone file: `public/passage/index.html` (served at /passage/). No site header, footer or mobile nav; the A·M·W mark is the only way back. It's generated outside this repo (Business Development project, `passage/source/build_final.py`), so edit the generator, not the HTML, when you can.
-- Links: header nav (after Contact) and footer second row, left of Orbit. Look: nocturnal blue-violet text gradient (`.passage-link`), a counterpoint to Orbit's aurora.
+- Links: header nav (first, then Orbit, then the white links) and footer second row, left of Orbit. Look: nocturnal blue-violet text gradient (`.passage-link`), a counterpoint to Orbit's aurora.
 - Applications post to Formspree (`https://formspree.io/f/xqpeqoab`, same as the contact form; emails Ashah, subject "Passage application: <brand>") and, in parallel, to the Google Apps Script relay ("Passage relay", bound to the Sheet "Passage applications (from ashah.world)"), which appends a row. A scheduled Claude task copies new rows into the Notion board "Passage applications" in NEW Central Hub.
