@@ -232,6 +232,21 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 .plate .lbl{font-size:max(10px,1.6cqw)}
 .scene.statement .copy{width:60%}
 @media (max-width:860px){.split,.split.flip{grid-template-columns:1fr;gap:28px;padding-block:64px}.split.flip .text{order:0}.text .title,.text .title.big{font-size:36px}}
+/* hero fits the first screen: trims only open sky above, never the door */
+@media (min-width:761px){.hero .art{aspect-ratio:auto;height:min(56.25vw,100svh);min-height:520px}}
+/* site scale (31 Oct): match ashah.world's 1200px measure on big screens */
+.scene:not(.hero){max-width:1280px;margin-inline:auto}
+.wrap{max-width:1280px;margin-inline:auto;padding-left:max(24px,min(6.667vw,85.33px),env(safe-area-inset-left,0px));padding-right:max(24px,min(6.667vw,85.33px),env(safe-area-inset-right,0px))}
+.hero .copy{left:max(6.667%,calc(50% - 554.67px))}
+.hero .nav{max-width:none;padding-left:max(24px,6.667vw,calc(50vw - 554.67px));padding-right:max(24px,6.667vw,calc(50vw - 554.67px))}
+.hero .hero-title{font-size:min(11.5cqw,148px)}
+.hero .hero-sub{font-size:min(2.3cqw,30px)}
+.hero .copy .eyebrow{font-size:min(max(11px,1.25cqw),15px)}
+@media (min-width:1281px){
+ .scene:not(.hero) .art{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);mask-composite:intersect}
+ .scene.invest .art{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%)}
+ .scene.invest+.prices{margin-top:-115px}
+}
 .ap[hidden]{display:none}
 .ap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,7,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:apin .5s ease}
 @keyframes apin{from{opacity:0}to{opacity:1}}
@@ -265,7 +280,7 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 </head>
 <body>
 
-<section class="scene hero"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A lit doorway on a night shoreline, a small figure standing in its light" viewBox="0 0 1920 1080">
+<section class="scene hero"><div class="art"><svg class="art-svg" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A lit doorway on a night shoreline, a small figure standing in its light" viewBox="0 0 1920 1080">
 <defs>
 <linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B18"/><stop offset="0.6" stop-color="#101845"/><stop offset="1" stop-color="#2A1B62"/></linearGradient>
 <linearGradient id="hero-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1236"/><stop offset="1" stop-color="#04060D"/></linearGradient>
