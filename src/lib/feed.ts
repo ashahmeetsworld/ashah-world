@@ -18,9 +18,9 @@ export function loadFeed(url: string): Promise<Post[]> {
 export const imageOf = (p: Post) =>
   p.sizes?.large?.mediaUrl || p.sizes?.medium?.mediaUrl || (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl) || p.thumbnailUrl || '';
 
-// Field Notes are the carousel posts on Instagram, newest first. The series ends with the November 2026 posts
-// (Ashah, 31 Oct 2026): anything posted after 30 Nov (Melbourne time) is never treated as a Field Note.
-export const FIELD_NOTES_END = Date.parse('2026-12-01T00:00:00+11:00');
+// Field Notes are the carousel posts on Instagram, newest first. The series ends on 8 November 2026
+// (Ashah, 31 Oct 2026): anything posted after 8 Nov (Melbourne time) is never treated as a Field Note.
+export const FIELD_NOTES_END = Date.parse('2026-11-09T00:00:00+11:00');
 export const carousels = (posts: Post[]) =>
   posts.filter((p) => p.mediaType === 'CAROUSEL_ALBUM' && !(p.timestamp && Date.parse(p.timestamp) >= FIELD_NOTES_END));
 export const slidesOf = (p: Post) => (p.children?.length ? p.children : [p]).filter((c) => c.mediaType !== 'VIDEO' || c.thumbnailUrl).map(imageOf).filter(Boolean);
