@@ -5,6 +5,9 @@ import '@fontsource/cormorant-garamond/500-italic.css';
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '../styles/global.css';
+// the two faces every page opens with, fetched early so headlines don't jump when they arrive
+import cgItalic from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-italic.woff2?url';
+import dmSans from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OsNudge from '../components/OsNudge.astro';
@@ -33,6 +36,8 @@ const ogImage = new URL(u(image), Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#070B18" />
     <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preload" href={cgItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={dmSans} as="font" type="font/woff2" crossorigin />
   </head>
   <body class={bodyClass}>
     <Header />
@@ -51,7 +56,11 @@ const ogImage = new URL(u(image), Astro.site);
           // some previews scroll an outer frame instead of the page itself
           try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {}
         };
-        top(); addEventListener('DOMContentLoaded', top); addEventListener('load', top);
+        // once the visitor starts moving, never pull them back up (the late 'load' jump used to yank people who scrolled early)
+        var moved = false, mark = function () { moved = true; };
+        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, mark, { passive: true, once: true }); });
+        var maybe = function () { if (!moved) top(); };
+        top(); addEventListener('DOMContentLoaded', maybe); addEventListener('load', maybe);
       })();
     </script>
     <script>

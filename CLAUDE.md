@@ -68,3 +68,9 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 
 ## Field Notes (31 Oct 2026)
 - Field Notes images load live from Instagram (`src/lib/feed.ts`, `src/lib/live.ts`): carousel posts, newest first. The series ends on 8 November 2026, so carousels posted from 9 Nov 2026 (Melbourne) are never counted (`FIELD_NOTES_END`).
+
+## Orbit v1.1 page (31 Oct 2026)
+- Customer Experience (was Client Success) has a Customer / Community / Client switch under its hub image (`.cxsw` in `sections-a.html`, script at the end of `sections.js`). Images: `public/orbit/c768620e99.jpg` (Customer), `cx-community.jpg`, `cx-client.jpg`.
+- "Your rhythm" section (book, collection, single) sits just above "You stay in charge".
+- Copy rule: "launch" is used sparingly in body copy, never in headers. Label sets keep one rhythm ("Your brand, Your mission, Your offer...").
+- Interaction rule (Ashah): hover or reveal text must not push the content below down. Reserve the space and fade it in. Exceptions are allowed, but that's the default.

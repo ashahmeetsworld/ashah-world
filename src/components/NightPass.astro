@@ -11,7 +11,8 @@
 <div class="np-line" aria-hidden="true"></div>
 
 <script>
-  const root = document.documentElement;
+  // only the sky and the phone line read these values, so set them there (setting them on <html> restyled the whole page every frame)
+  const targets = [...document.querySelectorAll<HTMLElement>('.np, .np-line')];
   const end = document.getElementById('letters');
   // sky colours through the night: [p, top, bottom, horizon glow alpha]
   const STOPS: [number, number[], number[], number][] = [
@@ -29,21 +30,31 @@
     return { top: mix(t0, t1, t), bot: mix(b0, b1, t), glow: g0 + (g1 - g0) * t };
   };
 
-  let ticking = false;
+  let ticking = false, stop = 1, last = '';
+  // where the night ends: measured on load and when the page changes size, not on every scroll frame
+  const measure = () => { if (end) stop = Math.max(1, end.getBoundingClientRect().top + scrollY - innerHeight * 0.3); };
   const update = () => {
     ticking = false;
     if (!end) return;
-    const stop = end.getBoundingClientRect().top + scrollY - innerHeight * 0.3;
-    const p = Math.min(1, Math.max(0, scrollY / Math.max(1, stop)));
+    const p = Math.min(1, Math.max(0, scrollY / stop));
+    const key = p.toFixed(4);
+    if (key === last) return;
+    last = key;
     const c = at(p);
-    root.style.setProperty('--np-p', p.toFixed(4));
-    root.style.setProperty('--np-top', `rgb(${c.top})`);
-    root.style.setProperty('--np-bot', `rgb(${c.bot})`);
-    root.style.setProperty('--np-glow', c.glow.toFixed(3));
+    for (const el of targets) {
+      el.style.setProperty('--np-p', key);
+      el.style.setProperty('--np-top', `rgb(${c.top})`);
+      el.style.setProperty('--np-bot', `rgb(${c.bot})`);
+      el.style.setProperty('--np-glow', c.glow.toFixed(3));
+    }
   };
   const ask = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  const remeasure = () => { measure(); last = ''; ask(); };
   addEventListener('scroll', ask, { passive: true });
-  addEventListener('resize', ask);
+  addEventListener('resize', remeasure);
+  addEventListener('load', remeasure);
+  if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.body);
+  measure();
   update();
 
   // stars: drawn once per size, faded out by CSS as the night passes
@@ -80,7 +91,7 @@
   /* phones: a line of light along the top that warms as the night passes */
   .np-line { display: none; }
   @media (max-width: 760px) {
-    .np-line { display: block; position: fixed; top: 0; left: 0; height: 2px; z-index: 60; width: calc(var(--np-p, 0) * 100%);
+    .np-line { display: block; position: fixed; top: 0; left: 0; height: 2px; z-index: 60; width: 100%; transform: scaleX(var(--np-p, 0)); transform-origin: left center;
       background: linear-gradient(90deg, var(--aqua), var(--mauve) 60%, var(--peach)); box-shadow: 0 0 12px rgba(242, 180, 140, .55); pointer-events: none; }
   }
 </style>

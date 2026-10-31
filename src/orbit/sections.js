@@ -95,3 +95,9 @@ const stop=()=>{clearInterval(t);t=null;shot.classList.remove('touring');lab.tex
 btn.onclick=()=>{if(t){stop();return;}shot.classList.add('touring');lab.textContent='Pause';if(i>=CAP.length-1)i=-1;show(i+1);t=setInterval(()=>{if(i>=CAP.length-1){stop();return;}show(i+1);},4300);};
 dots.onclick=e=>{const k=[...dots.children].indexOf(e.target);if(k>=0){show(k);}};
 })();
+
+/* Orbit v1.1: Customer / Community / Client switch under the Customer Experience room */
+(function(){var B=(window.ORBIT_HUB||'').replace(/orbit\/hub-demo\.html$/,'');var V={customer:['Customer Experience','First order, delivery, the next buy, loyalty','c768620e99.jpg'],community:['Community Engagement','From first look to inner circle','cx-community.jpg'],client:['Client Success','From yes to a glowing wrap-up','cx-client.jpg']};
+var sw=document.querySelector('.cxsw');var btn=document.querySelector('.hp[data-h="cs"]');var img=document.querySelector('img[data-room="cs"]');if(!sw||!btn||!img)return;
+sw.addEventListener('click',function(e){var b=e.target.closest('button[data-cx]');if(!b)return;var v=V[b.dataset.cx];sw.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
+btn.querySelector('b').textContent=v[0];btn.querySelector('span').textContent=v[1];img.src=B+'orbit/'+v[2];img.alt=v[0]+' room';});})();
