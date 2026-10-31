@@ -6,7 +6,7 @@
     "images": [
       "LI06.png"
     ],
-    "alt_text": "A night sky with two constellations, one labelled the guess, the other ending on a bright star labelled who showed up.",
+    "alt_text": "Founder cheat sheet on finding your ideal customer profile (ICP): guess, watch, follow. Two constellations in a night sky, one labelled the guess, the other who showed up.",
     "caption": "I started with a clear picture of who I wanted to work with. The conversations kept pointing somewhere slightly different.\n\nThat used to feel like failure. Now I see it as the work. Your ideal customer isn't a decision you make once in a strategy doc. It's something you find by listening, testing and paying attention to who actually lights up.\n\nThe takeaways:\n1. Write your best guess down, then treat it as a hypothesis.\n2. Notice who comes back without being chased.\n3. Update the picture every month.\n\nFounders: how far is your customer today from the one you first imagined?\n\nFree: Orbit. Six helpers built around you, including one that finds the people who'd love your work. Link in comments.\n\n#Founders #ICP #Entrepreneurship",
     "first_comment": "Orbit is free, for good. Six helpers that circle your work, built around you in Claude. You stay at the centre, and nothing goes out without your yes. Get it here: https://ashahmeetsworld.github.io/ashah-world/orbit/"
   },
@@ -17,7 +17,7 @@
     "images": [
       "LI15.png"
     ],
-    "alt_text": "A radio dish under a sky of falling light, above four things to listen for: the gap, the bottlenecks, what they value, what they have tried.",
+    "alt_text": "Sales cheat sheet: listen before you sell. Four things to listen for in customer conversations: the gap, the bottlenecks, what they value, what they've tried. A radio dish under a night sky.",
     "caption": "I had an offer ready to go, but I put it back on the shelf.\n\nNot because it was bad, but because I'd built it on what I assumed people needed. So I started listening instead, properly, with nothing to pitch.\n\nThe poster has the four things I listen for. The one that tells me the most is the last: what have they already tried? If three things haven't worked, a fourth that sounds the same won't either.\n\nWhat's the best question you've ever been asked by someone trying to help you?\n\nFree: Orbit. Six helpers built around you, including one that finds the people who'd love your work. Link in comments.\n\n#Sales #CustomerResearch #Founders",
     "first_comment": "Orbit is free, for good. Six helpers that circle your work, built around you in Claude. You stay at the centre, and nothing goes out without your yes. Get it here: https://ashahmeetsworld.github.io/ashah-world/orbit/"
   },
@@ -28,7 +28,7 @@
     "images": [
       "LI23.png"
     ],
-    "alt_text": "A white plug labelled idea about to connect to a dark socket labelled execution.",
+    "alt_text": "AI and productivity poster for founders: close the gap between idea and execution. A plug labelled idea about to connect to a socket labelled execution.",
     "caption": "Most of us don't have an ideas problem. We have a gap between what we can see and what actually ships.\n\nI closed mine by building a small team of AI helpers, each with one role and one standard. It compresses the research, the planning and the first drafts, so the time goes where it matters: the taste, the play, and the decision-making.\n\nThree ways to start closing yours:\n1. List the steps between idea and shipped.\n2. Find the slowest one.\n3. Give that step a system, human or AI.\n\nWhat's the step that slows you down most?\n\nFree: Orbit. The system I run my brand on, as six helpers built around you in Claude. Link in comments.\n\n#AI #Productivity #Founders",
     "first_comment": "Orbit is free, for good. Six helpers that circle your work, built around you in Claude. You stay at the centre, and nothing goes out without your yes. Get it here: https://ashahmeetsworld.github.io/ashah-world/orbit/"
   },
@@ -40,7 +40,10 @@
       "LI32-1.png",
       "LI32-2.png"
     ],
-    "alt_text": "Image 1: a winding path of light from start to done, with a straight line cutting through it. Image 2: a long beam of light balanced on a small point, lifting a glowing moon labelled done.",
+    "alt_text": {
+      "LI32-1.png": "AI leverage for founders: AI won't do the work for you, it shortens the distance to done. A winding path from start to done with a straight line of light cutting through it.",
+      "LI32-2.png": "The biggest lever of this moment: AI for small teams. A long beam of light balanced on a small point, lifting a glowing moon labelled done."
+    },
     "caption": "Every era has one lever that moves everything else. I think ours is AI, used well.\n\nNot to replace taste or judgement. To compress information and shorten the path to execution, so a small team can move like a big one.\n\nWhere I'd start:\n1. Give AI the research and first drafts, not the decisions.\n2. Brief it like a colleague: the role, the standard, examples.\n3. Keep a running list of its mistakes, and fix the brief each week.\n\nWhere has AI genuinely saved you time this year, and where hasn't it?\n\nFree: Orbit. The system I run my brand on, as six helpers built around you in Claude. Link in comments.\n\n#AI #Leverage #FutureOfWork",
     "first_comment": "Orbit is free, for good. Six helpers that circle your work, built around you in Claude. You stay at the centre, and nothing goes out without your yes. Get it here: https://ashahmeetsworld.github.io/ashah-world/orbit/"
   },
@@ -51,7 +54,7 @@
     "images": [
       "LI33.png"
     ],
-    "alt_text": "A city skyline at dawn under a violet sky, above three steps: notice the gap, show a future, make it believable.",
+    "alt_text": "Brand strategy and marketing cheat sheet on optimism: notice the gap, show a future, make it believable. A city skyline at dawn under a violet sky.",
     "caption": "The mood right now is cautious. A lot of brands have responded by saying very little.\n\nI think that's the opening. When everyone goes quiet, the brand with conviction gets heard. Spectacle, sincerity and a clear point of view are rare right now, which makes them valuable.\n\nThree questions to test your next campaign against:\n1. Would anyone feel anything if it disappeared?\n2. Does it say what you believe, or what's safe?\n3. Would people talk about it to someone who wasn't there?\n\nWhat's a brand that's made you feel more optimistic lately?\n\nBuilding a world takes more hands than one person has. I made Orbit for that: six helpers that circle your work, built around you. Free. Link in comments.\n\n#Marketing #BrandStrategy #Culture",
     "first_comment": "Orbit is free, for good. Six helpers that circle your work, built around you in Claude. You stay at the centre, and nothing goes out without your yes. Get it here: https://ashahmeetsworld.github.io/ashah-world/orbit/"
   }
