@@ -67,4 +67,4 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Applications post to Formspree (`https://formspree.io/f/xqpeqoab`, same as the contact form; emails Ashah, subject "Passage application: <brand>") and, in parallel, to the Google Apps Script relay ("Passage relay", bound to the Sheet "Passage applications (from ashah.world)"), which appends a row. A scheduled Claude task copies new rows into the Notion board "Passage applications" in NEW Central Hub.
 
 ## Field Notes (31 Oct 2026)
-- Field Notes images load live from Instagram (`src/lib/feed.ts`, `src/lib/live.ts`): carousel posts, newest first. The series ends with the November 2026 posts, so carousels posted from 1 Dec 2026 (Melbourne) are never counted (`FIELD_NOTES_END`).
+- Field Notes images load live from Instagram (`src/lib/feed.ts`, `src/lib/live.ts`): carousel posts, newest first. The series ends on 8 November 2026, so carousels posted from 9 Nov 2026 (Melbourne) are never counted (`FIELD_NOTES_END`).
