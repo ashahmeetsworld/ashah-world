@@ -38,7 +38,7 @@ const skills = [
   { name: 'Creative Direction', key: '--cd', metaphor: 'The North Star', role: 'sets the vision', text: 'Taste, worldbuilding and story decide what the world is, so every shoot, post and campaign is steered by the same light.' },
   { name: 'Ecosystem Design', key: '--eco', metaphor: 'The living reef', role: 'makes it cohesive', text: 'Systems, templates and funnels that keep every touchpoint (feed, site, packaging, DMs, drops) unmistakably the same world.' },
   { name: 'Cultural Leadership', key: '--cul', metaphor: 'Fireflies in sync', role: 'opens the rooms', text: 'The relationships, rooms and trust that bring artists, brands and community into the same rhythm.' },
-  { name: 'Campaign Marketing', key: '--cam', metaphor: 'The meteor shower', role: 'makes it impossible to miss', text: 'Ubiquity and spectacle that turn a world into a moment, and a moment into attention, desire and sales.' },
+  { name: 'Campaign Marketing', key: '--cam', metaphor: 'The meteor shower', role: 'makes it unmissable', text: 'Ubiquity and spectacle that turn a world into a moment, and a moment into attention, desire and sales.' },
 ];
 ---
 <Base>
@@ -343,6 +343,9 @@ const skills = [
   .card:hover::before { opacity: .42; }
   .card .icon { width: 84px; height: 84px; margin-bottom: 26px; position: relative; }
   .card .label { display: flex; gap: 10px; align-items: center; margin: 0 0 14px; }
+  /* Keep every card label on one line so the four headings line up (small laptops tighten the spacing a touch). */
+  .card .label { white-space: nowrap; }
+  @media (min-width: 981px) and (max-width: 1180px) { .card { padding-inline: 20px; } .card .label { letter-spacing: .16em; gap: 8px; } }
   .card .label i { width: 7px; height: 7px; border-radius: 50%; background: var(--a); box-shadow: 0 0 12px var(--a); }
   .card h3 { font-size: 30px; margin-bottom: 4px; }
   .metaphor { font: italic 19px/1.3 var(--serif); color: var(--a); margin: 0 0 16px; filter: brightness(1.35); }
