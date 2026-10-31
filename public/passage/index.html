@@ -247,6 +247,11 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
  .scene.invest .art{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 72%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%)}
  .scene.invest+.prices{margin-top:-115px}
 }
+/* floating Apply: centred, text centred (31 Oct) */
+.float-apply.float-apply{left:50%;right:auto;transform:translate(-50%,16px);justify-content:center;text-align:center;padding:12px 30px}
+.float-apply.float-apply.show{transform:translate(-50%,0)}
+.float-apply.float-apply::before{display:none}
+.float-apply .fa-wrap{align-items:center}
 .ap[hidden]{display:none}
 .ap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,7,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:apin .5s ease}
 @keyframes apin{from{opacity:0}to{opacity:1}}
@@ -276,6 +281,9 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 .ap-progress span{width:8px;height:8px;border-radius:50%;background:#2E3566;transition:all .4s}
 .ap-progress span.on{background:var(--peach);box-shadow:0 0 12px var(--peach)}
 @media (max-width:560px){.ap-choices{grid-template-columns:1fr}.ap-hint{display:none}}
+.ap [hidden]{display:none!important}
+.ap{overflow-y:auto;overscroll-behavior:contain}
+.ap-form{margin:auto}
 </style>
 </head>
 <body>
@@ -524,7 +532,7 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
       dots=[].slice.call(ap.querySelectorAll('.ap-progress span')),err=document.getElementById('ap-error'),
       prev=document.getElementById('ap-prev'),next=document.getElementById('ap-next'),nav=document.getElementById('ap-nav'),i=0,opener=null;
   function show(n){i=n;steps.forEach(function(s,k){s.hidden=k!==n;});dots.forEach(function(d,k){d.classList.toggle('on',k<=n);});
-    prev.style.visibility=n>0&&n<6?'visible':'hidden';next.textContent=n===5?'Send application':'Continue';nav.hidden=n===6;err.textContent='';
+    prev.style.display=n>0&&n<6?'':'none';next.textContent=n===5?'Send application':'Continue';nav.hidden=n===6;err.textContent='';
     var f=steps[n].querySelector('input,textarea');if(f)setTimeout(function(){f.focus();},60);}
   function valid(){var ok=true;steps[i].querySelectorAll('[required]').forEach(function(f){
       if(f.type==='radio'){if(!form.querySelector('input[name="'+f.name+'"]:checked'))ok=false;}
