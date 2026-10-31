@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
     </div>
     {/* second row: magnets, offers and ventures */}
     <div class="links ventures">
+      <a class="passage-link" href={u('/passage/')}>Passage</a>
       <a class="orbit-link" href={u('/orbit/')}>Orbit</a>
     </div>
     </div>
@@ -48,6 +49,9 @@ const year = new Date().getFullYear();
   /* Orbit (the free OS): aurora colours, still */
   .links a.orbit-link { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase;
     background: linear-gradient(100deg, #7FD8F0, #8FB4F6 50%, #A996FF); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
+  /* Passage (the offer): nocturnal blue-violet, sits left of Orbit */
+  .links a.passage-link { background: linear-gradient(100deg, #BCC8FF, #A39EFF 50%, #CBB3FA); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
+  .passage-link:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(140, 136, 240, .55)); }
   .orbit-link:hover { filter: brightness(1.25) drop-shadow(0 0 8px rgba(127, 216, 240, .5)); }
   .legal { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--ink-3); }
   .legal span:last-child { font: italic 15px/1.2 var(--serif); }

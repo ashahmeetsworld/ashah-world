@@ -60,3 +60,8 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Problem headline: "Spread thin across everything. Deep in nothing." The door in `AnklesScene.astro` sits lower, on its own horizon line; the lights are a faint algae blue.
 - The tag reads "Orbit v0.4" and the download is `public/os/Orbit-v0.4.zip` (30 Oct). `Orbit-v0.3.3.zip` stays so links in emails already sent keep working.
 - Never use people's names in sample content (Ashah's standing rule).
+
+## Passage (live 31 Oct 2026)
+- The offer's landing page is a standalone file: `public/passage/index.html` (served at /passage/). No site header, footer or mobile nav; the A·M·W mark is the only way back. It's generated outside this repo (Business Development project, `passage/source/build_final.py`), so edit the generator, not the HTML, when you can.
+- Links: header nav (after Contact) and footer second row, left of Orbit. Look: nocturnal blue-violet text gradient (`.passage-link`), a counterpoint to Orbit's aurora.
+- Applications post to Formspree (`https://formspree.io/f/xqpeqoab`, same as the contact form) with subject "Passage application: <brand>", then return to the home page.
