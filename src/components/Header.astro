@@ -16,10 +16,11 @@ const nav = [
       <span class="word">{site.name}</span>
     </a>
     <nav aria-label="Main">
+      <a class="passage-link" href={u('/passage/')}>Passage</a>
+      <a class="orbit-link" href={u('/orbit/')} aria-current={path.startsWith('/orbit/') ? 'page' : undefined}>Orbit</a>
       {nav.map((n) => (
         <a href={u(n.href)} aria-current={path.startsWith(n.href) && n.href !== '/' ? 'page' : undefined}>{n.label}</a>
       ))}
-      <a class="passage-link" href={u('/passage/')}>Passage</a>
     </nav>
   </div>
 </header>
@@ -44,6 +45,10 @@ const nav = [
   nav a { white-space: nowrap; }
   /* Passage (the offer, 31 Oct 2026): nocturnal blue-violet, a counterpoint to Orbit's aurora */
   nav a.passage-link { background: linear-gradient(100deg, #A185FF, #8C57F8 50%, #C07FFF); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
+  /* Orbit (the free OS): aurora, same as the footer */
+  nav a.orbit-link { background: linear-gradient(100deg, #7FD8F0, #8FB4F6 50%, #A996FF); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
+  nav a.orbit-link::after { background: linear-gradient(90deg, #7FD8F0, #A996FF); }
+  nav a.orbit-link:hover { filter: brightness(1.25) drop-shadow(0 0 8px rgba(127, 216, 240, .5)); }
   nav a.passage-link::after { background: linear-gradient(90deg, #8C88F0, #B79CF2); }
   nav a.passage-link:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(142, 98, 247, .6)); }
 </style>
