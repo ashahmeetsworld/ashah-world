@@ -51,7 +51,7 @@ If Notion isn't connected, ask in the same message: "And connect Notion: in Clau
 | The report | v0.3 | `00-your-report.md` exists | made from their sources and chats (OS section 16) |
 | The hub (`Orbit Hub` folder) | v0.4.1 | don't check, and never ask: always make a fresh one | `Orbit Hub.zip` (OS sections 17 and 17a), made from their sources, Projects and work so far; one double-click on Start Orbit Hub opens it, with a desktop shortcut |
 | Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Turn on hub chats files (17a); at the end, the Phase 2 lines from 17c |
-| Your hub's look (Orbit, Light, Your brand) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub has a Look button (Orbit, Light, and their own brand look once the Creative Director makes one). Never change their look in the update. If they already have one (Hub look on the Creative Director's Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "a Look button on your hub, and your Creative Director can dress it in your brand: just ask" |
+| Your hub's skin (Orbit, Light, Your brand) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub has a Skin button (Orbit, Light, and their own brand skin once the Creative Director makes one). Never change their skin in the update. If they already have one (Hub skin on the Creative Director's Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "a Skin button on your hub, and your Creative Director can make you a brand skin: just ask" |
 | Each helper's room in the hub: its jobs and buttons (skills) | v0.4 | the hub shows their helpers, with buttons | 3 to 5 buttons per helper from the OS (section 17, Skills), tuned to what each one actually does for them now |
 | Foundations | v0.4 | the hub's Foundations tab | the six basics from their sources, each Ready, Half there or Missing |
 | Values and mission (unlock the Advisory Board) | v0.4.1 | standards.md has seven values in order, founder.md has a mission | if both are there, mark the Foundations *Your values* and *Your mission* Ready; if not, mark them Missing (the hub keeps the board room locked and offers session 8). Never ask for them in the update |
@@ -79,7 +79,7 @@ Progress lines look like: "Notion: added your Content Calendar ✓" · "Funnel: 
 > New: [plain-words list, e.g. "a page that shows your whole team at once", "three advisors who look after you, not the business"].
 > I filled a few gaps with best guesses, marked [guess]: [list, or "none"]. Change any of them whenever you like.
 > [only if values or mission are Missing:] Your Advisory Board opens once you've done *Your values and mission* in Foundations. About 15 minutes, whenever you like.
-> Last step: unzip **Orbit Hub** below, put it anywhere you like (we suggest your "Your operating system" folder) and double-click **Start Orbit Hub** (.bat on Windows, .command on Mac). Your hub opens, and a shortcut lands on your desktop. (Already have an Orbit Hub folder? Replace it. Your hub's look comes along.)
+> Last step: unzip **Orbit Hub** below, put it anywhere you like (we suggest your "Your operating system" folder) and double-click **Start Orbit Hub** (.bat on Windows, .command on Mac). Your hub opens, and a shortcut lands on your desktop. (Already have an Orbit Hub folder? Replace it. Your hub's skin comes along.)
 > Then Phase 2, chats inside your hub: double-click **Turn on hub chats** in that folder, and click **Authorize** and **Allow access** when your browser asks. About 5 minutes. (Already turned it on? Skip this: your chats stay on.)
 > [the first-time check line from OS section 17a]
 > *Build it once. Let it learn.*
@@ -470,7 +470,7 @@ Whenever Business Development builds or sharpens an offer (the *Your offer* Foun
 - **By model:** *service:* how the work is shown: portfolio, proposals, case studies. *Physical product:* collections, lookbooks, shoots, packaging. *Music:* the visual world of each release: artwork, video, live visuals. *Digital:* product design, previews, thumbnails, the course look.
 - **Opens with:** "A brief, a check on something you've made, the monthly brand check, or a change to the brand?"
 - **First prompt:** "Read my brand answers back to me as a one-page brand sheet. Ask me about anything that's thin before you fill it."
-- **Hub look:** keeps their hub's *Your brand* look (section 17b): a PNG mock-up and their OK before any change, and one suggestion when their brand moves on.
+- **Hub skin:** keeps their hub's *Your brand* skin (section 17b): a PNG mock-up and their OK before any change, and one suggestion when their brand moves on.
 - **Introduces itself** (few words): "Keep what's yours. Take out the rest." Nothing more than it needs.
 - **Leverage:** their brand codes (section 9) kept as one living guide every seat follows · a monthly scan of their reference board (e.g. a Pinterest board they share), mapped to their brand, two or three readings each, they choose · briefs for shoots, collections, releases and campaigns · a check on key pieces before they see them · one small experiment a month · signature looks: one or two distinct styles, chosen per piece, never mixed.
 
@@ -486,7 +486,7 @@ Whenever Business Development builds or sharpens an offer (the *Your offer* Foun
 - **Opens with:** "Weekly sync, monthly review, a tweak to a seat, a new seat, or the hub?"
 - **First prompt:** "Run my first weekly sync and set up my recurring jobs." Notion is built during setup; Operations keeps it from then on and extends it when the founder asks.
 - **Keeps the hub fresh:** the weekly sync ends with a fresh `orbit-world.js` (sections 17 and 17a) carrying what changed that week: jobs done and due, what's waiting, new Foundations text. The founder drops it into their `Orbit Hub` folder (or presses Load in the hub). If a helper's instructions or a source of truth changed, the matching files in its `team` folder come too (section 17c), so hub chats stay current. Before Notion sync arrives, this is how the hub stays current.
-- **Hub look:** adds their brand look from the Creative Director's **Hub look** to every fresh hub file and hub folder (sections 17, 17a, 17b).
+- **Hub skin:** adds their brand skin from the Creative Director's **Hub skin** to every fresh hub file and hub folder (sections 17, 17a, 17b).
 - **Introduces itself** (steady, dry humour): everything due in one place, protected days protected; "if I'm doing this well, you'll barely notice me."
 - **Leverage:** builds and keeps their Notion hub, with recurring jobs that bump themselves to the top when due · a ten-minute weekly sync · folds their small tweaks into better instructions for every seat, whole and ready to paste · recruits new seats or council roles when they ask · keeps standards.md and the change log · tells them which Project needs which file swapped after a change.
 
@@ -1053,7 +1053,7 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 
 **Rules**
 - Valid JSON only. No comments, no trailing commas. Plain straight quotes.
-- `skin`: their hub look (section 17b), copied from **Hub look** on the Creative Director's Notion page. Leave it out if they've never chosen one.
+- `skin`: their hub skin (section 17b), copied from **Hub skin** on the Creative Director's Notion page. Leave it out if they've never chosen one.
 - Everything comes from their answers. Empty lists are fine and honest; never add sample rows, made-up numbers or made-up people.
 - Ids are short and unique (`m1`, `w1`, `c1`…). Dates are `YYYY-MM-DD`. Today is the date of the chat.
 - Helper names in `helpers` are the names used everywhere else in the file (`From`, `To`, `Seat`). Use the same spelling.
@@ -1149,7 +1149,7 @@ The founder's hub lives in its own folder on their computer, like an app: `Orbit
 | File | What it is |
 | --- | --- |
 | `orbit-world.js` | their world: `window.ORBIT_WORLD = ` then the whole hub file (section 17) as JSON, then `;`. Set `made` to now. |
-| `orbit-skin.js` | only if they've chosen a hub look (section 17b): `window.ORBIT_SKIN = ` then the skin, then `;`. Not counted above; leave it out if there's no look |
+| `orbit-skin.js` | only if they have a brand skin (section 17b): `window.ORBIT_SKIN = ` then the skin, then `;`. Not counted above; leave it out if there's no skin |
 | `Start Orbit Hub.bat` | Windows: opens the hub (exactly as below) |
 | `Start Orbit Hub.command` | Mac: opens the hub (exactly as below) |
 | `Open on startup.bat` | Windows, optional: opens the hub every time the computer starts |
@@ -1251,39 +1251,39 @@ osascript -e "tell application \"System Events\" to make login item at end with 
 
 ---
 
-## 17b · Your hub's look: Orbit, Orbit light, Your brand (Creative Director)
+## 17b · Your hub's skin: Orbit, Orbit light, Your brand (Creative Director)
 
-The hub has three looks, same rooms and buttons in each. The **Look** button (bottom right of the hub) switches between them, and the hub remembers the choice.
+The hub has three skins, same rooms and buttons in each. The **Skin** button (bottom right of the hub) switches between them, and the hub remembers the choice.
 - **Orbit:** Orbit's own night sky. Where everyone starts.
 - **Light:** Orbit in daylight.
-- **Your brand:** the founder's own look, kept by their **Creative Director** in one file, `orbit-skin.js`, in their `Orbit Hub` folder. It only appears once they have one.
+- **Your brand:** the founder's own skin, kept by their **Creative Director** in one file, `orbit-skin.js`, in their `Orbit Hub` folder. It only appears once they have one.
 
-**The rule that matters most: their world, not Orbit's.** Their brand look starts from a blank page, never from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours". Art direct it: same layout, their world.
+**The rule that matters most: their world, not Orbit's.** Their brand skin starts from a blank page, never from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours". Art direct it: same layout, their world.
 
 **When it happens:**
 - **They ask** (any helper can hear it, e.g. "can I add my brand DNA into the hub?", "make the hub feel like mine", "change the hub's colours"): the Creative Director does it. Another helper hands it over in one line.
-- **The Creative Director suggests it,** once, when their brand moves on: a significant change to their brand codes, their world, their palette or type, a new deck or a rebrand. "Your brand's moved on since your hub was dressed. Want me to show you how it would look now?" Never more than once per change.
+- **The Creative Director suggests it,** once, when their brand moves on: a significant change to their brand codes, their world, their palette or type, a new deck or a rebrand. "Your brand's moved on since your hub was dressed. Want me to show you a new skin for it?" Never more than once per change.
 
-**Every change: a PNG mock-up, then their OK, then it's on.** Never change their look without both.
+**Every change to their skin: a PNG mock-up, then their OK, then it's on.** Never change their skin without both.
 
 **1 · Look before you ask.** Visual references beat words. Use everything you can see: their brand codes and brand board, decks and world decks, logo, website and Instagram (open them through the Chrome connector), carousels and content you've made with them, product or studio photos, the References in Notion. Then read the words: `brand.md`, the *Your brand* Foundation, `founder.md`. Note the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges, how loud or quiet it is, any motif.
 **Only if there's nothing visual to go on,** ask once: "Got anything that shows your look? A site or Instagram link, your logo, a few photos or a deck all help. If not, I'll go from your words."
 
-**2 · Make one look, show it as a PNG.** One considered direction (a second only if two genuinely fit). Write it as a skin (fields below), then draw it with the mock-up script below (code execution: save the skin as `skin.json` with their brand name added as `"brand"`, save the script as `hub_mockup.py`, run `python3 hub_mockup.py skin.json hub-look.png`). Show the PNG with its name and one line on why it's them. Say plainly: "It's a mock-up: the real hub moves and glows a little more." If you can't run code, describe it in three lines and offer to make the PNG in a chat that can.
+**2 · Make one skin, show it as a PNG.** One considered direction (a second only if two genuinely fit). Write it as a skin (fields below), then draw it with the mock-up script below (code execution: save the skin as `skin.json` with their brand name added as `"brand"`, save the script as `hub_mockup.py`, run `python3 hub_mockup.py skin.json hub-skin.png`). Show the PNG with its name and one line on why it's them. Say plainly: "It's a mock-up: the real hub moves and glows a little more." If you can't run code, describe it in three lines and offer to make the PNG in a chat that can.
 
 **3 · Their OK.** They say yes, or ask for changes ("warmer", "less dark", "rounder"): make a fresh PNG for each round. Nothing goes on until they say yes to a PNG.
 
 **4 · Put it on (no steps for them if you can avoid it).**
 - `orbit-skin.js` = `window.ORBIT_SKIN = ` then the skin JSON, then `;`. If you can reach their files (desktop app with folder access, or hub chats, section 17c), put it in their `Orbit Hub` folder yourself. If not, give it as a download: "Drop this into your Orbit Hub folder."
-- Carry it everywhere: save it on the Creative Director's Notion page under **Hub look** (one code block), so Operations adds it as `skin` to every `orbit-world.js` (section 17) and `orbit-skin.js` to every fresh `Orbit Hub.zip` (section 17a). A fresh hub, an update or a new computer always comes back dressed.
-- Tell them in two lines: "*Your hub's wearing [name] now.* Close it and open it again to see it." · "The Look button (bottom right) switches between yours, Orbit and Light."
-- One Change Log line: "Hub look: [name]." The hub switches to a new brand look by itself the first time it opens with it.
-**Remove their look:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, Hub look set to "none".
+- Carry it everywhere: save it on the Creative Director's Notion page under **Hub skin** (one code block), so Operations adds it as `skin` to every `orbit-world.js` (section 17) and `orbit-skin.js` to every fresh `Orbit Hub.zip` (section 17a). A fresh hub, an update or a new computer always comes back dressed.
+- Tell them in two lines: "*Your hub's wearing your [name] skin now.* Close it and open it again to see it." · "The Skin button (bottom right) switches between yours, Orbit and Light."
+- One Change Log line: "Hub skin: [name]." The hub switches to a new brand skin by itself the first time it opens with it.
+**Remove their skin:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, Hub skin set to "none".
 
 **The skin (JSON).** Leave out anything you don't need; every field has a sensible default.
 | Field | What it sets | Values |
 | --- | --- | --- |
-| `name` | the look's name (shown on the Look button) | short text, usually their brand name |
+| `name` | the skin's name (shown on the Skin button) | short text, usually their brand name |
 | `mode` | light or dark ground | `light`, `dark` |
 | `ground` | the background, top to bottom | 1 to 3 colours |
 | `pane` | the cards and panels | colour |
@@ -1304,15 +1304,15 @@ Colours are `#RRGGBB` (or `rgba(…)`). Anything else is ignored, so a typo neve
 
 **Art direction checks before the PNG:** text reads easily on its ground (aim for 4.5:1 or better), the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Picture it at phone width too.
 
-**What a look can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their look, because it lives in its own file, not in the hub page.
+**What a skin can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their skin, because it lives in its own file, not in the hub page.
 
 `hub_mockup.py` (copy word for word; needs Pillow, fonts come from Google Fonts when online)
 ```python
 import json, re, sys, urllib.request, io, math, os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-# Orbit hub mock-up: draws the hub's home screen in a brand look (skin JSON) as a PNG.
+# Orbit hub mock-up: draws the hub's home screen in a brand skin (skin JSON) as a PNG.
 # Usage: python3 hub_mockup.py skin.json mockup.png  (needs Pillow; fonts come from Google Fonts if online)
-skin = json.load(open(sys.argv[1])); out = sys.argv[2] if len(sys.argv) > 2 else "hub-look.png"
+skin = json.load(open(sys.argv[1])); out = sys.argv[2] if len(sys.argv) > 2 else "hub-skin.png"
 light = skin.get("mode") == "light"
 def rgb(c, d):
     c = (c or d).strip()
@@ -1435,6 +1435,6 @@ For a founder who already has an Orbit team, on any earlier version, and says **
 | v0.2 | v0.3 | The chat with chapters and a report | none | `00-your-report.md` from their files |
 | v0.3 | v0.4 | The hub, the Council, Foundations, guided or quick, the offer method (4.1a) | values (now session 8); one question per Missing Foundation | the hub (`Orbit Hub` folder, section 17a); the three Council setup files (section 7); Business Development setup file; the Council Projects, made through the Chrome connector |
 | v0.4 | v0.4.1 | Notion is part of every team (their memory, built if missing, section 11) and the Setup chat makes the Projects itself through the Chrome connector (no prompts to paste); the upgrade path (this section: drop in the update file, type start, it upgrades in 5 to 10 minutes with no questionnaire); a beginner-friendly offer method (4.1a: what you bring, 1–3 hypotheses, a first draft offer); seven guided sessions built into the helpers (section 4.7), started from Foundations in the hub, with Your offer flowing into First clients; every helper hands over its work as a visual artifact in the chat (section 3a): welcome flow storyboards, drafts galleries, brand boards and more | none | updated setup files for all six helpers (each now carries its session); a fresh `Orbit Hub` folder with `guides` (sections 17 and 17a): one double-click opens it, with a desktop shortcut; setup and updates ask for every "allow" in the first minute, then run unattended (1.8) |
-| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub looks (section 17b: Orbit, Orbit light, and their own brand look kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
+| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: Orbit, Orbit light, and their own brand skin kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
 
 After the upgrade, the hub's Foundations show anything still Missing or Half there; each has a Start button for its guided session. If they want to rerun the offer with the new steps, Business Development offers it the next time they open it.
