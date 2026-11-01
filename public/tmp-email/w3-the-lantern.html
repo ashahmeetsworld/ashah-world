@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The lantern</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;padding:0;background:#070B18;}
+  a{text-decoration:none;}
+  @media (max-width:620px){ .w{width:100%!important;} .px{padding-left:22px!important;padding-right:22px!important;} .h1{font-size:38px!important;line-height:42px!important;} .stack{display:block!important;width:100%!important;} }
+</style></head>
+<body style="margin:0;padding:0;background:#070B18;">
+<div style="display:none;max-height:0;overflow:hidden;">A lantern only works if you carry it out.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#070B18" style="background:#070B18;"><tr><td align="center">
+<table role="presentation" class="w" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;">
+<tr><td class="px" align="center" bgcolor="#120C22" style="background:#120C22;background-image:radial-gradient(6% 10% at 50% 40%,#FFF6E4 0%,#FFE3B8 30%,rgba(242,180,140,.7) 60%,rgba(242,180,140,0) 100%),radial-gradient(26% 34% at 50% 40%,rgba(242,180,140,.30),rgba(224,140,126,.08) 60%,rgba(7,11,24,0) 100%),radial-gradient(60% 20% at 50% 100%,rgba(224,140,126,.12),rgba(7,11,24,0) 80%),linear-gradient(180deg,#070B18,#120C22);padding:190px 48px 60px;">
+  <div style="font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:11px;letter-spacing:6px;color:#F2B48C;">THE LANTERN</div>
+  <div class="h1" style="margin-top:22px;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-style:italic;font-weight:400;font-size:46px;line-height:50px;color:#F6F1E7;">Why I give the best thing away.</div>
+</td></tr><tr><td class="px" align="left" style="padding:44px 56px 10px;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-size:20px;line-height:30px;color:#D8D2E4;text-align:left;"><p style="margin:0 0 18px;">Hey {{ contact.FIRSTNAME | default : "there" }},</p><p style="margin:0 0 18px;">A lantern only works if you carry it out of the house.</p><p style="margin:0 0 18px;">Why is Orbit free? Because I'd rather founders spent their days on expression and on living, not on admin. So it's free, for good.</p></td></tr>{% if contact.JOINED_VIA == "os" or contact.OS_LATER == "yes" %}<tr><td class="px" align="left" style="padding:24px 56px 0;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-size:19px;line-height:28px;color:#D8D2E4;text-align:left;"><p style="margin:0 0 18px;">Already got it? Tell me how it's turning. Hit reply.</p></td></tr>{% else %}<tr><td style="padding:10px 48px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td bgcolor="#8FB4F6" style="border-radius:14px;background:#8FB4F6;background-image:linear-gradient(100deg,#7FD8F0,#8FB4F6 50%,#A996FF);padding:24px 26px;">
+  <div style="font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:10px;letter-spacing:4px;color:#0B1430;">FREE · ORBIT</div>
+  <div style="margin-top:8px;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-style:italic;font-size:24px;line-height:29px;color:#070B18;">Six helpers. One centre. You.</div>
+  <div style="margin-top:14px;"><a href="https://ashahmeetsworld.github.io/ashah-world/orbit/" style="font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:#070B18;">GET ORBIT &rarr;</a></div>
+</td></tr></table></td></tr>{% endif %}<tr><td class="px" style="padding:22px 56px 0;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-style:italic;font-size:21px;color:#D8D2E4;">Ashah</td></tr><tr><td class="px" align="center" style="padding:44px 48px 0;"><div style="height:1px;line-height:1px;font-size:1px;background:#4D4A63;opacity:.45;">&nbsp;</div></td></tr>
+<tr><td class="px" align="center" style="padding:30px 48px 0;font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;font-style:italic;font-size:22px;color:#8A7F96;"><a href="https://ashahmeetsworld.github.io/ashah-world/" style="color:#8A7F96;text-decoration:none;">A·M·W</a></td></tr>
+<tr><td class="px" align="center" style="padding:10px 48px 0;font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:11px;letter-spacing:4px;"><a href="https://ashahmeetsworld.github.io/ashah-world/" style="color:#8A7F96;text-decoration:none;">VISIT THE WORLD</a></td></tr>
+<tr><td class="px" align="center" style="padding:16px 48px 0;font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:10px;letter-spacing:3px;"><a href="https://www.instagram.com/ashah.world/" style="color:#8A7F96;text-decoration:none;">INSTAGRAM</a><span style="color:#4D4A63;">&nbsp;&nbsp;·&nbsp;&nbsp;</span><a href="https://www.linkedin.com/in/ashahpeters/" style="color:#8A7F96;text-decoration:none;">LINKEDIN</a><span style="color:#4D4A63;">&nbsp;&nbsp;·&nbsp;&nbsp;</span><a href="https://x.com/ashahmeetsworld" style="color:#8A7F96;text-decoration:none;">X</a></td></tr>
+<tr><td class="px" align="center" style="padding:24px 48px 40px;font-family:'DM Sans', Helvetica, Arial, sans-serif;font-size:11px;line-height:18px;letter-spacing:1px;color:#4D4A63;text-align:center;">
+Ashah Meets World · Melbourne, Australia<br>You're getting this because you joined at Ashah Meets World. <a href="{{ unsubscribe }}" style="color:#8A7F96;text-decoration:underline;">Unsubscribe</a>
+</td></tr>
+</table></td></tr></table>
+</body></html>
