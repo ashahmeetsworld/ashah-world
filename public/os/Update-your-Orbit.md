@@ -51,7 +51,7 @@ If Notion isn't connected, ask in the same message: "And connect Notion: in Clau
 | The report | v0.3 | `00-your-report.md` exists | made from their sources and chats (OS section 16) |
 | The hub (`Orbit Hub` folder) | v0.4.1 | don't check, and never ask: always make a fresh one | `Orbit Hub.zip` (OS sections 17 and 17a), made from their sources, Projects and work so far; one double-click on Start Orbit Hub opens it, with a desktop shortcut |
 | Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Turn on hub chats files (17a); at the end, the Phase 2 lines from 17c |
-| Your hub's look (skins) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub can wear their brand from this version. Never change their look in the update. If they already chose one (Hub look on Operations' Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "your hub can now wear your brand: ask me for a look" |
+| Your hub's look (Orbit, Light, Your brand) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub has a Look button (Orbit, Light, and their own brand look once the Creative Director makes one). Never change their look in the update. If they already have one (Hub look on the Creative Director's Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "a Look button on your hub, and your Creative Director can dress it in your brand: just ask" |
 | Each helper's room in the hub: its jobs and buttons (skills) | v0.4 | the hub shows their helpers, with buttons | 3 to 5 buttons per helper from the OS (section 17, Skills), tuned to what each one actually does for them now |
 | Foundations | v0.4 | the hub's Foundations tab | the six basics from their sources, each Ready, Half there or Missing |
 | Values and mission (unlock the Advisory Board) | v0.4.1 | standards.md has seven values in order, founder.md has a mission | if both are there, mark the Foundations *Your values* and *Your mission* Ready; if not, mark them Missing (the hub keeps the board room locked and offers session 8). Never ask for them in the update |
@@ -470,6 +470,7 @@ Whenever Business Development builds or sharpens an offer (the *Your offer* Foun
 - **By model:** *service:* how the work is shown: portfolio, proposals, case studies. *Physical product:* collections, lookbooks, shoots, packaging. *Music:* the visual world of each release: artwork, video, live visuals. *Digital:* product design, previews, thumbnails, the course look.
 - **Opens with:** "A brief, a check on something you've made, the monthly brand check, or a change to the brand?"
 - **First prompt:** "Read my brand answers back to me as a one-page brand sheet. Ask me about anything that's thin before you fill it."
+- **Hub look:** keeps their hub's *Your brand* look (section 17b): a PNG mock-up and their OK before any change, and one suggestion when their brand moves on.
 - **Introduces itself** (few words): "Keep what's yours. Take out the rest." Nothing more than it needs.
 - **Leverage:** their brand codes (section 9) kept as one living guide every seat follows · a monthly scan of their reference board (e.g. a Pinterest board they share), mapped to their brand, two or three readings each, they choose · briefs for shoots, collections, releases and campaigns · a check on key pieces before they see them · one small experiment a month · signature looks: one or two distinct styles, chosen per piece, never mixed.
 
@@ -485,7 +486,7 @@ Whenever Business Development builds or sharpens an offer (the *Your offer* Foun
 - **Opens with:** "Weekly sync, monthly review, a tweak to a seat, a new seat, or the hub?"
 - **First prompt:** "Run my first weekly sync and set up my recurring jobs." Notion is built during setup; Operations keeps it from then on and extends it when the founder asks.
 - **Keeps the hub fresh:** the weekly sync ends with a fresh `orbit-world.js` (sections 17 and 17a) carrying what changed that week: jobs done and due, what's waiting, new Foundations text. The founder drops it into their `Orbit Hub` folder (or presses Load in the hub). If a helper's instructions or a source of truth changed, the matching files in its `team` folder come too (section 17c), so hub chats stay current. Before Notion sync arrives, this is how the hub stays current.
-- **Hub look:** when they want their brand in the hub, Operations dresses it in a skin made from their own look (section 17b): three looks to try on, they pick, it's on.
+- **Hub look:** adds their brand look from the Creative Director's **Hub look** to every fresh hub file and hub folder (sections 17, 17a, 17b).
 - **Introduces itself** (steady, dry humour): everything due in one place, protected days protected; "if I'm doing this well, you'll barely notice me."
 - **Leverage:** builds and keeps their Notion hub, with recurring jobs that bump themselves to the top when due · a ten-minute weekly sync · folds their small tweaks into better instructions for every seat, whole and ready to paste · recruits new seats or council roles when they ask · keeps standards.md and the change log · tells them which Project needs which file swapped after a change.
 
@@ -1052,7 +1053,7 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 
 **Rules**
 - Valid JSON only. No comments, no trailing commas. Plain straight quotes.
-- `skin`: their hub look (section 17b), copied from **Hub look** on Operations' Notion page. Leave it out if they've never chosen one.
+- `skin`: their hub look (section 17b), copied from **Hub look** on the Creative Director's Notion page. Leave it out if they've never chosen one.
 - Everything comes from their answers. Empty lists are fine and honest; never add sample rows, made-up numbers or made-up people.
 - Ids are short and unique (`m1`, `w1`, `c1`…). Dates are `YYYY-MM-DD`. Today is the date of the chat.
 - Helper names in `helpers` are the names used everywhere else in the file (`From`, `To`, `Seat`). Use the same spelling.
@@ -1250,33 +1251,39 @@ osascript -e "tell application \"System Events\" to make login item at end with 
 
 ---
 
-## 17b · Skins: dress the hub in their brand (Operations)
+## 17b · Your hub's look: Orbit, Orbit light, Your brand (Creative Director)
 
-When the founder asks something like "can I add my brand DNA into the hub?", "make the hub feel like mine" or "change how my hub looks", Operations gives the hub a **skin**: their colours, their type, their texture, their mood, on the same hub. Like art directing a set: the rooms, buttons and wheel stay exactly where they are; only the look changes. About five minutes, then it's set and forget.
+The hub has three looks, same rooms and buttons in each. The **Look** button (bottom right of the hub) switches between them, and the hub remembers the choice.
+- **Orbit:** Orbit's own night sky. Where everyone starts.
+- **Light:** Orbit in daylight.
+- **Your brand:** the founder's own look, kept by their **Creative Director** in one file, `orbit-skin.js`, in their `Orbit Hub` folder. It only appears once they have one.
 
-**The rule that matters most: their world, not Orbit's.** Start from a blank page, not from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours".
+**The rule that matters most: their world, not Orbit's.** Their brand look starts from a blank page, never from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours". Art direct it: same layout, their world.
 
-**1 · Look before you ask.** Visual references beat words. Gather what you can see without asking: their brand board or deck, brand codes, logo, website and Instagram (open them through the Chrome connector), product or studio photos, anything the Creative Director has made with them. Then read the words: the *Your brand* Foundation, `brand.md`, `founder.md`. Note: the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges (soft, sharp, round), how loud or quiet it is, any motif.
-**Only if there's nothing visual to go on**, ask once: "Got anything that shows your look? A site or Instagram link, your logo, a few photos or a moodboard all help. If not, I'll go from your words." Then work with whatever comes back, or without it.
+**When it happens:**
+- **They ask** (any helper can hear it, e.g. "can I add my brand DNA into the hub?", "make the hub feel like mine", "change the hub's colours"): the Creative Director does it. Another helper hands it over in one line.
+- **The Creative Director suggests it,** once, when their brand moves on: a significant change to their brand codes, their world, their palette or type, a new deck or a rebrand. "Your brand's moved on since your hub was dressed. Want me to show you how it would look now?" Never more than once per change.
 
-**2 · Make three looks, fast.** Three different directions from the same brand, not three colourways of one idea (for example: *the everyday*, *the bold one*, *the quiet one*). Give each a short name and one line on why it's them. Each look is a skin (fields below). Then show them, in this order:
-- **Try-on links** (the real hub, dressed): `https://ashahmeetsworld.github.io/ashah-world/os/hub.html#skin=` followed by the skin as compact JSON, UTF-8, base64url (with code execution: `base64.urlsafe_b64encode(json.dumps(skin, separators=(",", ":")).encode()).decode()`). It opens the sample hub in that look in one tap, with a **Keep this look** button. If hub chats are on (section 17c), also give `http://127.0.0.1:4777/#skin=…`, which shows *their own* hub dressed.
-- **One picture of all three side by side** (an artifact in the chat), so they can compare at a glance. Say it's a sketch; the links are the real thing.
-Never wait on code you can't run: if you can't make the links, the picture alone is fine.
+**Every change: a PNG mock-up, then their OK, then it's on.** Never change their look without both.
 
-**3 · They pick.** "A", a name, or "Keep this look" on a link. Small tweaks ("warmer", "less dark", "rounder") go round once or twice, with a fresh link each time. Don't push past three rounds; suggest they live with it for a week.
+**1 · Look before you ask.** Visual references beat words. Use everything you can see: their brand codes and brand board, decks and world decks, logo, website and Instagram (open them through the Chrome connector), carousels and content you've made with them, product or studio photos, the References in Notion. Then read the words: `brand.md`, the *Your brand* Foundation, `founder.md`. Note the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges, how loud or quiet it is, any motif.
+**Only if there's nothing visual to go on,** ask once: "Got anything that shows your look? A site or Instagram link, your logo, a few photos or a deck all help. If not, I'll go from your words."
+
+**2 · Make one look, show it as a PNG.** One considered direction (a second only if two genuinely fit). Write it as a skin (fields below), then draw it with the mock-up script below (code execution: save the skin as `skin.json` with their brand name added as `"brand"`, save the script as `hub_mockup.py`, run `python3 hub_mockup.py skin.json hub-look.png`). Show the PNG with its name and one line on why it's them. Say plainly: "It's a mock-up: the real hub moves and glows a little more." If you can't run code, describe it in three lines and offer to make the PNG in a chat that can.
+
+**3 · Their OK.** They say yes, or ask for changes ("warmer", "less dark", "rounder"): make a fresh PNG for each round. Nothing goes on until they say yes to a PNG.
 
 **4 · Put it on (no steps for them if you can avoid it).**
-- **The skin file:** `orbit-skin.js` holding `window.ORBIT_SKIN = ` then the skin JSON, then `;`. If you can reach their files (desktop app with folder access), put it in their `Orbit Hub` folder yourself. If not, give it as a download: "Drop this into your Orbit Hub folder." ("Keep this look" on a try-on link downloads the same file.)
-- **Carry it everywhere:** add it as `skin` in every `orbit-world.js` you make from now on (section 17), include `orbit-skin.js` in every fresh `Orbit Hub.zip` (section 17a), and save it on Operations' Notion page under **Hub look** (one code block), so a fresh hub, an update or a new computer always comes back dressed.
-- Tell them in two lines: "*Your hub's wearing [name] now.* Close it and open it again (or press Start Orbit Hub) to see it." · "Want a change later? Just ask me for a new look."
-- One Change Log line: "Hub look: [name]."
-**Back to Orbit's own look:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, and Hub look set to "Orbit".
+- `orbit-skin.js` = `window.ORBIT_SKIN = ` then the skin JSON, then `;`. If you can reach their files (desktop app with folder access, or hub chats, section 17c), put it in their `Orbit Hub` folder yourself. If not, give it as a download: "Drop this into your Orbit Hub folder."
+- Carry it everywhere: save it on the Creative Director's Notion page under **Hub look** (one code block), so Operations adds it as `skin` to every `orbit-world.js` (section 17) and `orbit-skin.js` to every fresh `Orbit Hub.zip` (section 17a). A fresh hub, an update or a new computer always comes back dressed.
+- Tell them in two lines: "*Your hub's wearing [name] now.* Close it and open it again to see it." · "The Look button (bottom right) switches between yours, Orbit and Light."
+- One Change Log line: "Hub look: [name]." The hub switches to a new brand look by itself the first time it opens with it.
+**Remove their look:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, Hub look set to "none".
 
 **The skin (JSON).** Leave out anything you don't need; every field has a sensible default.
 | Field | What it sets | Values |
 | --- | --- | --- |
-| `name` | the look's name | short text |
+| `name` | the look's name (shown on the Look button) | short text, usually their brand name |
 | `mode` | light or dark ground | `light`, `dark` |
 | `ground` | the background, top to bottom | 1 to 3 colours |
 | `pane` | the cards and panels | colour |
@@ -1286,7 +1293,7 @@ Never wait on code you can't run: if you can't make the links, the picture alone
 | `helpers` | each helper's colour on the wheel: `tech` (Operations, Funnel), `people` (Business Development, customer care), `make` (Content, Creative Director), plus `desk`, `mentor`, `board`, `studio`, `intern` | colours |
 | `sky` | the backdrop's texture | `aurora`, `embers`, `mesh` (soft colour fields), `grid`, `grain`, `plain` |
 | `skyColours` | the colours in that texture | 1 to 3 colours |
-| `backdrop` (+ `fade` 0 to 0.95) | their own photo behind everything, dimmed by `fade` | an image file in the Orbit Hub folder, or an https link. Not shown on try-on links |
+| `backdrop` (+ `fade` 0 to 0.95) | their own photo behind everything, dimmed by `fade` | an image file in the Orbit Hub folder, or an https link |
 | `cards` | how panels feel | `glass`, `solid`, `outline`, `paper` |
 | `corners` | edges | `soft`, `sharp`, `round` |
 | `labels` | small labels | `spaced` (letter-spaced caps), `plain`, `mono` |
@@ -1295,9 +1302,94 @@ Never wait on code you can't run: if you can't make the links, the picture alone
 | `glow` | the soft light around dots and cards | `true`, `false` |
 Colours are `#RRGGBB` (or `rgba(…)`). Anything else is ignored, so a typo never breaks the hub.
 
-**Art direction checks before you show a look:** text reads easily on its ground (aim for 4.5:1 or better), the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Phone first: picture it at phone width.
+**Art direction checks before the PNG:** text reads easily on its ground (aim for 4.5:1 or better), the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Picture it at phone width too.
 
-**What a skin can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their look, because the look lives in its own file, not in the hub page.
+**What a look can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their look, because it lives in its own file, not in the hub page.
+
+`hub_mockup.py` (copy word for word; needs Pillow, fonts come from Google Fonts when online)
+```python
+import json, re, sys, urllib.request, io, math, os
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+# Orbit hub mock-up: draws the hub's home screen in a brand look (skin JSON) as a PNG.
+# Usage: python3 hub_mockup.py skin.json mockup.png  (needs Pillow; fonts come from Google Fonts if online)
+skin = json.load(open(sys.argv[1])); out = sys.argv[2] if len(sys.argv) > 2 else "hub-look.png"
+light = skin.get("mode") == "light"
+def rgb(c, d):
+    c = (c or d).strip()
+    if c.startswith("rgba") or c.startswith("rgb"): return tuple(int(float(x)) for x in re.findall(r"[\d.]+", c)[:3])
+    c = c.lstrip("#"); c = "".join(ch * 2 for ch in c) if len(c) == 3 else c[:6]; return tuple(int(c[i:i + 2], 16) for i in (0, 2, 4))
+def mix(a, b, t): return tuple(round(a[i] * (1 - t) + b[i] * t) for i in range(3))
+G = [rgb(x, "#000") for x in (skin.get("ground") or (["#FFFFFF", "#F4F1EA", "#ECE6DA"] if light else ["#0A1024", "#05070F", "#03040A"]))]
+G = (G * 3)[:3]
+T = rgb(skin.get("text"), "#1A1714" if light else "#F2EFE8"); P = rgb(skin.get("pane"), "#FFFFFF" if light else "#080C1C")
+A = rgb(skin.get("accent"), "#6F9BFF"); S = rgb(skin.get("soft"), "#000") if skin.get("soft") else mix(G[1], T, .58)
+H = skin.get("helpers") or {}
+col = lambda k, d: rgb(H.get(k), d)
+def font(fam, size, italic=False):
+    if fam:
+        try:
+            ua = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.30 (KHTML, like Gecko) Safari/534.30"}
+            q = fam.replace(" ", "+") + (":ital,wght@1,400" if italic else ":wght@400")
+            css = urllib.request.urlopen(urllib.request.Request("https://fonts.googleapis.com/css2?family=" + q, headers=ua), timeout=8).read().decode()
+            blk = css.split("/* latin */")[-1]; url = re.search(r"url\((https://[^)]+)\)", blk).group(1)
+            return ImageFont.truetype(io.BytesIO(urllib.request.urlopen(url, timeout=8).read()), size)
+        except Exception: pass
+    for f in ["DejaVuSerif-Italic.ttf" if italic else "DejaVuSans.ttf", "DejaVuSans.ttf"]:
+        try: return ImageFont.truetype(f, size)
+        except Exception: pass
+    return ImageFont.load_default()
+it = skin.get("headlines", "italic") == "italic"
+HF = lambda n: font(skin.get("serif") or "Cormorant Garamond", n, it); BF = lambda n: font(skin.get("sans") or "DM Sans", n)
+LF = lambda n: font(skin.get("mono") if skin.get("labels") == "mono" else (skin.get("sans") or "DM Sans"), n)
+W, Hh = 1440, 900
+im = Image.new("RGB", (W, Hh)); d = ImageDraw.Draw(im)
+for y in range(Hh):
+    t = y / Hh; c = mix(G[0], G[1], t / .55) if t < .55 else mix(G[1], G[2], (t - .55) / .45); d.line([(0, y), (W, y)], fill=c)
+sky = skin.get("sky", "aurora"); SC = [rgb(x, "#45E992") for x in (skin.get("skyColours") or [skin.get("accent") or "#45E992", skin.get("hi") or "#7FD8F0", skin.get("warm") or "#A996FF"])]
+if sky in ("aurora", "mesh", "embers"):
+    glow = Image.new("RGB", (W, Hh), (0, 0, 0)); g = ImageDraw.Draw(glow)
+    spots = [(180, 60, 0), (1260, 260, 1), (720, 900, 2)] if sky == "mesh" else [(720, 80, 0), (400, 120, 1), (1100, 100, 2)] if sky == "aurora" else [(720, 960, 0)]
+    for x, y, i in spots: g.ellipse([x - 520, y - 220, x + 520, y + 220], fill=SC[i % len(SC)])
+    glow = glow.filter(ImageFilter.GaussianBlur(120)); im = Image.blend(im, Image.composite(glow, im, glow.convert("L").point(lambda v: 255 if v else 0)), .22 if not light else .3); d = ImageDraw.Draw(im)
+if sky == "grid":
+    for x in range(0, W, 48): d.line([(x, 0), (x, Hh)], fill=mix(G[1], T, .06))
+    for y in range(0, Hh, 48): d.line([(0, y), (W, y)], fill=mix(G[1], T, .06))
+cap = (lambda s: s.upper()) if skin.get("labels", "spaced") in ("spaced", "mono") else (lambda s: s)
+sp = skin.get("labels", "spaced") == "spaced"
+def label(x, y, s, f, c):
+    if sp:
+        for ch in cap(s): d.text((x, y), ch, font=f, fill=c); x += d.textlength(ch, font=f) + 4
+    else: d.text((x, y), cap(s), font=f, fill=c)
+r = {"sharp": 3, "round": 22}.get(skin.get("corners"), 10)
+def card(x, y, w, h, c, lab, rows):
+    style = skin.get("cards", "glass")
+    fill = None if style == "outline" else (P if style in ("solid", "paper") else mix(P, c, .14))
+    line = mix(G[1], T, .28) if style == "outline" else (None if style == "paper" else mix(P, c, .45))
+    d.rounded_rectangle([x, y, x + w, y + h], r, fill=fill, outline=line)
+    label(x + 20, y + 18, lab, LF(11), S)
+    yy = y + 46
+    for t1, t2 in rows:
+        d.text((x + 20, yy), t1, font=HF(21), fill=T); d.text((x + 20, yy + 28), t2, font=BF(13), fill=S); yy += 64
+label(56, 34, skin.get("brand", "Your brand"), LF(11), T); label(56, 96, "Sunday 1 November", LF(11), S)
+d.text((56, 120), "Good morning.", font=HF(56), fill=T); d.text((56, 192), "3 things are waiting on you.", font=BF(14), fill=S)
+card(56, 236, 330, 170, col("people", "#45E992"), "Waiting on you", [("Brand: one line on the feel", "Paste-back to approve"), ("A follow-up", "Due today")])
+card(56, 424, 330, 170, col("make", "#A996FF"), "This week", [("Behind the scenes", "1 Nov · Instagram · Drafted"), ("Why we do it slowly", "4 Nov · LinkedIn · Idea")])
+card(1054, 112, 330, 104, col("tech", "#4FA8FF"), "Live", [("Free sign-up gift", "Lead magnet · Funnel")])
+card(1054, 234, 330, 170, col("desk", "#6F9BFF"), "Next up", [("Weekly sync", "Operations"), ("Prospect scan", "Business Development")])
+cx, cy, R = 720, 378, 230; ring = mix(G[1], T, .2)
+d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=ring); d.ellipse([cx - 142, cy - 142, cx + 142, cy + 142], outline=mix(G[1], T, .12))
+names = [("Operations", "tech"), ("Funnel", "tech"), ("Business Development", "people"), ("Customer Care", "people"), ("Content", "make"), ("Creative Director", "make")]
+for i, (n, k) in enumerate(names):
+    a = -math.pi / 2 + i * math.pi / 3; x, y = cx + R * math.cos(a), cy + R * math.sin(a); c = col(k, {"tech": "#4FA8FF", "people": "#45E992", "make": "#A996FF"}[k])
+    d.line([(cx, cy), (x, y)], fill=mix(G[1], T, .1))
+    if skin.get("glow", True): d.ellipse([x - 14, y - 14, x + 14, y + 14], fill=mix(G[1], c, .25))
+    d.ellipse([x - 6, y - 6, x + 6, y + 6], fill=c)
+    f = HF(20); tw = d.textlength(n, font=f); d.text((x - tw / 2, y - 36 if i in (0, 1, 5) else y + 16), n, font=f, fill=T)
+d.ellipse([cx - 7, cy - 7, cx + 7, cy + 7], fill=mix(T, A, .2))
+d.rounded_rectangle([460, 820, 980, 864], 3 if r == 3 else 22, outline=mix(P, A, .5), fill=mix(G[2], P, .5))
+d.text((486, 832), "Ask the Front Desk…", font=HF(19), fill=S)
+im.save(out); print("saved", out)
+```
 
 ## 17c · Phase 2: chats inside the hub
 
@@ -1343,6 +1435,6 @@ For a founder who already has an Orbit team, on any earlier version, and says **
 | v0.2 | v0.3 | The chat with chapters and a report | none | `00-your-report.md` from their files |
 | v0.3 | v0.4 | The hub, the Council, Foundations, guided or quick, the offer method (4.1a) | values (now session 8); one question per Missing Foundation | the hub (`Orbit Hub` folder, section 17a); the three Council setup files (section 7); Business Development setup file; the Council Projects, made through the Chrome connector |
 | v0.4 | v0.4.1 | Notion is part of every team (their memory, built if missing, section 11) and the Setup chat makes the Projects itself through the Chrome connector (no prompts to paste); the upgrade path (this section: drop in the update file, type start, it upgrades in 5 to 10 minutes with no questionnaire); a beginner-friendly offer method (4.1a: what you bring, 1–3 hypotheses, a first draft offer); seven guided sessions built into the helpers (section 4.7), started from Foundations in the hub, with Your offer flowing into First clients; every helper hands over its work as a visual artifact in the chat (section 3a): welcome flow storyboards, drafts galleries, brand boards and more | none | updated setup files for all six helpers (each now carries its session); a fresh `Orbit Hub` folder with `guides` (sections 17 and 17a): one double-click opens it, with a desktop shortcut; setup and updates ask for every "allow" in the first minute, then run unattended (1.8) |
-| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: their brand on the hub, three looks to try on) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
+| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub looks (section 17b: Orbit, Orbit light, and their own brand look kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
 
 After the upgrade, the hub's Foundations show anything still Missing or Half there; each has a Start button for its guided session. If they want to rerun the offer with the new steps, Business Development offers it the next time they open it.
