@@ -10,10 +10,13 @@ import sectionsA from '../orbit/sections-a.html?raw';
 import sectionsB from '../orbit/sections-b.html?raw';
 import sectionsJs from '../orbit/sections.js?raw';
 import '../styles/orbit-v04.css';
+import latest from '../../public/os/latest.json';
 
 // v0.4 sections were built as a mock-up; their images and the sample hub live in public/orbit/
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const withBase = (h: string) => h.replaceAll('__BASE__', base);
+// the version shown on the page always comes from public/os/latest.json (the same file that tells hubs an update is out)
+const VERSION = latest.version;
+const withBase = (h: string) => h.replaceAll('__BASE__', base).replaceAll('__VERSION__', VERSION);
 const hubUrl = base + 'orbit/hub-demo.html';
 
 // the hero's last word cycles through these
@@ -24,7 +27,7 @@ const verbs = ['making', 'building', 'creating', 'living'];
   <section class="o-hero">
     <OrbitScene />
     <div class="wrap o-copy">
-      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit v0.4.4</span></p>
+      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit v{VERSION}</span></p>
       <p class="req"><i></i>Runs on Claude. Needs a paid Claude plan, a free Notion account and Claude in Chrome.</p>
       <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
       <p class="lede">Six AI helpers circle your work, built around you in Claude. You stay at the centre.</p>
