@@ -1712,8 +1712,8 @@ function chatPage(view) { if (!CHAT) { location.hash = "#home"; return; } chatDr
 const _openClaudeOut = openClaude;
 openClaude = function (skill, text) { startChat(skill, text); };
 /* Shown in a chat until Claude Code is set up on this PC; the chat page itself stays in the hub. */
-const SETUP_CARD = (exit) => `<div class="lsetup">${ic("spark", 14)}<div><b class="serif">One step left: chats inside your hub</b>
-  <p>Double-click <b>Turn on hub chats</b> in your Orbit Hub folder: about 5 minutes, two clicks in your browser. It's free on your Claude plan.</p>
+const SETUP_CARD = (exit) => `<div class="lsetup">${ic("spark", 14)}<div><b class="serif">Optional: chats inside your hub</b>
+  <p>Double-click <b>Bring your hub to life</b> in your Orbit Hub folder: about 5 minutes, two clicks in your browser. It's free on your Claude plan. Skip it and this chat simply opens in Claude, as it always has.</p>
   <p><a href="#" data-out>${exit}</a></p></div></div>`;
 
 /* ---------- the board ---------- */
@@ -2247,15 +2247,15 @@ function webLessons() {
 }
 function phase2Nudge() {
   try { if (localStorage.getItem("orbit-p2-later") === new Date().toISOString().slice(0, 10)) return; } catch (e) {}
-  document.body.insertAdjacentHTML("beforeend", `<div id="p2" class="p2n"><b>Chats can live right here.</b> <span>Double-click <i>Turn on hub chats</i> in your Orbit Hub folder. About 5 minutes, two clicks.</span>
+  document.body.insertAdjacentHTML("beforeend", `<div id="p2" class="p2n"><b>Bring your hub to life.</b> <span>Optional: chat with your team right here, not in a new tab. Double-click <i>Bring your hub to life</i> in your Orbit Hub folder. About 5 minutes.</span>
     <a href="#" id="p2more">How</a><a href="#" id="p2x" title="Not today">×</a></div>`);
   document.getElementById("p2x").onclick = ev => { ev.preventDefault(); try { localStorage.setItem("orbit-p2-later", new Date().toISOString().slice(0, 10)); } catch (e) {} document.getElementById("p2").remove(); };
-  document.getElementById("p2more").onclick = ev => { ev.preventDefault(); modal(`<h3>Chats inside your hub</h3>
-    <p>Right now every chat button opens Claude in a new tab. Phase 2 puts the chats right here, in your hub, on your own Claude plan. No API key, nothing extra to pay.</p>
-    <ol><li>Open your <b>Orbit Hub</b> folder and double-click <b>Turn on hub chats</b> (.bat on Windows, .command on Mac).</li>
+  document.getElementById("p2more").onclick = ev => { ev.preventDefault(); modal(`<h3>Bring your hub to life</h3>
+    <p>Optional. Everything already works: each chat button opens Claude in a new tab. This puts the chats, lessons and live updates right here in your hub, on your own Claude plan. No API key, nothing extra to pay. Stuck? Close this and carry on: nothing breaks, and you can try again any time.</p>
+    <ol><li>Open your <b>Orbit Hub</b> folder and double-click <b>Bring your hub to life</b> (.bat on Windows, .command on Mac).</li>
     <li>Your browser opens twice: click <b>Authorize</b> for Claude, then <b>Allow access</b> for Notion.</li>
     <li>That's it. Your hub reopens with chats inside. From then on, Start Orbit Hub as usual.</li></ol>
-    <p class="hint">No Turn on hub chats file in your folder? Type <b>update</b> in TEAM - Operations: you'll get a fresh Orbit Hub folder with it inside. Needs a paid Claude plan (Pro or Max), which Orbit already uses. Your computer needs to be on for chats, like any app.</p>`); };
+    <p class="hint">No Bring your hub to life file in your folder (older folders call it Turn on hub chats)? Type <b>update</b> in TEAM - Operations: you'll get a fresh Orbit Hub folder with it inside. Needs a paid Claude plan (Pro or Max), which Orbit already uses. Your computer needs to be on for chats, like any app.</p>`); };
 }
 
 function modal(html) {

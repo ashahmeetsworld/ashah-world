@@ -54,7 +54,7 @@ If Notion isn't connected, ask in the same message: "And connect Notion: in Clau
 | Hub skins: quiet backdrops, more than one surface, panels that stand apart | v0.4.4 | don't check, and never ask | nothing to set up: it comes with the fresh hub page. If they already have a brand skin, the Creative Director can offer once to add a backdrop from their world (OS section 17b), with a PNG and their OK first |
 | The Council in depth (Mentor lessons in the hub, path in modules, Board meetings, Front Desk pace) | v0.4.3 | the Mentor's instructions mention the SWOT read and LAYER PROVEN | new instructions for the Front Desk, Mentor and Advisory Board (OS section 7b), and `hub.curriculum` rebuilt as modules: keep every topic and any layer already ticked, add `Area`, `Line` and `Layer 1` to `Layer 3` |
 | The autopilot rule (set and forget; 99% of the prep, one clear action, then their "go") | v0.4.3 | every helper's instructions have rule 10 "set and forget" | add rule 10 to every helper's shared block (OS section 10) and the rule to `team/about.md`; nothing else changes |
-| Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Turn on hub chats files (17a); at the end, the Phase 2 lines from 17c |
+| Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Bring your hub to life files (17a); at the end, the Phase 2 lines from 17c |
 | Your hub's skin (Orbit, Light, Your brand) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub has a Skin button (Orbit, Light, and their own brand skin once the Creative Director makes one). Never change their skin in the update. If they already have one (Hub skin on the Creative Director's Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "a Skin button on your hub, and your Creative Director can make you a brand skin: just ask" |
 | Each helper's room in the hub: its jobs and buttons (skills) | v0.4 | the hub shows their helpers, with buttons | 3 to 5 buttons per helper from the OS (section 17, Skills), tuned to what each one actually does for them now |
 | Foundations | v0.4 | the hub's Foundations tab | the six basics from their sources, each Ready, Half there or Missing |
@@ -84,7 +84,7 @@ Progress lines look like: "Notion: added your Content Calendar ✓" · "Funnel: 
 > I filled a few gaps with best guesses, marked [guess]: [list, or "none"]. Change any of them whenever you like.
 > [only if values or mission are Missing:] Your Advisory Board opens once you've done *Your values and mission* in Foundations. About 15 minutes, whenever you like.
 > Last step: unzip **Orbit Hub** below, put it anywhere you like (we suggest your "Your operating system" folder) and double-click **Start Orbit Hub** (.bat on Windows, .command on Mac). Your hub opens, and a shortcut lands on your desktop. (Already have an Orbit Hub folder? Replace it. Your hub's skin comes along.)
-> Then Phase 2, chats inside your hub: double-click **Turn on hub chats** in that folder, and click **Authorize** and **Allow access** when your browser asks. About 5 minutes. (Already turned it on? Skip this: your chats stay on.)
+> Then Phase 2, chats inside your hub: double-click **Bring your hub to life** in that folder, and click **Authorize** and **Allow access** when your browser asks. About 5 minutes. (Already turned it on? Skip this: your chats stay on.)
 > [the first-time check line from OS section 17a]
 > *Build it once. Let it learn.*
 
@@ -1208,8 +1208,8 @@ The founder's hub lives in its own folder on their computer, like an app: `Orbit
 | `Start Orbit Hub.command` | Mac: opens the hub (exactly as below) |
 | `Open on startup.bat` | Windows, optional: opens the hub every time the computer starts |
 | `Open on startup.command` | Mac, optional: the same |
-| `Turn on hub chats.bat` | Windows: Phase 2, chats inside the hub (section 17c, exactly as below) |
-| `Turn on hub chats.command` | Mac: the same |
+| `Bring your hub to life.bat` | Windows: Phase 2, chats inside the hub (section 17c, exactly as below) |
+| `Bring your hub to life.command` | Mac: the same |
 | `team/` | for chats inside the hub (section 17c): `about.md`, one `<id>.md` per helper, and `sources/` |
 
 Each time, the start file fetches the newest hub page from the Orbit site into `Orbit Hub` as `Your hub.html`, so the hub itself stays up to date (offline, it uses the copy it already has, or `04 Hub demo.html` if that sits in the folder around it). The hub reads `orbit-world.js` sitting next to it. That's what turns the demo into theirs. Nothing about them is sent anywhere.
@@ -1268,7 +1268,7 @@ fi
 echo "Your hub is open. You can close this window."
 ```
 
-`Turn on hub chats.bat`
+`Bring your hub to life.bat`
 ```bat
 @echo off
 cd /d "%~dp0"
@@ -1277,7 +1277,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://ashahmeetswo
 pause
 ```
 
-`Turn on hub chats.command`
+`Bring your hub to life.command`
 ```bash
 #!/bin/bash
 cd "$(dirname "$0")"
@@ -1480,7 +1480,7 @@ for skin, out in runs: draw(skin, out)
 
 Phase 1 is everything above: the team, Notion, the Projects and the hub. Phase 2 comes straight after, and takes about 5 minutes: it lets every chat button in the hub open a chat **right there in the hub**, instead of sending them off to Claude. It runs through Claude Code on their own computer, signed in to their own Claude plan. **No API key, nothing extra to pay:** it uses the same plan and the same usage limits as their normal Claude chats. It needs a paid Claude plan (Pro or Max), which Orbit already asks for. Windows and Mac.
 
-**What they do:** double-click **Turn on hub chats** in their `Orbit Hub` folder, then two clicks in their browser: **Authorize** (Claude) and **Allow access** (Notion). That's all. The file does the rest by itself, in a window that says what it's doing in plain words: it installs Claude Code and a tiny free engine (uv, which brings its own Python), signs Claude Code in to their plan, connects Notion, checks a test chat works, and switches their hub over. Their hub reopens with chats inside. From then on, Start Orbit Hub (or the desktop shortcut) opens it the same way. Set and forget. Safe to run again any time: it only does what's missing.
+**What they do:** double-click **Bring your hub to life** in their `Orbit Hub` folder, then two clicks in their browser: **Authorize** (Claude) and **Allow access** (Notion). That's all. The file does the rest by itself, in a window that says what it's doing in plain words: it installs Claude Code and a tiny free engine (uv, which brings its own Python), signs Claude Code in to their plan, connects Notion, checks a test chat works, and switches their hub over. Their hub reopens with chats inside. From then on, Start Orbit Hub (or the desktop shortcut) opens it the same way. Set and forget. Safe to run again any time: it only does what's missing.
 
 **What it puts where:** the engine lives in a hidden `.orbit` folder in their home folder (so a fresh `Orbit Hub` folder from an update never switches chats off). The hub then opens at `http://127.0.0.1:4777`, served only to their own computer. Each helper chats with the instructions in `team/<id>.md`, the sources of truth in `team/sources/`, `team/about.md` and their Notion. Chats are saved in the hub, one thread per helper, with **New chat** to start fresh. Anything visual a helper makes (a board, a storyboard, a one-pager) opens from a button under its reply.
 
@@ -1493,8 +1493,8 @@ The weekly sync (Operations) refreshes these when anything changes, along with `
 **Real limits, said plainly when it comes up:** the computer has to be on for hub chats, like any app. Hub chats don't show in their Claude app history. Anything that needs Claude in Chrome (making Projects, the upgrade) still opens in the Claude app, and the hub does that by itself. If they hit their plan's limit, the chat says so and when it resets. Nothing they type goes anywhere except to Claude, like any Claude chat.
 
 **What to tell them (straight after Phase 1, step 3):**
-> *Phase 2: chats inside your hub.* About 5 minutes, then never again.
-> Open your **Orbit Hub** folder and double-click **Turn on hub chats** (*.bat* on Windows, *.command* on Mac). A window opens and does it all.
+> *Optional bonus: bring your hub to life.* Your team already works as it is: chat buttons open Claude. This brings the chats, lessons and live updates inside your hub. About 5 minutes, then never again. Get stuck? Skip it: nothing breaks, and you can do it any time.
+> Open your **Orbit Hub** folder and double-click **Bring your hub to life** (*.bat* on Windows, *.command* on Mac). A window opens and does it all.
 > Your browser opens twice: click **Authorize** for Claude, then **Allow access** for Notion. Leave the window open till it says *All set*.
 > Your hub reopens with chats inside. From now on, just open it as usual.
 
@@ -1520,7 +1520,7 @@ For a founder who already has an Orbit team, on any earlier version, and says **
 | v0.2 | v0.3 | The chat with chapters and a report | none | `00-your-report.md` from their files |
 | v0.3 | v0.4 | The hub, the Council, Foundations, guided or quick, the offer method (4.1a) | values (now session 8); one question per Missing Foundation | the hub (`Orbit Hub` folder, section 17a); the three Council setup files (section 7); Business Development setup file; the Council Projects, made through the Chrome connector |
 | v0.4 | v0.4.1 | Notion is part of every team (their memory, built if missing, section 11) and the Setup chat makes the Projects itself through the Chrome connector (no prompts to paste); the upgrade path (this section: drop in the update file, type start, it upgrades in 5 to 10 minutes with no questionnaire); a beginner-friendly offer method (4.1a: what you bring, 1–3 hypotheses, a first draft offer); seven guided sessions built into the helpers (section 4.7), started from Foundations in the hub, with Your offer flowing into First clients; every helper hands over its work as a visual artifact in the chat (section 3a): welcome flow storyboards, drafts galleries, brand boards and more | none | updated setup files for all six helpers (each now carries its session); a fresh `Orbit Hub` folder with `guides` (sections 17 and 17a): one double-click opens it, with a desktop shortcut; setup and updates ask for every "allow" in the first minute, then run unattended (1.8) |
-| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: Orbit, Orbit light, and their own brand skin kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
+| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, now Bring your hub to life, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: Orbit, Orbit light, and their own brand skin kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Bring your hub to life files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
 | v0.4.2 | v0.4.3 | The Council in depth (section 7b): the Mentor's SWOT read and lessons in the hub (drawing, one question at a time, layers ticked), the path in modules; the Board's Chair, monthly meeting, deep dive and minutes; the Front Desk's top three and pace call; one-click Recos from any chat; the autopilot rule (section 1.0: set and forget, 99% of the prep, then one clear action and their "go") | none | updated instructions for the Front Desk, Mentor and Advisory Board (section 7b); `hub.curriculum` rows with `Area` (module), `Line` and `Layer 1` to `Layer 3`; `team/desk.md`, `team/mentor.md`, `team/board.md` refreshed |
 | v0.4.3 | v0.4.4 | Hub skins: a quiet backdrop texture from their own world, `variants` (more than one surface for one brand, each in the Skin button), the contrast rule (panels never the same colour as the ground), previews in their own business content (section 17b); a neutral sample hub | none | the hub page (fresh, as always); their brand skin keeps working as it is |
 
