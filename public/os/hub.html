@@ -201,7 +201,7 @@ const ORBIT = (() => {
   const b64d = s => decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
   let W = null, sample = false;
   // A world can arrive in the address (#world=...), from a file, or from this browser's memory.
-  try { const m = location.hash.match(/world=([A-Za-z0-9_\-+/=]+)/); if (m) { W = JSON.parse(b64d(m[1])); localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); history.replaceState(null, "", location.pathname + "#home"); } } catch (e) {}
+  try { const m = location.hash.match(/world=([A-Za-z0-9_\-+/=]+)/); if (m) { W = JSON.parse(b64d(m[1])); localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", (window.ORBIT_WORLD && window.ORBIT_WORLD.made) || W.made || ""); history.replaceState(null, "", location.pathname + "#home"); } } catch (e) {}
   if (!W) { try { W = JSON.parse(localStorage.getItem(ORBIT_KEY) || "null"); } catch (e) {} }
   // Your Orbit Hub folder: orbit-world.js next to this page. A newer file wins; otherwise the moves made here since are kept.
   try { const F = window.ORBIT_WORLD; if (F && F.hub && (!W || (F.made || "") > (localStorage.getItem("orbit-world-made") || ""))) { W = F; localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", F.made || ""); } } catch (e) {}
@@ -1808,6 +1808,155 @@ addEventListener("message", e => { const d = e.data || {}; if (d.tour != null &&
 })();
 })();
 </script>
+
+<script>
+/* ---------- Orbit Phase 2: chats inside the hub ----------
+   Served by the hub's engine (http://127.0.0.1:4777), every chat button opens a chat right here,
+   through Claude Code on this computer, signed in to their own Claude plan. Opened as a plain file,
+   the hub hops over to the engine when it's running, or offers Phase 2 when it isn't. */
+(() => {
+const ENGINE = "http://127.0.0.1:4777/";
+const ON_ENGINE = location.protocol === "http:" && location.port === "4777";
+const webOpen = openClaude;  // the old way: a Claude chat or Project in a new tab
+const KEY = "orbit-chats";
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } };
+const store = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
+const nameOf = id => { try { return skillName(id); } catch (e) { return "your helper"; } };
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+
+// ----- opened as a file: move over to the engine if it's running -----
+if (!ON_ENGINE) {
+  if (location.protocol !== "file:" || ORBIT.sample()) return;
+  const ping = new Image();
+  ping.onload = () => {
+    let moved = false; try { moved = localStorage.getItem("orbit-moved") === "1"; } catch (e) {}
+    if (moved) return location.replace(ENGINE);
+    try { localStorage.setItem("orbit-moved", "1"); } catch (e) {}
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(ORBIT.world)))).replace(/\+/g, "-").replace(/\//g, "_");
+    location.replace(ENGINE + "#world=" + b64);
+  };
+  ping.onerror = () => phase2Nudge();
+  ping.src = ENGINE + "ping.gif?" + Date.now();
+  return;
+}
+
+function phase2Nudge() {
+  try { if (localStorage.getItem("orbit-p2-later") === new Date().toISOString().slice(0, 10)) return; } catch (e) {}
+  document.body.insertAdjacentHTML("beforeend", `<div id="p2" class="p2n"><b>Chats can live right here.</b> <span>Double-click <i>Turn on hub chats</i> in your Orbit Hub folder. About 5 minutes, two clicks.</span>
+    <a href="#" id="p2more">How</a><a href="#" id="p2x" title="Not today">×</a></div>`);
+  document.getElementById("p2x").onclick = ev => { ev.preventDefault(); try { localStorage.setItem("orbit-p2-later", new Date().toISOString().slice(0, 10)); } catch (e) {} document.getElementById("p2").remove(); };
+  document.getElementById("p2more").onclick = ev => { ev.preventDefault(); modal(`<h3>Chats inside your hub</h3>
+    <p>Right now every chat button opens Claude in a new tab. Phase 2 puts the chats right here, in your hub, on your own Claude plan. No API key, nothing extra to pay.</p>
+    <ol><li>Open your <b>Orbit Hub</b> folder and double-click <b>Turn on hub chats</b> (.bat on Windows, .command on Mac).</li>
+    <li>Your browser opens twice: click <b>Authorize</b> for Claude, then <b>Allow access</b> for Notion.</li>
+    <li>That's it. Your hub reopens with chats inside. From then on, Start Orbit Hub as usual.</li></ol>
+    <p class="hint">No Turn on hub chats file in your folder? Type <b>update</b> in TEAM - Operations: you'll get a fresh Orbit Hub folder with it inside. Needs a paid Claude plan (Pro or Max), which Orbit already uses. Your computer needs to be on for chats, like any app.</p>`); };
+}
+
+function modal(html) {
+  document.querySelector(".p2m")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div class="p2m"><div class="p2c">${html}<div class="pills" style="margin-top:14px"><a href="#" class="pill on" id="p2ok">Got it</a></div></div></div>`);
+  const m = document.querySelector(".p2m");
+  m.onclick = ev => { if (ev.target === m || ev.target.id === "p2ok") { ev.preventDefault(); m.remove(); } };
+}
+
+// ----- on the engine: chats in a side panel -----
+let STATUS = null;
+fetch("/api/status").then(r => r.json()).then(s => { STATUS = s; }).catch(() => { STATUS = { chats: false }; });
+const state = load();
+let cur = null, busy = false;
+
+function md(t) {
+  const e = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const inline = s => e(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<i>$2</i>")
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  const out = []; let list = null;
+  String(t || "").replace(/\r/g, "").split("\n").forEach(line => {
+    const li = line.match(/^\s*(?:[-*•]|\d+[.)])\s+(.*)/);
+    if (li) { if (!list) { list = []; out.push(list); } list.push(inline(li[1])); return; }
+    list = null;
+    if (!line.trim()) return out.push("");
+    const h = line.match(/^#{1,4}\s+(.*)/);
+    out.push(h ? `<p><b>${inline(h[1])}</b></p>` : `<p>${inline(line)}</p>`);
+  });
+  return out.map(x => Array.isArray(x) ? `<ul>${x.map(i => `<li>${i}</li>`).join("")}</ul>` : x).join("");
+}
+
+function draw() {
+  const p = document.getElementById("oc"); if (!p || !cur) return;
+  const c = state[cur] || { msgs: [] };
+  p.querySelector(".och b").textContent = cap(nameOf(cur));
+  const box = p.querySelector(".ocm");
+  box.innerHTML = (c.msgs.length ? "" : `<p class="ocempty">Ask ${esc(nameOf(cur))} anything. It knows your Orbit and reads your Notion.</p>`) +
+    c.msgs.map(m => `<div class="ocb ${m.r}">${m.r === "me" ? `<p>${esc(m.t).replace(/\n/g, "<br>")}</p>` : md(m.t)}${(m.files || []).map(f => `<a class="pill" href="/out/${encodeURIComponent(f)}" target="_blank" rel="noopener">${ic("easel", 13)}Open ${esc(f.replace(/\.[a-z]+$/i, "").replace(/[-_]/g, " "))}</a>`).join("")}</div>`).join("") +
+    (busy ? `<div class="ocb ai think"><p>${esc(cap(nameOf(cur)))} is thinking<span>.</span><span>.</span><span>.</span></p><p class="hint">Looking things up in Notion can take a minute.</p></div>` : "");
+  box.scrollTop = box.scrollHeight;
+  p.querySelector("button[type=submit]").disabled = busy;
+}
+
+function panel() {
+  if (document.getElementById("oc")) return document.getElementById("oc");
+  document.body.insertAdjacentHTML("beforeend", `<aside id="oc" class="oc"><div class="och"><span class="caps">Chat</span><b></b><a href="#" id="ocnew" title="Start fresh">New chat</a><a href="#" id="ocx" title="Close">×</a></div>
+    <div class="ocm"></div><form class="ocf"><textarea rows="2" placeholder="Type here. Enter sends, Shift+Enter for a new line."></textarea><button class="pill on" type="submit">Send</button></form></aside>`);
+  const p = document.getElementById("oc"), ta = p.querySelector("textarea");
+  p.querySelector("#ocx").onclick = ev => { ev.preventDefault(); p.classList.remove("open"); };
+  p.querySelector("#ocnew").onclick = ev => { ev.preventDefault(); if (busy) return; state[cur] = { msgs: [] }; store(state); draw(); ta.focus(); };
+  ta.onkeydown = ev => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); p.querySelector("form").requestSubmit(); } };
+  p.querySelector("form").onsubmit = ev => { ev.preventDefault(); const t = ta.value.trim(); if (t && !busy) { ta.value = ""; send(t); } };
+  return p;
+}
+
+async function send(text) {
+  const id = cur, c = state[id] = state[id] || { msgs: [] };
+  c.msgs.push({ r: "me", t: text }); busy = true; store(state); draw();
+  let reply;
+  try {
+    const r = await (typeof _f === "function" ? _f : fetch)("/api/chat", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: id, msg: text, sid: c.sid || null }) });
+    const body = await r.text();
+    if (!r.ok) throw new Error(body || "The hub's engine didn't answer.");
+    reply = JSON.parse(body);
+    if (reply.sid) c.sid = reply.sid;
+    c.msgs.push({ r: "ai", t: reply.text, files: reply.files || [] });
+  } catch (e) {
+    c.msgs.push({ r: "ai err", t: String(e.message || e).replace(/^TypeError: Failed to fetch$/, "The hub's engine isn't running. Double-click Start Orbit Hub again.") });
+  }
+  c.msgs = c.msgs.slice(-60); busy = false; store(state);
+  if (cur === id) draw();
+}
+
+openClaude = function (skill, text) {
+  text = String(text || "").trim();
+  // Upgrades and anything that needs Claude in Chrome stay in the Claude app.
+  if (/^Upgrade my Orbit/.test(text) || (STATUS && !STATUS.chats)) return webOpen(skill, text);
+  if (busy && cur !== skill) { /* let the other chat finish in the background */ }
+  cur = skill; const p = panel(); p.classList.add("open"); draw();
+  const ta = p.querySelector("textarea");
+  if (text && !/[:…]$/.test(text) && !busy) send(text); else { ta.value = text ? text + " " : ""; ta.focus(); }
+};
+document.getElementById("ask").onsubmit = ev => { ev.preventDefault(); const q = document.getElementById("q"); if (!q.value.trim()) return; openClaude(q.dataset.skill || "desk", q.value.trim()); q.value = ""; };
+})();
+</script>
+<style>
+.p2n{position:fixed;left:18px;bottom:96px;z-index:60;max-width:min(420px,calc(100vw - 36px));display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;padding:10px 14px;border-radius:14px;background:var(--panel-solid,rgba(6,10,22,.92));border:1px solid var(--hi,#7FD8F0);color:var(--t);font-size:12.5px}
+.p2n b{font:italic 400 17px var(--serif)}.p2n span{color:var(--s)}.p2n a{color:var(--hi,#7FD8F0)}#p2x{margin-left:auto;color:var(--s)}
+.p2m{position:fixed;inset:0;z-index:120;background:rgba(3,5,12,.7);display:grid;place-items:center;padding:16px}
+.p2c{max-width:520px;background:var(--panel-solid,rgba(8,12,28,.97));border:1px solid var(--b);border-radius:18px;padding:22px 24px;color:var(--t)}
+.p2c h3{margin:0 0 8px;font:italic 400 26px var(--serif)}.p2c ol{padding-left:18px}.p2c li{padding:3px 0}.p2c .hint{color:var(--s);font-size:12px}
+.oc{position:fixed;top:0;right:0;bottom:0;z-index:110;width:min(460px,100vw);display:flex;flex-direction:column;background:var(--panel-solid,rgba(6,9,20,.96));border-left:1px solid var(--b);backdrop-filter:blur(12px);transform:translateX(102%);transition:transform .35s ease}
+.oc.open{transform:none}
+.och{display:flex;align-items:baseline;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--h)}.och b{font:italic 400 22px var(--serif);flex:1}.och a{color:var(--s);font-size:12px}#ocx{font-size:20px;line-height:1}
+.ocm{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.ocb{max-width:92%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.55}.ocb p{margin:0 0 6px}.ocb p:last-child{margin-bottom:0}.ocb ul{margin:4px 0 6px;padding-left:18px}
+.ocb.me{align-self:flex-end;background:color-mix(in srgb,var(--hi,#7FD8F0) 12%,transparent);border:1px solid color-mix(in srgb,var(--hi,#7FD8F0) 30%,transparent)}.ocb.ai{align-self:flex-start;background:var(--panel,rgba(255,255,255,.04));border:1px solid var(--h)}
+.ocb.err{border-color:var(--warm,#F4B45E);color:var(--t)}.ocb a{color:var(--hi,#7FD8F0)}.ocb .pill{margin:8px 6px 0 0;display:inline-flex}.ocb code{background:rgba(255,255,255,.08);padding:0 5px;border-radius:4px}
+.ocb .hint{color:var(--s);font-size:11.5px}.think span{animation:ocd 1.2s infinite}.think span:nth-child(2){animation-delay:.2s}.think span:nth-child(3){animation-delay:.4s}
+@keyframes ocd{0%,100%{opacity:.2}50%{opacity:1}}
+.ocempty{color:var(--s);font:italic 400 18px var(--serif);margin:auto 0}
+.ocf{display:flex;gap:8px;align-items:flex-end;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--h)}
+.ocf textarea{flex:1;resize:none;background:var(--panel,rgba(5,7,15,.7));border:1px solid var(--h);border-radius:12px;padding:10px 12px;color:var(--t);font:13.5px/1.45 var(--sans);outline:none}
+.ocf textarea:focus{border-color:var(--c,var(--hi,#7FD8F0))}.ocf button[disabled]{opacity:.5}
+</style>
 
 </body>
 </html>
