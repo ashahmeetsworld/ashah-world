@@ -6,7 +6,12 @@
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 
-const VERSION = '0.1';
+const VERSION = '0.2';
+const glimpses = [
+  { f: 'door-drift', t: 'Doors rise from still water' },
+  { f: 'door-climb', t: 'A stair of light' },
+  { f: 'door-glow', t: 'The one that’s yours' },
+];
 const OPEN = '2027-01-04T00:00:00+11:00'; // Melbourne, daylight time
 const crafts = ['videographer', 'designer', 'game dev', 'music producer', 'photographer', 'writer', 'illustrator', 'fashion designer', '3D artist', 'animator', 'architect', 'DJ', 'tattoo artist', 'podcaster', 'painter', 'choreographer'];
 const phases = [
@@ -60,13 +65,29 @@ const phases = [
     </div>
   </section>
 
+  <!-- Glimpses: little loops seen through door frames (from the launch reels) -->
+  <section class="l-glimpse" aria-label="Glimpses of Lucid">
+    <div class="wrap">
+      <div class="gl-row">
+        {glimpses.map((g, i) => (
+          <figure class="gl" style={`--i:${i}`}>
+            <div class="gl-door">
+              <video src={u(`/lucid/${g.f}.mp4`)} poster={u(`/lucid/${g.f}.jpg`)} muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+            </div>
+            <figcaption>{g.t}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Rooms: any craft -->
   <section class="l-rooms">
     <div class="halo h1"></div>
     <div class="wrap">
       <p class="eyebrow">Your rooms</p>
       <h2>Five rooms. Any craft you can name.</h2>
-      <p class="sub">Nothing is preset. A short interview learns how you work in each craft and what you really need, then builds that room around you.</p>
+      <p class="sub">Nothing is preset. A short chat with Lucid learns how you work in each craft and what you really need, then builds that room around you.</p>
       <div class="doors">
         <div class="door content"><span class="lab">Optional</span><span class="nm">Content</span><span class="ln">Pairs with your Content Producer in Orbit.</span></div>
         {[1, 2, 3, 4, 5].map((i) => (
@@ -129,6 +150,7 @@ const phases = [
 </Base>
 
 <script is:inline>
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.gl video').forEach((v) => { v.removeAttribute('autoplay'); v.pause(); });
   // nights left until the doors open (Melbourne midnight); quietly hides itself once it's time
   (function () {
     var c = document.querySelector('.l-hero .count'); if (!c) return;
@@ -178,8 +200,17 @@ const phases = [
   .sub { color: var(--ink-2); font-size: 17px; line-height: 1.65; max-width: 58ch; margin: 0; }
   .eyebrow { color: #BFEFF7; }
 
+  .l-glimpse { position: relative; padding-block: 40px 0; }
+  .gl-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 44px); max-width: 860px; margin: 0 auto; align-items: end; }
+  .gl { margin: 0; text-align: center; }
+  .gl:nth-child(2) { transform: translateY(-26px); }
+  .gl-door { position: relative; aspect-ratio: 3 / 5; border-radius: 999px 999px 14px 14px; overflow: hidden; border: 1px solid rgba(233, 216, 255, .22); box-shadow: 0 30px 80px -40px rgba(201, 188, 255, .55), inset 0 0 0 1px rgba(255, 246, 236, .04); background: #070B18; animation: gl-float 9s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -3s); }
+  .gl-door video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gl figcaption { margin-top: 14px; font: 500 11px/1.4 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: rgba(233, 216, 255, .7); }
+  @keyframes gl-float { from { translate: 0 0; } to { translate: 0 -8px; } }
+  @media (max-width: 700px) { .gl-row { gap: 10px; } .gl, .gl:nth-child(2) { transform: none; } .gl figcaption { font-size: 9px; letter-spacing: .16em; } }
   .l-rooms { position: relative; padding-block: 120px 100px; overflow: hidden; }
-  .l-rooms .halo.h1 { position: absolute; width: 640px; height: 640px; right: -160px; top: 40px; border-radius: 50%; background: #C9BCFF; filter: blur(110px); opacity: .12; pointer-events: none; }
+  .l-rooms .halo.h1 { position: absolute; width: 640px; height: 640px; right: -160px; top: 220px; border-radius: 50%; background: #C9BCFF; filter: blur(110px); opacity: .12; pointer-events: none; }
   .doors { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; margin-top: 48px; align-items: end; }
   .door { position: relative; min-height: 300px; border-radius: 120px 120px 6px 6px; padding: 26px 20px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; overflow: hidden; }
   .door.content { background: rgba(20, 18, 62, .7); border: 1px solid var(--line); }
@@ -231,6 +262,7 @@ const phases = [
     .door .nm { font-size: 26px; }
   }
   @media (prefers-reduced-motion: reduce) {
+    .gl-door { animation: none; }
     .opal, .stars circle, .breathe, .d, .shimmer { animation: none; }
   }
 </style>
