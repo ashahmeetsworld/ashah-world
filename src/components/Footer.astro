@@ -59,9 +59,10 @@ const year = new Date().getFullYear();
   .passage-link:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(142, 98, 247, .6)); }
   .orbit-link:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(46, 230, 200, .45)); }
   /* Lucid (coming soon): opal colours that slowly shift */
-  .links a.lucid-link { background: linear-gradient(100deg, #FFC4E4, #E2B8FF 35%, #9FE6F5 70%, #F2A8D8); background-size: 160% 100%;
-    -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; animation: lucid-opal 10s ease-in-out infinite alternate; }
-  .lucid-link:hover { filter: brightness(1.15) drop-shadow(0 0 8px rgba(233, 216, 255, .45)); }
+  .links a.lucid-link { background: linear-gradient(100deg, #FF9AD5, #D49BFF 30%, #8FE9FF 55%, #FFF1E0 72%, #FF8FCF); background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; animation: lucid-opal 7s ease-in-out infinite alternate;
+    filter: saturate(1.25) drop-shadow(0 0 6px rgba(226, 184, 255, .35)); }
+  .lucid-link:hover { filter: saturate(1.35) brightness(1.15) drop-shadow(0 0 10px rgba(233, 200, 255, .6)); }
   @keyframes lucid-opal { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
   /* the "Coming soon" pop-up: tiny, above the link (absolutely placed, nothing moves), a little spark burst, held ~1.8s, then it drifts off */
   .lucid-wrap { position: relative; display: flex; }
