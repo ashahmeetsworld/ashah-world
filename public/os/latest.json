@@ -1,1 +1,62 @@
-{"version": "0.4.3", "update": "Update-your-Orbit.md", "notes": "Lessons with your Mentor inside the hub, your path in modules, and one-click Recos."}
+{
+ "version": "0.4.3",
+ "update": "Update-your-Orbit.md",
+ "notes": "Lessons with your Mentor inside the hub, your path in modules, and one-click Recos.",
+ "changes": [
+  {
+   "id": "mentor-lessons-in-hub",
+   "title": "Mentor lessons inside the hub: a drawing of each idea, one question at a time, layers ticked",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "path-by-modules",
+   "title": "Your path laid out in modules, three layers per topic",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ]
+  },
+  {
+   "id": "recos-from-chats",
+   "title": "Any chat can suggest a better way to work; one click adds it to Recos",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "rows-open-in-hub",
+   "title": "Clients, posts, topics and months open their page in the hub",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ]
+  },
+  {
+   "id": "council-in-depth",
+   "title": "Council in depth: Mentor SWOT read, Board meetings and deep dives with a Chair, Front Desk top three and pace call (OS 7b)",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "lessons-fallback",
+   "title": "Without hub chats switched on, lessons and chats open in Claude instead",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html"
+   ]
+  }
+ ]
+}
