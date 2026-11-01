@@ -1,0 +1,79 @@
+---
+// Lucid pre-sign-up: first name + email, posts to the Brevo form "Lucid list".
+// Sign up before the doors open and Lucid lands in your inbox on launch day (Mon 4 January 2027).
+// Brevo form: paste its sibforms.com/serve/... URL into site.json → lucidFormUrl.
+// Empty = preview mode: the form shows the confirmation without sending anything.
+import site from '../data/site.json';
+const BREVO_FORM_ACTION = site.lucidFormUrl;
+
+interface Props { source?: string }
+const { source = 'lucid-page' } = Astro.props;
+---
+<div class="lucid-signup">
+  <form class="ls-form" action={BREVO_FORM_ACTION || undefined} method="post" novalidate={!BREVO_FORM_ACTION}>
+    <label class="field"><span>First name</span><input type="text" name="FIRSTNAME" autocomplete="given-name" required /></label>
+    <label class="field"><span>Email</span><input type="email" name="EMAIL" placeholder="you@yourworld.com" autocomplete="email" required /></label>
+    <input type="hidden" name="SIGNUP_SOURCE" value={source} />
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
+    <input type="hidden" name="locale" value="en" />
+    <button class="ls-btn" type="submit"><span>Save me a door</span></button>
+    <p class="ls-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="ls-done" hidden>
+    <p class="ls-done__eyebrow">You're on the list</p>
+    <p class="ls-done__title">Your door is saved.</p>
+    <p class="ls-done__line">Confirm your email, then rest easy. On 4 January 2027, Lucid lands in your inbox.</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.lucid-signup').forEach((box) => {
+    const form = box.querySelector<HTMLFormElement>('.ls-form')!;
+    const done = box.querySelector<HTMLElement>('.ls-done')!;
+    const status = form.querySelector<HTMLElement>('.ls-status')!;
+    const btn = form.querySelector('button')!;
+    const label = btn.querySelector('span')!;
+    const original = label.textContent;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { status.textContent = 'Add your first name and email.'; return; }
+      btn.disabled = true; label.textContent = 'Saving…'; status.textContent = '';
+      try {
+        if (form.action && form.getAttribute('action')) {
+          await fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        }
+        if (typeof (window as any).gtag === 'function') (window as any).gtag('event', 'lucid_presignup', { magnet: 'lucid' });
+        form.hidden = true; done.hidden = false;
+        requestAnimationFrame(() => done.classList.add('is-in'));
+      } catch {
+        btn.disabled = false; label.textContent = original;
+        status.textContent = 'That didn’t go through. Please try again.';
+      }
+    });
+  });
+</script>
+
+<style>
+  .lucid-signup { width: 100%; max-width: 520px; margin: 0 auto; text-align: left; }
+  .ls-form { display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px; align-items: end; }
+  .ls-form .field { display: grid; gap: 8px; }
+  .ls-form .field span { font: 500 11px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: rgba(233, 216, 255, .75); }
+  .ls-form input { background: rgba(16, 24, 69, .55); border: 1px solid rgba(233, 216, 255, .22); border-radius: 12px; padding: 12px 14px; color: #F6F1E7; font: 16px var(--sans); outline: none; }
+  .ls-form input:focus { border-color: rgba(242, 198, 224, .6); }
+  .ls-btn { grid-column: 1 / -1; justify-self: center; border: 0; border-radius: 99px; padding: 14px 26px; cursor: pointer; font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #070B18;
+    background: linear-gradient(100deg, #FFF6EC, #F2C6E0 25%, #E2B8FF 50%, #9FE6F5 75%, #FFF6EC); background-size: 220% 100%; animation: ls-opal 10s ease-in-out infinite alternate;
+    box-shadow: 0 0 30px -8px rgba(233, 216, 255, .55); transition: box-shadow .4s, transform .4s; }
+  .ls-btn:hover { box-shadow: 0 0 46px -6px rgba(233, 216, 255, .8); transform: translateY(-1px); }
+  .ls-btn:disabled { opacity: .7; cursor: default; }
+  @keyframes ls-opal { to { background-position: 100% 0; } }
+  .ls-status { grid-column: 1 / -1; margin: 0; min-height: 1.4em; font-size: 14px; color: rgba(201, 196, 218, .8); text-align: center; }
+  .ls-form[hidden], .ls-done[hidden] { display: none; }
+  .hp { position: absolute; left: -9999px; }
+  .ls-done { opacity: 0; transform: translateY(10px); transition: opacity .8s ease, transform .8s ease; text-align: center; padding: 10px 0; }
+  .ls-done.is-in { opacity: 1; transform: none; }
+  .ls-done__eyebrow { margin: 0 0 12px; font: 500 11px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; color: #BFEFF7; }
+  .ls-done__title { margin: 0 0 10px; font: italic 400 clamp(34px, 4vw, 46px)/1.05 var(--serif); color: #FFF6EC; }
+  .ls-done__line { margin: 0 auto; color: #C9C4DA; max-width: 40ch; }
+  @media (max-width: 560px) { .ls-form { grid-template-columns: 1fr; } .ls-btn { justify-self: stretch; } }
+  @media (prefers-reduced-motion: reduce) { .ls-btn { animation: none; } }
+</style>

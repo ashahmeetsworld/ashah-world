@@ -74,3 +74,12 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - "Your rhythm" section (book, collection, single) sits just above "You stay in charge".
 - Copy rule: "launch" is used sparingly in body copy, never in headers. Label sets keep one rhythm ("Your brand, Your mission, Your offer...").
 - Interaction rule (Ashah): hover or reveal text must not push the content below down. Reserve the space and fade it in. Exceptions are allowed, but that's the default.
+
+## Lucid (coming soon, 1 Nov 2026)
+- `/lucid/` (`src/pages/lucid.astro`) is the coming-soon page for Lucid, Ashah's creative-sanctuary product (his personal workstation, separate from Orbit). Doors open Mon 4 January 2027; teasers from about 21 December 2026. The page shows a nights-to-go count that hides itself on the day.
+- Linked from the footer's second row only (right of Orbit), never the header. Hovering the footer link pops a tiny "Coming soon" (smaller than the link) just above it with a little spark burst (no layout shift), held about 1.8 s, then it drifts off.
+- Nav colours match the Lucid deck: Orbit is aurora green to violet (#5CFFB0, #2EE6C8, #4FB8FF, #A98CFF) in header and footer; Lucid is opal (#FFD6EC, #E2B8FF, #9FE6F5, #FFF6EC, #F2A8D8), slowly shifting.
+- Under the hero: three small looping videos in arched door frames (`public/lucid/door-*.mp4` + poster jpgs, cut from the December launch reels). Door shapes are Lucid's framing device.
+- Pre-sign-up (1 Nov 2026): `LucidSignup.astro` at the bottom of /lucid/ (#list; hero link "Save me a door"). Posts to the Brevo form in `site.json` → `lucidFormUrl`; empty = preview mode (confirms without sending). Sign-ups get Lucid by email on launch day.
+- Lucid app (v0.3): runs locally like the Orbit hub. `public/lucid/app/lucid-server.py` is the engine's update copy (Start Lucid pulls it); `public/lucid/latest.json` drives the studio's update card. The Orbit hub (`public/os/hub.html`) shows an opal "Studio" door in its nav when Lucid answers at 127.0.0.1:4778/api/door.
+- Look: opal (pearl, lilac, aqua, blush) in a dream where the rules bend: floating doors, a stair of light, still water, no moon. Never aurora (Orbit) or ember. Phases: Dream, Conjure, Unfold, Awaken. Rooms: optional Content plus five rooms for any craft.

@@ -1,0 +1,5 @@
+{
+ "version": "0.3",
+ "update": "Update your Lucid.md",
+ "notes": "Setup is now a chat that proposes your studio (and reads Orbit if you have it). Each room holds your projects, and every project gets its own mixing desk: phases across, your craft's own lanes down."
+}

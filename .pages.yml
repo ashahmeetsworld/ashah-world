@@ -153,6 +153,7 @@ content:
       - { name: newsletterUrl, label: Email list link (Brevo hosted form), type: string }
       - { name: newsletterEmbed, label: Email list embed code (Brevo), type: code }
       - { name: orbitFormUrl, label: Orbit sign-up form link (Brevo form "OS sign-up"; used by the Orbit page and the pop-up), type: string }
+      - { name: lucidFormUrl, label: Lucid pre-sign-up form link (Brevo form "Lucid list"; empty = preview mode), type: string }
       - { name: discordUrl, label: Discord invite link, type: string }
       - { name: instagramFeedUrl, label: Instagram feed link (Behold JSON feed), type: string }
       - { name: bookingUrl, label: Booking link (Calendly / Cal.com), type: string }
