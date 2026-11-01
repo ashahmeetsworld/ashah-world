@@ -1493,7 +1493,7 @@ The weekly sync (Operations) refreshes these when anything changes, along with `
 **Real limits, said plainly when it comes up:** the computer has to be on for hub chats, like any app. Hub chats don't show in their Claude app history. Anything that needs Claude in Chrome (making Projects, the upgrade) still opens in the Claude app, and the hub does that by itself. If they hit their plan's limit, the chat says so and when it resets. Nothing they type goes anywhere except to Claude, like any Claude chat.
 
 **What to tell them (straight after Phase 1, step 3):**
-> *Phase 2: chats inside your hub.* About 5 minutes, then never again.
+> *Optional bonus: bring your hub to life.* Your team already works as it is: chat buttons open Claude. This brings the chats, lessons and live updates inside your hub. About 5 minutes, then never again. Get stuck? Skip it: nothing breaks, and you can do it any time.
 > Open your **Orbit Hub** folder and double-click **Bring your hub to life** (*.bat* on Windows, *.command* on Mac). A window opens and does it all.
 > Your browser opens twice: click **Authorize** for Claude, then **Allow access** for Notion. Leave the window open till it says *All set*.
 > Your hub reopens with chats inside. From now on, just open it as usual.
