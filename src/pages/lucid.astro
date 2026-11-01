@@ -21,6 +21,32 @@ const phases = [
   { n: 'Unfold', t: 'Break it down, piece by piece.' },
   { n: 'Awaken', t: 'Bring it home. It’s real now.' },
 ];
+// Each workstation = a room's own steps, run as lanes down a project's desk; the four phases run across.
+// c = which phase the sample card sits in (0 Dream .. 3 Awaken).
+const stations = [
+  { id: 'content', n: 'Content', line: 'One worksheet becomes a month of pieces.', steps: [
+    { n: 'Worksheet', c: 3, t: 'This month’s riffs' },
+    { n: 'Macro', c: 2, t: 'The long video' },
+    { n: 'Micro', c: 1, t: 'Twelve posts cut down' },
+    { n: 'Approved', c: 0, t: 'Monday’s drop' },
+  ] },
+  { id: 'music', n: 'Music', line: 'A song, built in three layers.', steps: [
+    { n: 'Beat', c: 3, t: 'Drums bounced' },
+    { n: 'Lyrics', c: 2, t: 'Second verse' },
+    { n: 'Vocals', c: 1, t: 'Rough take' },
+  ] },
+  { id: 'fashion', n: 'Fashion', line: 'From a feeling to a garment someone can make.', steps: [
+    { n: 'References', c: 3, t: 'Board locked' },
+    { n: 'Vision', c: 2, t: 'Collection story' },
+    { n: 'Artboard', c: 1, t: 'Flats for six pieces' },
+    { n: 'Tech pack', c: 0, t: 'Fabric notes' },
+  ] },
+  { id: 'yours', n: 'Your craft', line: 'Tell Lucid how you work. It draws your steps.', steps: [
+    { n: 'Your step', c: -1, t: '' },
+    { n: 'Your step', c: -1, t: '' },
+    { n: 'Your step', c: -1, t: '' },
+  ] },
+];
 ---
 <Base title="Lucid" description="A creative sanctuary for every medium you make in. A dream you get to steer. Doors open 4 January 2027." bodyClass="lucid">
 
@@ -105,13 +131,49 @@ const phases = [
     <div class="wrap">
       <p class="eyebrow">How a dream becomes real</p>
       <h2>Every dream moves in four phases.</h2>
-      <p class="sub">Structure to lean on, with room to wander back and forth. Each craft keeps its own steps inside them: music is beat, lyrics, vocals.</p>
+      <p class="sub">Structure to lean on, with room to wander back and forth. Each room keeps its own steps inside them.</p>
       <ol class="steps">
         {phases.map((p, i) => (
           <li style={`--i:${i}`}><svg viewBox="0 0 60 90" aria-hidden="true"><path d="M6 88 L6 30 A24 24 0 0 1 54 30 L54 88 Z" fill="url(#lopal2)" style={`opacity:${0.4 + i * 0.2}`}/></svg><span class="nm">{p.n}</span><span class="ln">{p.t}</span></li>
         ))}
       </ol>
       <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="lopal2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6EC"/><stop offset=".35" stop-color="#E9D8FF"/><stop offset=".65" stop-color="#BFEFF7"/><stop offset="1" stop-color="#F2C6E0"/></linearGradient></defs></svg>
+    </div>
+  </section>
+
+  <!-- Workstations: inside the four phases, each room's own steps run down as lanes (the project desk) -->
+  <section class="l-stations">
+    <div class="halo h2"></div>
+    <div class="wrap">
+      <p class="eyebrow">Inside the four phases</p>
+      <h2>Every room has its own flow.</h2>
+      <p class="sub">The four phases run across. Your craft’s own steps run down. Every project gets a desk like this.</p>
+      <div class="st-tabs" role="tablist" aria-label="Workstations">
+        {stations.map((w, i) => (
+          <button type="button" role="tab" class="st-tab" aria-selected={i === 0 ? 'true' : 'false'} data-st={w.id}>{w.n}</button>
+        ))}
+      </div>
+      <div class="st-stage">
+        {stations.map((w, i) => (
+          <div class={`st-panel${i === 0 ? ' on' : ''}${w.id === 'yours' ? ' yours' : ''}`} data-st={w.id} role="tabpanel" aria-hidden={i === 0 ? 'false' : 'true'}>
+            <p class="st-line">{w.line}</p>
+            <div class="desk" role="table" aria-label={`${w.n} desk`}>
+              <div class="dk-row dk-head" role="row">
+                <span class="dk-lane" role="columnheader"></span>
+                {phases.map((ph) => <span class="dk-ph" role="columnheader">{ph.n}</span>)}
+              </div>
+              {w.steps.map((st, j) => (
+                <div class="dk-row" role="row" style={`--j:${j}`}>
+                  <span class="dk-lane" role="rowheader"><span class="arch" aria-hidden="true"></span>{st.n}</span>
+                  {phases.map((_, k) => (
+                    <span class="dk-cell" role="cell">{st.c === k && <span class="dk-card">{st.t}</span>}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -164,6 +226,14 @@ const phases = [
     if (n > 1) { el.querySelector('.n').textContent = n; }
     else if (n === 1) { el.querySelector('.n').textContent = '1'; el.querySelector('.unit').textContent = 'night to go'; }
     else { el.style.visibility = 'hidden'; }
+  })();
+  // workstation switcher: panels share one grid cell, so switching never moves the page
+  (function () {
+    var tabs = document.querySelectorAll('.st-tab'), panels = document.querySelectorAll('.st-panel');
+    tabs.forEach(function (t) { t.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      panels.forEach(function (p) { var on = p.getAttribute('data-st') === t.getAttribute('data-st'); p.classList.toggle('on', on); p.setAttribute('aria-hidden', on ? 'false' : 'true'); });
+    }); });
   })();
 </script>
 
@@ -234,6 +304,32 @@ const phases = [
   .steps .nm { font: italic 400 40px/1 var(--serif); color: var(--ink); }
   .steps .ln { color: var(--ink-2); font-size: 15px; }
 
+  .l-stations { position: relative; padding-block: 100px; overflow: hidden; }
+  .l-stations .halo.h2 { position: absolute; width: 560px; height: 560px; left: -180px; top: 120px; border-radius: 50%; background: #9FE6F5; filter: blur(120px); opacity: .09; pointer-events: none; }
+  .st-tabs { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-top: 40px; padding: 5px; border: 1px solid rgba(233, 216, 255, .18); border-radius: 99px; }
+  .st-tab { appearance: none; background: none; border: 0; cursor: pointer; padding: 10px 18px; border-radius: 99px; font: 500 11px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); transition: color .3s, background .3s, box-shadow .3s; }
+  .st-tab:hover { color: var(--ink); }
+  .st-tab[aria-selected="true"] { color: #070B18; background: linear-gradient(100deg, #FFF6EC, #F2C6E0 35%, #E2B8FF 65%, #BFEFF7); box-shadow: 0 0 24px -6px rgba(233, 216, 255, .7); }
+  .st-stage { display: grid; margin-top: 44px; }
+  .st-panel { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility 0s .6s; }
+  .st-panel.on { opacity: 1; visibility: visible; transition: opacity .6s var(--ease), visibility 0s; }
+  .st-line { font: italic 400 clamp(24px, 2.6vw, 34px)/1.2 var(--serif); color: #F2C6E0; margin: 0 0 26px; }
+  .desk { border: 1px solid rgba(233, 216, 255, .16); border-radius: 18px; background: rgba(11, 16, 36, .55); overflow: hidden; }
+  .dk-row { display: grid; grid-template-columns: 170px repeat(4, 1fr); }
+  .dk-row + .dk-row { border-top: 1px solid rgba(233, 216, 255, .08); }
+  .dk-head { background: rgba(233, 216, 255, .04); }
+  .dk-ph { padding: 16px 18px; font: 500 11px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: #BFEFF7; border-left: 1px solid rgba(233, 216, 255, .08); }
+  .dk-lane { display: flex; align-items: center; gap: 12px; padding: 18px; font: italic 400 24px/1 var(--serif); color: var(--ink); }
+  .dk-lane .arch { flex: none; width: 14px; height: 20px; border-radius: 7px 7px 2px 2px; background: linear-gradient(160deg, #FFF6EC, #F7C9E6 35%, #DDB4FF 65%, #A8ECF8); box-shadow: 0 0 14px -2px rgba(233, 200, 255, .55); }
+  .dk-cell { min-height: 74px; padding: 12px; border-left: 1px solid rgba(233, 216, 255, .08); display: flex; align-items: center; }
+  .dk-card { display: block; width: 100%; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; line-height: 1.35; color: #F6E4F4;
+    background: linear-gradient(160deg, rgba(255, 246, 236, .12), rgba(226, 184, 255, .12) 55%, rgba(159, 230, 245, .1)); border: 1px solid rgba(233, 216, 255, .28); box-shadow: 0 10px 30px -18px rgba(226, 184, 255, .8); }
+  .st-panel.on .dk-card { animation: st-rise .8s var(--ease) both; animation-delay: calc(.15s + var(--j) * .1s); }
+  @keyframes st-rise { from { translate: -14px 0; opacity: 0; } }
+  .st-panel.yours .dk-lane { color: var(--ink-3); }
+  .st-panel.yours .dk-lane .arch { background: none; border: 1px dashed rgba(191, 239, 247, .7); box-shadow: none; }
+  .st-panel.yours .dk-cell { background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(191, 239, 247, .025) 10px 11px); }
+
   .l-steer { padding-block: 100px; }
   .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
   .half { width: min(320px, 100%); justify-self: center; filter: drop-shadow(0 0 40px rgba(201, 188, 255, .18)); }
@@ -263,13 +359,24 @@ const phases = [
     .steps li { transform: none; }
     .split { grid-template-columns: 1fr; }
   }
+  @media (max-width: 760px) {
+    .dk-row { grid-template-columns: 74px repeat(4, 1fr); }
+    .dk-ph { padding: 12px 6px; font-size: 8.5px; letter-spacing: .1em; }
+    .dk-lane { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 8px; font-size: 15px; }
+    .dk-cell { min-height: 60px; padding: 6px 4px; }
+    .dk-card { padding: 7px 6px; font-size: 10.5px; border-radius: 7px; }
+  }
+  @media (max-width: 560px) {
+    .st-tabs { flex-wrap: nowrap; gap: 2px; max-width: 100%; }
+    .st-tab { padding: 9px 11px; font-size: 9.5px; letter-spacing: .14em; white-space: nowrap; }
+  }
   @media (max-width: 520px) {
     .doors { grid-template-columns: repeat(2, 1fr); }
     .door { min-height: 230px; }
     .door .nm { font-size: 26px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .gl-door { animation: none; }
+    .gl-door, .st-panel.on .dk-card { animation: none; }
     .opal, .stars circle, .breathe, .d, .shimmer { animation: none; }
   }
 </style>
