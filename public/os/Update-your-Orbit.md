@@ -51,6 +51,7 @@ If Notion isn't connected, ask in the same message: "And connect Notion: in Clau
 | Helper instructions up to date | each version | the seat's version line, HUB NOTE, YOUR GUIDED SESSION | a fresh instructions block per helper from the OS (section 10), with their own changes kept; you paste it in through the Chrome connector |
 | The report | v0.3 | `00-your-report.md` exists | made from their sources and chats (OS section 16) |
 | The hub (`Orbit Hub` folder) | v0.4.1 | don't check, and never ask: always make a fresh one | `Orbit Hub.zip` (OS sections 17 and 17a), made from their sources, Projects and work so far; one double-click on Start Orbit Hub opens it, with a desktop shortcut |
+| Hub skins: quiet backdrops, more than one surface, panels that stand apart | v0.4.4 | don't check, and never ask | nothing to set up: it comes with the fresh hub page. If they already have a brand skin, the Creative Director can offer once to add a backdrop from their world (OS section 17b), with a PNG and their OK first |
 | The Council in depth (Mentor lessons in the hub, path in modules, Board meetings, Front Desk pace) | v0.4.3 | the Mentor's instructions mention the SWOT read and LAYER PROVEN | new instructions for the Front Desk, Mentor and Advisory Board (OS section 7b), and `hub.curriculum` rebuilt as modules: keep every topic and any layer already ticked, add `Area`, `Line` and `Layer 1` to `Layer 3` |
 | The autopilot rule (set and forget; 99% of the prep, one clear action, then their "go") | v0.4.3 | every helper's instructions have rule 10 "set and forget" | add rule 10 to every helper's shared block (OS section 10) and the rule to `team/about.md`; nothing else changes |
 | Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Turn on hub chats files (17a); at the end, the Phase 2 lines from 17c |
@@ -98,9 +99,9 @@ Add one Change Log line: "Updated to Orbit [version from the top of Part 2]: [wh
 
 # Orbit · the OS file
 
-*Orbit v0.4.3, 1 Nov 2026. The one file a founder adds to a new Claude Project.*
+*Orbit v0.4.4, 1 Nov 2026. The one file a founder adds to a new Claude Project.*
 
-*New in v0.4: the chat ends with your own hub, a page with your whole team on one screen, opened from the `04 Hub demo.html` file in your "Your operating system" folder. Everyone also gets the Council (Front Desk, Mentor and an Advisory Board whose seats are named after your own values). The hub has Foundations: your six basics, filled from the interview and marked Ready, Half there or Missing, where every gap has a step-by-step session with one helper. A gentle "guide me" mode for anyone new, and a quick mode for anyone who isn't. Business Development builds your offer from the life you want: a monthly number, worked back to clients and price, aiming for an offer worth ten times what it costs. New in v0.4.1: seven step-by-step guided sessions built into your helpers, from your offer to your first clients, brand, content, funnel, client care and week. Start any of them from Foundations in your hub. Your helpers now show their work as you go: your welcome flow as a storyboard, your posts as a drafts gallery, your brand as a board, right there in the chat. Notion and Claude in Chrome are now part of every setup: a free Notion account becomes your team's memory, behind the scenes, and Claude in Chrome makes your Projects. Your values and mission are now their own Foundations session, and your Advisory Board opens once they're done. Your hub tells you when a new Orbit is out, with an Upgrade button. Your hub now lives in its own `Orbit Hub` folder: one double-click opens it, with a shortcut on your desktop and an optional open-on-startup. Setup and updates ask for every "allow" in the first minute, then run while you step away. Already have an Orbit team, on any version? Type "upgrade" and keep everything you've made. No more worksheets and no more Notion cover art: the chat does it all. New in v0.4.2: chats inside your hub. After setup, one double-click and two clicks in your browser, and every helper chats with you right there in the hub, on your own Claude plan, with no API key and nothing extra to pay (section 17c). And your hub can wear your brand: ask Operations and pick from three looks (section 17b). New in v0.4.3: your Mentor teaches right inside your hub, with a drawing of each idea and one question at a time, and your path is laid out in modules, three layers per topic. Any helper can suggest a better way to work, and one click adds it to your Recos. Your Council works the way it does in the original OS: the Mentor reads your situation before choosing a lesson, the Advisory Board runs meetings and deep dives with a Chair, and the Front Desk ranks your top three and calls the pace (section 7b). And every automation your team builds is set and forget: it runs on its own until it truly needs you, then tells you the one thing to do and waits for your go.*
+*New in v0.4: the chat ends with your own hub, a page with your whole team on one screen, opened from the `04 Hub demo.html` file in your "Your operating system" folder. Everyone also gets the Council (Front Desk, Mentor and an Advisory Board whose seats are named after your own values). The hub has Foundations: your six basics, filled from the interview and marked Ready, Half there or Missing, where every gap has a step-by-step session with one helper. A gentle "guide me" mode for anyone new, and a quick mode for anyone who isn't. Business Development builds your offer from the life you want: a monthly number, worked back to clients and price, aiming for an offer worth ten times what it costs. New in v0.4.1: seven step-by-step guided sessions built into your helpers, from your offer to your first clients, brand, content, funnel, client care and week. Start any of them from Foundations in your hub. Your helpers now show their work as you go: your welcome flow as a storyboard, your posts as a drafts gallery, your brand as a board, right there in the chat. Notion and Claude in Chrome are now part of every setup: a free Notion account becomes your team's memory, behind the scenes, and Claude in Chrome makes your Projects. Your values and mission are now their own Foundations session, and your Advisory Board opens once they're done. Your hub tells you when a new Orbit is out, with an Upgrade button. Your hub now lives in its own `Orbit Hub` folder: one double-click opens it, with a shortcut on your desktop and an optional open-on-startup. Setup and updates ask for every "allow" in the first minute, then run while you step away. Already have an Orbit team, on any version? Type "upgrade" and keep everything you've made. No more worksheets and no more Notion cover art: the chat does it all. New in v0.4.2: chats inside your hub. After setup, one double-click and two clicks in your browser, and every helper chats with you right there in the hub, on your own Claude plan, with no API key and nothing extra to pay (section 17c). And your hub can wear your brand: ask your Creative Director for a skin, see it as a picture first, and say yes (section 17b). New in v0.4.3: your Mentor teaches right inside your hub, with a drawing of each idea and one question at a time, and your path is laid out in modules, three layers per topic. Any helper can suggest a better way to work, and one click adds it to your Recos. Your Council works the way it does in the original OS: the Mentor reads your situation before choosing a lesson, the Advisory Board runs meetings and deep dives with a Chair, and the Front Desk ranks your top three and calls the pace (section 7b). And every automation your team builds is set and forget: it runs on its own until it truly needs you, then tells you the one thing to do and waits for your go. New in v0.4.4: your brand skin can have a quiet backdrop from your own world (a stone wall, timber, a soft sky), more than one surface for the same brand in the Skin button, and panels that always stand apart from the ground so everything reads. The sample hub now shows a neutral business, and skin previews show your own.*
 
 *Earlier: v0.3.2 made the chat impossible to get stuck in · v0.3 made the chat the main way in, with chapters, checkpoints and a report · v0.2 added hand-offs between seats, the standards file and the Chrome setup prompt.*
 
@@ -1147,7 +1148,7 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 **Shape**
 ```json
 {
-  "orbit": "0.4.3",
+  "orbit": "0.4.4",
   "made": "YYYY-MM-DDTHH:MM",
   "you": {"first_name": "", "name": "", "brand": "", "website": ""},
   "values": ["", "", ""],
@@ -1202,6 +1203,7 @@ The founder's hub lives in its own folder on their computer, like an app: `Orbit
 | --- | --- |
 | `orbit-world.js` | their world: `window.ORBIT_WORLD = ` then the whole hub file (section 17) as JSON, then `;`. Set `made` to now. |
 | `orbit-skin.js` | only if they have a brand skin (section 17b): `window.ORBIT_SKIN = ` then the skin, then `;`. Not counted above; leave it out if there's no skin |
+| their backdrop image | only if their brand skin has one (section 17b), under the name in its `backdrop`. Not counted above |
 | `Start Orbit Hub.bat` | Windows: opens the hub (exactly as below) |
 | `Start Orbit Hub.command` | Mac: opens the hub (exactly as below) |
 | `Open on startup.bat` | Windows, optional: opens the hub every time the computer starts |
@@ -1312,22 +1314,26 @@ The hub has three skins, same rooms and buttons in each. The **Skin** button (bo
 
 **The rule that matters most: their world, not Orbit's.** Their brand skin starts from a blank page, never from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours". Art direct it: same layout, their world.
 
+**The backdrop: their world behind the hub, kept quiet.** A skin can put a texture from their world behind everything, the way Orbit's own skin puts stars behind it. It sits behind every screen, so it must be minimal and simple and never clash with anything: a surface, not a scene. Think the stone of a cave wall, wood grain, a wallpaper pattern, the surface of water, plaster, linen, a soft sky. Never a busy photo (a shop floor, people, products, a landscape with a subject), never text or a logo. Let their brand codes and world decide what it is, and take it from their own visual references first: crop a plain patch of texture out of their campaign shots, shop or studio photos, carousels or brand board (the wall itself, not the room), flatten its light so it's even, keep the contrast low, soften it a touch, and scale one big patch rather than tiling a small one (tiles show as a pattern). If they have none, ask once, or go without: flat colour, mesh or grain is still a skin. Never use stock photos or other brands' images, and don't invent photographs; a simple texture drawn in code (grain, paper, a pattern) is fine. Then set `fade` until the cards and text read easily on top.
+
+**One brand, more than one surface.** A brand's world often has a few surfaces that are all unmistakably it (a store with a cave wall and a sky ceiling, a studio with timber and linen). A skin can carry up to four `variants`: each one only lists what changes (usually `name`, `backdrop`, `fade`, and the ground, pane or accent that suit that surface), and each gets its own place in the hub's Skin button, e.g. "Realism", "Realism · Sky roof", "Realism · Gallery wall". Offer variants only when their world clearly has them, and show each one as its own PNG (the mock-up script draws them all).
+
 **When it happens:**
 - **They ask** (any helper can hear it, e.g. "can I add my brand DNA into the hub?", "make the hub feel like mine", "change the hub's colours"): the Creative Director does it. Another helper hands it over in one line.
 - **The Creative Director suggests it,** once, when their brand moves on: a significant change to their brand codes, their world, their palette or type, a new deck or a rebrand. "Your brand's moved on since your hub was dressed. Want me to show you a new skin for it?" Never more than once per change.
 
 **Every change to their skin: a PNG mock-up, then their OK, then it's on.** Never change their skin without both.
 
-**1 · Look before you ask.** Visual references beat words. Use everything you can see: their brand codes and brand board, decks and world decks, logo, website and Instagram (open them through the Chrome connector), carousels and content you've made with them, product or studio photos, the References in Notion. Then read the words: `brand.md`, the *Your brand* Foundation, `founder.md`. Note the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges, how loud or quiet it is, any motif.
+**1 · Look before you ask.** Visual references beat words. Use everything you can see: their brand codes and brand board, decks and world decks, logo, website and Instagram (open them through the Chrome connector), carousels and content you've made with them, product or studio photos, the References in Notion. Note which plain surface in their images could be their backdrop (a wall, a floor, a ceiling, fabric, water). Then read the words: `brand.md`, the *Your brand* Foundation, `founder.md`. Note the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges, how loud or quiet it is, any motif.
 **Only if there's nothing visual to go on,** ask once: "Got anything that shows your look? A site or Instagram link, your logo, a few photos or a deck all help. If not, I'll go from your words."
 
-**2 · Make one skin, show it as a PNG.** One considered direction (a second only if two genuinely fit). Write it as a skin (fields below), then draw it with the mock-up script below (code execution: save the skin as `skin.json` with their brand name added as `"brand"`, save the script as `hub_mockup.py`, run `python3 hub_mockup.py skin.json hub-skin.png`). Show the PNG with its name and one line on why it's them. Say plainly: "It's a mock-up: the real hub moves and glows a little more." If you can't run code, describe it in three lines and offer to make the PNG in a chat that can.
+**2 · Make one skin, show it as a PNG.** One considered direction (a second only if two genuinely fit). Write it as a skin (fields below), then draw it with the mock-up script below (code execution: save the skin as `skin.json` with their brand name added as `"brand"`, save the script as `hub_mockup.py`, put the backdrop image next to them under the name in `backdrop`, and save a `content.json` with their own brand name and a few of their real items so the mock-up reads like their business, not a placeholder (the format is at the top of the script); run `python3 hub_mockup.py skin.json hub-skin.png content.json`). Show the PNG with its name and one line on why it's them. Say plainly: "It's a mock-up: the real hub moves and glows a little more." If you can't run code, describe it in three lines and offer to make the PNG in a chat that can.
 
 **3 · Their OK.** They say yes, or ask for changes ("warmer", "less dark", "rounder"): make a fresh PNG for each round. Nothing goes on until they say yes to a PNG.
 
 **4 · Put it on (no steps for them if you can avoid it).**
-- `orbit-skin.js` = `window.ORBIT_SKIN = ` then the skin JSON, then `;`. If you can reach their files (desktop app with folder access, or hub chats, section 17c), put it in their `Orbit Hub` folder yourself. If not, give it as a download: "Drop this into your Orbit Hub folder."
-- Carry it everywhere: save it on the Creative Director's Notion page under **Hub skin** (one code block), so Operations adds it as `skin` to every `orbit-world.js` (section 17) and `orbit-skin.js` to every fresh `Orbit Hub.zip` (section 17a). A fresh hub, an update or a new computer always comes back dressed.
+- `orbit-skin.js` = `window.ORBIT_SKIN = ` then the skin JSON, then `;`, plus the backdrop image(s) if there are any (JPGs about 1920 px wide and under 1 MB each, named as in `backdrop`, e.g. `backdrop.jpg`). If you can reach their files (desktop app with folder access, or hub chats, section 17c), put both in their `Orbit Hub` folder yourself. If not, give them as downloads: "Drop these into your Orbit Hub folder."
+- Carry it everywhere: save it on the Creative Director's Notion page under **Hub skin** (one code block, with the backdrop images attached), so Operations adds it as `skin` to every `orbit-world.js` (section 17) and `orbit-skin.js` to every fresh `Orbit Hub.zip` (section 17a). A fresh hub, an update or a new computer always comes back dressed.
 - Tell them in two lines: "*Your hub's wearing your [name] skin now.* Close it and open it again to see it." · "The Skin button (bottom right) switches between yours, Orbit and Light."
 - One Change Log line: "Hub skin: [name]." The hub switches to a new brand skin by itself the first time it opens with it.
 **Remove their skin:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, Hub skin set to "none".
@@ -1345,7 +1351,9 @@ The hub has three skins, same rooms and buttons in each. The **Skin** button (bo
 | `helpers` | each helper's colour on the wheel: `tech` (Operations, Funnel), `people` (Business Development, customer care), `make` (Content, Creative Director), plus `desk`, `mentor`, `board`, `studio`, `intern` | colours |
 | `sky` | the backdrop's texture | `aurora`, `embers`, `mesh` (soft colour fields), `grid`, `grain`, `plain` |
 | `skyColours` | the colours in that texture | 1 to 3 colours |
-| `backdrop` (+ `fade` 0 to 0.95) | their own photo behind everything, dimmed by `fade` | an image file in the Orbit Hub folder, or an https link |
+| `backdrop` (+ `fade` 0 to 0.95) | a quiet texture from their world behind everything, dimmed toward the ground colour by `fade` | an image file in the Orbit Hub folder (e.g. `backdrop.jpg`), or an https link |
+| `variants` | other surfaces of the same brand, each a short list of changes with its own `name` (up to 4) | e.g. `[{"name": "Sky roof", "backdrop": "sky.jpg", "fade": 0.1}]` |
+| `sameTone` | only if they ask for panels the same colour as the ground | `true` (otherwise the hub keeps them apart) |
 | `cards` | how panels feel | `glass`, `solid`, `outline`, `paper` |
 | `corners` | edges | `soft`, `sharp`, `round` |
 | `labels` | small labels | `spaced` (letter-spaced caps), `plain`, `mono` |
@@ -1354,7 +1362,7 @@ The hub has three skins, same rooms and buttons in each. The **Skin** button (bo
 | `glow` | the soft light around dots and cards | `true`, `false` |
 Colours are `#RRGGBB` (or `rgba(…)`). Anything else is ignored, so a typo never breaks the hub.
 
-**Art direction checks before the PNG:** text reads easily on its ground (aim for 4.5:1 or better), the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Picture it at phone width too.
+**Art direction checks before the PNG:** text reads easily on its ground (aim for 4.5:1 or better); the panels (`pane`) are clearly a different shade from the ground, never the same colour (blue cards on the same blue reads as one flat wall and is hard to read), so pick a deeper or lighter tone from their palette for the panels, unless they specifically ask for it (`sameTone: true`; the hub and the mock-up otherwise push a too-close pane apart and make see-through cards solid); the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Picture it at phone width too.
 
 **What a skin can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their skin, because it lives in its own file, not in the hub page.
 
@@ -1363,84 +1371,109 @@ Colours are `#RRGGBB` (or `rgba(…)`). Anything else is ignored, so a typo neve
 import json, re, sys, urllib.request, io, math, os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 # Orbit hub mock-up: draws the hub's home screen in a brand skin (skin JSON) as a PNG.
-# Usage: python3 hub_mockup.py skin.json mockup.png  (needs Pillow; fonts come from Google Fonts if online)
-skin = json.load(open(sys.argv[1])); out = sys.argv[2] if len(sys.argv) > 2 else "hub-skin.png"
-light = skin.get("mode") == "light"
-def rgb(c, d):
-    c = (c or d).strip()
-    if c.startswith("rgba") or c.startswith("rgb"): return tuple(int(float(x)) for x in re.findall(r"[\d.]+", c)[:3])
-    c = c.lstrip("#"); c = "".join(ch * 2 for ch in c) if len(c) == 3 else c[:6]; return tuple(int(c[i:i + 2], 16) for i in (0, 2, 4))
-def mix(a, b, t): return tuple(round(a[i] * (1 - t) + b[i] * t) for i in range(3))
-G = [rgb(x, "#000") for x in (skin.get("ground") or (["#FFFFFF", "#F4F1EA", "#ECE6DA"] if light else ["#0A1024", "#05070F", "#03040A"]))]
-G = (G * 3)[:3]
-T = rgb(skin.get("text"), "#1A1714" if light else "#F2EFE8"); P = rgb(skin.get("pane"), "#FFFFFF" if light else "#080C1C")
-A = rgb(skin.get("accent"), "#6F9BFF"); S = rgb(skin.get("soft"), "#000") if skin.get("soft") else mix(G[1], T, .58)
-H = skin.get("helpers") or {}
-col = lambda k, d: rgb(H.get(k), d)
-def font(fam, size, italic=False):
-    if fam:
+# Usage: python3 hub_mockup.py skin.json mockup.png [content.json]  (needs Pillow; fonts come from Google Fonts if online;
+#   a `backdrop` is read from that file name next to the script, or from its https link)
+# content.json (optional) fills the mock-up with THEIR business, so it reads like their hub, not a placeholder:
+#   {"brand": "Their name", "date": "Sunday 1 November", "waiting": [["title", "small line"], ...], "week": [...], "live": [...], "next": [...]}
+# If the skin has `variants`, one PNG is made for each as well (mockup-2.png, mockup-3.png ...).
+base = json.load(open(sys.argv[1])); out0 = sys.argv[2] if len(sys.argv) > 2 else "hub-skin.png"
+CT = json.load(open(sys.argv[3])) if len(sys.argv) > 3 else {}
+runs = [(base, out0)] + [({**base, **v, "variants": None, "name": base.get("name", "Your brand") + " · " + v.get("name", str(i + 2))}, out0.rsplit(".", 1)[0] + "-" + str(i + 2) + ".png") for i, v in enumerate(base.get("variants") or [])]
+def lum(c): return .2126 * (c[0] / 255) ** 2.2 + .7152 * (c[1] / 255) ** 2.2 + .0722 * (c[2] / 255) ** 2.2
+def draw(skin, out):
+    light = skin.get("mode") == "light"
+    def rgb(c, d):
+        c = (c or d).strip()
+        if c.startswith("rgba") or c.startswith("rgb"): return tuple(int(float(x)) for x in re.findall(r"[\d.]+", c)[:3])
+        c = c.lstrip("#"); c = "".join(ch * 2 for ch in c) if len(c) == 3 else c[:6]; return tuple(int(c[i:i + 2], 16) for i in (0, 2, 4))
+    def mix(a, b, t): return tuple(round(a[i] * (1 - t) + b[i] * t) for i in range(3))
+    G = [rgb(x, "#000") for x in (skin.get("ground") or (["#FFFFFF", "#F4F1EA", "#ECE6DA"] if light else ["#0A1024", "#05070F", "#03040A"]))]
+    G = (G * 3)[:3]
+    T = rgb(skin.get("text"), "#1A1714" if light else "#F2EFE8"); P = rgb(skin.get("pane"), "#FFFFFF" if light else "#080C1C")
+    # contrast rule (same as the hub): a pane too close to the ground goes darker/lighter, see-through cards turn solid
+    if skin.get("sameTone") is not True:
+        pn = P if skin.get("pane") else G[1]
+        a, b = lum(G[1]), lum(pn)
+        if (max(a, b) + .05) / (min(a, b) + .05) < 1.35:
+            P = mix(pn, (255, 255, 255) if light else (0, 0, 0), .55); skin = dict(skin, cards="solid" if skin.get("cards", "glass") in ("outline", "glass") else skin.get("cards"))
+    A = rgb(skin.get("accent"), "#6F9BFF"); S = rgb(skin.get("soft"), "#000") if skin.get("soft") else mix(G[1], T, .58)
+    H = skin.get("helpers") or {}
+    col = lambda k, d: rgb(H.get(k), d)
+    def font(fam, size, italic=False):
+        if fam:
+            try:
+                ua = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.30 (KHTML, like Gecko) Safari/534.30"}
+                q = fam.replace(" ", "+") + (":ital,wght@1,400" if italic else ":wght@400")
+                css = urllib.request.urlopen(urllib.request.Request("https://fonts.googleapis.com/css2?family=" + q, headers=ua), timeout=8).read().decode()
+                blk = css.split("/* latin */")[-1]; url = re.search(r"url\((https://[^)]+)\)", blk).group(1)
+                return ImageFont.truetype(io.BytesIO(urllib.request.urlopen(url, timeout=8).read()), size)
+            except Exception: pass
+        for f in ["DejaVuSerif-Italic.ttf" if italic else "DejaVuSans.ttf", "DejaVuSans.ttf"]:
+            try: return ImageFont.truetype(f, size)
+            except Exception: pass
+        return ImageFont.load_default()
+    it = skin.get("headlines", "italic") == "italic"
+    HF = lambda n: font(skin.get("serif") or "Cormorant Garamond", n, it); BF = lambda n: font(skin.get("sans") or "DM Sans", n)
+    LF = lambda n: font(skin.get("mono") if skin.get("labels") == "mono" else (skin.get("sans") or "DM Sans"), n)
+    W, Hh = 1440, 900
+    im = Image.new("RGB", (W, Hh)); d = ImageDraw.Draw(im)
+    for y in range(Hh):
+        t = y / Hh; c = mix(G[0], G[1], t / .55) if t < .55 else mix(G[1], G[2], (t - .55) / .45); d.line([(0, y), (W, y)], fill=c)
+    sky = skin.get("sky", "aurora"); SC = [rgb(x, "#45E992") for x in (skin.get("skyColours") or [skin.get("accent") or "#45E992", skin.get("hi") or "#7FD8F0", skin.get("warm") or "#A996FF"])]
+    if sky in ("aurora", "mesh", "embers"):
+        glow = Image.new("RGB", (W, Hh), (0, 0, 0)); g = ImageDraw.Draw(glow)
+        spots = [(180, 60, 0), (1260, 260, 1), (720, 900, 2)] if sky == "mesh" else [(720, 80, 0), (400, 120, 1), (1100, 100, 2)] if sky == "aurora" else [(720, 960, 0)]
+        for x, y, i in spots: g.ellipse([x - 520, y - 220, x + 520, y + 220], fill=SC[i % len(SC)])
+        glow = glow.filter(ImageFilter.GaussianBlur(120)); im = Image.blend(im, Image.composite(glow, im, glow.convert("L").point(lambda v: 255 if v else 0)), .22 if not light else .3); d = ImageDraw.Draw(im)
+    bd = skin.get("backdrop")
+    if bd:  # their own image behind everything, cover-fit, dimmed toward the ground colour like the hub does
         try:
-            ua = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.30 (KHTML, like Gecko) Safari/534.30"}
-            q = fam.replace(" ", "+") + (":ital,wght@1,400" if italic else ":wght@400")
-            css = urllib.request.urlopen(urllib.request.Request("https://fonts.googleapis.com/css2?family=" + q, headers=ua), timeout=8).read().decode()
-            blk = css.split("/* latin */")[-1]; url = re.search(r"url\((https://[^)]+)\)", blk).group(1)
-            return ImageFont.truetype(io.BytesIO(urllib.request.urlopen(url, timeout=8).read()), size)
-        except Exception: pass
-    for f in ["DejaVuSerif-Italic.ttf" if italic else "DejaVuSans.ttf", "DejaVuSans.ttf"]:
-        try: return ImageFont.truetype(f, size)
-        except Exception: pass
-    return ImageFont.load_default()
-it = skin.get("headlines", "italic") == "italic"
-HF = lambda n: font(skin.get("serif") or "Cormorant Garamond", n, it); BF = lambda n: font(skin.get("sans") or "DM Sans", n)
-LF = lambda n: font(skin.get("mono") if skin.get("labels") == "mono" else (skin.get("sans") or "DM Sans"), n)
-W, Hh = 1440, 900
-im = Image.new("RGB", (W, Hh)); d = ImageDraw.Draw(im)
-for y in range(Hh):
-    t = y / Hh; c = mix(G[0], G[1], t / .55) if t < .55 else mix(G[1], G[2], (t - .55) / .45); d.line([(0, y), (W, y)], fill=c)
-sky = skin.get("sky", "aurora"); SC = [rgb(x, "#45E992") for x in (skin.get("skyColours") or [skin.get("accent") or "#45E992", skin.get("hi") or "#7FD8F0", skin.get("warm") or "#A996FF"])]
-if sky in ("aurora", "mesh", "embers"):
-    glow = Image.new("RGB", (W, Hh), (0, 0, 0)); g = ImageDraw.Draw(glow)
-    spots = [(180, 60, 0), (1260, 260, 1), (720, 900, 2)] if sky == "mesh" else [(720, 80, 0), (400, 120, 1), (1100, 100, 2)] if sky == "aurora" else [(720, 960, 0)]
-    for x, y, i in spots: g.ellipse([x - 520, y - 220, x + 520, y + 220], fill=SC[i % len(SC)])
-    glow = glow.filter(ImageFilter.GaussianBlur(120)); im = Image.blend(im, Image.composite(glow, im, glow.convert("L").point(lambda v: 255 if v else 0)), .22 if not light else .3); d = ImageDraw.Draw(im)
-if sky == "grid":
-    for x in range(0, W, 48): d.line([(x, 0), (x, Hh)], fill=mix(G[1], T, .06))
-    for y in range(0, Hh, 48): d.line([(0, y), (W, y)], fill=mix(G[1], T, .06))
-cap = (lambda s: s.upper()) if skin.get("labels", "spaced") in ("spaced", "mono") else (lambda s: s)
-sp = skin.get("labels", "spaced") == "spaced"
-def label(x, y, s, f, c):
-    if sp:
-        for ch in cap(s): d.text((x, y), ch, font=f, fill=c); x += d.textlength(ch, font=f) + 4
-    else: d.text((x, y), cap(s), font=f, fill=c)
-r = {"sharp": 3, "round": 22}.get(skin.get("corners"), 10)
-def card(x, y, w, h, c, lab, rows):
-    style = skin.get("cards", "glass")
-    fill = None if style == "outline" else (P if style in ("solid", "paper") else mix(P, c, .14))
-    line = mix(G[1], T, .28) if style == "outline" else (None if style == "paper" else mix(P, c, .45))
-    d.rounded_rectangle([x, y, x + w, y + h], r, fill=fill, outline=line)
-    label(x + 20, y + 18, lab, LF(11), S)
-    yy = y + 46
-    for t1, t2 in rows:
-        d.text((x + 20, yy), t1, font=HF(21), fill=T); d.text((x + 20, yy + 28), t2, font=BF(13), fill=S); yy += 64
-label(56, 34, skin.get("brand", "Your brand"), LF(11), T); label(56, 96, "Sunday 1 November", LF(11), S)
-d.text((56, 120), "Good morning.", font=HF(56), fill=T); d.text((56, 192), "3 things are waiting on you.", font=BF(14), fill=S)
-card(56, 236, 330, 170, col("people", "#45E992"), "Waiting on you", [("Brand: one line on the feel", "Paste-back to approve"), ("A follow-up", "Due today")])
-card(56, 424, 330, 170, col("make", "#A996FF"), "This week", [("Behind the scenes", "1 Nov · Instagram · Drafted"), ("Why we do it slowly", "4 Nov · LinkedIn · Idea")])
-card(1054, 112, 330, 104, col("tech", "#4FA8FF"), "Live", [("Free sign-up gift", "Lead magnet · Funnel")])
-card(1054, 234, 330, 170, col("desk", "#6F9BFF"), "Next up", [("Weekly sync", "Operations"), ("Prospect scan", "Business Development")])
-cx, cy, R = 720, 378, 230; ring = mix(G[1], T, .2)
-d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=ring); d.ellipse([cx - 142, cy - 142, cx + 142, cy + 142], outline=mix(G[1], T, .12))
-names = [("Operations", "tech"), ("Funnel", "tech"), ("Business Development", "people"), ("Customer Care", "people"), ("Content", "make"), ("Creative Director", "make")]
-for i, (n, k) in enumerate(names):
-    a = -math.pi / 2 + i * math.pi / 3; x, y = cx + R * math.cos(a), cy + R * math.sin(a); c = col(k, {"tech": "#4FA8FF", "people": "#45E992", "make": "#A996FF"}[k])
-    d.line([(cx, cy), (x, y)], fill=mix(G[1], T, .1))
-    if skin.get("glow", True): d.ellipse([x - 14, y - 14, x + 14, y + 14], fill=mix(G[1], c, .25))
-    d.ellipse([x - 6, y - 6, x + 6, y + 6], fill=c)
-    f = HF(20); tw = d.textlength(n, font=f); d.text((x - tw / 2, y - 36 if i in (0, 1, 5) else y + 16), n, font=f, fill=T)
-d.ellipse([cx - 7, cy - 7, cx + 7, cy + 7], fill=mix(T, A, .2))
-d.rounded_rectangle([460, 820, 980, 864], 3 if r == 3 else 22, outline=mix(P, A, .5), fill=mix(G[2], P, .5))
-d.text((486, 832), "Ask the Front Desk…", font=HF(19), fill=S)
-im.save(out); print("saved", out)
+            src = Image.open(io.BytesIO(urllib.request.urlopen(bd, timeout=10).read()) if bd.startswith("https://") else bd).convert("RGB")
+            k = max(W / src.width, Hh / src.height); src = src.resize((round(src.width * k), round(src.height * k)))
+            l, t = (src.width - W) // 2, (src.height - Hh) // 2; src = src.crop((l, t, l + W, t + Hh))
+            im = Image.blend(src, Image.new("RGB", (W, Hh), G[2]), min(.95, max(0, float(skin.get("fade", .55))))); d = ImageDraw.Draw(im)
+        except Exception as e: print("backdrop not found, drawn without it:", e)
+    if sky == "grid":
+        for x in range(0, W, 48): d.line([(x, 0), (x, Hh)], fill=mix(G[1], T, .06))
+        for y in range(0, Hh, 48): d.line([(0, y), (W, y)], fill=mix(G[1], T, .06))
+    cap = (lambda s: s.upper()) if skin.get("labels", "spaced") in ("spaced", "mono") else (lambda s: s)
+    sp = skin.get("labels", "spaced") == "spaced"
+    def label(x, y, s, f, c):
+        if sp:
+            for ch in cap(s): d.text((x, y), ch, font=f, fill=c); x += d.textlength(ch, font=f) + 4
+        else: d.text((x, y), cap(s), font=f, fill=c)
+    r = {"sharp": 3, "round": 22}.get(skin.get("corners"), 10)
+    def card(x, y, w, h, c, lab, rows):
+        style = skin.get("cards", "glass")
+        fill = None if style == "outline" else (P if style in ("solid", "paper") else mix(P, c, .14))
+        line = mix(G[1], T, .28) if style == "outline" else (None if style == "paper" else mix(P, c, .45))
+        d.rounded_rectangle([x, y, x + w, y + h], r, fill=fill, outline=line)
+        label(x + 20, y + 18, lab, LF(11), S)
+        yy = y + 46
+        for t1, t2 in rows:
+            d.text((x + 20, yy), t1, font=HF(21), fill=T); d.text((x + 20, yy + 28), t2, font=BF(13), fill=S); yy += 64
+    c2 = lambda k, d: [tuple(x) for x in CT.get(k, d)]
+    label(56, 34, CT.get("brand", skin.get("brand", "Your brand")), LF(11), T); label(56, 96, CT.get("date", "Sunday 1 November"), LF(11), S)
+    d.text((56, 120), "Good morning.", font=HF(56), fill=T); d.text((56, 192), CT.get("line", "3 things are waiting on you."), font=BF(14), fill=S)
+    card(56, 236, 330, 170, col("people", "#45E992"), "Waiting on you", c2("waiting", [("Brand: one line on the feel", "Paste-back to approve"), ("A follow-up", "Due today")])[:2])
+    card(56, 424, 330, 170, col("make", "#A996FF"), "This week", c2("week", [("Behind the scenes", "1 Nov · Instagram · Drafted"), ("Why we do it slowly", "4 Nov · LinkedIn · Idea")])[:2])
+    card(1054, 112, 330, 104, col("tech", "#4FA8FF"), "Live", c2("live", [("Free sign-up gift", "Lead magnet · Funnel")])[:1])
+    card(1054, 234, 330, 170, col("desk", "#6F9BFF"), "Next up", c2("next", [("Weekly sync", "Operations"), ("Prospect scan", "Business Development")])[:2])
+    cx, cy, R = 720, 378, 230; ring = mix(G[1], T, .2)
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=ring); d.ellipse([cx - 142, cy - 142, cx + 142, cy + 142], outline=mix(G[1], T, .12))
+    names = [("Operations", "tech"), ("Funnel", "tech"), ("Business Development", "people"), ("Customer Care", "people"), ("Content", "make"), ("Creative Director", "make")]
+    for i, (n, k) in enumerate(names):
+        a = -math.pi / 2 + i * math.pi / 3; x, y = cx + R * math.cos(a), cy + R * math.sin(a); c = col(k, {"tech": "#4FA8FF", "people": "#45E992", "make": "#A996FF"}[k])
+        d.line([(cx, cy), (x, y)], fill=mix(G[1], T, .1))
+        if skin.get("glow", True): d.ellipse([x - 14, y - 14, x + 14, y + 14], fill=mix(G[1], c, .25))
+        d.ellipse([x - 6, y - 6, x + 6, y + 6], fill=c)
+        f = HF(20); tw = d.textlength(n, font=f); d.text((x - tw / 2, y - 36 if i in (0, 1, 5) else y + 16), n, font=f, fill=T)
+    d.ellipse([cx - 7, cy - 7, cx + 7, cy + 7], fill=mix(T, A, .2))
+    d.rounded_rectangle([460, 820, 980, 864], 3 if r == 3 else 22, outline=mix(P, A, .5), fill=mix(G[2], P, .5))
+    d.text((486, 832), "Ask the Front Desk…", font=HF(19), fill=S)
+    im.save(out); print("saved", out)
+
+for skin, out in runs: draw(skin, out)
 ```
 
 ## 17c · Phase 2: chats inside the hub
@@ -1489,5 +1522,6 @@ For a founder who already has an Orbit team, on any earlier version, and says **
 | v0.4 | v0.4.1 | Notion is part of every team (their memory, built if missing, section 11) and the Setup chat makes the Projects itself through the Chrome connector (no prompts to paste); the upgrade path (this section: drop in the update file, type start, it upgrades in 5 to 10 minutes with no questionnaire); a beginner-friendly offer method (4.1a: what you bring, 1–3 hypotheses, a first draft offer); seven guided sessions built into the helpers (section 4.7), started from Foundations in the hub, with Your offer flowing into First clients; every helper hands over its work as a visual artifact in the chat (section 3a): welcome flow storyboards, drafts galleries, brand boards and more | none | updated setup files for all six helpers (each now carries its session); a fresh `Orbit Hub` folder with `guides` (sections 17 and 17a): one double-click opens it, with a desktop shortcut; setup and updates ask for every "allow" in the first minute, then run unattended (1.8) |
 | v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: Orbit, Orbit light, and their own brand skin kept by the Creative Director, always shown as a PNG for their OK first) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
 | v0.4.2 | v0.4.3 | The Council in depth (section 7b): the Mentor's SWOT read and lessons in the hub (drawing, one question at a time, layers ticked), the path in modules; the Board's Chair, monthly meeting, deep dive and minutes; the Front Desk's top three and pace call; one-click Recos from any chat; the autopilot rule (section 1.0: set and forget, 99% of the prep, then one clear action and their "go") | none | updated instructions for the Front Desk, Mentor and Advisory Board (section 7b); `hub.curriculum` rows with `Area` (module), `Line` and `Layer 1` to `Layer 3`; `team/desk.md`, `team/mentor.md`, `team/board.md` refreshed |
+| v0.4.3 | v0.4.4 | Hub skins: a quiet backdrop texture from their own world, `variants` (more than one surface for one brand, each in the Skin button), the contrast rule (panels never the same colour as the ground), previews in their own business content (section 17b); a neutral sample hub | none | the hub page (fresh, as always); their brand skin keeps working as it is |
 
 After the upgrade, the hub's Foundations show anything still Missing or Half there; each has a Start button for its guided session. If they want to rerun the offer with the new steps, Business Development offers it the next time they open it.
