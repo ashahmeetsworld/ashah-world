@@ -42,8 +42,11 @@ if (-not $Uv) {
 }
 if (-not $Uv) { Stop-Here "The engine didn't install. Check you're online, then try again." }
 try {
-  Invoke-WebRequest -UseBasicParsing "$Site/hub-server.py" -OutFile "$Eng\hub-server.py"
-  Invoke-WebRequest -UseBasicParsing "$Site/chats/start.ps1" -OutFile "$Eng\start.ps1"
+  if ($env:ORBIT_LOCAL) { Copy-Item "$env:ORBIT_LOCAL\hub-server.py", "$env:ORBIT_LOCAL\start.ps1" $Eng -Force }  # test kits only
+  else {
+    Invoke-WebRequest -UseBasicParsing "$Site/hub-server.py" -OutFile "$Eng\hub-server.py"
+    Invoke-WebRequest -UseBasicParsing "$Site/chats/start.ps1" -OutFile "$Eng\start.ps1"
+  }
 } catch { Stop-Here "Couldn't download the engine. Check you're online, then try again." }
 & $Uv run --no-project --quiet --python 3.12 python -c "print('ok')" *> $null
 Note "Done."
@@ -75,9 +78,9 @@ Say "5 of 5 · Checking it all works..."
 $test = & $Claude -p "Reply with the single word: ready" --output-format json 2>$null | Out-String
 Pop-Location
 if ($test -notmatch '"is_error"\s*:\s*false') { Stop-Here "Claude didn't answer the test. If you've hit your plan's limit, wait for it to reset." }
-try {
+if (-not $env:ORBIT_LOCAL) { try {
   Invoke-WebRequest -UseBasicParsing "$Site/chats/Start%20Orbit%20Hub.bat" -OutFile (Join-Path $Hub "Start Orbit Hub.bat")
-} catch {}
+} catch {} }
 "on" | Set-Content -Path (Join-Path $Eng "chats-on") -Encoding ascii
 Note "All set."
 
