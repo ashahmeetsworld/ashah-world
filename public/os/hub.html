@@ -258,10 +258,10 @@ window.fetch = async (u, o) => {
 </script>
 <script src="orbit-skin.js"></script>
 <script>
-/* Orbit skins: art-direct the hub without touching its layout. A skin is a short list of colours, two fonts,
-   a sky and a corner style. It lives in its own file, orbit-skin.js, next to this page, so a fresh hub
-   (pulled from the site each start) and a fresh orbit-world.js both leave it alone.
-   Order: a preview link (#skin=...) > orbit-skin.js > `skin` in orbit-world.js > the last look this browser wore > Orbit's own night sky. */
+/* Orbit skins: three skins, same hub. "orbit" = Orbit's own night sky, "light" = Orbit in daylight,
+   "brand" = their own brand look, which their Creative Director keeps in orbit-skin.js next to this page
+   (also carried as `skin` in orbit-world.js and remembered by the browser), so a fresh hub page never loses it.
+   The Skin button (bottom right) switches between them; the choice is remembered. A new brand skin switches on once by itself. */
 const ORBIT_SKIN_NOW = (() => {
   const C = v => typeof v === "string" && /^(#[0-9a-f]{3,8}|rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*(,\s*[\d.]+\s*)?\))$/i.test(v.trim()) ? v.trim() : null;
   const F = v => typeof v === "string" && /^[A-Za-z0-9 ]{2,40}$/.test(v.trim()) ? v.trim() : null;
@@ -285,17 +285,31 @@ const ORBIT_SKIN_NOW = (() => {
     const sf = F(s.serif), ss = F(s.sans), sm = F(s.mono); if (sf) o.serif = sf; if (ss) o.sans = ss; if (sm) o.mono = sm;
     return o;
   }
-  const b64d = x => decodeURIComponent(escape(atob(x.replace(/-/g, "+").replace(/_/g, "/"))));
-  let skin = null, preview = false;
-  try { const m = location.hash.match(/skin=([A-Za-z0-9_\-+/=]+)/); if (m) { skin = clean(JSON.parse(b64d(m[1]))); preview = !!skin; history.replaceState(null, "", location.pathname + location.search + "#home"); } } catch (e) {}
-  // orbit-skin.js wins (null there = Orbit's own look), then the skin carried in their world file, then the last look this browser wore
-  if (!preview) {
-    let src;
-    if (window.ORBIT_SKIN !== undefined) src = window.ORBIT_SKIN;
-    else { try { if (typeof ORBIT !== "undefined" && !ORBIT.sample() && ORBIT.world.skin !== undefined) src = ORBIT.world.skin; } catch (e) {} }
-    if (src !== undefined) { skin = clean(src); try { localStorage.setItem("orbit-skin", JSON.stringify(skin)); } catch (e) {} }
-    else { try { skin = clean(JSON.parse(localStorage.getItem("orbit-skin") || "null")); } catch (e) {} }
-  }
+  const LS = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+  // their brand look: orbit-skin.js wins (null there = none), then `skin` in their world file, then what this browser remembers
+  let brand = null, src;
+  if (window.ORBIT_SKIN !== undefined) src = window.ORBIT_SKIN;
+  else { try { if (typeof ORBIT !== "undefined" && !ORBIT.sample() && ORBIT.world.skin !== undefined) src = ORBIT.world.skin; } catch (e) {} }
+  if (src !== undefined) { brand = clean(src); LS.set("orbit-skin", JSON.stringify(brand)); }
+  else { try { brand = clean(JSON.parse(LS.get("orbit-skin") || "null")); } catch (e) {} }
+  if (brand) brand.mode0 = brand.mode;
+  const LIGHT = { name: "Orbit light", mode: "light", ground: ["#F7F5F0", "#EEF0F5", "#E6E9F1"], pane: "#FFFFFF", text: "#151824", accent: "#3F6FE0", hi: "#1C8FB0", warm: "#C98A2E", ember: "#E0702A",
+    helpers: { tech: "#2F7FD6", make: "#7A62E0", people: "#1F9E62", intern: "#C98A2E", mentor: "#3E9E78", board: "#8A6FE0", desk: "#3F6FE0", studio: "#7A62E0" },
+    skyColours: ["#45C98A", "#5FB8D8", "#9A86F0"], sky: "aurora", cards: "glass", labels: "spaced", headlines: "italic", glow: true, corners: "soft" };
+  // which mode: a new brand look is shown once, then whatever they last picked
+  const sig = brand ? JSON.stringify(brand).length + ":" + (brand.name || "") : "";
+  let mode = LS.get("orbit-look") || "orbit";
+  if (brand && LS.get("orbit-look-seen") !== sig) { mode = "brand"; LS.set("orbit-look", "brand"); LS.set("orbit-look-seen", sig); }
+  if (mode === "brand" && !brand) mode = "orbit";
+  const MODES = [["orbit", "Orbit"], ["light", "Light"]].concat(brand ? [["brand", brand.name || "Your brand"]] : []);
+  addEventListener("DOMContentLoaded", () => {
+    const bar = document.getElementById("orbitBar"); if (!bar) return;
+    const b = document.createElement("button"); b.id = "skinBtn"; b.title = "Switch your hub's skin";
+    b.textContent = "Skin: " + MODES.find(m => m[0] === mode)[1];
+    b.onclick = () => { const i = MODES.findIndex(m => m[0] === mode); LS.set("orbit-look", MODES[(i + 1) % MODES.length][0]); location.reload(); };
+    bar.insertBefore(b, bar.firstChild);
+  });
+  const skin = mode === "light" ? LIGHT : mode === "brand" ? brand : null;
   if (!skin) return null;
 
   // ---- dress the page now, before anything draws, so there's no flash of the old look ----
@@ -315,8 +329,11 @@ const ORBIT_SKIN_NOW = (() => {
   if (skin.accent) { const a = skin.accent; [["--c", 100], ["--g", 35], ["--b", 30], ["--g1", 20], ["--g2", 9], ["--g3", 5]].forEach(([k, p]) => set(k, p === 100 ? a : `color-mix(in srgb, ${a} ${p}%, transparent)`)); }
   if (skin.headlines === "upright") set("--hs", "normal");
   if (skin.serif || skin.sans || skin.mono) {
-    const fam = [skin.serif && (skin.serif.replace(/ /g, "+") + ":ital,wght@0,400;0,500;1,400;1,500"), skin.sans && (skin.sans.replace(/ /g, "+") + ":wght@400;500"), skin.mono && (skin.mono.replace(/ /g, "+") + ":wght@400;500")].filter(Boolean);
-    const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?" + fam.map(f => "family=" + f).join("&") + "&display=swap"; document.head.appendChild(l);
+    // one stylesheet per family, so a family without italics (or a typo) never stops the others loading
+    [[skin.serif, skin.headlines === "upright" ? "" : ":ital@0;1"], [skin.sans, ""], [skin.mono, ""]].forEach(([f, ax]) => {
+      if (!f) return; const l = document.createElement("link"); l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=" + f.replace(/ /g, "+") + ax + "&display=swap"; document.head.appendChild(l);
+    });
     if (skin.serif) set("--serif", `'${skin.serif}', Georgia, serif`);
     if (skin.sans) set("--sans", `'${skin.sans}', 'DM Sans', Arial, sans-serif`);
     if (skin.mono) set("--mono", `'${skin.mono}', ui-monospace, Menlo, monospace`);
@@ -341,23 +358,6 @@ const ORBIT_SKIN_NOW = (() => {
   if (skin.labels === "mono") css += `.caps{font-family:var(--mono,ui-monospace,monospace)!important;letter-spacing:.12em!important;font-size:10px!important}`;
   const st = document.createElement("style"); st.id = "orbit-skin-css"; st.textContent = css; document.head.appendChild(st);
 
-  // ---- preview links: a small bar to keep the look, or go back ----
-  if (preview) addEventListener("DOMContentLoaded", () => {
-    try { localStorage.setItem("orbit-toured", "1"); } catch (e) {}
-    const bar = document.createElement("div"); bar.id = "sk-bar";
-    const bs = document.createElement("style");
-    bs.textContent = "#sk-bar{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:70;display:flex;gap:10px;align-items:center;justify-content:center;white-space:nowrap;padding:8px 10px 8px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 96%,transparent);border:1px solid var(--c);color:var(--t);font:12.5px var(--sans);backdrop-filter:blur(14px);max-width:calc(100vw - 32px)}@media(max-width:700px){#sk-bar{bottom:auto;top:66px;gap:6px;padding:6px 6px 6px 14px;font-size:12px}#sk-bar .sk-try{display:none}#orbitSample{display:none}}";
-    document.head.appendChild(bs);
-    bar.innerHTML = `<span><span class="sk-try">Trying on </span><b style="font:var(--hs,italic) 400 16px var(--serif)">${skin.name.replace(/[<>&"]/g, "")}</b></span><button class="pill" id="sk-keep" style="padding:6px 14px;border:1px solid var(--c);border-radius:99px">Keep this look</button><button id="sk-back" style="color:var(--s);padding:6px 8px">Back to normal</button>`;
-    document.body.appendChild(bar);
-    bar.querySelector("#sk-back").onclick = () => { location.hash = "home"; location.reload(); };
-    bar.querySelector("#sk-keep").onclick = () => {
-      try { localStorage.setItem("orbit-skin", JSON.stringify(skin)); } catch (e) {}
-      const blob = new Blob(["window.ORBIT_SKIN = " + JSON.stringify(skin, null, 2) + ";\n"], { type: "text/javascript" });
-      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "orbit-skin.js"; a.click();
-      bar.style.whiteSpace = "normal"; bar.style.borderRadius = "14px"; bar.innerHTML = `<span>Kept. Put <b>orbit-skin.js</b> in your Orbit Hub folder (Operations can do it for you), and it stays on every start.</span>`;
-    };
-  });
   return skin;
 })();
 window.ORBIT_SKIN_NOW = ORBIT_SKIN_NOW;
