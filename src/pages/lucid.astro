@@ -5,8 +5,9 @@
 // Linked from the footer only, not the header. Lucid is NOT part of Orbit.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
+import LucidSignup from '../components/LucidSignup.astro';
 
-const VERSION = '0.2';
+const VERSION = '0.3';
 const glimpses = [
   { f: 'door-drift', t: 'Doors rise from still water' },
   { f: 'door-climb', t: 'A stair of light' },
@@ -61,6 +62,7 @@ const phases = [
       <div class="count" data-open={OPEN}>
         <p class="when">Doors open <strong>4 January 2027</strong></p>
         <p class="days" aria-live="polite"><span class="n">&nbsp;</span> <span class="unit">nights to go</span></p>
+        <a class="save-cta" href="#list">Save me a door</a>
       </div>
     </div>
   </section>
@@ -145,6 +147,8 @@ const phases = [
       <svg class="ajar" viewBox="0 0 160 260" aria-hidden="true"><path d="M10 255 L10 80 A70 70 0 0 1 150 80 L150 255 Z" fill="url(#lopal2)" opacity=".9"/><path d="M10 255 L10 80 A70 70 0 0 1 80 10 L80 255 Z" fill="#0B1230" opacity=".55"/></svg>
       <p class="eyebrow">Lucid v{VERSION} · coming soon</p>
       <h2>The doors open on 4 January 2027.</h2>
+      <p class="sub" id="list">Sign up now and Lucid lands in your inbox the morning the doors open. Free.</p>
+      <LucidSignup />
     </div>
   </section>
 </Base>
@@ -243,6 +247,9 @@ const phases = [
   .l-close .glow { position: absolute; left: 50%; top: 30%; width: 520px; height: 520px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(#E9D8FF, transparent 70%); opacity: .14; filter: blur(40px); pointer-events: none; }
   .ajar { width: 110px; margin: 0 auto 28px; display: block; position: relative; }
   .l-close .wrap { position: relative; }
+  .save-cta { display: inline-block; margin-top: 22px; padding: 11px 20px; border-radius: 99px; border: 1px solid rgba(242, 198, 224, .45); color: #FFF6EC; text-decoration: none; font: 500 11px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; transition: box-shadow .4s, border-color .4s; }
+  .save-cta:hover { border-color: rgba(242, 198, 224, .8); box-shadow: 0 0 30px -8px rgba(233, 216, 255, .7); }
+  .l-close .sub { margin: 0 auto 30px; max-width: 46ch; }
 
   @media (max-width: 700px) {
     /* phone: the dream sits above the words instead of behind them */

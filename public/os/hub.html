@@ -2120,7 +2120,17 @@ navTo = function (top) {
   _navOrbit(top);
   const nav = document.getElementById("nav");
   nav.insertAdjacentHTML("beforeend", `<a href="#foundations" class="${top === "foundations" ? "on" : ""}">${ic("layers", 12)}Foundations</a>`);
+  if (LUCID) nav.insertAdjacentHTML("beforeend", `<a href="${LUCID}" target="_blank" rel="noopener" class="lucid-door" title="Your Lucid studio, on this computer">Studio</a>`);
 };
+/* Lucid docking: when Lucid runs on this computer, the hub shows a Studio door that opens it (opal, its own world) */
+var LUCID = null;
+(async () => {
+  try {
+    const c = new AbortController(); setTimeout(() => c.abort(), 1500);
+    const r = await fetch("http://127.0.0.1:4778/api/door", { signal: c.signal });
+    if (r.ok) { LUCID = (await r.json()).url; document.head.insertAdjacentHTML("beforeend", `<style>#nav a.lucid-door{background:linear-gradient(100deg,#FFD6EC,#E2B8FF 35%,#9FE6F5 70%,#FFF6EC);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:lucidOpal 9s ease-in-out infinite alternate}@keyframes lucidOpal{to{background-position:100% 0}}</style>`); navTo((location.hash.replace("#", "") || "home").split("/")[0]); }
+  } catch (e) { /* Lucid isn't running here: no door */ }
+})();
 
 /* ---------- your world: back up, load, sample note ---------- */
 document.body.insertAdjacentHTML("beforeend", `<div id="orbitBar"><button id="tourAgain" title="A five-stop look around">Show me around</button><button id="bk" title="Save your world to a file">Back up</button><label title="Open a world file">Load<input type="file" accept=".json,.js,application/json,text/javascript" hidden id="ld"></label></div>`);
