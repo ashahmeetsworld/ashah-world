@@ -189,15 +189,15 @@
   <main id="view"><p class="empty" style="margin-top:20vh;text-align:center">Opening the doors…</p></main>
 </div>
 <form class="ask" id="ask"><input id="q" autocomplete="off" placeholder="Ask the Front Desk…" aria-label="Ask"><button>ENTER</button></form>
-<div class="foot">Orbit v0.4.2</div>
+<div class="foot">Orbit v0.4.3</div>
 
 <script src="orbit-world.js"></script>
 <script>
 /* Orbit v0.4 · your hub. Your world lives in this browser (and in your backup file). Nothing here reaches anyone else. */
-const ORBIT_VERSION = "0.4.2";
+const ORBIT_VERSION = "0.4.3";
 const ORBIT_KEY = "orbit-world";
 const ORBIT = (() => {
-  const SAMPLE = {"orbit": "0.4.2", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "A knitwear label", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds stockists and people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who buys, from order to the next one."}, "fo": {"name": "Funnel", "line": "The shop, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns studio riffs into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like the label."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free lookbook (sign-up gift)", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The lookbook is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A fashion label", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Streetwear", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A streetwear brand", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their drop", "Lane": "Streetwear", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the drop: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we knit in small runs", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: the winter drop", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A fashion label", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Streetwear", "Tier": "A"}}, {"id": "demo0009", "title": "A streetwear brand", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their drop", "Lane": "Streetwear", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Streetwear", "Tier": "B"}}, {"id": "demo0011", "title": "A caf\u00e9 group", "url": "", "props": {"Status": "Qualified", "Lane": "Streetwear", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Fashion", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the drop: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we knit in small runs", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: the winter drop", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "2026-10-29", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "New", "Kind": "Content", "Seat": "Content", "Date": "2026-10-28", "Why": "One sitting instead of four", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Sales", "Seat": "Business Development", "Date": "2026-10-27", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Soft, slow, made by hand. Colours of the coast in winter."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Clothes that outlast the season they were made in."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who buy one good jumper instead of five."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Studio Monday to Thursday. Fridays for the shop. Weekends off."}]};
+  const SAMPLE = {"orbit": "0.4.3", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "A knitwear label", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds stockists and people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who buys, from order to the next one."}, "fo": {"name": "Funnel", "line": "The shop, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns studio riffs into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like the label."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free lookbook (sign-up gift)", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The lookbook is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A fashion label", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Streetwear", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A streetwear brand", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their drop", "Lane": "Streetwear", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the drop: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we knit in small runs", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: the winter drop", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A fashion label", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Streetwear", "Tier": "A"}}, {"id": "demo0009", "title": "A streetwear brand", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their drop", "Lane": "Streetwear", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Streetwear", "Tier": "B"}}, {"id": "demo0011", "title": "A caf\u00e9 group", "url": "", "props": {"Status": "Qualified", "Lane": "Streetwear", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Fashion", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the drop: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we knit in small runs", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: the winter drop", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "2026-10-29", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "New", "Kind": "Content", "Seat": "Content", "Date": "2026-10-28", "Why": "One sitting instead of four", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Sales", "Seat": "Business Development", "Date": "2026-10-27", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Soft, slow, made by hand. Colours of the coast in winter."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Clothes that outlast the season they were made in."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who buy one good jumper instead of five."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Studio Monday to Thursday. Fridays for the shop. Weekends off."}]};
   const b64d = s => decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
   let W = null, sample = false;
   // A world can arrive in the address (#world=...), from a file, or from this browser's memory.
@@ -217,8 +217,21 @@ const ORBIT = (() => {
       ["live", "handoffs", "machine", "machine_all", "waiting", "calendar", "curriculum", "recos"].forEach(k => h[k] = h[k] || []);
       h.flows = h.flows || {}; h.stages = h.stages || {}; h.skills = h.skills || {}; h.errors = {};
       h.studio = h.studio || { cap: 0, spent: 0, month: today().slice(0, 7) };
-      h.writes = true; h.today = today(); h.projects = W.projects || {};
+      h.writes = true; h.today = today(); h.projects = W.projects || {}; h.chat = location.port === "4777";
       return h;
+    },
+    // a proven layer is ticked on its topic; all three proven makes it Complete
+    tick(id, layer) {
+      const h = W.hub || {}, today_ = today();
+      [h.curriculum, h.flows && h.flows.curriculum].forEach(p => (p || []).forEach(r => { if (r.id === id || r.id.replace(/-/g, "") === String(id).replace(/-/g, "")) {
+        r.props["Layer " + layer] = true; r.props["Last lesson"] = today_; r.props.Status = [1, 2, 3].every(k => r.props["Layer " + k]) ? "Complete" : "Learning"; } }));
+      save();
+    },
+    // a suggestion from a chat lands in Recos as New
+    reco(text, kind, seat) {
+      const h = W.hub = W.hub || {}; h.recos = h.recos || [];
+      h.recos.unshift({ id: "r" + Date.now().toString(36), title: String(text || "").slice(0, 200), url: "", props: { Status: "New", Kind: kind || "Process", Seat: seat || "Operations", Date: today() } });
+      save();
     },
     // a move made in the hub is kept in the world, so it's still there tomorrow
     move(db, id, status) {
@@ -252,6 +265,9 @@ window.fetch = async (u, o) => {
   if (u.startsWith("/api/doc/")) { const k = decodeURIComponent(u.slice(9)); return J(((ORBIT.world.docs || {})[k]) || { blocks: [{ k: "paragraph", rt: [{ t: "Nothing written here yet. Ask this helper to start it with you." }] }] }); }
   if (u.startsWith("/api/move") && o && o.body) { const b = JSON.parse(o.body); ORBIT.move(b.db, b.id, b.status); return J({ ok: true }); }
   if (u.startsWith("/api/projects") && o && o.body) { ORBIT.world.projects = JSON.parse(o.body); ORBIT.save(); return J({ ok: true }); }
+  if (u.startsWith("/api/chat") && location.port === "4777") return _f(u, o);  // hub chats: the engine on this computer
+  if (u.startsWith("/api/tick") && o && o.body) { const b = JSON.parse(o.body); ORBIT.tick(b.id, b.layer); return J({ ok: true }); }
+  if (u.startsWith("/api/reco") && o && o.body) { const b = JSON.parse(o.body); ORBIT.reco(b.text, b.kind, b.seat); return J({ ok: true }); }
   if (o && o.method === "POST") return J({ ok: true });
   return _f(u, o);
 };
@@ -1234,6 +1250,7 @@ function sectionBody(blocks) {
 /* Presentation first: each section becomes a tile with an icon, one headline line and short keys.
    Detail folds away under "More"; open questions show as hollow dots, not paragraphs. */
 Object.assign(P, {
+  check: '<path d="M5 12.5l4.5 4.5L19 7"/>',
   link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
   wave: '<path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/>', drop: '<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',
   bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
@@ -1340,6 +1357,14 @@ async function docPage(view, key) {
 }
 
 /* ---------- a skill on a shelf ---------- */
+/* A skill goes straight to where it's done: lessons and meetings to their pages, everything else to an in-hub chat. */
+function runSkill(it) {
+  if (!it) return;
+  const l = (it.label || "").toLowerCase();
+  if (it.skill === "mentor") return void (location.hash = /path|review/.test(l) ? "#mentor/path" : /plan|what to learn/.test(l) ? "#mentor/plan" : "#mentor/lesson");
+  if (it.skill === "board" && /meeting|ask the board|deep dive/.test(l)) return void (location.hash = "#board/meeting");
+  startChat(it.skill, it.prompt || "");
+}
 function skillPage(view, shelf, i) {
   const it = ((DATA.skills || {})[shelf] || [])[+i];
   const seat = shelf.startsWith("studio") ? "studio" : shelf === "system" ? "home" : shelf, [h, n] = seatHome(seat);
@@ -1362,11 +1387,11 @@ function tabPage(view, seat, t) {
   let body = blank();
   if (seat === "ops" && t === "routines") {
     const rows = DATA.machine_all || [];
-    body = rows.length ? `<div class="card enter tcard"><div class="tblw"><table><thead><tr><th>Routine</th><th>Seat</th><th>Cadence</th><th>Next due</th><th>Last done</th></tr></thead><tbody>${rows.map(r => `<tr><td>${title(r)}</td><td>${esc(r.props.Seat || "")}</td><td>${esc(r.props.Cadence || "")}</td><td>${esc(fmt(r.props["Next due"]))}</td><td>${esc(fmt(r.props["Last done"]))}</td></tr>`).join("")}</tbody></table></div></div>` : blank();
+    body = rows.length ? `<div class="card enter tcard"><div class="tblw"><table><thead><tr><th>Routine</th><th>Seat</th><th>Cadence</th><th>Next due</th><th>Last done</th></tr></thead><tbody>${rows.map(r => `<tr><td>${roomOfName(r.props.Seat) ? `<a href="${roomOfName(r.props.Seat)}">${esc(r.title)}</a>` : esc(r.title)}</td><td>${esc(r.props.Seat || "")}</td><td>${esc(r.props.Cadence || "")}</td><td>${esc(fmt(r.props["Next due"]))}</td><td>${esc(fmt(r.props["Last done"]))}</td></tr>`).join("")}</tbody></table></div></div>` : blank();
   }
   if (seat === "ops" && t === "paste-backs") {
     const rows = (DATA.waiting || []).filter(r => r.kind === "Paste-back to approve");
-    body = rows.length ? `<div class="cols enter">${rows.map(r => `<div class="card"><div class="k"><span class="caps">${esc(r.props.Seat || "")}</span></div><h4>${title(r)}</h4></div>`).join("")}</div>` : blank();
+    body = rows.length ? `<div class="cols enter">${rows.map(r => `<div class="card"><div class="k"><span class="caps">${esc(r.props.Seat || "")}</span></div><h4>${esc(r.title)}</h4><div class="pills"><button class="pill on" data-open="ops" data-text="${esc("Apply the paste-back \u201c" + r.title + "\u201d, with my OK at each change.")}">${ic("chat", 13)}Apply it with Operations</button>${r.url ? `<a class="pill quiet" href="${esc(r.url)}" target="_blank" rel="noopener">${ic("folder", 13)}Notion page</a>` : ""}</div></div>`).join("")}</div>` : blank();
   }
   view.innerHTML = pageHead(`${ic("home", 12)}${esc(dp.name)} · ${esc(name)}`, dp.icon, name, "", `<a class="pill on" href="#" data-open="${dp.skill}" data-text="Let's work on ${esc(name)}.">${ic("chat", 13)}Work on it with Claude</a>${back("#room/" + seat, dp.name)}`) + body;
 }
@@ -1379,17 +1404,126 @@ const CURRIC_URL = "#";
 function mentorPills(here) {
   return [["path", "Your path", "layers"], ["plan", "Plan my learning", "chat"], ["lesson", "Begin a lesson", "spark"]].map(([k, l, i]) => k === here ? "" : `<a class="pill${k === "lesson" ? " on" : ""}" href="#mentor/${k}">${ic(i, 13)}${l}</a>`).join("") + back("#mentor", "The garden");
 }
+
+/* Your path, v3: numbered modules (M1, M2...) of topic cards, each with a short description. The whole card starts its next layer in the hub. */
+const CRAFT_MODS = ["Strategy & Brand", "Attention & Creative", "Growth & Systems"];
+const TOPIC_DESC = {
+  "Business Models & Unit Economics": "How a business makes money, one sale at a time.",
+  "Customer Psychology & Jobs To Be Done": "What people are really hiring your product to do.",
+  "Market Research & Insight": "Diagnosing the market before you prescribe.",
+  "Segmentation & ICP": "Choosing exactly who you serve, and who you don't.",
+  "Positioning": "The one spot you own in the buyer's mind.",
+  "Differentiation": "Why you, and not the next option on the shelf.",
+  "Brand Equity": "The trust you bank with every promise kept.",
+  "Cultural Strategy & Trends": "Reading the currents that move what people want.",
+  "Consumer Attention": "Earning the few seconds people give anything.",
+  "Copywriting & Persuasion": "Words that move someone from maybe to yes.",
+  "Storytelling": "Shaping ideas so people feel them and remember.",
+  "Creative Strategy": "The plan behind the work, before the work.",
+  "Art Direction": "A visual language that says it without words.",
+  "Content Strategy & Systems": "A kitchen that serves great content every week.",
+  "Platform Mechanics": "How each platform decides who sees what.",
+  "Virality & Social Transmission": "Why people pass some things on and not others.",
+  "Conversion Rate Optimisation": "Plugging the leaks between interest and purchase.",
+  "Performance Marketing": "Paid reach you can turn up and measure.",
+  "CRM, Retention & Lifecycle": "Keeping customers close long after the first sale.",
+  "Analytics, Attribution & Testing": "Knowing what actually worked, and proving it.",
+  "Growth Loops": "Systems where each customer brings the next.",
+  "Offer Design & PMF": "An offer people pull from you, not one you push.",
+  "Go-to-Market & Expansion": "Launching, then stepping into the next market.",
+  "Strategy, Prioritisation & Leverage": "Doing the few things that move everything else.",
+  "How to enter ecosystems": "Finding the rooms where the right people gather.",
+  "How to identify problems": "Spotting problems worth someone paying to solve.",
+  "How to create value": "Turning what you know into something people want.",
+  "How to communicate and initiate": "Starting conversations that open doors.",
+  "How to build through iteration": "Shipping small, learning fast, getting better.",
+  "How money actually works": "Where money comes from and why it moves.",
+  "Personal finance": "Running your own money like a small business.",
+  "Compounding": "Small gains that snowball over time.",
+  "Investing & asset allocation": "Spreading money so it grows and survives.",
+  "Cash flow": "Money in versus money out, month to month.",
+  "Leverage": "Using other people's money, time or code to multiply.",
+  "Opportunity cost": "The price of every option you didn't take.",
+  "Risk & expected value": "Weighing bets by the odds and the payoff.",
+  "Value creation": "Making something worth more than it costs.",
+  "Markets & incentives": "Why people and markets behave as they do.",
+  "Marketing": "Getting the right message to the right people.",
+  "Sales & persuasion": "Helping someone decide, honestly and well.",
+  "Brand": "What people say about you when you leave the room.",
+  "Distribution": "How your work actually reaches people.",
+  "Creative direction": "Leading the look and feel of the work.",
+  "Entrepreneurship": "Building something from nothing and keeping it alive.",
+  "Negotiation": "Getting to yes without giving everything away.",
+  "Career capital": "Rare skills that open better doors.",
+  "Neuroplasticity & habit formation": "How the brain rewires and habits stick.",
+  "Attention": "Where your focus goes, your life follows.",
+  "Belief systems": "The rules you live by without noticing.",
+  "Emotional regulation": "Feeling it fully without being run by it.",
+  "Neuro-associations": "The links your mind makes between pain and pleasure.",
+  "Identity": "Who you believe you are, and how it steers you.",
+  "Ego": "The self that protects you and sometimes blocks you.",
+  "Resilience": "Bending under pressure without breaking.",
+  "Decision-making": "Choosing well under uncertainty.",
+  "Delayed gratification": "Trading a small now for a bigger later.",
+  "Exercise physiology": "What training does inside the body.",
+  "Nutrition & energy balance": "Food as fuel, and how energy adds up.",
+  "Sleep & circadian biology": "Your body clock and why rest matters.",
+  "Stress physiology": "How stress works in the body, and how to reset.",
+  "Mobility & movement": "Moving freely and staying pain free.",
+  "Body composition": "Muscle, fat and how to shift the balance.",
+  "Embodiment": "Living in your body, not just your head.",
+  "Attachment & intimacy": "How we bond, and what makes closeness safe.",
+  "Communication": "Saying what you mean so it lands.",
+  "Trust": "How trust is built, broken and repaired.",
+  "Social dynamics & status": "The unspoken rules of every group.",
+  "Conflict": "Disagreeing well and coming out closer.",
+  "Empathy & perspective-taking": "Seeing the world through someone else's eyes.",
+  "Leadership": "Getting people to follow you willingly.",
+  "Human motivation": "What actually drives people to act.",
+  "Meaning & purpose": "What makes a life feel worth living.",
+  "Mortality": "Using the fact of death to live better.",
+  "Stoicism & voluntary discomfort": "Choosing hardship to become unshakeable.",
+  "Existentialism": "Making meaning in a world that gives none.",
+  "Consciousness": "What awareness is, and why it's strange.",
+  "Spiritual traditions & transcendence": "What the great traditions say about going beyond self.",
+  "Values & virtue": "Knowing what you stand for and living it.",
+  "Sex Appeal": "Attraction, and what draws people in.",
+  "Swagger": "Easy confidence that shows in how you move.",
+  "Physique": "Building a body that carries you well.",
+  "Mystique": "Leaving a little unknown, on purpose.",
+  "Power": "Presence and influence without force."
+};
+function whyOf(r) {
+  const parts = String(r.props.Why || "").split(" · ").map(x => x.trim()).filter(Boolean);
+  const track = parts[0] || r.props.Area || "Other", code = (parts[1] || "").match(/^[A-Z]\d+(?:\.\d+)?$/) ? parts[1] : "";
+  const rest = parts.slice(code ? 2 : 1);
+  const analogy = (rest.find(x => /^analogy:/i.test(x)) || "").replace(/^analogy:\s*/i, "");
+  const mark = (rest.find(x => /^status:/i.test(x)) || "").replace(/^status:\s*/i, "");
+  const modName = rest.find(x => !/^(analogy|status):/i.test(x)) || "";
+  const n = +(code.match(/\d+/) || [0])[0];
+  const module = /^S\d/.test(code) && n ? CRAFT_MODS[Math.min(2, Math.floor((n - 1) / 8))] : modName || track;
+  return { track, code, analogy, mark, module };
+}
+const codeNum = c => { const m = String(c).match(/(\d+)(?:\.(\d+))?/); return m ? +m[1] * 100 + +(m[2] || 0) : 9999; };
+const descOf = r => TOPIC_DESC[r.title] || r.props.Line || (whyOf(r).analogy ? "Through the analogy of " + whyOf(r).analogy + "." : "");
+function modulesHTML(rows, card) {
+  const mods = [];
+  rows.slice().sort((a, b) => (a.props.Order || 999) - (b.props.Order || 999)).forEach(r => { const m = whyOf(r).module; let g = mods.find(x => x.name === m); if (!g) mods.push(g = { name: m, rows: [] }); g.rows.push(r); });
+  return mods.map((g, i) => `<section class="pmod"><div class="pmod-h"><h3 class="serif">M${i + 1} · ${esc(g.name)}</h3><span>${g.rows.filter(doneTopic).length} of ${g.rows.length} complete</span></div>
+    <div class="pgrid">${g.rows.map(card).join("")}</div></section>`).join("");
+}
 function pathPage(view) {
   const rows = DATA.curriculum || [], live = rows.filter(r => r.props.Status !== "Suggested"), sugg = rows.filter(r => r.props.Status === "Suggested");
   const done = live.filter(doneTopic).length;
-  const row = r => `<div class="topic"><div><h4>${title(r)}</h4><p>${esc([r.props.Area, r.props.Status === "Complete" || doneTopic(r) ? "complete" : r.props.Status, r.props["Last lesson"] ? "last lesson " + fmt(r.props["Last lesson"]) : ""].filter(Boolean).join(" · "))}</p></div>${pips(r)}</div>`;
-  view.innerHTML = pageHead(`${ic("leaf", 12)}The Council · the Mentor`, "layers", "Your path", "The whole curriculum. A topic is complete once all three layers are proven.", mentorPills("path"))
+  const row = r => `<button class="pcard" data-topic="${r.id}" title="${doneTopic(r) ? "Review" : "Start layer " + (layersOf(r).indexOf(false) + 1) + " here"}"><h4 class="serif">${esc(r.title)}</h4><p>${esc(descOf(r))}</p><div class="pfoot">${pips(r)}<span class="pgo">${ic("door", 12)}${doneTopic(r) ? "Review" : "Layer " + (layersOf(r).indexOf(false) + 1)}</span><span class="caps pst">${esc(doneTopic(r) ? "Complete" : r.props.Status || "")}</span></div></button>`;
+  view.innerHTML = pageHead(`${ic("leaf", 12)}The Council · the Mentor`, "layers", "Your path", "The whole curriculum, module by module. A topic is complete once all three layers are proven.", mentorPills("path"))
     + (rows.length ? `<div class="path enter" style="animation-delay:.1s">
       <div class="card psum"><div class="k">${ic("layers", 13)}<span class="caps">Progress</span><span class="n">${done} of ${live.length} complete</span></div><div class="meter"><span style="width:${live.length ? done / live.length * 100 : 0}%"></span></div>
         <p class="legend"><span class="pips"><i class="on"></i></span> Layer 1 foundations <span class="pips"><i class="on"></i><i class="on"></i></span> Layer 2 working depth <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span> Layer 3 mastery</p></div>
-      <div class="card">${live.length ? live.map(row).join("") : `<p class="empty">No topics yet.</p>`}</div>
-      ${sugg.length ? `<div class="card"><div class="k">${ic("spark", 13)}<span class="caps">Suggested additions</span><span class="n">from the Mentor and Recos</span></div>${sugg.map(r => `<div class="topic"><div><h4>${title(r)}</h4><p>${esc([r.props.Source, r.props.Why].filter(Boolean).join(" · "))}</p></div></div>`).join("")}<p class="hint">Set one to Planned in Notion to add it to your path.</p></div>` : ""}
+      ${live.length ? modulesHTML(live, row) : `<div class="card"><p class="empty">No topics yet.</p></div>`}
+      ${sugg.length ? `<div class="card"><div class="k">${ic("spark", 13)}<span class="caps">Suggested additions</span><span class="n">from the Mentor and Recos</span></div>${sugg.map(r => `<button class="topic go" data-topic="${r.id}"><div><h4>${esc(r.title)}</h4><p>${esc([r.props.Source, r.props.Why].filter(Boolean).join(" · "))}</p></div><span class="tgo">${ic("door", 13)}Try layer 1</span></button>`).join("")}<p class="hint">Starting one tries layer 1 here. Prove a layer and it joins your path.</p></div>` : ""}
       </div>` : blank());
+  view.querySelectorAll("[data-topic]").forEach(b => b.onclick = () => { const r = rows.find(x => x.id === b.dataset.topic); if (!r) return; const n = layersOf(r).indexOf(false) + 1 || 3; beginLesson(r.title, n, r.id); });
 }
 function planPage(view) {
   const sugg = (DATA.curriculum || []).filter(r => r.props.Status === "Suggested"), recos = (DATA.recos || []).filter(r => r.props.Kind === "Curriculum");
@@ -1397,9 +1531,10 @@ function planPage(view) {
     + `<div class="cols enter" style="animation-delay:.1s;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)"><form class="card plan" id="planf"><div class="k">${ic("chat", 13)}<span class="caps">Talk to the Mentor</span></div>
       <textarea name="q" rows="6" placeholder="What I want to learn, or what I'm in the middle of…" required></textarea>
       <div class="pills"><button class="pill on">${ic("door", 13)}Talk it through</button></div><p class="hint">Opens a chat with the Mentor. Anything it suggests comes back here as a suggested topic, for your OK.</p></form>
-      <div class="card"><div class="k">${ic("spark", 13)}<span class="caps">Waiting for your OK</span></div>${sugg.length || recos.length ? sugg.map(r => `<div class="item"><h4>${title(r)}</h4><p>${esc(r.props.Source || "")}</p></div>`).join("") + recos.map(r => `<div class="item"><h4>${title(r)}</h4><p>a Reco · ${esc(r.props.Seat || "")}</p></div>`).join("") : `<p class="empty">Nothing yet.</p>`}</div></div>`;
+      <div class="card"><div class="k">${ic("spark", 13)}<span class="caps">Waiting for your OK</span></div>${sugg.length || recos.length ? sugg.map(r => `<button class="topic go" data-topic="${r.id}"><div><h4>${esc(r.title)}</h4><p>${esc(r.props.Source || "")}</p></div><span class="tgo">${ic("door", 13)}Try layer 1</span></button>`).join("") + recos.map(r => `<a class="item ilink" href="#recos"><h4>${esc(r.title)}</h4><p>a Reco · ${esc(r.props.Seat || "")}</p></a>`).join("") : `<p class="empty">Nothing yet.</p>`}</div></div>`;
+  view.querySelectorAll("[data-topic]").forEach(b => b.onclick = () => { const r = sugg.find(x => x.id === b.dataset.topic); if (r) beginLesson(r.title, 1, r.id); });
   view.querySelector("#planf").onsubmit = ev => { ev.preventDefault(); const q = new FormData(ev.target).get("q").trim(); if (!q) return;
-    openClaude("mentor", `I want to work out what to learn next. Here's what I want to learn or what I'm doing:\n${q}\n\nAsk me what you need to, then work out what I need to learn. Check it against my Curriculum table in Notion and recommend additions. Add each one I OK as a Curriculum row with Status Suggested and Source Mentor.`); };
+    openClaude("mentor", `I want to work out what to learn next. Here's what I want to learn or what I'm doing:\n${q}\n\nAsk me what you need to, then work out what I need to learn. Check it against my path in my hub and recommend additions. Add each one I OK as a Curriculum row with Status Suggested and Source Mentor.`); };
 }
 function lessonPage(view) {
   const rows = (DATA.curriculum || []).filter(r => r.props.Status !== "Suggested" && !doneTopic(r));
@@ -1409,14 +1544,157 @@ function lessonPage(view) {
       `<a class="pill on" href="#" data-open="mentor" data-text="Let's begin a lesson. My Curriculum table is empty, so do a SWOT read and propose the first teaching. Once I pick, add it to the Curriculum table (Status Learning) with my OK, and teach layer 1.">${ic("door", 13)}Let the Mentor choose</a>` + mentorPills("lesson"))
       + `<div class="cols enter" style="animation-delay:.1s;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)"><form class="card plan" id="ownf"><div class="k">${ic("spark", 13)}<span class="caps">Or pick your own subject</span></div>
       <textarea name="q" rows="3" placeholder="What you want to learn…" required></textarea><div class="pills"><button class="pill on">${ic("door", 13)}Begin layer 1</button></div></form></div>`;
-    view.querySelector("#ownf").onsubmit = ev => { ev.preventDefault(); const q = new FormData(ev.target).get("q").trim(); if (q) openClaude("mentor", `Let's begin a lesson on: ${q}\nAdd it to my Curriculum table (Status Learning, Source You) with my OK, then teach layer 1 through an analogy and a thought experiment, and check my understanding. When I've proven it, tick Layer 1.`); };
+    view.querySelector("#ownf").onsubmit = ev => { ev.preventDefault(); const q = new FormData(ev.target).get("q").trim(); if (q) beginLesson(q, 1, null); };
     return;
   }
   const L = layersOf(next), n = L.indexOf(false) + 1, names = ["Foundations", "Working depth", "Mastery"];
   view.innerHTML = pageHead(`${ic("leaf", 12)}The Council · the Mentor`, "spark", next.title, `Next up: layer ${n}, ${names[n - 1].toLowerCase()}.`,
-    `<a class="pill on" href="#" data-open="mentor" data-text="Let's begin a lesson on ${esc(next.title)}, layer ${n} (${names[n - 1].toLowerCase()}). Teach it through an analogy and a thought experiment, then check my understanding. When I've proven it, tick Layer ${n} on this topic in the Curriculum table, with my OK.">${ic("door", 13)}Begin with the Mentor</a>` + mentorPills("lesson"))
+    `<button class="pill on" data-begin>${ic("door", 13)}Begin with the Mentor</button>` + mentorPills("lesson"))
     + `<div class="stairs enter" style="animation-delay:.1s">${[3, 2, 1].map(k => `<div class="stair${L[k - 1] ? " on" : ""}${k === n ? " now" : ""}"><span class="slab"></span><div><b class="serif">Layer ${k}</b><em>${names[k - 1]}${L[k - 1] ? " · proven" : k === n ? " · this lesson" : ""}</em></div></div>`).join("")}</div>`;
+  view.querySelector("[data-begin]").onclick = () => beginLesson(next.title, n, next.id.replace(/-/g, ""));
 }
+
+
+
+/* Suggestions come up inside a chat whenever they're relevant; one click adds them to Recos. */
+const RECO_KINDS = ["Routine", "Skill", "Memory", "Hub", "Tool", "Process", "Curriculum"];
+function splitReco(text) {
+  const m = text.match(/\n?\s*RECO:\s*(.+?)\s*(?:\|\s*(\w+))?\s*$/);
+  if (!m) return { text, reco: null };
+  return { text: text.slice(0, m.index).trim(), reco: { t: m[1], k: RECO_KINDS.includes(m[2]) ? m[2] : "Process" } };
+}
+const seatLabel = s => { const d = DEPTS.find(x => x.skill === s); return d ? d.name : s === "mentor" ? "Mentor" : s === "board" ? "Advisory Board" : "Front Desk"; };
+const recoHTML = (m, i) => m.reco ? `<div class="lreco${m.reco.done ? " done" : ""}">${ic("bulb", 13)}<div><span class="caps">Suggestion · ${esc(m.reco.k)}</span><p>${esc(m.reco.t)}</p>
+  ${m.reco.done ? `<em>${esc(m.reco.done)}</em>` : `<div class="pills"><button class="pill on" data-reco="${i}">${ic("compass", 13)}Add to Recos</button><button class="pill quiet" data-noreco="${i}">Not now</button></div>`}</div></div>` : "";
+function wireRecos2(view, list, seat, redraw, say) {
+  view.querySelectorAll("[data-reco]").forEach(b => b.onclick = async () => {
+    const m = list[+b.dataset.reco]; b.disabled = true;
+    if (!DATA.writes || !DATA.chat) {
+      if (DATA.chat) { m.reco.done = "Asked in this chat"; redraw(); return say(`Please add this to my Recos table in Notion (Status New, Kind ${m.reco.k}, Seat ${seatLabel(seat)}): ${m.reco.t}`); }
+      m.reco.done = "Switch on hub writes (HUB_WRITES=on) to add it from here"; return redraw();
+    }
+    const r = await fetch("/api/reco", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ text: m.reco.t, kind: m.reco.k, seat: seatLabel(seat) }) });
+    m.reco.done = r.ok ? "Added to Recos" : "Couldn't add: " + (await r.text()); redraw();
+  });
+  view.querySelectorAll("[data-noreco]").forEach(b => b.onclick = () => { list[+b.dataset.noreco].reco = null; redraw(); });
+}
+
+/* ---------- a lesson, inside the hub ----------
+   The chat runs through Claude Code on this PC (Ashah's own plan, no API). The Mentor explains one layer
+   through an analogy, draws it on the left, then asks one question. A proven layer is ticked in the Curriculum. */
+let LESSON = null;
+try { LESSON = JSON.parse(localStorage.getItem("amw-lesson") || "null"); } catch (e) {}
+const saveLesson = () => { try { localStorage.setItem("amw-lesson", JSON.stringify(LESSON)); } catch (e) {} };
+function cleanSVG(src) {
+  const doc = new DOMParser().parseFromString(src, "image/svg+xml"), svg = doc.querySelector("svg");
+  if (!svg || doc.querySelector("parsererror")) return "";
+  svg.querySelectorAll("script,foreignObject,image,use,a,style").forEach(n => n.remove());
+  [svg, ...svg.querySelectorAll("*")].forEach(n => [...n.attributes].forEach(a => { if (/^on|href$/i.test(a.name)) n.removeAttribute(a.name); }));
+  svg.removeAttribute("width"); svg.removeAttribute("height");
+  return svg.outerHTML;
+}
+function splitReply(text) {
+  let svg = "";
+  text = text.replace(/```svg\s*([\s\S]*?)```/g, (_, s) => { svg = svg || cleanSVG(s); return ""; });
+  const proven = /\n?\s*LAYER PROVEN\s*$/.test(text);
+  return { text: text.replace(/\n?\s*LAYER PROVEN\s*$/, "").trim(), svg, proven };
+}
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
+function startLesson(topic, layer, rowId) {
+  LESSON = { topic, layer, rowId: rowId || null, sid: null, msgs: [], svg: "", title: "", proven: false, ticked: false };
+  saveLesson(); location.hash = "#mentor/learn"; if (location.hash === "#mentor/learn") route();
+}
+function beginLesson(topic, layer, rowId) {
+  startLesson(topic, layer, rowId);
+}
+async function lessonSay(view, msg, shown) {
+  const L = LESSON; if (shown !== false) L.msgs.push({ u: 1, t: msg }); L.busy = true; saveLesson(); lessonDraw(view);
+  try {
+    const r = await fetch("/api/chat", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ seat: "mentor-lesson", msg, sid: L.sid }) });
+    if (!r.ok) throw new Error(await r.text());
+    const out = await r.json(), p = splitReply(out.text), rc = splitReco(p.text);
+    L.sid = out.sid; L.msgs.push({ t: rc.text, reco: rc.reco });
+    if (p.svg) { L.svg = p.svg; L.title = (p.text.match(/^\*\*(.+?)\*\*/) || [])[1] || L.title; }
+    if (p.proven) L.proven = true;
+  } catch (e) { L.msgs.push({ t: "Couldn't reach Claude: " + e.message, err: 1 }); }
+  L.busy = false; saveLesson(); if (LESSON === L && location.hash === "#mentor/learn") lessonDraw(view);
+}
+function lessonDraw(view) {
+  const L = LESSON, names = ["Foundations", "Working depth", "Mastery"];
+  view.innerHTML = pageHead(`${ic("leaf", 12)}The Council · the Mentor`, "spark", L.topic, `Layer ${L.layer}, ${names[L.layer - 1].toLowerCase()}. Explain, then one question at a time.`, mentorPills("") )
+    + `<div class="lchat enter"><div class="lstage"><span class="caps"><span class="leaf"></span>The analogy</span><h3 class="serif">${esc(L.title.replace(/^.*?:\s*/, "")) || "&nbsp;"}</h3>
+      <div class="lpic">${L.svg || `<p class="empty">${L.busy ? "Drawing the analogy…" : "The picture appears here."}</p>`}</div>
+      <div class="lstep">${[1, 2, 3].map(k => `<i class="${k < L.layer || (k === L.layer && L.proven) ? "on" : k === L.layer ? "now" : ""}"></i>`).join("")}<span class="caps">Layer ${L.layer} of 3</span></div></div>
+    <div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}Your Mentor is an AI: Claude, teaching one layer at a time.</div>${L.msgs.map((m, i) => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">Mentor</span>`}${md(m.t)}</div>${recoHTML(m, i)}`).join("")}${L.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
+      ${L.proven ? `<div class="lproven">${ic("spark", 14)}<b class="serif">Layer ${L.layer} proven</b>${L.rowId && DATA.writes && !L.ticked ? `<button class="pill on" data-tick>${ic("check", 13)}Tick it in your path</button>` : L.ticked ? `<span class="caps">Ticked in your path</span>` : ""}${L.layer < 3 ? `<button class="pill" data-next>Next layer</button>` : ""}</div>` : ""}
+      <form class="lform"><textarea name="a" rows="2" placeholder="${L.msgs.length ? "Your answer…" : ""}" ${L.busy || !L.msgs.length ? "disabled" : ""}></textarea><button class="pill on" ${L.busy || !L.msgs.length ? "disabled" : ""}>${ic("door", 13)}Send</button></form>
+      <div class="lfoot">${PLAN_NOTE}<a href="#mentor/lesson" data-end>End lesson</a></div></div></div>`;
+  const box = view.querySelector(".lmsgs"); box.scrollTop = box.scrollHeight;
+  const f = view.querySelector(".lform"), ta = f.querySelector("textarea");
+  f.onsubmit = ev => { ev.preventDefault(); const a = ta.value.trim(); if (a && !L.busy) lessonSay(view, a); };
+  ta.onkeydown = ev => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); f.requestSubmit(); } };
+  if (!L.busy && L.msgs.length) ta.focus();
+  view.querySelector("[data-end]").onclick = () => { LESSON = null; saveLesson(); };
+  const t = view.querySelector("[data-tick]");
+  if (t) t.onclick = async () => { t.disabled = true; const r = await fetch("/api/tick", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ id: L.rowId, layer: L.layer }) }); if (r.ok) { L.ticked = true; saveLesson(); lessonDraw(view); } else { t.disabled = false; t.textContent = "Couldn't tick: " + (await r.text()); } };
+  wireRecos2(view, L.msgs, "mentor", () => { saveLesson(); lessonDraw(view); }, a => lessonSay(view, a));
+  const n = view.querySelector("[data-next]");
+  if (n) n.onclick = () => startLesson(L.topic, L.layer + 1, L.rowId);
+}
+function learnPage(view) {
+  if (!LESSON) { location.hash = "#mentor/lesson"; return; }
+  lessonDraw(view);
+  if (!DATA.chat) { const f = view.querySelector(".lform"); f.insertAdjacentHTML("beforebegin", SETUP_CARD("Start this lesson in Claude instead")); view.querySelector("[data-out]").onclick = ev => { ev.preventDefault(); _openClaudeOut("mentor", `Let's begin a lesson on ${LESSON.topic}, layer ${LESSON.layer}. Explain it simply through one analogy, then ask me one question that tests my understanding.`); }; return; }
+  if (!LESSON.msgs.length && !LESSON.busy) lessonSay(view, `Begin the lesson. Topic: ${LESSON.topic}. Layer ${LESSON.layer} (${["foundations", "working depth", "mastery"][LESSON.layer - 1]}).`, false);
+}
+
+
+/* ---------- seat chats, inside the hub ----------
+   Every "open a chat" button lands here when Claude Code is on this PC. It only runs when you send. */
+let CHAT = null;
+try { CHAT = JSON.parse(localStorage.getItem("amw-chat") || "null"); } catch (e) {}
+const saveChat = () => { try { localStorage.setItem("amw-chat", JSON.stringify(CHAT)); } catch (e) {} };
+async function chatPost(seat, msg, sid) {
+  const r = await fetch("/api/chat", { method: "POST", headers: { "X-AMW-Hub": "1", "Content-Type": "application/json" }, body: JSON.stringify({ seat, msg, sid }) });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+const PLAN_NOTE = `<span class="caps">AI · runs on your Claude plan · <a href="https://claude.ai/settings/usage" target="_blank" rel="noopener">see its usage limits</a></span>`;
+function startChat(skill, text) {
+  CHAT = { skill, sid: null, msgs: [], draft: text || "", back: location.hash || "#home" };
+  saveChat(); location.hash = "#chat"; if (location.hash === "#chat") route();
+}
+async function chatSay(view, msg) {
+  const C = CHAT; C.msgs.push({ u: 1, t: msg }); C.draft = ""; C.busy = true; saveChat(); chatDraw(view);
+  try { const out = await chatPost(C.skill, msg, C.sid), rc = splitReco(out.text); C.sid = out.sid; C.msgs.push({ t: rc.text, reco: rc.reco }); }
+  catch (e) { C.msgs.push({ t: "Couldn't reach Claude: " + e.message, err: 1 }); }
+  C.busy = false; saveChat(); if (CHAT === C && location.hash === "#chat") chatDraw(view);
+}
+function chatDraw(view) {
+  const C = CHAT, who = skillName(C.skill), c = seatColOfSkill(C.skill);
+  view.innerHTML = pageHead(`${ic("chat", 12)}In the hub · ${esc(who)}`, "chat", who[0].toUpperCase() + who.slice(1), "", back(C.back, "Back"))
+    + `<div class="lchat solo enter" style="--m:${c}"><div class="lside"><div class="lmsgs"><div class="lb ai">${ic("spark", 12)}You're chatting with an AI: Claude, working as ${esc(who)}. It runs only when you press Send.</div>${C.msgs.map((m, i) => `<div class="lb ${m.u ? "u" : "m"}${m.err ? " err" : ""}">${m.u ? "" : `<span class="caps">${esc(who)}</span>`}${md(m.t)}</div>${recoHTML(m, i)}`).join("")}${C.busy ? `<div class="lb m typing"><span></span><span></span><span></span></div>` : ""}</div>
+      ${DATA.chat ? "" : SETUP_CARD("Start this chat in Claude instead")}
+      <form class="lform"><textarea name="a" rows="${C.msgs.length ? 2 : 5}" ${C.busy ? "disabled" : ""}>${esc(C.draft || "")}</textarea><button class="pill on" ${C.busy ? "disabled" : ""}>${ic("door", 13)}Send</button></form>
+      <div class="lfoot">${PLAN_NOTE}<span><a href="#" data-out>Open in Claude instead</a> · <a href="#" data-new>New chat</a></span></div></div></div>`;
+  const box = view.querySelector(".lmsgs"); box.scrollTop = box.scrollHeight;
+  const f = view.querySelector(".lform"), ta = f.querySelector("textarea");
+  ta.oninput = () => { C.draft = ta.value; saveChat(); };
+  f.onsubmit = ev => { ev.preventDefault(); const a = ta.value.trim(); if (!DATA.chat) return _openClaudeOut(C.skill, a); if (a && !C.busy) chatSay(view, a); };
+  ta.onkeydown = ev => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); f.requestSubmit(); } };
+  if (!C.busy) ta.focus();
+  wireRecos2(view, C.msgs, C.skill, () => { saveChat(); chatDraw(view); }, a => chatSay(view, a));
+  view.querySelectorAll("[data-out]").forEach(o => o.onclick = ev => { ev.preventDefault(); _openClaudeOut(C.skill, ta.value); });
+  view.querySelector("[data-new]").onclick = ev => { ev.preventDefault(); startChat(C.skill, ""); };
+}
+function seatColOfSkill(s) { const d = DEPTS.find(x => x.skill === s); return d ? colOf(d) : s === "mentor" ? COL.mentor : s === "board" ? COL.board : COL.desk; }
+function chatPage(view) { if (!CHAT) { location.hash = "#home"; return; } chatDraw(view); }
+const _openClaudeOut = openClaude;
+openClaude = function (skill, text) { startChat(skill, text); };
+/* Shown in a chat until Claude Code is set up on this PC; the chat page itself stays in the hub. */
+const SETUP_CARD = (exit) => `<div class="lsetup">${ic("spark", 14)}<div><b class="serif">One step left: chats inside your hub</b>
+  <p>Double-click <b>Turn on hub chats</b> in your Orbit Hub folder: about 5 minutes, two clicks in your browser. It's free on your Claude plan.</p>
+  <p><a href="#" data-out>${exit}</a></p></div></div>`;
 
 /* ---------- the board ---------- */
 function meetingPage(view) {
@@ -1457,23 +1735,26 @@ studioView = () => _studioViewBase().replace(/<div class="rail">[\s\S]*?<\/div>\
 const _wirePages = wire;
 wire = function (el) {
   _wirePages(el);
-  el.querySelectorAll && el.querySelectorAll("[data-run]").forEach(b => { const prev = b.onclick; b.onclick = ev => { if (ev.target.dataset.del) return prev(ev); const [k, i] = b.dataset.run.split(":"); location.hash = `#skill/${k}/${i}`; }; });
+  el.querySelectorAll && el.querySelectorAll("[data-run]").forEach(b => { const prev = b.onclick; b.onclick = ev => { if (ev.target.dataset.del) return prev(ev); const [k, i] = b.dataset.run.split(":"); runSkill(((DATA.skills || {})[k] || [])[+i]); }; });
 };
 
 /* ---------- routing ---------- */
 const _routePages = route;
 route = function () {
   const h = location.hash.replace("#", ""), [top, a, b] = h.split("/");
-  const isPage = ["doc", "skill", "tab", "bench"].includes(top) || (["mentor", "board"].includes(top) && a);
+  const askBar = document.getElementById("ask"); const inChat = top === "chat" || (top === "mentor" && a === "learn"); if (askBar) askBar.hidden = inChat; document.body.classList.toggle("in-chat", inChat);
+  const isPage = ["doc", "skill", "tab", "bench", "chat"].includes(top) || (["mentor", "board"].includes(top) && a);
   if (!DATA || DATA.setup || !isPage) return _routePages();
   if (!_extrasDone) { _extrasDone = true; applyFont(); showUsage(); setTimeout(showNotes, 700); }
-  navTo(top === "mentor" || top === "board" ? top : top === "bench" ? "studio" : "room");
+  const chatSeat = top === "chat" && CHAT ? (CHAT.skill === "mentor" ? "mentor" : CHAT.skill === "board" ? "board" : "room") : "";
+  navTo(chatSeat || (top === "mentor" || top === "board" ? top : top === "bench" ? "studio" : "room"));
   const view = document.getElementById("view"); view.dataset.v = "page"; clearTimeout(focusTimer);
   if (top === "doc") docPage(view, a);
   else if (top === "skill") skillPage(view, a, b);
   else if (top === "tab") tabPage(view, a, b);
   else if (top === "bench") benchPage(view, a);
-  else if (top === "mentor") { setTint(COL.mentor); setAsk("mentor", "your Mentor"); (a === "path" ? pathPage : a === "plan" ? planPage : lessonPage)(view); }
+  else if (top === "mentor") { setTint(COL.mentor); setAsk("mentor", "your Mentor"); (a === "path" ? pathPage : a === "plan" ? planPage : a === "learn" ? learnPage : lessonPage)(view); }
+  else if (top === "chat") { if (CHAT) { setTint(seatColOfSkill(CHAT.skill)); setAsk(CHAT.skill, skillName(CHAT.skill)); } chatPage(view); }
   else if (top === "board") { setTint(COL.board); setAsk("board", "the Board"); meetingPage(view); }
   if (top !== "doc") wire(view);
   scrollTo(0, 0);
@@ -1481,6 +1762,7 @@ route = function () {
 window.removeEventListener("hashchange", _routePages);
 window.addEventListener("hashchange", route);
 window.addEventListener("hashchange", () => document.querySelector(".leave")?.remove());
+if (typeof DATA !== "undefined" && DATA && location.hash.length > 1) setTimeout(route, 0);  // the hub may have drawn before these pages loaded
 
 
 /* ---------- staying in step with Notion ----------
@@ -1489,7 +1771,7 @@ window.addEventListener("hashchange", () => document.querySelector(".leave")?.re
 let _lastSync = "";
 async function syncFromNotion() {
   if (document.hidden || !DATA || DATA.setup) return;
-  const busy = document.querySelector(".confirm, .leave, .addform.on") || ["INPUT", "TEXTAREA"].includes((document.activeElement || {}).tagName);
+  const busy = document.querySelector(".confirm, .leave, .addform.on, .lchat") || ["INPUT", "TEXTAREA"].includes((document.activeElement || {}).tagName);
   if (busy) return;
   let fresh; try { fresh = await (await fetch("/api/hub")).json(); } catch (e) { return; }
   const sig = JSON.stringify({ ...fresh, skills: null, today: null });
@@ -1589,6 +1871,46 @@ a[target="_blank"]:not(.pill):not(.ref):hover{animation:none;box-shadow:none;tex
 .rail2{position:absolute;left:5%;right:5%;top:42px;height:1px;background:var(--b);z-index:0}
 .panels{max-width:900px}
 [hidden]{display:none!important}
+.lchat{--m:#8FDDB2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);border:1px solid rgba(143,221,178,.22);border-radius:18px;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 30% 40%,rgba(143,221,178,.08),transparent 70%),rgba(4,7,12,.75);min-height:600px;margin-top:22px}
+@media(max-width:860px){.lchat{grid-template-columns:1fr}}
+.lstage{padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}.lstage .caps{color:var(--m)}.lstage .leaf{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m);box-shadow:0 0 10px var(--m);margin-right:8px}
+.lstage h3{font-size:clamp(22px,2.6vw,30px);margin:0;font-style:italic;font-weight:400;line-height:1.15}
+.lpic{flex:1;display:grid;place-items:center;color:var(--m);min-height:280px}.lpic svg{width:100%;max-width:460px;height:auto;filter:drop-shadow(0 0 10px rgba(143,221,178,.35))}
+.lpic svg *{stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:ldraw 2.4s ease forwards}.lpic svg text{stroke-dasharray:none;stroke-dashoffset:0;animation:none;opacity:.85;font-family:inherit}
+@keyframes ldraw{to{stroke-dashoffset:0}}
+.lstep{display:flex;align-items:center;gap:8px}.lstep i{width:9px;height:9px;border-radius:50%;border:1px solid var(--m)}.lstep i.on{background:var(--m);box-shadow:0 0 8px var(--m)}.lstep i.now{box-shadow:0 0 0 3px rgba(143,221,178,.2)}.lstep .caps{margin-left:6px;font-size:10px}
+.lside{border-left:1px solid rgba(143,221,178,.15);padding:22px 20px 16px;display:flex;flex-direction:column;gap:12px;min-width:0;background:rgba(255,255,255,.015)}
+@media(max-width:860px){.lside{border-left:0;border-top:1px solid rgba(143,221,178,.15)}}
+.lmsgs{flex:1;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:560px;min-height:320px;padding-right:4px}
+.lb{max-width:92%;padding:11px 14px;border-radius:12px;font-size:14.5px;line-height:1.55;animation:rise .4s ease both}.lb p{margin:0 0 8px}.lb p:last-child{margin:0}
+.lb.m{border:1px solid rgba(143,221,178,.35);background:rgba(143,221,178,.06);align-self:flex-start}.lb.m .caps{display:block;font-size:10px;color:var(--m);margin-bottom:4px}
+.lb.ai{align-self:center;max-width:100%;font-size:12px;opacity:.75;border:1px dashed rgba(255,255,255,.18);border-radius:99px;padding:5px 12px;display:flex;gap:6px;align-items:center}
+.lb.u{align-self:flex-end;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)}.lb.err{border-color:rgba(255,138,61,.5)}
+.lb.typing span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--m);animation:ldot 1s infinite}.lb.typing span:nth-child(2){animation-delay:.15s}.lb.typing span:nth-child(3){animation-delay:.3s}
+@keyframes ldot{50%{opacity:.25;transform:translateY(-2px)}}
+.lproven{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border:1px solid var(--m);border-radius:12px;padding:10px 14px;color:var(--m);box-shadow:0 0 22px rgba(143,221,178,.18)}.lproven b{font-size:20px;font-weight:400;font-style:italic;color:inherit}
+.lform{display:flex;gap:8px;align-items:flex-end}.lform textarea{flex:1;min-width:0;resize:none;background:transparent;border:1px solid rgba(143,221,178,.3);border-radius:12px;padding:10px 12px;color:inherit;font:inherit}.lform textarea:focus{outline:none;border-color:var(--m)}
+.topic.go{appearance:none;background:none;border:0;border-top:1px solid var(--h);font:inherit;color:inherit;text-align:left;width:100%;cursor:pointer;padding:12px 4px;border-radius:0}.topic.go:first-child{border-top:0}.topic.go:hover{background:rgba(143,221,178,.04)}.topic.go>div{flex:1;min-width:0}.topic.go .tgo{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;border:1px solid rgba(143,221,178,.35);border-radius:99px;padding:5px 12px;opacity:.75;transition:.2s}.topic.go:hover .tgo,.topic.go:focus-visible .tgo{opacity:1;border-color:#8FDDB2;box-shadow:0 0 14px rgba(143,221,178,.25)}
+.lsetup{display:flex;gap:12px;border:1px dashed var(--m,#8FDDB2);border-radius:12px;padding:12px 14px;font-size:13.5px}.lsetup b{font-size:18px;font-weight:400;font-style:italic}.lsetup p{margin:6px 0 0;opacity:.85}.lsetup a{color:inherit}
+a.item.ilink{display:block;color:inherit;text-decoration:none;border-radius:10px;transition:background .2s}a.item.ilink:hover{background:rgba(255,255,255,.04)}a.item.ilink h4{text-decoration:none}
+.mo-pop{margin-top:12px}.mo-pop .k{display:flex;align-items:center}.mo-pop [data-x]{margin-left:auto;padding:2px 10px}.mo-track{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 14px;font-size:13px;opacity:.85}.mo-track span{display:flex;align-items:center;gap:6px}.mo-track i{width:9px;height:9px;border-radius:50%;border:1px solid currentColor}.mo-track .on i{background:currentColor}.mo-track .now i{box-shadow:0 0 0 3px rgba(255,255,255,.15)}.year .mo.pick span{box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.lreco{align-self:flex-start;max-width:92%;display:flex;gap:10px;border:1px dashed rgba(255,214,140,.45);border-radius:12px;padding:9px 12px;font-size:13.5px;color:#FFE2B0;animation:rise .4s ease both}.lreco p{margin:2px 0 6px;color:inherit}.lreco .caps{font-size:9.5px;opacity:.8}.lreco em{font-style:normal;font-size:12px;opacity:.8}.lreco.done{opacity:.7}
+body.in-chat .notes{display:none}
+.pmod{display:flex;flex-direction:column;gap:14px;margin-top:18px}.pmod-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--h)}.pmod-h h3{margin:0;font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,28px);text-wrap:balance}.pmod-h span{font-size:12.5px;color:var(--s);white-space:nowrap}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.pcard{appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:16px 18px 14px;border-radius:14px;border:1px solid rgba(143,221,178,.16);background:rgba(18,24,34,.55);transition:.2s;min-width:0}
+.pcard h4{margin:0;font-style:italic;font-weight:400;font-size:19px}.pcard p{margin:0;font-size:13.5px;color:var(--s);line-height:1.45;flex:1}
+.pcard .pfoot{display:flex;align-items:center;gap:10px;margin-top:6px}.pcard .pst{margin-left:auto;font-size:10.5px;opacity:.75}
+.pcard .pgo{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:#8FDDB2;opacity:0;transition:.2s}
+.pcard:hover,.pcard:focus-visible{border-color:rgba(143,221,178,.55);box-shadow:0 0 18px rgba(143,221,178,.14);outline:none}.pcard:hover .pgo,.pcard:focus-visible .pgo{opacity:1}
+.track{padding:0;overflow:hidden}.track summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px) auto;gap:18px;align-items:center;padding:20px 22px}.track summary::-webkit-details-marker{display:none}
+.track summary>svg{transform:rotate(-90deg);transition:transform .25s;opacity:.6}.track[open] summary>svg{transform:rotate(90deg)}
+.track .th h3{margin:4px 0 0;font-size:clamp(22px,2.4vw,28px);font-style:italic;font-weight:400}.track .tp{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--s)}
+.track[open] summary{border-bottom:1px solid var(--h)}.track .mod{padding:0 22px 6px}.track .mod-h{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 2px}.track .mod-h .caps{color:#8FDDB2;font-size:10.5px}.track .mod-h i{font-style:normal;font-size:12px;opacity:.6}
+@media(max-width:700px){.track summary{grid-template-columns:1fr auto}.track .tp{grid-column:1/-1;grid-row:2}}
+.lchat.solo{grid-template-columns:1fr;max-width:900px}.lchat.solo .lside{border:0}.lfoot a{color:inherit}
+.lfoot{display:flex;justify-content:space-between;gap:10px;font-size:12px;opacity:.7}.lfoot .caps{font-size:9.5px}
+
 .plink{display:flex;flex-direction:column;gap:8px;margin:4px 0 14px}.plink .prow{display:flex;gap:8px;flex-wrap:wrap}.plink input{flex:1 1 260px;min-width:0;background:transparent;border:1px solid color-mix(in srgb,var(--lit) 18%,transparent);border-radius:99px;padding:9px 14px;color:inherit;font:inherit}.plink input:focus{outline:none;border-color:#FF8A3D}.plink .hint{font-size:12.5px;opacity:.7;margin:0}
 .brief{display:flex;flex-direction:column;gap:16px;padding:26px 28px;animation:rise .4s ease both}
 .bh{display:flex;align-items:center;gap:16px}.bh h3{font-size:30px;font-weight:400;margin:2px 0 0}
@@ -1602,6 +1924,63 @@ a[target="_blank"]:not(.pill):not(.ref):hover{animation:none;box-shadow:none;tex
 `;
 document.head.appendChild(pageStyle);
 
+
+/* ---------- desk cards stay in the hub ----------
+   Hand-offs, Next up and the Studio bench point at the room that owns the row, not at Notion. */
+const roomOfName = txt => { const d = DEPTS.find(x => (txt || "").includes(x.name)); return d ? "#room/" + d.id : /Studio/.test(txt || "") ? "#studio" : /Mentor/.test(txt || "") ? "#mentor" : /Board/.test(txt || "") ? "#board" : ""; };
+const _cardBase = card;
+card = function (c, icon, label, rows, meta, empty, err, max = 2) {
+  if (!/Between departments|Next up|On the bench/.test(label)) return _cardBase(c, icon, label, rows, meta, empty, err, max);
+  const hrefs = (rows || []).slice(0, max).map(r => roomOfName(/Next up/.test(label) ? r.props.Seat : r.props.To));
+  const html = _cardBase(c, icon, label, (rows || []).map(r => ({ ...r, url: "" })), meta, empty, err, max);
+  let i = 0;
+  return html.replace(/<div class="item">([\s\S]*?)<\/p><\/div>/g, (m, inner) => { const h = hrefs[i++]; return h ? `<a class="item ilink" href="${h}">${inner}</p></a>` : m; });
+};
+
+/* ---------- the year of orbs: a month opens here, not in Notion ---------- */
+window.addEventListener("click", ev => {
+  const a = ev.target.closest && ev.target.closest(".year .mo");
+  if (!a) return;
+  ev.preventDefault(); ev.stopImmediatePropagation();
+  const m = rowsOf("campaigns").find(x => x.url === a.getAttribute("href")) || { title: a.title, props: {}, url: a.getAttribute("href") };
+  const year = a.closest(".year"); year.parentNode.querySelector(".mo-pop")?.remove();
+  document.querySelectorAll(".year .mo.pick").forEach(x => x.classList.remove("pick")); a.classList.add("pick");
+  const st = m.props.Stage || "Not started", i = CP_STAGES.findIndex(s => s[0] === st);
+  year.insertAdjacentHTML("afterend", `<div class="card mo-pop enter"><div class="k">${ic("cal", 13)}<span class="caps">${esc(m.title)}</span><button class="pill quiet" data-x>×</button></div>
+    <div class="mo-track">${CP_STAGES.map((s, k) => `<span class="${k < i || st === "Scheduled" ? "on" : k === i ? "now" : ""}"><i></i>${s[0]}</span>`).join("")}</div>
+    <div class="pills">${m.url ? `<a class="pill" href="${esc(m.url)}" target="_blank" rel="noopener">${ic("folder", 13)}Notion page</a>` : ""}</div></div>`);
+  year.parentNode.querySelector(".mo-pop [data-x]").onclick = () => { year.parentNode.querySelector(".mo-pop")?.remove(); a.classList.remove("pick"); };
+}, true);
+
+/* ---------- a row's title opens its home in the hub ----------
+   Only links that say so ("Notion page", "Every word is in Notion") go to Notion. Any other link to a
+   Notion row is caught here and sent to the room, page or lesson that owns that row. */
+function findRow(url) {
+  for (const [k, v] of Object.entries(DATA || {})) {
+    const list = Array.isArray(v) ? v : v && typeof v === "object" ? Object.values(v).flat() : [];
+    for (const r of list) if (r && r.url === url) return [k, r];
+  }
+  for (const [k, list] of Object.entries((DATA && DATA.flows) || {})) for (const r of list) if (r.url === url) return [k, r];
+  return null;
+}
+function hubHomeOf(k, r) {
+  const p = r.props || {};
+  if (k === "curriculum") return () => beginLesson(r.title, (layersOf(r).indexOf(false) + 1) || 3, r.id);
+  if (k === "recos") return "#recos";
+  if (k === "handoffs") return roomOfName(p.To) || "#home";
+  if (k === "machine" || k === "machine_all") return roomOfName(p.Seat) || "#tab/ops/routines";
+  if (k === "waiting") return r.kind === "Follow-up due" ? "#room/bd" : "#tab/ops/paste-backs";
+  if (k === "campaigns" || k === "calendar") return "#room/cp";
+  return roomOfName(p.Seat || p.Owner || p.To) || "";
+}
+window.addEventListener("click", ev => {
+  const a = ev.target.closest && ev.target.closest('a[target="_blank"]');
+  if (!a || !/notion\.(so|site)|notion\.com/.test(a.href) || /Notion page|Every word is in Notion|Notion$/.test(a.textContent.trim())) return;
+  const hit = findRow(a.getAttribute("href")); if (!hit) return;
+  const go = hubHomeOf(hit[0], hit[1]); if (!go) return;
+  ev.preventDefault(); ev.stopImmediatePropagation();
+  typeof go === "function" ? go() : (location.hash = go);
+}, true);
 </script>
 <style>.doors .ic{translate:-5px 0}html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{width:0;height:0;display:none}*{scrollbar-width:none}</style>
 <script>
@@ -1817,7 +2196,7 @@ addEventListener("message", e => { const d = e.data || {}; if (d.tour != null &&
 (() => {
 const ENGINE = "http://127.0.0.1:4777/";
 const ON_ENGINE = location.protocol === "http:" && location.port === "4777";
-const webOpen = openClaude;  // the old way: a Claude chat or Project in a new tab
+const webOpen = typeof _openClaudeOut === "function" ? _openClaudeOut : openClaude;  // the old way: a Claude chat or Project in a new tab
 const KEY = "orbit-chats";
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } };
 const store = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
@@ -1826,7 +2205,8 @@ const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
 
 // ----- opened as a file: move over to the engine if it's running -----
 if (!ON_ENGINE) {
-  if (location.protocol !== "file:" || ORBIT.sample()) return;
+  openClaude = webOpen; startChat = (skill, text) => webOpen(skill, text);  // no engine: chats open in Claude
+  if (location.protocol !== "file:" || ORBIT.sample()) return webLessons();
   const ping = new Image();
   ping.onload = () => {
     let moved = false; try { moved = localStorage.getItem("orbit-moved") === "1"; } catch (e) {}
@@ -1835,11 +2215,16 @@ if (!ON_ENGINE) {
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(ORBIT.world)))).replace(/\+/g, "-").replace(/\//g, "_");
     location.replace(ENGINE + "#world=" + b64);
   };
-  ping.onerror = () => phase2Nudge();
+  ping.onerror = () => { phase2Nudge(); webLessons(); };
   ping.src = ENGINE + "ping.gif?" + Date.now();
   return;
 }
 
+// without the engine, a lesson opens as a Claude chat with the same brief
+function webLessons() {
+  const names = ["foundations", "working depth", "mastery"];
+  beginLesson = (topic, layer) => webOpen("mentor", `Let's begin a lesson on ${topic}, layer ${layer} (${names[(layer || 1) - 1]}). Teach it through one analogy and a thought experiment, then check my understanding one question at a time. When I've proven it, tell me to tick Layer ${layer} in my hub.`);
+}
 function phase2Nudge() {
   try { if (localStorage.getItem("orbit-p2-later") === new Date().toISOString().slice(0, 10)) return; } catch (e) {}
   document.body.insertAdjacentHTML("beforeend", `<div id="p2" class="p2n"><b>Chats can live right here.</b> <span>Double-click <i>Turn on hub chats</i> in your Orbit Hub folder. About 5 minutes, two clicks.</span>
@@ -1862,7 +2247,8 @@ function modal(html) {
 
 // ----- on the engine: chats in a side panel -----
 let STATUS = null;
-fetch("/api/status").then(r => r.json()).then(s => { STATUS = s; }).catch(() => { STATUS = { chats: false }; });
+fetch("/api/status").then(r => r.json()).then(s => { STATUS = s; if (!s.chats) webLessons(); }).catch(() => { STATUS = { chats: false }; webLessons(); });
+startChat = (skill, text) => openClaude(skill, text);  // every seat chat uses the side panel
 const state = load();
 let cur = null, busy = false;
 
@@ -1889,10 +2275,11 @@ function draw() {
   p.querySelector(".och b").textContent = cap(nameOf(cur));
   const box = p.querySelector(".ocm");
   box.innerHTML = (c.msgs.length ? "" : `<p class="ocempty">Ask ${esc(nameOf(cur))} anything. It knows your Orbit and reads your Notion.</p>`) +
-    c.msgs.map(m => `<div class="ocb ${m.r}">${m.r === "me" ? `<p>${esc(m.t).replace(/\n/g, "<br>")}</p>` : md(m.t)}${(m.files || []).map(f => `<a class="pill" href="/out/${encodeURIComponent(f)}" target="_blank" rel="noopener">${ic("easel", 13)}Open ${esc(f.replace(/\.[a-z]+$/i, "").replace(/[-_]/g, " "))}</a>`).join("")}</div>`).join("") +
+    c.msgs.map((m, i) => `<div class="ocb ${m.r}">${m.r === "me" ? `<p>${esc(m.t).replace(/\n/g, "<br>")}</p>` : md(m.t)}${(m.reco ? `<div class="ocreco"><span class="caps">${ic("spark", 11)}A better way</span><p>${esc(m.reco.t)}</p>${m.reco.added ? `<i>In your Recos</i>` : `<button class="pill" data-reco="${i}">Add to Recos</button>`}</div>` : "") + (m.files || []).map(f => `<a class="pill" href="/out/${encodeURIComponent(f)}" target="_blank" rel="noopener">${ic("easel", 13)}Open ${esc(f.replace(/\.[a-z]+$/i, "").replace(/[-_]/g, " "))}</a>`).join("")}</div>`).join("") +
     (busy ? `<div class="ocb ai think"><p>${esc(cap(nameOf(cur)))} is thinking<span>.</span><span>.</span><span>.</span></p><p class="hint">Looking things up in Notion can take a minute.</p></div>` : "");
   box.scrollTop = box.scrollHeight;
   p.querySelector("button[type=submit]").disabled = busy;
+  box.querySelectorAll("[data-reco]").forEach(b => b.onclick = () => { const m = c.msgs[+b.dataset.reco]; if (!m || !m.reco) return; ORBIT.reco(m.reco.t, m.reco.k, nameOf(cur)); m.reco.added = true; store(state); draw(); });
 }
 
 function panel() {
@@ -1917,7 +2304,8 @@ async function send(text) {
     if (!r.ok) throw new Error(body || "The hub's engine didn't answer.");
     reply = JSON.parse(body);
     if (reply.sid) c.sid = reply.sid;
-    c.msgs.push({ r: "ai", t: reply.text, files: reply.files || [] });
+    const rm = String(reply.text || "").match(/\n?\s*RECO:\s*(.+?)\s*\|\s*([A-Za-z]+)\s*$/);
+    c.msgs.push({ r: "ai", t: rm ? reply.text.slice(0, rm.index).trim() : reply.text, files: reply.files || [], reco: rm ? { t: rm[1], k: rm[2] } : null });
   } catch (e) {
     c.msgs.push({ r: "ai err", t: String(e.message || e).replace(/^TypeError: Failed to fetch$/, "The hub's engine isn't running. Double-click Start Orbit Hub again.") });
   }
@@ -1952,6 +2340,8 @@ document.getElementById("ask").onsubmit = ev => { ev.preventDefault(); const q =
 .ocb.err{border-color:var(--warm,#F4B45E);color:var(--t)}.ocb a{color:var(--hi,#7FD8F0)}.ocb .pill{margin:8px 6px 0 0;display:inline-flex}.ocb code{background:rgba(255,255,255,.08);padding:0 5px;border-radius:4px}
 .ocb .hint{color:var(--s);font-size:11.5px}.think span{animation:ocd 1.2s infinite}.think span:nth-child(2){animation-delay:.2s}.think span:nth-child(3){animation-delay:.4s}
 @keyframes ocd{0%,100%{opacity:.2}50%{opacity:1}}
+.ocreco{margin-top:10px;padding:8px 10px;border-radius:10px;border:1px dashed color-mix(in srgb,var(--hi,#7FD8F0) 45%,transparent)}.ocreco p{margin:4px 0 6px}.ocreco i{color:var(--s);font-size:12px}
+body.in-chat #orbitBar,body.in-chat .foot{display:none}
 .ocempty{color:var(--s);font:italic 400 18px var(--serif);margin:auto 0}
 .ocf{display:flex;gap:8px;align-items:flex-end;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--h)}
 .ocf textarea{flex:1;resize:none;background:var(--panel,rgba(5,7,15,.7));border:1px solid var(--h);border-radius:12px;padding:10px 12px;color:var(--t);font:13.5px/1.45 var(--sans);outline:none}

@@ -40,7 +40,18 @@ BRIEF = """You are {name}, one of {who}'s Orbit helpers, chatting with them insi
 Read CLAUDE.md in this folder for who they are and the shared rules. Their team's memory is their Notion (the notion tools): look there before you ask.
 Replies are short and plain: the point first, like explaining to a smart 9-year-old, warm but not cheesy. One short question when you're unsure.
 Put drafts in the reply itself. For anything visual (a board, a storyboard, a one-pager, a calendar), write ONE self-contained .html file into the out folder (out/<short-name>.html, dark background, light text) and say its name in one line: the hub shows it as a button.
-Never send, post, publish or change anything outside this chat without their clear OK here. Never ask them to open a terminal or run a command."""
+Never send, post, publish or change anything outside this chat without their clear OK here. Never ask them to open a terminal or run a command.
+Set and forget: anything you set up runs on autopilot until it hits a hard wall. If you need them, do 99% of the prep, pause, tell them exactly what one action to take, and wait for their "go" to finish.
+Ongoing suggestions: whenever this chat shows a better way to work (a correction, a preference, friction, a repeated step a routine, skill or memory could handle), offer it then. Add one last line exactly: RECO: <the suggestion, one short line> | <Routine, Skill, Memory, Hub, Tool or Process>. At most one per reply, only when genuinely useful."""
+
+LESSON = """You are {who}'s Mentor, teaching one layer of one topic inside their hub's lesson page. Layers: 1 foundations, 2 working depth, 3 mastery.
+Every reply is short and plain (no walls of text, never more than about 120 words of prose), like explaining to a smart 9-year-old, warm but not cheesy.
+First reply: open with one short line saying you are an AI mentor (Claude). Then explain the layer simply through ONE analogy from outside their field, then ask ONE effective question that tests understanding (not recall of your words: make them explain, apply it to a new case, or spot it done badly).
+Every first reply, and any reply that brings a new analogy, also includes a picture of the analogy as one SVG in a fenced ```svg block: viewBox 0 0 400 300, line art only, stroke currentColor, fill none, stroke-width 1.5, no text longer than 3 words, no scripts or external links.
+After each answer: say what they got right and what's missing in a line or two, then ask the next single question. They answer first; you reveal after.
+When they have clearly proven the layer (explained it in their own words AND applied it to a new case), say so in one line and end your reply with the exact line: LAYER PROVEN
+Tie examples to their business when it helps (CLAUDE.md, their Notion). Never invent facts, studies or quotes. Never use person names in examples; use roles.
+Ongoing suggestions: when something shows a better way to work, add one last line exactly: RECO: <the suggestion, one short line> | <Routine, Skill, Memory, Hub, Tool or Process>. At most one per reply."""
 
 
 def world():
@@ -128,7 +139,10 @@ def run_chat(hid, msg, sid=None):
     name = helper_name(hid, w)
     who = ((w.get("you") or {}).get("first_name")) or "the founder"
     skill = os.path.isdir(os.path.join(CHAT_DIR, ".claude", "skills", "orbit-" + hid))
-    brief = BRIEF.format(name=name, who=who, skill_line=(f"Follow the orbit-{hid} skill: it's how you work." if skill else
+    if hid == "mentor-lesson":
+        brief = LESSON.format(who=who)
+    else:
+      brief = BRIEF.format(name=name, who=who, skill_line=(f"Follow the orbit-{hid} skill: it's how you work." if skill else
                          "Your full instructions are in their Claude Project for you; here, work from CLAUDE.md, the sources folder and their Notion."))
     cmd = [exe, "-p", msg, "--output-format", "json", "--append-system-prompt", brief,
            "--allowedTools", "Read", "Glob", "Grep", "WebSearch", "WebFetch", "Skill", "mcp__notion", "Edit(./out/**)", "Write(./out/**)",
@@ -219,13 +233,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         # Only the hub page sends this header, so other websites can't use the chats.
-        if self.headers.get("Host") not in HOSTS or self.headers.get("X-Orbit-Hub") != "1":
+        if self.headers.get("Host") not in HOSTS or "1" not in (self.headers.get("X-Orbit-Hub"), self.headers.get("X-AMW-Hub")):
             return self.send(403, "forbidden", "text/plain")
         if self.path != "/api/chat":
             return self.send(404, "not found", "text/plain")
         try:
             data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
-            hid, msg, sid = data["helper"], data["msg"].strip(), data.get("sid")
+            hid, msg, sid = data.get("helper") or data["seat"], data["msg"].strip(), data.get("sid")
             assert ID_RE.fullmatch(hid) and 0 < len(msg) < 12000
             assert sid is None or SID_RE.fullmatch(sid)
         except Exception:
