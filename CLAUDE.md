@@ -77,5 +77,6 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 
 ## Lucid (coming soon, 1 Nov 2026)
 - `/lucid/` (`src/pages/lucid.astro`) is the coming-soon page for Lucid, Ashah's creative-sanctuary product (his personal workstation, separate from Orbit). Doors open Mon 4 January 2027; teasers from about 21 December 2026. The page shows a nights-to-go count that hides itself on the day.
-- Linked from the footer's second row only (right of Orbit), never the header. Hovering the footer link breathes out a smoky "Coming soon" just below it (no layout shift), held about 1.8 s, then it disperses.
+- Linked from the footer's second row only (right of Orbit), never the header. Hovering the footer link pops a tiny "Coming soon" (smaller than the link) just above it with a little spark burst (no layout shift), held about 1.8 s, then it drifts off.
+- Nav colours match the Lucid deck: Orbit is aurora green to violet (#5CFFB0, #2EE6C8, #4FB8FF, #A98CFF) in header and footer; Lucid is opal (#FFD6EC, #E2B8FF, #9FE6F5, #FFF6EC, #F2A8D8), slowly shifting.
 - Look: opal (pearl, lilac, aqua, blush) in a dream where the rules bend: floating doors, a stair of light, still water, no moon. Never aurora (Orbit) or ember. Phases: Dream, Conjure, Unfold, Awaken. Rooms: optional Content plus five rooms for any craft.
