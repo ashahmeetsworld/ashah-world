@@ -57,6 +57,16 @@
    "files": [
     "os/hub.html"
    ]
+  },
+  {
+   "id": "autopilot-rule",
+   "title": "The autopilot rule: every automation is set and forget; when it needs you, it does 99% of the prep, says the one thing to do and waits for your go",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/Update-your-Orbit.md",
+    "os/hub-server.py"
+   ]
   }
  ]
 }
