@@ -1,8 +1,46 @@
 {
- "version": "0.4.3",
+ "version": "0.4.4",
  "update": "Update-your-Orbit.md",
- "notes": "Lessons with your Mentor inside the hub, your path in modules, and one-click Recos.",
+ "notes": "Your brand skin can have a quiet backdrop from your world, more than one surface, and panels that always read.",
  "changes": [
+  {
+   "id": "skin-backdrops",
+   "title": "Brand skins can have a quiet backdrop texture from your own world (a stone wall, timber, a soft sky)",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "skin-variants",
+   "title": "One brand, more than one surface: skin variants, each in the Skin button",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ]
+  },
+  {
+   "id": "skin-contrast",
+   "title": "Contrast rule: panels never the same colour as the ground, unless you ask",
+   "tag": "both",
+   "from": "amw",
+   "files": [
+    "os/hub.html",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "neutral-sample",
+   "title": "The sample hub shows a neutral business; skin previews use your own business",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/Update-your-Orbit.md"
+   ]
+  },
   {
    "id": "mentor-lessons-in-hub",
    "title": "Mentor lessons inside the hub: a drawing of each idea, one question at a time, layers ticked",
