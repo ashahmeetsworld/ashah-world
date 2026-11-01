@@ -1,0 +1,35 @@
+---
+// Landing page for the "Download Orbit" button in the Brevo emails.
+// Email apps (and Brevo's click tracking) open links in a browser tab; a bare
+// .zip link leaves that tab blank, and on phones the file often never saves.
+// This page starts the download itself and gives a button to retry.
+import Base from '../../layouts/Base.astro';
+import Sky from '../../components/Sky.astro';
+import { u } from '../../lib/url';
+const ZIP = u('/os/Orbit-v0.4.zip');
+---
+<Base title="Your Orbit">
+  <section class="dl">
+    <Sky variant="night" id="dl-sky" />
+    <div class="wrap copy">
+      <p class="eyebrow">Orbit v0.4 · free</p>
+      <h1>Your Orbit is on its way.</h1>
+      <p class="lede">The download should start by itself. If it doesn't, tap the button.</p>
+      <a class="btn aurora" id="dl-btn" href={ZIP} download><span>Download Orbit</span></a>
+      <p class="note">Zip · about 3 MB. On a phone? Orbit runs best on a computer, so you may want to open the email there and download it again.</p>
+      <p class="note">Then: unzip it, open <i>Start here</i>, and follow the three steps.</p>
+      <a class="back" href={u('/orbit/')}>Back to Orbit</a>
+    </div>
+  </section>
+  <script is:inline define:vars={{ ZIP }}>
+    setTimeout(function () { window.location.href = ZIP; }, 600);
+  </script>
+</Base>
+<style>
+  .dl { position: relative; min-height: 100svh; display: grid; align-items: center; overflow: hidden; }
+  .copy { position: relative; }
+  h1 { margin-bottom: 20px; }
+  .lede { margin: 0 0 30px; }
+  .note { margin: 22px 0 0; max-width: 34em; font-size: 15px; opacity: .92; text-shadow: 0 1px 12px rgba(7,11,24,.9), 0 0 2px rgba(7,11,24,.8); }
+  .back { display: inline-block; margin-top: 28px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: .7; }
+</style>
