@@ -1692,9 +1692,9 @@ function chatPage(view) { if (!CHAT) { location.hash = "#home"; return; } chatDr
 const _openClaudeOut = openClaude;
 openClaude = function (skill, text) { startChat(skill, text); };
 /* Shown in a chat until Claude Code is set up on this PC; the chat page itself stays in the hub. */
-const SETUP_CARD = (exit) => `<div class="lsetup">${ic("spark", 14)}<div><b class="serif">One step left: chats run through Claude Code on this PC</b>
-  <p>Install Claude Code, run <code>setup-chat.bat</code> in the hub folder and sign in with your Claude account, then restart the hub. It's free on your plan.</p>
-  <p><a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">Install Claude Code</a> · <a href="#" data-out>${exit}</a></p></div></div>`;
+const SETUP_CARD = (exit) => `<div class="lsetup">${ic("spark", 14)}<div><b class="serif">One step left: chats inside your hub</b>
+  <p>Double-click <b>Turn on hub chats</b> in your Orbit Hub folder: about 5 minutes, two clicks in your browser. It's free on your Claude plan.</p>
+  <p><a href="#" data-out>${exit}</a></p></div></div>`;
 
 /* ---------- the board ---------- */
 function meetingPage(view) {
@@ -2196,7 +2196,7 @@ addEventListener("message", e => { const d = e.data || {}; if (d.tour != null &&
 (() => {
 const ENGINE = "http://127.0.0.1:4777/";
 const ON_ENGINE = location.protocol === "http:" && location.port === "4777";
-const webOpen = openClaude;  // the old way: a Claude chat or Project in a new tab
+const webOpen = typeof _openClaudeOut === "function" ? _openClaudeOut : openClaude;  // the old way: a Claude chat or Project in a new tab
 const KEY = "orbit-chats";
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } };
 const store = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
@@ -2205,7 +2205,8 @@ const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
 
 // ----- opened as a file: move over to the engine if it's running -----
 if (!ON_ENGINE) {
-  if (location.protocol !== "file:" || ORBIT.sample()) return;
+  openClaude = webOpen; startChat = (skill, text) => webOpen(skill, text);  // no engine: chats open in Claude
+  if (location.protocol !== "file:" || ORBIT.sample()) return webLessons();
   const ping = new Image();
   ping.onload = () => {
     let moved = false; try { moved = localStorage.getItem("orbit-moved") === "1"; } catch (e) {}
