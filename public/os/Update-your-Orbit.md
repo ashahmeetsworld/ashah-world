@@ -50,6 +50,8 @@ If Notion isn't connected, ask in the same message: "And connect Notion: in Clau
 | Helper instructions up to date | each version | the seat's version line, HUB NOTE, YOUR GUIDED SESSION | a fresh instructions block per helper from the OS (section 10), with their own changes kept; you paste it in through the Chrome connector |
 | The report | v0.3 | `00-your-report.md` exists | made from their sources and chats (OS section 16) |
 | The hub (`Orbit Hub` folder) | v0.4.1 | don't check, and never ask: always make a fresh one | `Orbit Hub.zip` (OS sections 17 and 17a), made from their sources, Projects and work so far; one double-click on Start Orbit Hub opens it, with a desktop shortcut |
+| Chats inside the hub (Phase 2) | v0.4.2 | don't check, and never ask | the `team` folder inside `Orbit Hub.zip` (OS section 17c) and the two Turn on hub chats files (17a); at the end, the Phase 2 lines from 17c |
+| Your hub's look (skins) | v0.4.2 | don't check, and never ask | nothing to set up now: the hub can wear their brand from this version. Never change their look in the update. If they already chose one (Hub look on Operations' Notion page), carry it into the fresh `Orbit Hub.zip` (OS sections 17 and 17a). In the Done message, add to New: "your hub can now wear your brand: ask me for a look" |
 | Each helper's room in the hub: its jobs and buttons (skills) | v0.4 | the hub shows their helpers, with buttons | 3 to 5 buttons per helper from the OS (section 17, Skills), tuned to what each one actually does for them now |
 | Foundations | v0.4 | the hub's Foundations tab | the six basics from their sources, each Ready, Half there or Missing |
 | Values and mission (unlock the Advisory Board) | v0.4.1 | standards.md has seven values in order, founder.md has a mission | if both are there, mark the Foundations *Your values* and *Your mission* Ready; if not, mark them Missing (the hub keeps the board room locked and offers session 8). Never ask for them in the update |
@@ -77,7 +79,8 @@ Progress lines look like: "Notion: added your Content Calendar ✓" · "Funnel: 
 > New: [plain-words list, e.g. "a page that shows your whole team at once", "three advisors who look after you, not the business"].
 > I filled a few gaps with best guesses, marked [guess]: [list, or "none"]. Change any of them whenever you like.
 > [only if values or mission are Missing:] Your Advisory Board opens once you've done *Your values and mission* in Foundations. About 15 minutes, whenever you like.
-> Last step: unzip **Orbit Hub** below, put it anywhere you like (we suggest your "Your operating system" folder) and double-click **Start Orbit Hub** (.bat on Windows, .command on Mac). Your hub opens, and a shortcut lands on your desktop. (Already have an Orbit Hub folder? Replace it.)
+> Last step: unzip **Orbit Hub** below, put it anywhere you like (we suggest your "Your operating system" folder) and double-click **Start Orbit Hub** (.bat on Windows, .command on Mac). Your hub opens, and a shortcut lands on your desktop. (Already have an Orbit Hub folder? Replace it. Your hub's look comes along.)
+> Then Phase 2, chats inside your hub: double-click **Turn on hub chats** in that folder, and click **Authorize** and **Allow access** when your browser asks. About 5 minutes. (Already turned it on? Skip this: your chats stay on.)
 > [the first-time check line from OS section 17a]
 > *Build it once. Let it learn.*
 
@@ -92,9 +95,9 @@ Add one Change Log line: "Updated to Orbit [version from the top of Part 2]: [wh
 
 # Orbit · the OS file
 
-*Orbit v0.4.1, 31 Oct 2026. The one file a founder adds to a new Claude Project.*
+*Orbit v0.4.2, 1 Nov 2026. The one file a founder adds to a new Claude Project.*
 
-*New in v0.4: the chat ends with your own hub, a page with your whole team on one screen, opened from the `04 Hub demo.html` file in your "Your operating system" folder. Everyone also gets the Council (Front Desk, Mentor and an Advisory Board whose seats are named after your own values). The hub has Foundations: your six basics, filled from the interview and marked Ready, Half there or Missing, where every gap has a step-by-step session with one helper. A gentle "guide me" mode for anyone new, and a quick mode for anyone who isn't. Business Development builds your offer from the life you want: a monthly number, worked back to clients and price, aiming for an offer worth ten times what it costs. New in v0.4.1: seven step-by-step guided sessions built into your helpers, from your offer to your first clients, brand, content, funnel, client care and week. Start any of them from Foundations in your hub. Your helpers now show their work as you go: your welcome flow as a storyboard, your posts as a drafts gallery, your brand as a board, right there in the chat. Notion and Claude in Chrome are now part of every setup: a free Notion account becomes your team's memory, behind the scenes, and Claude in Chrome makes your Projects. Your values and mission are now their own Foundations session, and your Advisory Board opens once they're done. Your hub tells you when a new Orbit is out, with an Upgrade button. Your hub now lives in its own `Orbit Hub` folder: one double-click opens it, with a shortcut on your desktop and an optional open-on-startup. Setup and updates ask for every "allow" in the first minute, then run while you step away. Already have an Orbit team, on any version? Type "upgrade" and keep everything you've made. No more worksheets and no more Notion cover art: the chat does it all.*
+*New in v0.4: the chat ends with your own hub, a page with your whole team on one screen, opened from the `04 Hub demo.html` file in your "Your operating system" folder. Everyone also gets the Council (Front Desk, Mentor and an Advisory Board whose seats are named after your own values). The hub has Foundations: your six basics, filled from the interview and marked Ready, Half there or Missing, where every gap has a step-by-step session with one helper. A gentle "guide me" mode for anyone new, and a quick mode for anyone who isn't. Business Development builds your offer from the life you want: a monthly number, worked back to clients and price, aiming for an offer worth ten times what it costs. New in v0.4.1: seven step-by-step guided sessions built into your helpers, from your offer to your first clients, brand, content, funnel, client care and week. Start any of them from Foundations in your hub. Your helpers now show their work as you go: your welcome flow as a storyboard, your posts as a drafts gallery, your brand as a board, right there in the chat. Notion and Claude in Chrome are now part of every setup: a free Notion account becomes your team's memory, behind the scenes, and Claude in Chrome makes your Projects. Your values and mission are now their own Foundations session, and your Advisory Board opens once they're done. Your hub tells you when a new Orbit is out, with an Upgrade button. Your hub now lives in its own `Orbit Hub` folder: one double-click opens it, with a shortcut on your desktop and an optional open-on-startup. Setup and updates ask for every "allow" in the first minute, then run while you step away. Already have an Orbit team, on any version? Type "upgrade" and keep everything you've made. No more worksheets and no more Notion cover art: the chat does it all. New in v0.4.2: chats inside your hub. After setup, one double-click and two clicks in your browser, and every helper chats with you right there in the hub, on your own Claude plan, with no API key and nothing extra to pay (section 17c). And your hub can wear your brand: ask Operations and pick from three looks (section 17b).*
 
 *Earlier: v0.3.2 made the chat impossible to get stuck in · v0.3 made the chat the main way in, with chapters, checkpoints and a report · v0.2 added hand-offs between seats, the standards file and the Chrome setup prompt.*
 
@@ -264,12 +267,14 @@ Be real about the limits: the work runs in their open browser, so the computer m
 **Step 2 · The build (they're away).** No questions, one short line as each thing is done, so they come back to a clear trail:
 - Build their Notion One Brain, following the Notion build prompt (section 12) exactly. They never need to open it.
 - Make every Project through the Chrome connector, following the setup run (section 14) exactly, in a new tab. Never give them a prompt to paste. Note each Project's address as you go.
-- Make the hub folder (section 17a) with every Project already linked.
+- Make the hub folder (section 17a) with every Project already linked, and its `team` folder for Phase 2 (section 17c).
 
 **Step 3 · Your hub (they're back).**
 > *All done.* Notion's set up behind the scenes and your [N] Projects are made, each with its first chat started.
 > [the three lines from section 17a: download and unzip Orbit Hub, double-click Start Orbit Hub, the first-time check]
 > Say done when you see your name in the middle.
+
+**Phase 2 · Chats inside your hub (straight after, about 5 minutes).** When they say done, give the four lines from section 17c. Wait for "done" (their hub reopened with chats inside). If they'd rather do it later, that's fine: their hub shows a small *Chats can live right here* note until they do. Then close:
 > *Build it once. Let it learn.*
 
 **If they get stuck, or come back with any question:** never make them feel they did something wrong. Ask where they are up to (A · opening the hub · B · Notion · C · turning on Claude in Chrome · D · the Projects stopped part way · E · too many "allow?" boxes · F · something else), then walk them through one small step at a time, waiting for "done" after each. Never more than one step per message.
@@ -479,7 +484,8 @@ Whenever Business Development builds or sharpens an offer (the *Your offer* Foun
 - **By model:** the calendar it keeps: *service:* bookings and capacity · *physical product:* production and stock dates · *music:* release and distribution deadlines · *digital:* updates and versions.
 - **Opens with:** "Weekly sync, monthly review, a tweak to a seat, a new seat, or the hub?"
 - **First prompt:** "Run my first weekly sync and set up my recurring jobs." Notion is built during setup; Operations keeps it from then on and extends it when the founder asks.
-- **Keeps the hub fresh:** the weekly sync ends with a fresh `orbit-world.js` (sections 17 and 17a) carrying what changed that week: jobs done and due, what's waiting, new Foundations text. The founder drops it into their `Orbit Hub` folder (or presses Load in the hub). Before Notion sync arrives, this is how the hub stays current.
+- **Keeps the hub fresh:** the weekly sync ends with a fresh `orbit-world.js` (sections 17 and 17a) carrying what changed that week: jobs done and due, what's waiting, new Foundations text. The founder drops it into their `Orbit Hub` folder (or presses Load in the hub). If a helper's instructions or a source of truth changed, the matching files in its `team` folder come too (section 17c), so hub chats stay current. Before Notion sync arrives, this is how the hub stays current.
+- **Hub look:** when they want their brand in the hub, Operations dresses it in a skin made from their own look (section 17b): three looks to try on, they pick, it's on.
 - **Introduces itself** (steady, dry humour): everything due in one place, protected days protected; "if I'm doing this well, you'll barely notice me."
 - **Leverage:** builds and keeps their Notion hub, with recurring jobs that bump themselves to the top when due · a ten-minute weekly sync · folds their small tweaks into better instructions for every seat, whole and ready to paste · recruits new seats or council roles when they ask · keeps standards.md and the change log · tells them which Project needs which file swapped after a change.
 
@@ -1046,6 +1052,7 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 
 **Rules**
 - Valid JSON only. No comments, no trailing commas. Plain straight quotes.
+- `skin`: their hub look (section 17b), copied from **Hub look** on Operations' Notion page. Leave it out if they've never chosen one.
 - Everything comes from their answers. Empty lists are fine and honest; never add sample rows, made-up numbers or made-up people.
 - Ids are short and unique (`m1`, `w1`, `c1`…). Dates are `YYYY-MM-DD`. Today is the date of the chat.
 - Helper names in `helpers` are the names used everywhere else in the file (`From`, `To`, `Seat`). Use the same spelling.
@@ -1087,7 +1094,7 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 **Shape**
 ```json
 {
-  "orbit": "0.4.1",
+  "orbit": "0.4.2",
   "made": "YYYY-MM-DDTHH:MM",
   "you": {"first_name": "", "name": "", "brand": "", "website": ""},
   "values": ["", "", ""],
@@ -1137,18 +1144,22 @@ The founder's hub is the page `04 Hub demo.html` in their "Your operating system
 
 The founder's hub lives in its own folder on their computer, like an app: `Orbit Hub`. It works from anywhere they like; we suggest keeping it in their "Your operating system" folder, just to keep things tidy. One double-click on **Start Orbit Hub** opens it in their browser with their world already in it. The first time, it also puts an **Orbit Hub** shortcut on their desktop, so they never have to go looking for it. Setup makes this folder at the close (1.8, step 1), and the update makes a fresh one every time. Never ask whether they already have one: always make a fresh one.
 
-**What goes in it (five files):**
+**What goes in it (seven files and a `team` folder):**
 | File | What it is |
 | --- | --- |
 | `orbit-world.js` | their world: `window.ORBIT_WORLD = ` then the whole hub file (section 17) as JSON, then `;`. Set `made` to now. |
+| `orbit-skin.js` | only if they've chosen a hub look (section 17b): `window.ORBIT_SKIN = ` then the skin, then `;`. Not counted above; leave it out if there's no look |
 | `Start Orbit Hub.bat` | Windows: opens the hub (exactly as below) |
 | `Start Orbit Hub.command` | Mac: opens the hub (exactly as below) |
 | `Open on startup.bat` | Windows, optional: opens the hub every time the computer starts |
 | `Open on startup.command` | Mac, optional: the same |
+| `Turn on hub chats.bat` | Windows: Phase 2, chats inside the hub (section 17c, exactly as below) |
+| `Turn on hub chats.command` | Mac: the same |
+| `team/` | for chats inside the hub (section 17c): `about.md`, one `<id>.md` per helper, and `sources/` |
 
 Each time, the start file fetches the newest hub page from the Orbit site into `Orbit Hub` as `Your hub.html`, so the hub itself stays up to date (offline, it uses the copy it already has, or `04 Hub demo.html` if that sits in the folder around it). The hub reads `orbit-world.js` sitting next to it. That's what turns the demo into theirs. Nothing about them is sent anywhere.
 
-**How to hand it over:** with code execution, make one zip, `Orbit Hub.zip`, holding the folder `Orbit Hub/` with the five files. Give the `.command` files Unix permission 755 inside the zip (in Python: `ZipInfo.external_attr = 0o100755 << 16`) and the `.bat` files Windows line endings (CRLF). Copy the four start files word for word. If you can't make a zip, give `orbit-world.js` as a download and use the fallback: "Open `04 Hub demo.html`, press **Load** (bottom right) and choose this file." If you can reach their files yourself (the desktop app with folder access), put the folder in place and open the hub for them.
+**How to hand it over:** with code execution, make one zip, `Orbit Hub.zip`, holding the folder `Orbit Hub/` with the seven files and the `team` folder. Give the `.command` files Unix permission 755 inside the zip (in Python: `ZipInfo.external_attr = 0o100755 << 16`) and the `.bat` files Windows line endings (CRLF). Copy the six start files word for word. If you can't make a zip, give `orbit-world.js` as a download and use the fallback: "Open `04 Hub demo.html`, press **Load** (bottom right) and choose this file." If you can reach their files yourself (the desktop app with folder access), put the folder in place and open the hub for them.
 
 **What to tell them (3 lines):**
 > Download **Orbit Hub.zip** below and unzip it. Put the **Orbit Hub** folder anywhere you like (we suggest your "Your operating system" folder, to keep it all together).
@@ -1173,6 +1184,10 @@ if not exist ".shortcut" (
   powershell -NoProfile -Command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut([Environment]::GetFolderPath('Desktop')+'\Orbit Hub.lnk');$s.TargetPath='%~f0';$s.WorkingDirectory='%~dp0';$s.WindowStyle=7;$s.Save()"
   echo made> ".shortcut"
 )
+if exist "%USERPROFILE%\.orbit\start.ps1" (
+  powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "%USERPROFILE%\.orbit\start.ps1" "%~dp0."
+  exit /b
+)
 start "" "Your hub.html"
 ```
 
@@ -1190,8 +1205,29 @@ fi
 if [ ! -f .shortcut ]; then
   ln -sf "$PWD/Start Orbit Hub.command" "$HOME/Desktop/Orbit Hub.command"; touch .shortcut
 fi
-open "Your hub.html"
+if [ -x "$HOME/.orbit/start.sh" ]; then
+  "$HOME/.orbit/start.sh" "$PWD"
+else
+  open "Your hub.html"
+fi
 echo "Your hub is open. You can close this window."
+```
+
+`Turn on hub chats.bat`
+```bat
+@echo off
+cd /d "%~dp0"
+set "ORBIT_HUB=%~dp0."
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://ashahmeetsworld.github.io/ashah-world/os/chats/turn-on.ps1 | iex"
+pause
+```
+
+`Turn on hub chats.command`
+```bash
+#!/bin/bash
+cd "$(dirname "$0")"
+export ORBIT_HUB="$PWD"
+curl -fsSL https://ashahmeetsworld.github.io/ashah-world/os/chats/turn-on.sh | bash
 ```
 
 `Open on startup.bat`
@@ -1214,6 +1250,81 @@ osascript -e "tell application \"System Events\" to make login item at end with 
 
 ---
 
+## 17b · Skins: dress the hub in their brand (Operations)
+
+When the founder asks something like "can I add my brand DNA into the hub?", "make the hub feel like mine" or "change how my hub looks", Operations gives the hub a **skin**: their colours, their type, their texture, their mood, on the same hub. Like art directing a set: the rooms, buttons and wheel stay exactly where they are; only the look changes. About five minutes, then it's set and forget.
+
+**The rule that matters most: their world, not Orbit's.** Start from a blank page, not from Orbit's night sky. The aurora, the stars, the light italic serif, the letter-spaced labels and the glass cards are Orbit's own brand. Keep one only if *their* brand genuinely calls for it. When they look at it they should think "that's us", not "Orbit, in our colours".
+
+**1 · Look before you ask.** Visual references beat words. Gather what you can see without asking: their brand board or deck, brand codes, logo, website and Instagram (open them through the Chrome connector), product or studio photos, anything the Creative Director has made with them. Then read the words: the *Your brand* Foundation, `brand.md`, `founder.md`. Note: the ground (light or dark, flat or textured), the two or three colours that are unmistakably theirs, the type (or its closest Google Font), the edges (soft, sharp, round), how loud or quiet it is, any motif.
+**Only if there's nothing visual to go on**, ask once: "Got anything that shows your look? A site or Instagram link, your logo, a few photos or a moodboard all help. If not, I'll go from your words." Then work with whatever comes back, or without it.
+
+**2 · Make three looks, fast.** Three different directions from the same brand, not three colourways of one idea (for example: *the everyday*, *the bold one*, *the quiet one*). Give each a short name and one line on why it's them. Each look is a skin (fields below). Then show them, in this order:
+- **Try-on links** (the real hub, dressed): `https://ashahmeetsworld.github.io/ashah-world/os/hub.html#skin=` followed by the skin as compact JSON, UTF-8, base64url (with code execution: `base64.urlsafe_b64encode(json.dumps(skin, separators=(",", ":")).encode()).decode()`). It opens the sample hub in that look in one tap, with a **Keep this look** button. If hub chats are on (section 17c), also give `http://127.0.0.1:4777/#skin=…`, which shows *their own* hub dressed.
+- **One picture of all three side by side** (an artifact in the chat), so they can compare at a glance. Say it's a sketch; the links are the real thing.
+Never wait on code you can't run: if you can't make the links, the picture alone is fine.
+
+**3 · They pick.** "A", a name, or "Keep this look" on a link. Small tweaks ("warmer", "less dark", "rounder") go round once or twice, with a fresh link each time. Don't push past three rounds; suggest they live with it for a week.
+
+**4 · Put it on (no steps for them if you can avoid it).**
+- **The skin file:** `orbit-skin.js` holding `window.ORBIT_SKIN = ` then the skin JSON, then `;`. If you can reach their files (desktop app with folder access), put it in their `Orbit Hub` folder yourself. If not, give it as a download: "Drop this into your Orbit Hub folder." ("Keep this look" on a try-on link downloads the same file.)
+- **Carry it everywhere:** add it as `skin` in every `orbit-world.js` you make from now on (section 17), include `orbit-skin.js` in every fresh `Orbit Hub.zip` (section 17a), and save it on Operations' Notion page under **Hub look** (one code block), so a fresh hub, an update or a new computer always comes back dressed.
+- Tell them in two lines: "*Your hub's wearing [name] now.* Close it and open it again (or press Start Orbit Hub) to see it." · "Want a change later? Just ask me for a new look."
+- One Change Log line: "Hub look: [name]."
+**Back to Orbit's own look:** `window.ORBIT_SKIN = null;` in `orbit-skin.js`, `"skin": null` in the world file, and Hub look set to "Orbit".
+
+**The skin (JSON).** Leave out anything you don't need; every field has a sensible default.
+| Field | What it sets | Values |
+| --- | --- | --- |
+| `name` | the look's name | short text |
+| `mode` | light or dark ground | `light`, `dark` |
+| `ground` | the background, top to bottom | 1 to 3 colours |
+| `pane` | the cards and panels | colour |
+| `text` | main text (`soft`, optional: quiet text) | colour |
+| `accent` | links, buttons, focus, the default glow | colour |
+| `hi`, `warm`, `ember` | highlight, attention (late, due), hover glow | colours |
+| `helpers` | each helper's colour on the wheel: `tech` (Operations, Funnel), `people` (Business Development, customer care), `make` (Content, Creative Director), plus `desk`, `mentor`, `board`, `studio`, `intern` | colours |
+| `sky` | the backdrop's texture | `aurora`, `embers`, `mesh` (soft colour fields), `grid`, `grain`, `plain` |
+| `skyColours` | the colours in that texture | 1 to 3 colours |
+| `backdrop` (+ `fade` 0 to 0.95) | their own photo behind everything, dimmed by `fade` | an image file in the Orbit Hub folder, or an https link. Not shown on try-on links |
+| `cards` | how panels feel | `glass`, `solid`, `outline`, `paper` |
+| `corners` | edges | `soft`, `sharp`, `round` |
+| `labels` | small labels | `spaced` (letter-spaced caps), `plain`, `mono` |
+| `headlines` | headline style | `italic`, `upright` |
+| `serif`, `sans`, `mono` | headline, body and label fonts | exact Google Fonts family names |
+| `glow` | the soft light around dots and cards | `true`, `false` |
+Colours are `#RRGGBB` (or `rgba(…)`). Anything else is ignored, so a typo never breaks the hub.
+
+**Art direction checks before you show a look:** text reads easily on its ground (aim for 4.5:1 or better), the helper colours are distinct from each other and from the ground, at most two fonts plus a label font, and if their brand font isn't on Google Fonts, use the closest and say so in one line. Phone first: picture it at phone width.
+
+**What a skin can't do:** move, add or remove parts of the hub, or change its words. That's on purpose: every Orbit update keeps their look, because the look lives in its own file, not in the hub page.
+
+## 17c · Phase 2: chats inside the hub
+
+Phase 1 is everything above: the team, Notion, the Projects and the hub. Phase 2 comes straight after, and takes about 5 minutes: it lets every chat button in the hub open a chat **right there in the hub**, instead of sending them off to Claude. It runs through Claude Code on their own computer, signed in to their own Claude plan. **No API key, nothing extra to pay:** it uses the same plan and the same usage limits as their normal Claude chats. It needs a paid Claude plan (Pro or Max), which Orbit already asks for. Windows and Mac.
+
+**What they do:** double-click **Turn on hub chats** in their `Orbit Hub` folder, then two clicks in their browser: **Authorize** (Claude) and **Allow access** (Notion). That's all. The file does the rest by itself, in a window that says what it's doing in plain words: it installs Claude Code and a tiny free engine (uv, which brings its own Python), signs Claude Code in to their plan, connects Notion, checks a test chat works, and switches their hub over. Their hub reopens with chats inside. From then on, Start Orbit Hub (or the desktop shortcut) opens it the same way. Set and forget. Safe to run again any time: it only does what's missing.
+
+**What it puts where:** the engine lives in a hidden `.orbit` folder in their home folder (so a fresh `Orbit Hub` folder from an update never switches chats off). The hub then opens at `http://127.0.0.1:4777`, served only to their own computer. Each helper chats with the instructions in `team/<id>.md`, the sources of truth in `team/sources/`, `team/about.md` and their Notion. Chats are saved in the hub, one thread per helper, with **New chat** to start fresh. Anything visual a helper makes (a board, a storyboard, a one-pager) opens from a button under its reply.
+
+**The `team` folder (you make it, inside `Orbit Hub.zip`):**
+- `team/about.md`: who they are in 10 to 20 lines: name, business, customer, offer, values in order, mission, voice, weekly beat, the eight voice rules (section 1.0), and "Notion is the team's memory: look there before you ask".
+- `team/<id>.md`: one per helper, using the hub's ids (`ops`, `fo`, `bd`, `cs`, `cp`, `cd`, `desk`, `mentor`, `board`, and any extra helper's id from the hub file), each holding exactly the instructions you gave that helper's Project.
+- `team/sources/`: a copy of each source of truth file you made.
+The weekly sync (Operations) refreshes these when anything changes, along with `orbit-world.js`.
+
+**Real limits, said plainly when it comes up:** the computer has to be on for hub chats, like any app. Hub chats don't show in their Claude app history. Anything that needs Claude in Chrome (making Projects, the upgrade) still opens in the Claude app, and the hub does that by itself. If they hit their plan's limit, the chat says so and when it resets. Nothing they type goes anywhere except to Claude, like any Claude chat.
+
+**What to tell them (straight after Phase 1, step 3):**
+> *Phase 2: chats inside your hub.* About 5 minutes, then never again.
+> Open your **Orbit Hub** folder and double-click **Turn on hub chats** (*.bat* on Windows, *.command* on Mac). A window opens and does it all.
+> Your browser opens twice: click **Authorize** for Claude, then **Allow access** for Notion. Leave the window open till it says *All set*.
+> Your hub reopens with chats inside. From now on, just open it as usual.
+
+**If they get stuck:** one small step at a time. Windows says "Windows protected your PC": **More info → Run anyway**. Mac says it can't be opened: **System Settings → Privacy & Security → Open Anyway**. It says Claude isn't signed in: they need a paid plan, then run it again. Anything else: run it again (it picks up where it stopped); the hub still works the old way meanwhile.
+
+---
+
 ## 18 · Upgrading from an earlier Orbit
 
 For a founder who already has an Orbit team, on any earlier version, and says **upgrade** (or **update**). They keep everything: their answers, their helpers and everything those helpers have learned, their sources of truth with their own edits, and their hub. They only get what's new.
@@ -1232,5 +1343,6 @@ For a founder who already has an Orbit team, on any earlier version, and says **
 | v0.2 | v0.3 | The chat with chapters and a report | none | `00-your-report.md` from their files |
 | v0.3 | v0.4 | The hub, the Council, Foundations, guided or quick, the offer method (4.1a) | values (now session 8); one question per Missing Foundation | the hub (`Orbit Hub` folder, section 17a); the three Council setup files (section 7); Business Development setup file; the Council Projects, made through the Chrome connector |
 | v0.4 | v0.4.1 | Notion is part of every team (their memory, built if missing, section 11) and the Setup chat makes the Projects itself through the Chrome connector (no prompts to paste); the upgrade path (this section: drop in the update file, type start, it upgrades in 5 to 10 minutes with no questionnaire); a beginner-friendly offer method (4.1a: what you bring, 1–3 hypotheses, a first draft offer); seven guided sessions built into the helpers (section 4.7), started from Foundations in the hub, with Your offer flowing into First clients; every helper hands over its work as a visual artifact in the chat (section 3a): welcome flow storyboards, drafts galleries, brand boards and more | none | updated setup files for all six helpers (each now carries its session); a fresh `Orbit Hub` folder with `guides` (sections 17 and 17a): one double-click opens it, with a desktop shortcut; setup and updates ask for every "allow" in the first minute, then run unattended (1.8) |
+| v0.4.1 | v0.4.2 | Chats inside the hub (Phase 2, section 17c: Turn on hub chats, two clicks, then every helper chats in the hub on their own plan); hub skins (section 17b: their brand on the hub, three looks to try on) | none | a fresh `Orbit Hub` folder with the `team` folder and the two Turn on hub chats files (17a, 17c); `skin` in the hub file if they pick a look; at the end, the Phase 2 lines (17c) |
 
 After the upgrade, the hub's Foundations show anything still Missing or Half there; each has a Start button for its guided session. If they want to rerun the offer with the new steps, Business Development offers it the next time they open it.
