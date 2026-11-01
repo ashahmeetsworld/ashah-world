@@ -24,6 +24,11 @@ const year = new Date().getFullYear();
     <div class="links ventures">
       <a class="passage-link" href={u('/passage/')}>Passage</a>
       <a class="orbit-link" href={u('/orbit/')}>Orbit</a>
+      {/* Lucid (coming soon, doors open 4 Jan 2027): footer only, never the header. Hover breathes out a smoky "Coming soon". */}
+      <span class="lucid-wrap">
+        <a class="lucid-link" href={u('/lucid/')}>Lucid</a>
+        <span class="smoke" aria-hidden="true"><span>Coming soon</span></span>
+      </span>
     </div>
     </div>
   </div>
@@ -53,6 +58,29 @@ const year = new Date().getFullYear();
   .links a.passage-link { background: linear-gradient(100deg, #A185FF, #8C57F8 50%, #C07FFF); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
   .passage-link:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(142, 98, 247, .6)); }
   .orbit-link:hover { filter: brightness(1.25) drop-shadow(0 0 8px rgba(127, 216, 240, .5)); }
+  /* Lucid (coming soon): opal colours that slowly shift */
+  .links a.lucid-link { background: linear-gradient(100deg, #F7B8DC, #D2A8FF 30%, #8FDDF2 60%, #F2C6E0 85%, #F7B8DC); background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; animation: lucid-opal 10s ease-in-out infinite alternate; }
+  .lucid-link:hover { filter: brightness(1.15) drop-shadow(0 0 8px rgba(233, 216, 255, .45)); }
+  @keyframes lucid-opal { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+  /* the smoky pop-up: sits just below the link (nothing below moves), drifts in from blur, holds ~1.8s, then disperses */
+  .lucid-wrap { position: relative; display: flex; }
+  .smoke { position: absolute; right: -8px; top: calc(100% + 2px); pointer-events: none; white-space: nowrap; opacity: 0; }
+  .smoke::before { content: ''; position: absolute; inset: -14px -22px; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(233, 216, 255, .22), rgba(159, 230, 245, .08) 60%, transparent); filter: blur(10px); }
+  .smoke span { position: relative; display: block; font: italic 400 22px/1 var(--serif); color: #F6E4F4; letter-spacing: .06em;
+    text-shadow: 0 0 10px rgba(242, 198, 224, .55), 0 0 22px rgba(201, 188, 255, .35); }
+  .lucid-wrap:hover .smoke, .lucid-link:focus-visible + .smoke { animation: lucid-smoke 3.4s var(--ease) forwards; }
+  @keyframes lucid-smoke {
+    0%   { opacity: 0; transform: translateY(8px) scale(.96); filter: blur(10px); letter-spacing: .4em; }
+    18%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); letter-spacing: .06em; }
+    70%  { opacity: 1; transform: translateY(-2px); filter: blur(0); letter-spacing: .08em; }
+    100% { opacity: 0; transform: translateY(-20px) scale(1.04); filter: blur(12px); letter-spacing: .3em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .links a.lucid-link { animation: none; }
+    @keyframes lucid-smoke { 0% { opacity: 0; } 15%, 75% { opacity: 1; } 100% { opacity: 0; } }
+  }
   .legal { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--ink-3); }
   .legal span:last-child { font: italic 15px/1.2 var(--serif); }
 </style>
