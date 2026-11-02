@@ -6,7 +6,7 @@ const title=document.getElementById('stTitle'),foot=document.getElementById('stF
 function set(t,f){title.style.opacity=0;setTimeout(()=>{title.textContent=t;title.style.opacity=1},250);foot.textContent=f}
 function stage(on,seen,extra){all().forEach(p=>{p.className='plate';const l=+p.dataset.l;if(on.includes(l))p.classList.add('on');else if(seen.includes(l))p.classList.add('seen')});spark.classList.remove('run');extra&&extra()}
 const B=[
- {go(){stage([],[]);set('Four layers, one at a time.','Lesson · the kitchen')},
+ {go(){stage([],[]);set('How Orbit works, explained with a kitchen.','Sample lesson · the kitchen')},
   say:[['m','Today: how a system like this holds together. Picture a restaurant kitchen. Four layers, and we build it from the floor up.']]},
  {go(){stage([1],[]);set('Layer 1: Skills','Layer 1 of 4 · Skills')},
   say:[['m','First, the recipe cards. Each one says exactly how a dish is made, so any cook can make it the same way twice. Those are <b>Skills</b>: written instructions for one job.'],['u','So a skill is the how.'],['m','Exactly. The how, written down once.']]},
@@ -87,7 +87,7 @@ new IntersectionObserver(([e])=>{past=!e.isIntersecting;set()}).observe(hero);ne
 (()=>{const fr=document.getElementById('liveHub'),box=document.getElementById('lf'),shot=box.parentElement;
 fr.src=window.ORBIT_HUB;
 const fit=()=>{fr.style.transform='scale('+(box.clientWidth/1280)+')'};fit();new ResizeObserver(fit).observe(box);
-const CAP=["Your Front Desk. What's waiting on you, and what's coming this week.","Your helpers, on one wheel. Tap one to step into their room.","Each room is a pipeline. Every step, at a glance.","One tap moves work on. It checks with you first.","Only what's urgent or timely. Never noise.","What ran, and what it cost. Right now, $0.","Your Council. Two doors, away from the work.","The Mentor's garden. One lesson at a time.","Recos. It suggests its own upgrades.","That's your world. Yours arrives with your names in it."];
+const CAP=["Your Front Desk: what needs you today, and what’s coming this week.", "Your six helpers. Tap one to see what they’re working on.", "Each helper’s room shows their work, step by step, from start to done.", "One tap moves something forward. It always asks you first.", "Just what’s coming up or overdue.", "What got done on its own this week, and what it cost. Right now, $0 extra.", "Your Mentor and your Board: one teaches, one helps with big decisions.", "The Mentor explains how things work, one idea at a time.", "Suggestions: small ways Orbit could work better for you. You choose.", "That’s a sample. Yours arrives with your own names and projects in it."];
 const btn=document.getElementById('guideBtn'),lab=btn.querySelector('span'),cap=document.getElementById('gcap'),dots=document.getElementById('gdots');
 dots.innerHTML=CAP.map(()=>'<i></i>').join('');let i=-1,t=null;
 const show=n=>{i=n;fr.contentWindow.postMessage({tour:n},'*');cap.style.opacity=0;setTimeout(()=>{cap.textContent=CAP[n];cap.style.opacity=1},250);[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===n));};
@@ -97,7 +97,7 @@ dots.onclick=e=>{const k=[...dots.children].indexOf(e.target);if(k>=0){show(k);}
 })();
 
 /* Orbit v1.1: Customer / Community / Client switch under the Customer Experience room */
-(function(){var B=(window.ORBIT_HUB||'').replace(/orbit\/hub-demo\.html$/,'');var V={customer:['Customer Experience','First order, delivery, the next buy, loyalty','c768620e99.jpg'],community:['Community Engagement','From first look to inner circle','cx-community.jpg'],client:['Client Success','From yes to a glowing wrap-up','cx-client.jpg']};
+(function(){var B=(window.ORBIT_HUB||'').replace(/orbit\/hub-demo\.html$/,'');var V={customer:['Customer Experience','Looks after customers, from their first order to coming back for more','c768620e99.jpg'],community:['Community Engagement','Turns first-time visitors into your inner circle','cx-community.jpg'],client:['Client Success','Looks after clients, from their yes to a glowing wrap-up','cx-client.jpg']};
 var sw=document.querySelector('.cxsw');var btn=document.querySelector('.hp[data-h="cs"]');var img=document.querySelector('img[data-room="cs"]');if(!sw||!btn||!img)return;
 sw.addEventListener('click',function(e){var b=e.target.closest('button[data-cx]');if(!b)return;var v=V[b.dataset.cx];sw.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
 btn.querySelector('b').textContent=v[0];btn.querySelector('span').textContent=v[1];img.src=B+'orbit/'+v[2];img.alt=v[0]+' room';});})();
