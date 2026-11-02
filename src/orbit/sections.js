@@ -101,3 +101,7 @@ dots.onclick=e=>{const k=[...dots.children].indexOf(e.target);if(k>=0){show(k);}
 var sw=document.querySelector('.cxsw');var btn=document.querySelector('.hp[data-h="cs"]');var img=document.querySelector('img[data-room="cs"]');if(!sw||!btn||!img)return;
 sw.addEventListener('click',function(e){var b=e.target.closest('button[data-cx]');if(!b)return;var v=V[b.dataset.cx];sw.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
 btn.querySelector('b').textContent=v[0];btn.querySelector('span').textContent=v[1];img.src=B+'orbit/'+v[2];img.alt=v[0]+' room';});})();
+
+// Performance (2 Nov 2026): the room images are lazy so they don't compete with the hero on first load.
+// Once the page has loaded, quietly fetch the hidden ones so switching rooms is still instant.
+addEventListener('load', () => setTimeout(() => document.querySelectorAll('.rooms img[hidden]').forEach((im) => { im.loading = 'eager'; }), 1500));

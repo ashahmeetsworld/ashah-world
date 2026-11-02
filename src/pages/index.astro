@@ -168,7 +168,7 @@ const skills = [
               <a class="post-head" href={u(`/work/${w.id}/`)}><i aria-hidden="true"></i><span class="serif">{w.data.title}</span><span class="label">{w.data.skill}</span></a>
               <div class="car" style={`--ratio:${ratio}`} data-live={live ? 'latest' : undefined} data-feed={live ? site.instagramFeedUrl : undefined}>
                 <div class="car-track">
-                  {imgs.map((src, i) => <div class="car-slide"><img src={u(src)} alt={i === 0 ? w.data.title : ''} loading={i === 0 ? undefined : 'lazy'} decoding="async" /></div>)}
+                  {imgs.map((src, i) => <div class="car-slide"><img src={u(src)} alt={i === 0 ? w.data.title : ''} loading="lazy" decoding="async" /></div>)}
                 </div>
                 <div class="car-dots" aria-hidden="true"></div>
               </div>
