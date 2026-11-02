@@ -22,7 +22,7 @@ const hubUrl = base + 'orbit/hub-demo.html';
 // the hero's last word cycles through these
 const verbs = ['making', 'building', 'creating', 'living'];
 ---
-<Base title="Orbit" description="Orbit gives creatives a ready-made AI team that runs the business side of their brand, so there’s room to make the work. Free." bodyClass="orbit">
+<Base title="Orbit" description="Orbit gives creatives a ready-made AI team that runs the business side of their brand, so there’s room to create your work. Free." bodyClass="orbit">
   <!-- Hero: the light at the centre -->
   <section class="o-hero">
     <OrbitScene />
@@ -30,7 +30,7 @@ const verbs = ['making', 'building', 'creating', 'living'];
       <p class="eyebrow tag"><span class="free">Free</span><span>Orbit v{VERSION}</span></p>
       <p class="req"><i></i>Needs a paid Claude plan and free Notion.</p>
       <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
-      <p class="lede">A ready-made AI team that runs the business side of your brand, so there’s room to make the work.</p>
+      <p class="lede">A ready-made AI team that runs the business side of your brand, so there’s room to create your work.</p>
       <OrbitSignup source="orbit-page-top" />
       <p class="note"><strong>Free, for good.</strong></p>
     </div>
