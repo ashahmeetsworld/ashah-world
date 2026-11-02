@@ -83,13 +83,13 @@ p,h1,h2,h3{margin:0}
 .hero .hero-sub{font-family:var(--serif);font-style:italic;font-size:2.3cqw;color:#E9E3F2}
 .hero .nav{position:absolute;top:0;left:0;right:0}
 @media (max-width:760px){
- .copy,.rootpos,.footpos{position:static;width:auto!important;padding:28px max(20px,env(safe-area-inset-left,0px)) 16px}
+ .copy,.rootpos,.footpos{position:static;width:auto!important;padding:28px max(24px,env(safe-area-inset-left,0px)) 16px}
  .copy .title{font-size:34px}.copy .title.big{font-size:40px}.copy .sub{font-size:17px}
  .rootpos .title{font-size:30px}
  .scene{display:flex;flex-direction:column}
  .copy{order:1}.art{order:2}.rootpos{order:3}.footpos{order:5;font-size:13px}
  .okey,.num{display:none}
- .mkeys{display:grid!important;order:4;padding:20px max(20px,env(safe-area-inset-left,0px));grid-template-columns:1fr 1fr}
+ .mkeys{display:grid!important;order:4;padding:20px max(24px,env(safe-area-inset-left,0px));grid-template-columns:1fr 1fr}
  .hero .copy{order:2}.hero .hero-title{font-size:72px}.hero .hero-sub{font-size:20px}
 }
 .mkeys{display:none}
@@ -189,7 +189,7 @@ a.mark{color:inherit;text-decoration:none}
 .deeppos .deeper p{font-size:20px}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media (max-width:760px){.deeppos{position:static;width:auto;order:3;padding:16px max(20px,env(safe-area-inset-left,0px)) 0}.terms li{grid-template-columns:7.5em 1fr}}
+@media (max-width:760px){.deeppos{position:static;width:auto;order:3;padding:16px max(24px,env(safe-area-inset-left,0px)) 0}.terms li{grid-template-columns:7.5em 1fr}}
 .split,.how{position:relative;isolation:isolate}
 .split::before,.how::before{content:"";position:absolute;inset:-6% 0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(9,13,32,.96) 0%,rgba(9,13,32,.85) 45%,rgba(7,11,24,0) 100%)}
 .text,.how-head{text-shadow:0 1px 18px rgba(7,11,24,.8)}
@@ -216,7 +216,7 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 .how-acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .how-rhythm{color:var(--soft);font-family:var(--serif);font-style:italic;font-size:24px;max-width:none}
 @media (max-width:760px){.how-grid{grid-template-columns:1fr;gap:28px}.how-thr{padding-top:0}.how-link{display:none}.how-acts{grid-template-columns:1fr}.how-head .title{font-size:38px}.how-door,.how-moon{width:150px}}
-@media (max-width:760px){.wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}.hero .nav{padding-left:20px;padding-right:20px}}
+@media (max-width:760px){.wrap{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}.hero .nav{padding-left:20px;padding-right:20px}}
 .split{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:start;padding-block:120px}
 .split.flip{grid-template-columns:7fr 5fr}
 .split.flip .text{order:2}
@@ -258,7 +258,7 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 @keyframes deep-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.deeper>p,.deeper>.terms{animation:none}}
 .ap[hidden]{display:none}
-.ap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,7,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:apin .5s ease}
+.ap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,7,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));animation:apin .5s ease}
 @keyframes apin{from{opacity:0}to{opacity:1}}
 .ap-glow{position:absolute;left:50%;bottom:-30vh;width:120vh;height:80vh;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(242,180,140,.22),rgba(242,180,140,0) 65%);pointer-events:none}
 .ap-close{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));right:max(20px,env(safe-area-inset-right,0px));background:none;border:1px solid var(--line);color:var(--soft);border-radius:999px;padding:10px 18px;font:inherit;font-size:13px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
@@ -296,6 +296,14 @@ body>section,body>footer,body>nav{position:relative;z-index:1}
 .hero .hero-title.hero-title{font-size:min(14cqw,184px)}
 @media (max-width:760px){.hero .hero-title.hero-title{font-size:96px}.hero .hero-sub.hero-sub{font-size:20px;margin-top:6px}}
 @media (prefers-reduced-motion:reduce){.hero .hero-title.hero-title{animation:none}}
+
+/* Phone spacing pass (2 Nov 2026): headlines got their body copy jammed right under them, and the hero subtitle sat on top of the button */
+@media (max-width:760px){
+ .copy .title+.sub,.rootpos .title+.sub,.copy .title+p{margin-top:12px}
+ .copy .eyebrow+.title,.rootpos .eyebrow+.title{margin-top:6px}
+ .hero .hero-sub.hero-sub{margin-top:14px}
+ .hero .ctas{margin-top:28px}
+}
 </style>
 </head>
 <body>
