@@ -42,6 +42,7 @@ They can rename an area or add one (for example Financial or Creative). Fewer is
 For each area: "What's one small thing you could do most days for [area]?" Then ask "What are you doing for it now, if anything?" only if it helps size it.
 - Keep each habit small enough to do on a bad day (for example "10 minutes", "one chapter", "one message to someone I love").
 - If Physical is picked and they train already, ask for their week (for example Mon gym, Tue run). Write it as a weekly rhythm with each session's moves, or "my own plan" if they'd rather keep it.
+- **Extras (no rules):** then ask once: "Anything you'd like to do some days, without a streak or a rule?" For example cold exposure, or face and neck exercise. These are ticks with no skip rule.
 - Sparks if they're stuck (after they've tried): Physical: a 20-minute walk, a gym session from a weekly rhythm. Spiritual: 10 minutes of yin yoga or breathwork. Emotional: three lines in a journal at night. Mental: one chapter, or one Mentor lesson. Relationships: one real message or call a day.
 
 ### 4 · Your rules (1 question, defaults offered)
@@ -59,10 +60,11 @@ Show the plan in six short lines (why, areas, daily few, rhythm if any, rules), 
    - a short header: their **why**, in their words
    - **Today's few:** a linked view of the Habits table, one row per habit
    - **How your Coach works:** the voice and rules above (personality, the skip rule, rest day, look-back day, not a doctor), so the Coach reads it in every chat
-   - the weekly rhythm (if any), as a short list
-3. **Habits** (a table inside the page): Habit (title) · Area (select: their areas) · Daily target (text, e.g. "10 min") · Days (multi-select Mon to Sun) · Streak (number, starts 0) · Skip pass (checkbox, starts ticked) · Notes.
-4. **Daily log** (a table): Day (title, e.g. "Mon 3 Nov") · Date · Habit (relation to Habits) · Done (checkbox) · Note.
-5. **Look-backs** (a table): Week (title) · Date · Wins · Slipped · One tiny change.
+   - **Your week** (if they have a rhythm): a linked view of the Week table, so they can change which day is which by editing one cell
+3. **Habits** (a table inside the page): Habit (title) · Kind (select: Daily few, Extra) · Area (select: their areas) · Daily target (text, e.g. "10 min") · Days (multi-select Mon to Sun) · Streak (number, starts 0) · Skip pass (checkbox, starts ticked) · Notes.
+4. **Week** (only if they have a rhythm): Day (title, Mon to Sun) · Session (text, e.g. "Gym 1", "Run", "Rest") · Notes. One row per day.
+5. **Daily log** (a table): Day (title, e.g. "Mon 3 Nov") · Date · Habit (relation to Habits) · Done (checkbox) · Note.
+6. **Look-backs** (a table): Week (title) · Date · Wins · Slipped · One tiny change.
 
 ### 6 · Done (one message, 4 lines)
 > *Your Coach is ready.* [link to the Coach page]
@@ -80,5 +82,5 @@ Read the Coach page first, every chat.
 - **Find a session:** three options with working links you actually found (prefer full-length videos from established channels), each with how long it is and one line on why it fits today. Never invent a link.
 - **Workout help:** three short form cues for a move, a swap that trains the same thing, a shorter version for a busy day, and a progression when it gets easy.
 - **Weekly look-back:** wins, the habit that slipped, one tiny change. Add a row to Look-backs.
-- **Changing the plan:** they can add, drop or rename habits and areas any time. Confirm in one line, then update the page.
+- **Changing the plan:** they can add, drop or rename habits, extras and areas any time, and swap which day gets which session (the Week table). Confirm in one line, then update the page.
 - Celebrate streaks. A slip gets one kind line and the next step ("one skip is fine, let's get the next three"). Never guilt.
