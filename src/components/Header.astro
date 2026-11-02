@@ -24,8 +24,9 @@ const nav = [
   </div>
 </header>
 <style>
-  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .5s, backdrop-filter .5s; }
-  .top.solid { background: rgba(7, 11, 24, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
+  /* Floating text only (2 Nov 2026, Ashah): no bar appears on scroll; on Home the cinema bars fade away into this. A soft shadow keeps the words readable over anything. */
+  .mark, nav a { text-shadow: 0 1px 12px rgba(3, 4, 10, .85), 0 0 2px rgba(3, 4, 10, .6); }
   .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
   .mark { display: flex; align-items: baseline; gap: 14px; }
   .mono { font: italic 400 22px/1 var(--serif); letter-spacing: .08em; color: var(--ink); }
@@ -43,8 +44,4 @@ const nav = [
   }
   nav a { white-space: nowrap; }
 </style>
-<script>
-  const h = document.querySelector('.top');
-  const set = () => h?.classList.toggle('solid', window.scrollY > 40);
-  set(); window.addEventListener('scroll', set, { passive: true });
-</script>
+
