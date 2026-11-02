@@ -76,7 +76,8 @@ def parse_time(s):
 
 def main():
     if not TOKEN:
-        sys.exit("IG_ACCESS_TOKEN is not set")
+        print("IG_ACCESS_TOKEN secret not added yet, nothing to do")
+        return
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=WINDOW_DAYS)
     media, err = api("GET", f"{IG_ID}/media", fields="id,timestamp,permalink", limit=25)
