@@ -2671,9 +2671,10 @@ body.in-chat #orbitBar,body.in-chat .foot{display:none}
 
 <script>
 /* ---------- Orbit v0.4.7 · the Coach ----------
-   A third seat at the Council: the sunrise. It keeps life outside work strong (physical, spiritual, emotional, mental,
-   relationships). The setup is a guided chat that builds a Coach page in their own Notion, from Coach-setup.md on the
-   Orbit site. On launch day the main page opens with a dawn takeover: "Coach now available". */
+   A third seat at the Council: the sunrise. It keeps life outside work strong across the leverage points.
+   Build my Coach runs Coach-setup.md (Orbit site) as a chat that builds a Coach page in their own Notion and ends with a
+   COACH: line; the hub keeps that as world.coach (their daily few, extras and week), and ticks as world.coachLog.
+   On launch day the main page opens with a dawn takeover: "Coach now available". */
 (() => {
 const SITE = "https://ashahmeetsworld.github.io/ashah-world/os/";
 const FROM = Date.parse("2026-11-02T23:00:00Z");   // 10am, 3 Nov 2026, Melbourne
@@ -2684,39 +2685,126 @@ const get = k => { try { return localStorage.getItem(k); } catch (e) { return nu
 const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
 COL.coach = COL.coach || C;
 SKILL_NAMES.coach = "your Coach";
-P.sun = '<path d="M4 18h16M7 18a5 5 0 0 1 10 0"/><path d="M12 8V6M6.3 10.3 4.9 8.9M17.7 10.3l1.4-1.4M3 14h2M19 14h2"/>';
-const AREAS = ["Physical", "Spiritual", "Emotional", "Mental", "Relationships"];
+const SUN = '<circle cx="12" cy="14" r="4"/><path d="M3 18h18M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10M2 14h2M20 14h2"/>';
+P.sun = SUN;
+const AREAS = ["Physical", "Spiritual", "Mental", "Emotional", "Relational", "Financial"];
+const ACOL = { Physical: C, Spiritual: "#45E992", Mental: "#6F9BFF", Emotional: "#FF9AB8", Relational: "#B49CFF", Financial: "#7FD8F0" };
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const SAMPLE_COACH = { few: [{ a: "Physical", h: "Move for 30 minutes" }, { a: "Spiritual", h: "10 minutes of breathwork" }, { a: "Mental", h: "One chapter" }, { a: "Relational", h: "One real message" }], extras: ["Cold exposure"], week: ["Gym", "Walk", "Gym", "Walk", "Gym", "Rest", "Long walk"] };
 const SETUP = `Set up my Coach. Read the Coach setup file in full: ${SITE}Coach-setup.md (if you can't fetch it, open it in a new tab through Claude in Chrome). Then follow it exactly, as if I'd dropped it in and typed start.`;
-const ASK = t => `Coach: read my Coach page in Notion first. ${t}`;
-const build = () => { put("orbit-coach-built", "1"); openClaude("coach", SETUP); };
-const sun = (w, cls) => `<svg class="${cls || ""}" width="${w}" height="${w * .6}" viewBox="0 0 200 120" aria-hidden="true"><defs><radialGradient id="cgl" cx="50%" cy="100%" r="60%"><stop offset="0" stop-color="#FFE7B8" stop-opacity=".9"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></radialGradient></defs>
-  <circle cx="100" cy="100" r="90" fill="url(#cgl)" opacity=".5"/><path d="M60 100a40 40 0 0 1 80 0z" fill="#FFF3DC"/>${[-60, -35, -12, 12, 35, 60].map(a => { const r = a * Math.PI / 180; return `<line x1="${100 + 52 * Math.sin(r)}" y1="${100 - 52 * Math.cos(r)}" x2="${100 + 70 * Math.sin(r)}" y2="${100 - 70 * Math.cos(r)}" stroke="${C}" stroke-width="2" stroke-linecap="round"/>`; }).join("")}<line x1="10" y1="100" x2="190" y2="100" stroke="${C}" stroke-opacity=".6"/></svg>`;
+const plan = () => { const c = coach(); if (!c) return ""; return ` My plan as it is in my hub (the latest; if my Coach page in Notion differs, update it to match): daily few: ${c.few.map(f => `${f.a}: ${f.h}`).join("; ")}.${c.extras && c.extras.length ? ` Extras: ${c.extras.join(", ")}.` : ""}${c.week ? ` Week: ${c.week.map((w, i) => DAYS[i] + " " + w).join(", ")}.` : ""}`; };
+const ASK = t => `Coach: read my Coach page in Notion first.${plan()} ${t}`;
 
-/* the sunrise door in the Council */
-function door() {
-  const built = get("orbit-coach-built");
-  return `<a class="door coachdoor" href="#coach" style="${glass(C)}"><span class="arch"><span class="spill"></span><span class="ic">${sun(110)}</span>${figure}</span>
-    <span class="caps" style="margin-top:22px;color:var(--c)">Coach</span><h2>The sunrise</h2><p>Your life outside work, kept strong.</p><span class="pill on">${ic("door", 13)}${built ? "Go inside" : "New · set it up"}</span></a>`;
+/* their Coach: from the world file (or the sample) */
+const W = () => ORBIT.world;
+const coach = () => ORBIT.sample() ? SAMPLE_COACH : (W().coach || null);
+const log = () => { const w = W(); if (!w.coachLog) w.coachLog = {}; return w.coachLog; };
+const pad = n => String(n).padStart(2, "0"), iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n), dow = d => (d.getDay() + 6) % 7;
+function setCoach(c) {
+  if (!c || ORBIT.sample()) return;
+  const clean = { few: (c.few || []).filter(x => x && (x.h || x.habit)).slice(0, 8).map(x => ({ a: String(x.a || x.area || "Physical").slice(0, 30), h: String(x.h || x.habit).slice(0, 80) })),
+    extras: (c.extras || []).map(x => String(x).slice(0, 60)).filter(Boolean).slice(0, 6), week: Array.isArray(c.week) && c.week.length === 7 ? c.week.map(x => String(x || "").slice(0, 30)) : null,
+    why: c.why ? String(c.why).slice(0, 200) : "" };
+  W().coach = clean; ORBIT.save(); put("orbit-coach-built", "1");
 }
-/* the Coach's room */
+// the skip rule, per habit: skip one day, never two in a row; three in a row earns the pass back
+function chain(key) {
+  const L = log(), today = new Date(), t0 = iso(today), days = Object.keys(L).filter(d => (L[d] || {})[key]).sort();
+  const first = days[0] ? new Date(days[0] + "T00:00:00") : today;
+  let pass = true, run = 0, broke = false;
+  for (let d = first; iso(d) < t0; d = addDays(d, 1)) {
+    if ((L[iso(d)] || {})[key]) { run++; if (!pass && run >= 3) { pass = true; broke = false; } }
+    else { if (pass) pass = false; else broke = true; run = 0; }
+  }
+  const done = !!(L[t0] || {})[key];
+  if (done && !pass && run + 1 >= 3) pass = true;
+  const need = pass ? 0 : 3 - (run + (done ? 1 : 0));
+  const note = !days.length && !done ? "start today" : pass ? "skip pass ready" : broke ? `chain broke · ${need} in a row resets it` : need < 3 || done ? `pass back after ${need} more` : "skip used · not today";
+  return { done, streak: run + (done ? 1 : 0), note };
+}
+function tick(key) {
+  if (ORBIT.sample()) return demoSay ? demoSay("In your own hub, this ticks today off and keeps your streak.") : 0;
+  const L = log(), t0 = iso(new Date()); L[t0] = L[t0] || {};
+  if (L[t0][key]) delete L[t0][key]; else L[t0][key] = 1;
+  ORBIT.save(); route();
+}
+// a COACH: line at the end of the setup chat fills the room (the chat panel never shows it)
+if (typeof orbitLines === "function") {
+  const _ol = orbitLines;
+  orbitLines = function (text) {
+    const keep = String(text || "").split("\n").filter(line => {
+      const m = line.match(/^\s*\**COACH\**\s*:\s*(\{.*\})\s*$/);
+      if (!m) return true;
+      try { setCoach(JSON.parse(m[1])); setTimeout(route, 50); } catch (e) {}
+      return false;
+    }).join("\n");
+    return _ol(keep);
+  };
+}
+const build = () => { put("orbit-coach-built", "1"); openClaude("coach", SETUP); };
+
+/* the sunrise door, after the Board's (same as the Mentor's and the Board's) */
+function door() {
+  return `<a class="door coachdoor" href="#coach" style="${glass(C)}"><span class="arch"><span class="spill"></span><span class="ic">${ic("sun", 30, 1.1)}</span>${figure}</span>
+    <span class="caps" style="margin-top:22px;color:var(--c)">Coach</span><h2>The sunrise</h2><p>Train, breathe, show up. Every day.</p><span class="pill on">${ic("door", 13)}Go inside</span></a>`;
+}
+const scene = `<svg class="scene" viewBox="0 0 560 360"><defs><radialGradient id="cr-sun"><stop offset="0" stop-color="#FFF3DC" stop-opacity=".95"/><stop offset=".3" stop-color="${C}" stop-opacity=".35"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="330" cy="250" r="108" fill="url(#cr-sun)"/><path d="M290 250 A40 40 0 0 1 370 250 Z" fill="#FFF3DC"/>
+  ${[-70, -45, -20, 20, 45, 70].map(a => { const r = a * Math.PI / 180; return `<line x1="${330 + 58 * Math.sin(r)}" y1="${250 - 58 * Math.cos(r)}" x2="${330 + 86 * Math.sin(r)}" y2="${250 - 86 * Math.cos(r)}" stroke="${C}" stroke-opacity=".5" stroke-width="1.2"/>`; }).join("")}
+  <path d="M20 262 Q160 236 300 250 T540 246" fill="none" stroke="${rgba(C, .35)}"/><line x1="20" y1="250" x2="540" y2="250" stroke="${rgba(C, .18)}"/>
+  <g fill="#03050C"><circle cx="190" cy="226" r="4"/><path d="M184 249 L186 233 Q190 230 194 233 L196 249 Z"/><path d="M186 236 L176 226 M194 236 L204 226" stroke="#03050C" stroke-width="2.4" stroke-linecap="round"/></g></svg>`;
+const ico = d => `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+
+/* the Coach's room: like the founder's own, filled with theirs */
 function coachView() {
-  const built = get("orbit-coach-built");
-  const pills = built
-    ? `<a class="pill on" href="#" data-open="coach" data-text="${esc(ASK("Check in with me: what's the one thing that matters most today?"))}">${ic("spark", 13)}Check in</a>
-       <a class="pill" href="#" data-open="coach" data-text="${esc(ASK("Show me today's few, and help me tick them off."))}">${ic("layers", 13)}Today's few</a>
-       <a class="pill" href="#" data-open="coach" data-text="${esc(ASK("Find me a session for today: three options with real links, how long each is, and why it fits."))}">${ic("compass", 13)}Find a session</a>
-       <a class="pill" href="#" data-open="coach" data-text="${esc(ASK("Run my weekly look-back: wins, what slipped, and one tiny change for next week."))}">${ic("cal", 13)}Weekly look-back</a>`
-    : `<a class="pill on" href="#" data-coach-build>${ic("spark", 13)}Build my Coach</a>`;
-  return `<div class="scene coachscene">${sun(420)}</div>
-    <div class="rh enter" style="margin-top:60px;${glass(C)}"><span class="caps eb">${ic("sun", 12)}The Council · the sunrise</span>
+  const cc = coach(), t = new Date(), today = cc && cc.week ? cc.week[dow(t)] : "";
+  const pill = (attr, i, label, on) => `<a class="pill${on ? " on" : ""}" href="#" ${attr}>${ic(i, 13)}${label}</a>`;
+  const open = (txt) => `data-open="coach" data-text="${esc(ASK(txt))}"`;
+  const pills = !cc
+    ? pill("data-coach-build", "spark", "Build my Coach", 1)
+    : (today && !/^rest/i.test(today) ? pill(open(`Walk me through today's session (${today}), one step at a time.`), "spark", `Today: ${esc(today)}`, 1) : pill(open("Check in with me: what's the one thing that matters most today?"), "spark", "Check in", 1))
+      + pill(open("Find me a session for today: three options with real links, how long each is, and why it fits today."), "leaf", "Find a session")
+      + (today && !/^rest/i.test(today) ? pill(open("Check in with me: how am I across my areas, one quick question at a time, then the one thing that matters most today."), "chat", "Check in") : "")
+      + pill(open("Run my weekly look-back: wins, the habit that slipped, and one tiny change for next week."), "cal", "Weekly look-back");
+  const rows = cc ? cc.few.map((f, i) => { const k = "f:" + f.h, ch = chain(k), c = ACOL[f.a] || C;
+      return `<div class="three-row" style="--hc:${c}"><i class="${ch.done ? "on" : ""}" data-ctick="${esc(k)}" title="Tick today"></i><span>${esc(f.a)} <em>· ${esc(f.h)}</em></span><em>${ch.done ? "done ✓" : esc(ch.note)}</em></div>`; }).join("")
+      + (cc.extras && cc.extras.length ? `<div class="cz-x">${cc.extras.map(x => { const k = "x:" + x, on = !!(log()[iso(t)] || {})[k] && !ORBIT.sample(); return `<button type="button" data-ctick="${esc(k)}" class="${on ? "on" : ""}">${on ? "✓ " : ""}${esc(x)}</button>`; }).join("")}</div>` : "")
+    : `<p>Not set up yet. Build my Coach: about ten minutes, one question at a time. It makes your Coach in your Notion.</p>`;
+  const lev = AREAS.map(a => { const f = cc && cc.few.find(x => x.a.toLowerCase().startsWith(a.slice(0, 5).toLowerCase())); return `<div>${a}<em class="${f ? "on" : ""}">${f ? esc(f.h.length > 18 ? f.h.slice(0, 17) + "…" : f.h) : "not picked"}</em></div>`; }).join("");
+  const week = cc && cc.week ? `<div class="cz-week">${cc.week.map((w, i) => `<span class="${i === dow(t) ? "on" : ""}">${DAYS[i][0]}<br>${esc((w || "Rest").slice(0, 7))}</span>`).join("")}</div>` : "";
+  return `${scene}<div class="rh cz enter" style="margin-top:60px"><span class="caps eb">${ic("sun", 12)}The Council · the sunrise</span>
     <div class="title"><span class="badge">${ic("sun", 20)}</span><h1 class="serif">Coach</h1></div><p>Keeps your life outside work strong, so the work stays strong. Encouraging, and holds you to it.</p>
     <div class="pills">${pills}<a class="pill quiet" href="#council">${ic("back", 13)}The Council</a></div></div>
-    <div class="cols enter" style="animation-delay:.15s;margin-top:200px;${glass(C)}">
-    <div class="card"><div class="k">${ic("layers", 13)}<span class="caps">Today's few</span></div><p>${built ? "One small habit per area, picked by you. They live on your Coach page in Notion. Press Check in to see where you're at." : "Not set up yet. Build my Coach: about ten minutes, one question at a time."}</p></div>
-    <div class="card"><div class="k">${ic("compass", 13)}<span class="caps">Leverage points</span></div><p class="coachchips">${AREAS.map(a => `<span>${a}</span>`).join("")}</p><p class="dim" style="font-size:12.5px">You pick the ones that matter to you.</p></div>
-    <div class="card"><div class="k">${ic("spark", 13)}<span class="caps">Holds you to it</span></div><p>Skip one day, never two. Three in a row earns the skip back. Every week, a look-back. You can change any of it.</p></div></div>`;
+    <div class="cols cz enter" style="animation-delay:.15s;margin-top:200px">
+      <div class="card"><div class="k">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}<span class="caps">Today's few</span>${cc ? `<a href="#" class="n" data-cedit>Edit</a>` : ""}</div>${rows}${week}</div>
+      <div class="card"><div class="k">${ico('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>')}<span class="caps">Leverage points</span></div><div class="lev">${lev}</div></div>
+      <div class="card"><div class="k">${ico('<path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8z"/>')}<span class="caps">Holds you to it</span></div>
+        <p>Skip one day, never two. After a skip, three in a row earns the pass back. Every week, a look-back.</p></div></div>`;
 }
-function wireCoach(el) { el.querySelectorAll("[data-coach-build]").forEach(b => b.onclick = ev => { ev.preventDefault(); build(); setTimeout(route, 300); }); }
+/* edit the few, the extras and the week right here (also how a Claude-tab setup lands in the hub) */
+function editor() {
+  if (ORBIT.sample()) return demoSay("In your own hub, Edit changes your daily few, extras and which day is which.");
+  const cc = coach() || { few: [], extras: [], week: null }, wk = cc.week || ["", "", "", "", "", "", ""];
+  const few = AREAS.map(a => { const f = cc.few.find(x => x.a.toLowerCase().startsWith(a.slice(0, 5).toLowerCase())); return `<label><span>${a}</span><input name="f-${a}" value="${esc(f ? f.h : "")}" placeholder="leave blank to skip"></label>`; }).join("");
+  document.querySelector(".p2m")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div class="p2m"><form class="p2c cz-ed"><h3>Your daily few</h3>
+    <p class="hint">One small thing per area, small enough for a bad day. Change it any time here: your Coach updates your Notion page to match next time you talk.</p>${few}
+    <label><span>Extras</span><input name="extras" value="${esc((cc.extras || []).join(", "))}" placeholder="e.g. Cold exposure, Face and neck"></label>
+    <div class="cz-wk">${DAYS.map((d, i) => `<label><span>${d}</span><input name="w${i}" value="${esc(wk[i] || "")}" placeholder="Rest"></label>`).join("")}</div>
+    <div class="pills" style="margin-top:14px"><button class="pill on">Save</button><a href="#" class="pill quiet" data-x>Cancel</a></div></form></div>`);
+  const m = document.querySelector(".p2m"), f = m.querySelector("form");
+  m.onclick = ev => { if (ev.target === m || ev.target.dataset.x !== undefined) { ev.preventDefault(); m.remove(); } };
+  f.onsubmit = ev => { ev.preventDefault(); const v = Object.fromEntries(new FormData(f));
+    const week = DAYS.map((d, i) => (v["w" + i] || "").trim());
+    setCoach({ why: cc.why, few: AREAS.map(a => ({ a, h: (v["f-" + a] || "").trim() })).filter(x => x.h), extras: (v.extras || "").split(",").map(x => x.trim()).filter(Boolean), week: week.some(Boolean) ? week.map(x => x || "Rest") : null });
+    m.remove(); route(); };
+}
+function wireCoach(el) {
+  el.querySelectorAll("[data-coach-build]").forEach(b => b.onclick = ev => { ev.preventDefault(); build(); });
+  el.querySelectorAll("[data-ctick]").forEach(b => b.onclick = () => tick(b.dataset.ctick));
+  el.querySelectorAll("[data-cedit]").forEach(b => b.onclick = ev => { ev.preventDefault(); editor(); });
+}
 
 const _routeCoach = route;
 route = function () {
@@ -2729,7 +2817,7 @@ route = function () {
   _routeCoach();
   if (top === "council") {
     const doors = document.querySelector(".doors");
-    if (doors && !doors.querySelector(".coachdoor")) { doors.classList.add("three"); const b = doors.querySelector('a.door[href="#board"]'); (b || doors.lastElementChild).insertAdjacentHTML("beforebegin", door()); }
+    if (doors && !doors.querySelector(".coachdoor")) { doors.classList.add("three"); doors.insertAdjacentHTML("beforeend", door()); }
   }
 };
 window.removeEventListener("hashchange", _routeCoach);
@@ -2737,27 +2825,42 @@ window.addEventListener("hashchange", route);
 
 /* launch day: the dawn takeover on the main page, once */
 function takeover() {
-  if (!live() || ORBIT.sample() || get("orbit-coach-seen") || document.getElementById("coachDawn")) return;
+  if (!live() || ORBIT.sample() || get("orbit-coach-seen") || coach() || document.getElementById("coachDawn")) return;
   const top = (location.hash.replace("#", "") || "home").split("/")[0];
   if (top !== "home") return;
   if (document.getElementById("tourWelcome")) return;   // a brand-new hub: the welcome goes first, the Coach next time
   document.body.insertAdjacentHTML("beforeend", `<div id="coachDawn" role="dialog" aria-label="Coach now available"><div class="cdin">
     <span class="caps">Orbit · new at your Council</span><h1>Coach now available</h1>
     <p>Your own training for a whole life, not just the work. You pick what matters. Your Coach builds it in your Notion and holds you to it.</p>
-    <div class="cdchips">${AREAS.map(a => `<span>${a}</span>`).join("")}</div>
-    <a href="#" class="cdgo" id="cdGo">Build my Coach</a><a href="#" class="cdno" id="cdNo">Not now</a></div>${sun(420, "cdsun")}</div>`);
+    <div class="cdchips">${["Physical", "Spiritual", "Emotional", "Mental", "Relationships"].map(a => `<span>${a}</span>`).join("")}</div>
+    <a href="#" class="cdgo" id="cdGo">Build my Coach</a><a href="#" class="cdno" id="cdNo">Not now</a></div>${sunArt(420)}</div>`);
   const close = () => { put("orbit-coach-seen", "1"); const d = document.getElementById("coachDawn"); d.classList.add("out"); setTimeout(() => d.remove(), 600); };
   document.getElementById("cdGo").onclick = ev => { ev.preventDefault(); close(); location.hash = "coach"; build(); };
   document.getElementById("cdNo").onclick = ev => { ev.preventDefault(); close(); };
+}
+function sunArt(w) {
+  return `<svg class="cdsun" width="${w}" height="${w * .6}" viewBox="0 0 200 120" aria-hidden="true"><defs><radialGradient id="cgl" cx="50%" cy="100%" r="60%"><stop offset="0" stop-color="#FFE7B8" stop-opacity=".9"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="100" cy="100" r="90" fill="url(#cgl)" opacity=".5"/><path d="M60 100a40 40 0 0 1 80 0z" fill="#FFF3DC"/>${[-60, -35, -12, 12, 35, 60].map(a => { const r = a * Math.PI / 180; return `<line x1="${100 + 52 * Math.sin(r)}" y1="${100 - 52 * Math.cos(r)}" x2="${100 + 70 * Math.sin(r)}" y2="${100 - 70 * Math.cos(r)}" stroke="${C}" stroke-width="2" stroke-linecap="round"/>`; }).join("")}<line x1="10" y1="100" x2="190" y2="100" stroke="${C}" stroke-opacity=".6"/></svg>`;
 }
 setTimeout(takeover, 1900);   // after the page and any welcome have drawn
 if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }
 })();
 </script>
 <style>
-.doors.three{gap:48px}
-.coachscene{display:grid;place-items:end center}
-.coachchips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}.coachchips span{padding:3px 11px;border-radius:99px;border:1px solid color-mix(in srgb,#F4B45E 40%,transparent);font: var(--hs,italic) 400 16px var(--serif);color:#FFE7B8}
+.doors.three{gap:64px}
+.cz .k svg{color:#F4B45E}.cz .k .n{margin-left:auto;font-size:11px;color:var(--s)}
+.cz .three-row{display:flex;align-items:center;gap:10px;padding:7px 0}.cz .three-row+.three-row{border-top:1px solid rgba(242,239,232,.08)}
+.cz .three-row i{width:11px;height:11px;border-radius:50%;flex:none;border:1.5px solid var(--hc);cursor:pointer}.cz .three-row i.on{background:var(--hc)}.cz .three-row i:hover{box-shadow:0 0 10px -2px var(--hc)}
+.cz .three-row span{flex:1}.cz .three-row em{font-style:normal;font-size:11.5px;color:var(--s)}
+.cz .lev{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:4px;font-size:12.5px}
+.cz .lev div{display:flex;justify-content:space-between;gap:8px}.cz .lev em{font-style:normal;color:var(--s);font-size:11px;text-align:right}.cz .lev em.on{color:#F4B45E}
+.cz-x{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.cz-x button{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid rgba(242,239,232,.15);color:var(--s);cursor:pointer;background:none}
+.cz-x button.on{border-color:rgba(244,180,94,.6);color:var(--t);background:rgba(244,180,94,.1)}
+.cz-week{display:flex;gap:4px;margin-top:10px}.cz-week span{flex:1;text-align:center;padding:3px 0;border-radius:5px;font-size:10px;line-height:1.35;background:rgba(242,239,232,.05);color:var(--s)}
+.cz-week span.on{background:rgba(244,180,94,.16);color:#F4B45E}
+.cz-ed{width:min(520px,100%);max-height:86vh;overflow:auto}.cz-ed label{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}.cz-ed label span{width:84px;flex:none;color:var(--s)}
+.cz-ed input{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid var(--h);border-radius:8px;padding:7px 10px;color:var(--t);font:13px var(--sans);outline:none}.cz-ed input:focus{border-color:#F4B45E}
+.cz-wk{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0 10px;margin-top:6px}.cz-wk label span{width:34px}
 #coachDawn{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:16px;overflow:hidden;background:radial-gradient(ellipse at 50% 115%,rgba(244,180,94,.5),rgba(60,30,20,.55) 35%,rgba(3,5,12,.97) 70%);backdrop-filter:blur(4px);animation:cdin 1.4s ease both}
 #coachDawn.out{animation:cdout .6s ease both}
 #coachDawn .cdin{position:relative;z-index:2;text-align:center;max-width:760px;margin-top:-8vh;color:#EEEAF6;font:400 16px/1.55 'DM Sans',system-ui,sans-serif}

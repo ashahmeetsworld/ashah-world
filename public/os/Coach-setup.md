@@ -60,9 +60,11 @@ Show the plan in six short lines (why, areas, daily few, rhythm if any, rules), 
    - a short header: their **why**, in their words
    - **Today's few:** a linked view of the Habits table, one row per habit
    - **How your Coach works:** the voice and rules above (personality, the skip rule, rest day, look-back day, not a doctor), so the Coach reads it in every chat
-   - **Your week** (if they have a rhythm): a linked view of the Week table, so they can change which day is which by editing one cell
+   - **Your week** (if they have a rhythm): a linked view of the Week table
 3. **Habits** (a table inside the page): Habit (title) · Kind (select: Daily few, Extra) · Area (select: their areas) · Daily target (text, e.g. "10 min") · Days (multi-select Mon to Sun) · Streak (number, starts 0) · Skip pass (checkbox, starts ticked) · Notes.
 4. **Week** (only if they have a rhythm): Day (title, Mon to Sun) · Session (text, e.g. "Gym 1", "Run", "Rest") · Notes. One row per day.
+
+They never have to open Notion to change anything: the hub's Coach room has an Edit button for the daily few, extras and week, and every Coach chat from the hub starts with the plan as it is there. When it differs from the Notion page, update the page to match, in one quiet line.
 5. **Daily log** (a table): Day (title, e.g. "Mon 3 Nov") · Date · Habit (relation to Habits) · Done (checkbox) · Note.
 6. **Look-backs** (a table): Week (title) · Date · Wins · Slipped · One tiny change.
 
@@ -71,6 +73,10 @@ Show the plan in six short lines (why, areas, daily few, rhythm if any, rules), 
 > Your daily few: [the habits, one line].
 > It lives in your hub's Council, behind the sunrise door: Check in, Today's few, Find a session, Weekly look-back.
 > Today's first tick is the easiest one: [the smallest habit]. Go.
+
+Then end that message with one last line, exactly this shape, on one line (the hub reads it to fill the Coach room and hides it):
+`COACH: {"why":"<their why>","few":[{"a":"Physical","h":"<habit>"},...],"extras":["<extra>",...],"week":["<Mon>","<Tue>","<Wed>","<Thu>","<Fri>","<Sat>","<Sun>"]}`
+Use the area names Physical, Spiritual, Mental, Emotional, Relational, Financial (or theirs). Leave `week` out if they have no rhythm. If this chat is in Claude rather than the hub, also say: "In your hub, open the Coach room and press Edit to put your few in, or it fills itself next time you chat there."
 
 ---
 
@@ -82,5 +88,5 @@ Read the Coach page first, every chat.
 - **Find a session:** three options with working links you actually found (prefer full-length videos from established channels), each with how long it is and one line on why it fits today. Never invent a link.
 - **Workout help:** three short form cues for a move, a swap that trains the same thing, a shorter version for a busy day, and a progression when it gets easy.
 - **Weekly look-back:** wins, the habit that slipped, one tiny change. Add a row to Look-backs.
-- **Changing the plan:** they can add, drop or rename habits, extras and areas any time, and swap which day gets which session (the Week table). Confirm in one line, then update the page.
+- **Changing the plan:** they can add, drop or rename habits, extras and areas any time, and swap which day gets which session. They do it in the hub (Edit) or by telling you; you keep the Notion page in line. Confirm in one line, then update the page.
 - Celebrate streaks. A slip gets one kind line and the next step ("one skip is fine, let's get the next three"). Never guilt.
