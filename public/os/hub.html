@@ -194,7 +194,7 @@
 <script src="orbit-world.js"></script>
 <script>
 /* Orbit v0.4 · your hub. Your world lives in this browser (and in your backup file). Nothing here reaches anyone else. */
-const ORBIT_VERSION = "0.4.7";
+const ORBIT_VERSION = "0.4.8";
 const ORBIT_KEY = "orbit-world";
 const ORBIT = (() => {
   const SAMPLE = {"orbit": "0.4.6", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "Your business", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds the people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who says yes, from hello to the next time."}, "fo": {"name": "Funnel", "line": "The site, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns your ideas into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like you."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free sign-up gift", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The sign-up gift is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0011", "title": "A café group", "url": "", "props": {"Status": "Qualified", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Studios", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "-2", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Business Development", "Date": "-3", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "In progress", "Kind": "Process", "Seat": "Content", "Date": "-6", "Checked": "-1", "Why": "One sitting instead of four"}}, {"id": "r4", "title": "Save the welcome email as a template", "url": "", "props": {"Status": "Done", "Kind": "Skill", "Seat": "Funnel", "Date": "-9", "Note": "Saved in Funnel's instructions"}}, {"id": "r5", "title": "A monthly check of old links", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Funnel", "Date": "-40", "SampleOld": true}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}, "mailbox": [{"id": "p1", "kind": "Update", "from": "cd", "to": "all", "text": "Captions now skip exclamation marks. It's in the brand rules.", "date": "-0", "status": "Open", "readBy": ["cd"]}, {"id": "p2", "kind": "Ask", "from": "bd", "to": "you", "text": "Two shops want a call this week. Which day suits you?", "date": "-1", "status": "Open", "readBy": ["bd"]}, {"id": "p3", "kind": "Ask", "from": "cp", "to": "cd", "text": "Is the new colour for headlines only, or buttons too?", "date": "-1", "status": "Open", "readBy": ["cp"]}, {"id": "p4", "kind": "Hub", "from": "cd", "to": "ops", "text": "A Brand board button in the Creative Director's room", "where": "Creative Director's room", "date": "-1", "status": "Open", "readBy": ["cd"]}, {"id": "p5", "kind": "Ask", "from": "cs", "to": "bd", "text": "What did the last client say about the price?", "date": "-3", "status": "Answered", "answer": "It felt fair for the time it saves.", "answeredBy": "bd", "answered": "-2", "readBy": ["cs", "bd"]}]}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Warm, clear and unhurried. Made with care."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Work that outlasts the moment it was made for."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who choose one good thing over five quick ones."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Make Monday to Thursday. Fridays for admin. Weekends off."}]};
@@ -2620,13 +2620,14 @@ async function send(text) {
   let reply;
   try {
     const feed = ORBIT.mail.feed(id);  // v0.4.6: unread updates, open asks and answers, handed over quietly before the founder's words
-    const r = await (typeof _f === "function" ? _f : fetch)("/api/chat", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: id, msg: feed + text, sid: c.sid || null }) });
+    const r = await (typeof _f === "function" ? _f : fetch)("/api/chat", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: id, msg: (window.orbitVoice ? orbitVoice.note(id) : "") + feed + text, sid: c.sid || null }) });  // v0.4.8: voice note when spoken
     const body = await r.text();
     if (!r.ok) throw new Error(body || "The hub's engine didn't answer.");
     reply = JSON.parse(body);
     if (reply.sid) c.sid = reply.sid;
     const L = orbitLines(reply.text), mail = orbitApply(id, L);
     c.msgs.push({ r: "ai", t: L.text, files: reply.files || [], reco: L.reco, mail });
+    if (window.orbitVoice) orbitVoice.reply(id, L.text);  // v0.4.8: read out in the seat's own voice
     if (mail.notes.length || mail.hubs.length) orbitRefresh();
   } catch (e) {
     c.msgs.push({ r: "ai err", t: String(e.message || e).replace(/^TypeError: Failed to fetch$/, "The hub's engine isn't running. Double-click Start Orbit Hub again.") });
@@ -2668,6 +2669,142 @@ body.in-chat #orbitBar,body.in-chat .foot{display:none}
 .ocf{display:flex;gap:8px;align-items:flex-end;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--h)}
 .ocf textarea{flex:1;resize:none;background:var(--panel,rgba(5,7,15,.7));border:1px solid var(--h);border-radius:12px;padding:10px 12px;color:var(--t);font:13.5px/1.45 var(--sans);outline:none}
 .ocf textarea:focus{border-color:var(--c,var(--hi,#7FD8F0))}.ocf button[disabled]{opacity:.5}
+</style>
+
+<script>
+/* ---------- Orbit v0.4.8 · voices ----------
+   The Personal Assistant and the Council (Mentor, Advisory Board, Coach) answer out loud, each in its own voice.
+   Hold the mic (or hold Space) and talk, let go to send. Holding again cuts the reply off. Never hands-free:
+   it would pick up the founder talking to other people in the room.
+   The voices are made on this computer by the engine (/api/voice/*). Until they're set up, or on an older engine,
+   the browser's own voice reads the reply. */
+(() => {
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const VOICED = { desk: 1, mentor: 1, board: 1, coach: 1 };
+const EF = (u, o) => (typeof _f === "function" ? _f : window.fetch)(u, o);
+const NOTE = "[Voice chat: they're talking out loud with you and will hear your reply read aloud. Answer in 1 to 3 short spoken sentences, in plain everyday words. No lists, headings, markdown, links or emoji. If there's more, give the headline and offer to go deeper.]\n\n";
+let voiceNext = 0, spoken = null, vstate = { state: "off" };  // voiceNext: when the last spoken message was sent
+
+const status = start => EF("/api/voice/status" + (start ? "?start=1" : "")).then(r => r.ok ? r.json() : { state: "none" }).catch(() => ({ state: "none" }))
+  .then(s => (vstate = s));
+
+function speakable(t) {
+  return String(t || "").replace(/```[\s\S]*?```/g, " ").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/https?:\/\/\S+/g, "").replace(/[*_#>`|~]/g, "")
+    .replace(/^\s*(?:[-•]|\d+[.)])\s+/gm, "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "").replace(/\s+/g, " ").trim();
+}
+function browserVoice() {
+  const v = window.speechSynthesis ? speechSynthesis.getVoices() : [], en = v.filter(x => /^en/i.test(x.lang)), nat = x => /natural|online|neural/i.test(x.name);
+  return en.find(x => nat(x) && x.lang === "en-AU") || en.find(nat) || en.find(x => x.lang === "en-AU") || en[0] || null;
+}
+
+/* Speaker: cuts the reply into sentences, fetches each one's voice ahead of time, plays them in order. */
+const Speaker = (() => {
+  let id = 0, queue = [], playing = null;
+  async function synth(seat, text) {
+    if (vstate.state !== "ready") return null;
+    try {
+      const r = await EF("/api/voice/say", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: seat, text }) });
+      return r.ok ? URL.createObjectURL(await r.blob()) : null;
+    } catch (e) { return null; }
+  }
+  async function pump() {
+    if (playing || !queue.length) return;
+    const job = playing = queue.shift(), my = id, url = await job.audio;
+    if (my !== id) { if (url) URL.revokeObjectURL(url); return; }
+    const next = () => { if (url) URL.revokeObjectURL(url); if (playing === job) { playing = null; pump(); } };
+    if (url) { job.el = new Audio(url); job.el.onended = job.el.onerror = next; job.el.play().catch(next); }
+    else if (window.speechSynthesis) { const u = new SpeechSynthesisUtterance(job.text); u.voice = browserVoice(); u.rate = 1.03; u.onend = u.onerror = next; speechSynthesis.speak(u); }
+    else next();
+  }
+  async function say(seat, text) {
+    stop(); const my = id;
+    await status();
+    if (my !== id) return;
+    const t = speakable(text).slice(0, 1500);
+    (t.match(/[^.!?…]+[.!?…]+["')\]]?|[^.!?…]+$/g) || []).map(s => s.trim()).filter(s => /[a-z0-9]/i.test(s))
+      .forEach(s => queue.push({ text: s, audio: synth(seat, s) }));
+    pump();
+  }
+  function stop() {
+    id++; queue = [];
+    if (playing && playing.el) { playing.el.onended = playing.el.onerror = null; playing.el.pause(); }
+    playing = null; if (window.speechSynthesis) speechSynthesis.cancel();
+  }
+  return { say, stop };
+})();
+
+/* Hooks the chat calls (see send() in the chat block). */
+window.orbitVoice = {
+  note(seat) { spoken = Date.now() - voiceNext < 3000 && VOICED[seat] ? seat : null; voiceNext = 0; return spoken ? NOTE : ""; },
+  reply(seat, text) { if (spoken !== seat) return; spoken = null; if (text) Speaker.say(seat, text); },
+  say: (seat, text) => Speaker.say(seat, text),
+  stop: () => Speaker.stop()
+};
+
+/* Hold to talk */
+const MIC = `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
+let rec = null, holding = null, setupNoted = false;
+const chatOpen = () => { const p = document.getElementById("oc"); return p && p.classList.contains("open") ? p : null; };
+function target() {
+  const p = chatOpen();
+  if (p) return { form: p.querySelector("form"), box: p.querySelector("textarea") };
+  const f = document.getElementById("ask");
+  return f && !f.hidden ? { form: f, box: document.getElementById("q") } : null;
+}
+function hint(f, text) {
+  let n = f.querySelector(".vnote");
+  if (!n) { f.insertAdjacentHTML("beforeend", `<span class="vnote"></span>`); n = f.querySelector(".vnote"); }
+  n.textContent = text; n.classList.add("on"); clearTimeout(hint.t); hint.t = setTimeout(() => n.classList.remove("on"), 5000);
+}
+function startTalk() {
+  if (holding || !SR) return;
+  const t = target(); if (!t) return;
+  Speaker.stop(); holding = t;
+  status(true).then(s => {
+    if (setupNoted || s.state === "ready" || s.state === "none") return;
+    setupNoted = true; hint(t.form, s.state === "failed" ? "Your helpers' own voices couldn't set up. The browser voice will read replies for now." : "Your helpers' voices are setting up (about 350MB, once). The browser voice reads replies until then.");
+  });
+  t.form.classList.add("listening");
+  const before = t.box.value.trim();
+  rec = new SR(); rec.lang = "en-AU"; rec.interimResults = true; rec.continuous = true;
+  rec.onresult = e => { t.box.value = ((before ? before + " " : "") + [...e.results].map(r => r[0].transcript).join(" ")).trim(); };
+  rec.onerror = e => { if (e.error === "not-allowed" || e.error === "service-not-allowed") hint(t.form, "Allow the microphone for this page, then hold the mic again."); };
+  rec.onend = () => { if (holding === t && rec) try { rec.start(); } catch (e) {} };
+  try { rec.start(); } catch (e) {}
+}
+function stopTalk() {
+  const t = holding; if (!t) return;
+  holding = null; t.form.classList.remove("listening");
+  const r = rec; rec = null;
+  setTimeout(() => { try { r && r.stop(); } catch (e) {} if (t.box.value.trim()) { voiceNext = Date.now(); t.form.requestSubmit(); } }, 350);
+}
+function addMic(f) {
+  if (!SR || !f || f.querySelector(".vmic")) return;
+  const send = f.querySelector("button[type=submit], button:not([type])");
+  send.insertAdjacentHTML("beforebegin", `<button type="button" class="vmic" title="Hold to talk (or hold Space). Let go to send.">${MIC}</button>`);
+  const b = f.querySelector(".vmic");
+  b.addEventListener("pointerdown", e => { e.preventDefault(); try { b.setPointerCapture(e.pointerId); } catch (x) {} startTalk(); });
+  ["pointerup", "pointercancel"].forEach(k => b.addEventListener(k, stopTalk));
+  b.addEventListener("click", e => e.preventDefault());
+}
+const typing = () => { const a = document.activeElement; return a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.isContentEditable); };
+addEventListener("keydown", e => { if (e.code === "Space" && !e.repeat && !typing() && SR && target()) { e.preventDefault(); startTalk(); } });
+addEventListener("keyup", e => { if (e.code === "Space" && holding) { e.preventDefault(); stopTalk(); } });
+addEventListener("keydown", e => { if (e.key === "Escape") Speaker.stop(); });
+
+addMic(document.getElementById("ask"));
+new MutationObserver(() => { const p = document.getElementById("oc"); if (p) addMic(p.querySelector("form")); }).observe(document.body, { childList: true });
+if (location.port === "4777") status(false);  // wakes the voices if they were set up before
+})();
+</script>
+<style>
+.vmic{display:inline-grid;place-items:center;width:32px;height:32px;padding:0!important;border-radius:99px;border:1px solid var(--h);color:var(--s);background:transparent;cursor:pointer;touch-action:none;user-select:none;flex:none;transition:color .2s,border-color .2s,box-shadow .2s}
+.vmic:hover{color:var(--t);border-color:var(--c,var(--hi,#7FD8F0))}
+.listening .vmic{color:var(--t);border-color:var(--c,var(--hi,#7FD8F0));box-shadow:0 0 0 4px color-mix(in srgb,var(--c,var(--hi,#7FD8F0)) 22%,transparent),0 0 18px color-mix(in srgb,var(--c,var(--hi,#7FD8F0)) 45%,transparent);animation:vmicp 1.4s ease-in-out infinite}
+@keyframes vmicp{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--c,var(--hi,#7FD8F0)) 12%,transparent),0 0 24px color-mix(in srgb,var(--c,var(--hi,#7FD8F0)) 35%,transparent)}}
+.ocf{position:relative}
+.vnote{position:absolute;left:12px;right:12px;bottom:calc(100% + 8px);padding:7px 11px;border-radius:10px;background:var(--panel-solid,rgba(6,10,22,.94));border:1px solid var(--h);color:var(--s);font:12px/1.4 var(--sans);opacity:0;pointer-events:none;transition:opacity .3s}
+.vnote.on{opacity:1}
 </style>
 
 <script>
