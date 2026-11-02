@@ -50,7 +50,7 @@ const skills = [
     <div class="hero-fade"></div>
     <div class="wrap hero-copy">
       <p class="eyebrow">{site.tagline}</p>
-      <h1>Ashah<br /><span class="indent">Meets World</span></h1>
+      <h1 class="hero-title"><span class="ln moon">Ashah</span><br /><span class="ln city indent">Meets World</span></h1>
       <p class="lede">{site.intro}</p>
       <div class="ctas">
         <a class="go glow" href={u('/work/')}>See the work <Arrow /></a>
@@ -279,7 +279,18 @@ const skills = [
   .hero-fade { display: none; }
   .hero-copy { position: relative; z-index: 2; padding-bottom: clamp(96px, 16vh, 170px); }
   .hero-fade, .hero .scroll { z-index: 1; }
-  .hero h1 { text-shadow: 0 0 60px rgba(127, 216, 240, .18); }
+  /* Hero title, 2 Nov 2026: "Ashah" is lit by the moon, "Meets World" by the city's windows.
+     Each line switches on left to right like a skyline at dusk, then keeps a slow shimmer (the Lucid sheen). */
+  .hero-title { font-size: clamp(66px, 12.5vw, 184px); line-height: .9; filter: drop-shadow(0 0 32px rgba(233, 216, 255, .22)); }
+  .hero-title .ln { display: inline-block; padding: 0 .1em .08em 0; background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%); mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+    -webkit-mask-size: 260% 100%; mask-size: 260% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0;
+    animation: lights-on 1.8s cubic-bezier(.3, .6, .2, 1) forwards, sheen 16s ease-in-out 1.8s infinite alternate; }
+  .hero-title .moon { background-image: linear-gradient(100deg, #FFFFFF, #E6ECFF 22%, #BFEFF7 42%, #D9CCFF 62%, #F4F1FF 80%, #FFFFFF 95%); }
+  .hero-title .city { background-image: linear-gradient(100deg, #FFF6EC, #FFE1C4 22%, #F2B48C 42%, #F2C6E0 62%, #FFE9D6 80%, #FFF6EC 95%); animation-delay: .45s, 2.25s; }
+  @keyframes lights-on { to { -webkit-mask-position: 0 0; mask-position: 0 0; } }
+  @keyframes sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+  @media (prefers-reduced-motion: reduce) { .hero-title .ln { animation: none; -webkit-mask-image: none; mask-image: none; } }
   .indent { padding-left: .55em; }
   .hero .lede { margin: 28px 0 34px; }
   .ctas { display: flex; flex-wrap: wrap; gap: 14px 40px; }
