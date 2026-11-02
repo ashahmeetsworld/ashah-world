@@ -231,12 +231,12 @@ const skills = [
 </Base>
 
 <script>
-  // Title card bars (2 Nov 2026): they slide away over the first third of a screen of scrolling.
+  // Title card bars (2 Nov 2026): fixed to the screen, they fade out over the first ~30% of a screen of scrolling.
   (() => {
     const hero = document.querySelector('.hero') as HTMLElement | null;
     if (!hero) return;
     let raf = 0;
-    const set = () => { raf = 0; hero.style.setProperty('--open', Math.min(1, scrollY / (innerHeight * 0.35)).toFixed(3)); };
+    const set = () => { raf = 0; const o = Math.min(1, scrollY / (innerHeight * 0.3)); hero.style.setProperty('--open', o.toFixed(3)); hero.classList.toggle('opened', o >= 1); };
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(set); }, { passive: true });
     set();
   })();
@@ -311,11 +311,13 @@ const skills = [
   .hero-title { font-size: clamp(64px, 9.4vw, 164px); filter: drop-shadow(0 0 50px rgba(221, 232, 255, .35)); }
   .hero .eyebrow { letter-spacing: .5em; font-size: 11px; }
   .hero .lede { margin: 18px auto 26px; }
-  .bars { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
-  .bar { position: absolute; left: 0; right: 0; height: 9vh; background: #03040A; will-change: transform; }
-  .bar.top { top: 0; transform: translateY(calc(-100% * var(--open))); }
-  .bar.bot { bottom: 0; transform: translateY(calc(100% * var(--open))); }
-  .hero .scroll { z-index: 4; bottom: calc(4.5vh - 6px); color: #9AA0C0; }
+  /* fixed to the screen, floating over everything but the nav, and fading out as you scroll */
+  .bars { position: fixed; inset: 0; z-index: 45; pointer-events: none; opacity: calc(1 - var(--open)); }
+  .hero.opened .bars { visibility: hidden; }
+  .bar { position: absolute; left: 0; right: 0; height: 9vh; background: #03040A; }
+  .bar.top { top: 0; }
+  .bar.bot { bottom: 0; }
+  .hero .scroll { z-index: 46; bottom: calc(4.5vh - 6px); color: #9AA0C0; }
   @media (max-width: 759px) {
     .hero :global(.hs) { --my: 14% !important; }
     .hero { align-items: end; }
