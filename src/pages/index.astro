@@ -50,8 +50,7 @@ const skills = [
     <div class="hero-fade"></div>
     <div class="wrap hero-copy">
       <p class="eyebrow">{site.tagline}</p>
-      <h1 class="hero-title"><span class="ln moon">Ashah</span><br /><span class="ln city indent">Meets World</span></h1>
-      <div class="hero-reflect" aria-hidden="true"><span class="rf indent">Meets World</span></div>
+      <h1 class="hero-title">Ashah <br class="br" />Meets World</h1>
       <p class="lede">{site.intro}</p>
       <div class="ctas">
         <a class="go glow" href={u('/work/')}>See the work <Arrow /></a>
@@ -231,22 +230,6 @@ const skills = [
 </Base>
 
 <script>
-  // Hero lantern (2 Nov 2026): on desktop the moonlight beam on the title follows the pointer; it eases back to its own glide when you leave.
-  (() => {
-    const t = document.querySelector('.hero-title') as HTMLElement | null;
-    const hero = document.querySelector('.hero') as HTMLElement | null;
-    if (!t || !hero || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let target = -40, cur = -40, raf = 0;
-    const step = () => { cur += (target - cur) * 0.12; t.style.setProperty('--gx', cur.toFixed(1) + '%'); raf = Math.abs(target - cur) > 0.2 ? requestAnimationFrame(step) : 0; };
-    hero.addEventListener('pointermove', (e) => {
-      const r = t.getBoundingClientRect();
-      if (!t.classList.contains('follow')) { cur = parseFloat(getComputedStyle(t).getPropertyValue('--gx')) || -40; t.classList.add('follow'); }
-      target = ((e.clientX - r.left) / r.width) * 100;
-      if (!raf) raf = requestAnimationFrame(step);
-    });
-    hero.addEventListener('pointerleave', () => { cancelAnimationFrame(raf); raf = 0; t.classList.remove('follow'); t.style.removeProperty('--gx'); });
-  })();
-
   import { wireAll } from '../lib/carousel';
   import { loadFeed, carousels, slidesOf } from '../lib/feed';
   // Phone swipe row for the skill cards: dots underneath show where you are; tap one to jump.
@@ -296,37 +279,19 @@ const skills = [
   .hero-fade { display: none; }
   .hero-copy { position: relative; z-index: 2; padding-bottom: clamp(96px, 16vh, 170px); }
   .hero-fade, .hero .scroll { z-index: 1; }
-  /* Hero title (2 Nov 2026, round 2). "Ashah" is moonlit, "Meets World" holds the city's warm windows.
-     It's there from the first frame (no fade-in). A beam of moonlight glides across the letters, and on desktop
-     it follows your pointer like a lantern. "Meets World" is reflected in the water below, broken into ripples. */
-  @property --gx { syntax: '<percentage>'; inherits: true; initial-value: -40%; }
-  .hero-title { font-size: clamp(66px, 12.5vw, 184px); line-height: .9; --gx: -40%;
-    filter: drop-shadow(0 0 34px rgba(233, 216, 255, .2)); animation: glint 7s cubic-bezier(.45, 0, .25, 1) .6s infinite; }
-  .hero-title.follow { animation: none; }
-  .hero-title .ln, .hero-reflect .rf { display: inline-block; padding: 0 .1em .08em 0; -webkit-background-clip: text; background-clip: text; color: transparent;
-    background-size: 24% 170%, 220% 100%; background-repeat: no-repeat; background-position: var(--gx) 50%, 0% 50%; animation: sheen 16s ease-in-out infinite alternate; }
-  .hero-title .moon { background-image: radial-gradient(closest-side, #FFFFFF, rgba(255, 255, 255, .9) 35%, rgba(255, 255, 255, 0)),
-    linear-gradient(100deg, #D9DCF5, #B9C4F0 22%, #9FD6E8 42%, #B7A8EE 62%, #CFC8F2 80%, #D9DCF5 95%); }
-  .hero-title .city, .hero-reflect .rf { background-image: radial-gradient(closest-side, #FFFDF6, rgba(255, 246, 228, .9) 35%, rgba(255, 246, 228, 0)),
-    linear-gradient(100deg, #F7DCC4, #F2C29C 22%, #E9A47E 42%, #E0A3BE 62%, #F2C6A4 80%, #F7DCC4 95%); }
-  @keyframes sheen { from { background-position: var(--gx) 50%, 0% 50%; } to { background-position: var(--gx) 50%, 100% 50%; } }
-  @keyframes glint { 0% { --gx: -40%; } 62%, 100% { --gx: 140%; } }
-  /* the beam's halo, passing behind the letters */
-  .hero-title { position: relative; isolation: isolate; width: fit-content; }
-  .hero-title::before { content: ''; position: absolute; z-index: -1; top: -10%; bottom: -10%; width: 26%; left: calc(var(--gx) * .9 - 13%); border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(233, 236, 255, .22), rgba(191, 239, 247, .08) 55%, transparent); filter: blur(24px); pointer-events: none; }
-  /* the reflection: the bottom line flipped into the water, cut into drifting ripples */
-  .hero-reflect { font: italic 400 clamp(66px, 12.5vw, 184px)/.9 var(--serif); letter-spacing: -.01em; height: .4em; overflow: hidden; margin-top: -.06em; pointer-events: none; user-select: none;
-    opacity: .32; -webkit-mask-image: linear-gradient(180deg, #000 10%, transparent 100%); mask-image: linear-gradient(180deg, #000 10%, transparent 100%); }
-  .hero-reflect .rf { transform: scaleY(-1) translateY(.08em); transform-origin: 50% 50%; filter: blur(.6px);
-    -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 3px, rgba(0, 0, 0, .45) 3px 5px); mask-image: repeating-linear-gradient(180deg, #000 0 3px, rgba(0, 0, 0, .45) 3px 5px);
-    animation: sheen 16s ease-in-out infinite alternate, ripple 5s ease-in-out infinite; }
-  @keyframes ripple { 0%, 100% { translate: 0 0; } 50% { translate: .025em 0; } }
-  .hero .hero-reflect + .lede { margin-top: 6px; }
-  /* the reflection only makes sense where the title sits on the water: phones. On desktop the title is in the sky. */
-  @media (min-width: 760px) { .hero-reflect { display: none; } }
-  @media (prefers-reduced-motion: reduce) { .hero-title, .hero-title .ln, .hero-reflect .rf { animation: none; } }
-  .indent { padding-left: .55em; }
+  /* Hero title (2 Nov 2026): centred, one bold line, the Lucid treatment. Moonlight cooling into the city's warm windows,
+     one slow shimmer and nothing else, so it lands the moment the page opens. Two lines on phones. */
+  .hero-copy { display: grid; justify-items: center; text-align: center; }
+  .hero-copy .lede { margin-inline: auto; }
+  .hero .ctas { justify-content: center; }
+  .hero-title { font-size: clamp(64px, 9.6vw, 168px); line-height: .95; white-space: nowrap; padding: 0 .08em .1em; width: fit-content;
+    background: linear-gradient(100deg, #FFFFFF, #E6ECFF 18%, #BFEFF7 34%, #E9D8FF 50%, #F7CBA8 66%, #FFE7C4 80%, #FFFFFF 96%); background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 36px rgba(233, 216, 255, .22));
+    animation: sheen 16s ease-in-out infinite alternate; }
+  .hero-title .br { display: none; }
+  @keyframes sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+  @media (max-width: 759px) { .hero-title { white-space: normal; font-size: clamp(64px, 18vw, 92px); } .hero-title .br { display: inline; } }
+  @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
   .hero .lede { margin: 28px 0 34px; }
   .ctas { display: flex; flex-wrap: wrap; gap: 14px 40px; }
   /* Work with me: same link, but its line of light is the Ubiquity aurora */
