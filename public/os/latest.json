@@ -45,6 +45,14 @@
     "os/Orbit-v0.4.zip",
     "os/Update-your-Orbit.md"
    ]
+  },
+  {
+   "id": "clear-before-build",
+   "title": "Clear before we build: what Orbit will do for you, and any worries you mentioned settled, before anything is installed",
+   "tag": "orbit-only",
+   "files": [
+    "os/Orbit-v0.4.zip"
+   ]
   }
  ]
 }
