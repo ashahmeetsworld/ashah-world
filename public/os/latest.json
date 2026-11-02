@@ -1,8 +1,20 @@
 {
- "version": "0.4.6",
+ "version": "0.4.7",
  "update": "Update-your-Orbit.md",
- "notes": "Your team keeps each other posted, and you only hear what needs you. Recos stay tidy, and the Front Desk is now your Personal Assistant.",
+ "notes": "Coach now available: a third seat at your Council that keeps your life outside work strong. Open the sunrise door to build yours, about ten minutes.",
  "changes": [
+  {
+   "id": "coach",
+   "title": "A Coach joins your Council (the sunrise door): you pick your areas, it builds your daily few in your Notion and holds you to it",
+   "tag": "both",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Coach-setup.md",
+    "os/Update-your-Orbit.md",
+    "os/Orbit.zip"
+   ]
+  },
   {
    "id": "team-mailbox",
    "title": "Team mailbox: helpers ask each other, share news and hand over hub ideas, right in your hub",

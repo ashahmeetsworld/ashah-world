@@ -29,7 +29,7 @@ HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 ID_RE = re.compile(r"[a-z][a-z0-9-]{0,30}")
 SID_RE = re.compile(r"[0-9a-f-]{36}")
 NAMES = {"desk": "Personal Assistant", "mentor": "Mentor", "board": "Advisory Board", "ops": "Operations", "fo": "Funnel",
-         "bd": "Business Development", "cs": "Client Success", "cp": "Content", "cd": "Creative Director"}
+         "bd": "Business Development", "cs": "Client Success", "cp": "Content", "cd": "Creative Director", "coach": "Coach"}
 BUSY = {}
 FILES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8", "json": "application/json", "png": "image/png",
          "jpg": "image/jpeg", "jpeg": "image/jpeg", "webp": "image/webp", "svg": "image/svg+xml", "woff2": "font/woff2"}
@@ -66,6 +66,13 @@ After each answer: say what they got right and what's missing in a line or two, 
 When they have clearly proven the layer (explained it in their own words AND applied it to a new case), say so in one line and end your reply with the exact line: LAYER PROVEN
 Tie examples to their business when it helps (CLAUDE.md, their Notion). Never invent facts, studies or quotes. Never use person names in examples; use roles.
 Ongoing suggestions: when something shows a better way to work, add one last line exactly: RECO: <the suggestion, one short line> | <Routine, Skill, Memory, Hub, Tool or Process>. At most one per reply."""
+
+COACH_EXTRA = """
+You are their Coach, the third seat of their Council (Orbit v0.4.7): encouraging and energetic. You keep their life outside work strong, so the work stays strong.
+Your plan for them and how you work live on the Coach page in their Notion (search "Coach"). Read it before you answer, and keep its log and look-backs up to date when they tell you what they did.
+No Coach page yet, or they ask to set it up? Read https://ashahmeetsworld.github.io/ashah-world/os/Coach-setup.md in full (WebFetch) and follow it exactly.
+You are not a doctor: anything that sounds like pain, injury or a crisis, say to stop and see a professional. Never use person names; name teachers and creators by role or style.
+Only offer links you actually found. Never guilt them: one skip is fine, never two in a row, three in a row earns the skip back."""
 
 
 def world():
@@ -160,6 +167,8 @@ def run_chat(hid, msg, sid=None):
                          "Your full instructions are in their Claude Project for you; here, work from CLAUDE.md, the sources folder and their Notion."))
       if hid == "ops":
           brief += OPS_EXTRA
+      if hid == "coach":
+          brief = brief.replace("Your full instructions are in their Claude Project for you; here, work from CLAUDE.md, the sources folder and their Notion.", "Your instructions are below and on the Coach page in their Notion.") + COACH_EXTRA
     cmd = [exe, "-p", msg, "--output-format", "json", "--append-system-prompt", brief,
            "--allowedTools", "Read", "Glob", "Grep", "WebSearch", "WebFetch", "Skill", "mcp__notion", "Edit(./out/**)", "Write(./out/**)",
            "--disallowedTools", "Bash", "PowerShell", "NotebookEdit"]
