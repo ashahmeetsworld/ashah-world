@@ -1,0 +1,9 @@
+{
+  "_how": "One entry per comment keyword. 'keyword' is what people comment (any case, quotes, a small typo all match). 'message' is the DM they get. Add a new entry for a new campaign.",
+  "keywords": [
+    {
+      "keyword": "orbit",
+      "message": "Here's Orbit, the free system I run my brand on: https://ashahmeetsworld.github.io/ashah-world/orbit/"
+    }
+  ]
+}
