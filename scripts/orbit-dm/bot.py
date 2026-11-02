@@ -185,4 +185,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # GitHub runs free schedules late, so one run keeps watching for a while,
+    # checking every minute, and the next scheduled run takes over after it.
+    import time
+    minutes = float(os.environ.get("LOOP_MINUTES") or 0)
+    end = time.time() + minutes * 60
+    while True:
+        main()
+        if time.time() + 60 > end:
+            break
+        time.sleep(60)
