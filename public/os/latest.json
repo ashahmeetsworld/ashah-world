@@ -1,11 +1,16 @@
 {
- "version": "0.4.7",
+ "version": "0.4.8",
  "update": "Update-your-Orbit.md",
- "notes": "Coach now available, and updates now happen inside your hub. Open the sunrise door in your Council to build your Coach: a few quick questions, 5 to 10 minutes.",
+ "notes": "Your whole team now talks back, each in their own voice. Hold the mic, or hold Space, and just talk. Plus the Coach: open the sunrise door in your Council to build yours.",
  "team_since": "0.4.6",
  "hold": "2026-11-02T12:00:00Z",
  "show": "coach",
  "whatsnew": [
+  {
+   "icon": "spark",
+   "title": "Your team talks back.",
+   "line": "Hold the mic, or Space, and talk. Let go to send. Everyone answers in their own voice."
+  },
   {
    "icon": "sun",
    "title": "A Coach in your Council.",
@@ -20,14 +25,18 @@
    "icon": "mail",
    "title": "Your team talks to each other.",
    "line": "You only hear what truly needs you."
-  },
-  {
-   "icon": "spark",
-   "title": "Recos stay tidy.",
-   "line": "Picked ones close themselves when the work lands."
   }
  ],
  "changes": [
+  {
+   "id": "voices",
+   "title": "Your Personal Assistant, Council and six helpers answer out loud, each in their own voice, made free on your computer: hold the mic (or Space) to talk, let go to send, hold again to cut in, close the chat to stop",
+   "tag": "hub",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
   {
    "id": "coach",
    "title": "A Coach joins your Council (the sunrise door): you pick your areas, it builds your daily few in your Notion and holds you to it",

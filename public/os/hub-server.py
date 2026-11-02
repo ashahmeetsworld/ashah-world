@@ -203,6 +203,158 @@ def status():
     return {"chats": bool(exe) and signed, "claude": bool(exe), "signed_in": signed, "team": os.path.isdir(TEAM_DIR), "server": VERSION}
 
 
+# ---------- Voices (Orbit v0.4.8) ----------
+# The Personal Assistant, the Council (Mentor, Advisory Board, Coach) and the six helpers answer out loud, each in its own voice,
+# made on this computer for free (Kokoro, open source, Apache 2.0). Set up once, the first time they hold the mic:
+# the voice engine goes into ~/.orbit/voice-lib and the voices (about 350MB) into ~/.orbit/voice. Until it's ready,
+# the hub uses the browser's own voice. Nothing is sent anywhere.
+VOICE_HOME = os.path.join(HERE, "voice")
+VOICE_LIB = os.path.join(HERE, "voice-lib")
+VOICE_LOG = os.path.join(HERE, "voice-status.txt")
+VOICE_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/"
+VOICE_FILES = {"kokoro-v1.0.onnx": 325532387, "voices-v1.0.bin": 28214398}
+VOICES = {
+    "desk": {"mix": {"af_heart": 1}, "lang": "en-us", "speed": 1.0},
+    "coach": {"mix": {"am_onyx": 1}, "lang": "en-us", "speed": 1.0, "pitch": 0.907, "chest": 0.467},
+    "mentor": {"mix": {"bm_george": 1}, "lang": "en-gb", "speed": 0.92},
+    "board": {"mix": {"bm_lewis": 1}, "lang": "en-gb", "speed": 0.95},
+    # the team, each voiced to their personality
+    "ops": {"mix": {"am_echo": 1}, "lang": "en-us", "speed": 1.0},          # witty: dry, quick
+    "cd": {"mix": {"af_bella": 1}, "lang": "en-us", "speed": 1.0},          # expressive: warm, vivid
+    "cp": {"mix": {"af_sky": 1}, "lang": "en-us", "speed": 1.05},           # playful: light, bubbly
+    "bd": {"mix": {"am_michael": 1}, "lang": "en-us", "speed": 0.97},       # magnetic: smooth, assured
+    "fo": {"mix": {"af_kore": 1}, "lang": "en-us", "speed": 1.02},          # direct: clear, no-nonsense
+    "cs": {"mix": {"af_jessica": 1}, "lang": "en-us", "speed": 0.95},       # nurturing: gentle, caring
+}
+VOICE = {"state": "off", "note": "", "pct": 0}
+VOICE_LOCK = threading.Lock()
+SAY_LOCK = threading.Lock()
+_kokoro = None
+
+
+def vlog(line):
+    try:
+        with open(VOICE_LOG, "a", encoding="utf-8") as f:
+            f.write(time.strftime("%Y-%m-%d %H:%M:%S ") + str(line)[:2000] + "\n")
+    except OSError:
+        pass
+
+
+def voice_import():
+    import importlib
+    if os.path.isdir(VOICE_LIB) and VOICE_LIB not in sys.path:
+        sys.path.insert(0, VOICE_LIB)
+    importlib.invalidate_caches()
+    return importlib.import_module("kokoro_onnx")
+
+
+def voice_install():
+    """The engine goes into its own folder (uv first, then pip), so it never touches anything else on their computer."""
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    home = os.path.expanduser("~")
+    uv = shutil.which("uv") or next((p for p in (os.path.join(home, ".local", "bin", "uv.exe"), os.path.join(home, ".local", "bin", "uv")) if os.path.exists(p)), None)
+    tries = []
+    if uv:
+        tries.append([uv, "pip", "install", "--quiet", "--python", sys.executable, "--target", VOICE_LIB, "kokoro-onnx"])
+    tries.append([sys.executable, "-m", "pip", "install", "--quiet", "--disable-pip-version-check", "--target", VOICE_LIB, "kokoro-onnx"])
+    err = ""
+    for cmd in tries:
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900, creationflags=flags)
+        except Exception as e:
+            err = str(e)
+            continue
+        if r.returncode == 0:
+            return
+        err = (r.stderr or r.stdout).strip()[-1500:]
+        vlog("install try failed: " + err)
+    raise RuntimeError("Couldn't install the voice engine: " + err[-300:])
+
+
+def voice_download():
+    import urllib.request
+    os.makedirs(VOICE_HOME, exist_ok=True)
+    total = sum(VOICE_FILES.values())
+    done = sum(os.path.getsize(os.path.join(VOICE_HOME, f)) for f in VOICE_FILES if os.path.exists(os.path.join(VOICE_HOME, f)))
+    for name, size in VOICE_FILES.items():
+        dest = os.path.join(VOICE_HOME, name)
+        if os.path.exists(dest) and os.path.getsize(dest) == size:
+            continue
+        part = dest + ".part"
+        with urllib.request.urlopen(VOICE_BASE + name, timeout=60) as r, open(part, "wb") as f:
+            while True:
+                b = r.read(1 << 20)
+                if not b:
+                    break
+                f.write(b)
+                done += len(b)
+                VOICE["pct"] = min(99, int(done * 100 / total))
+        os.replace(part, dest)
+
+
+def voice_setup():
+    global _kokoro
+    try:
+        VOICE.update(state="installing", note="Setting up the voices", pct=0)
+        vlog(f"start: python {sys.version.split()[0]}")
+        try:
+            kk = voice_import()
+        except ImportError:
+            vlog("installing the voice engine")
+            voice_install()
+            kk = voice_import()
+        VOICE.update(note="Downloading the voices (about 350MB, once)")
+        voice_download()
+        _kokoro = kk.Kokoro(os.path.join(VOICE_HOME, "kokoro-v1.0.onnx"), os.path.join(VOICE_HOME, "voices-v1.0.bin"))
+        VOICE.update(state="ready", note="", pct=100)
+        vlog("ready")
+    except Exception as e:
+        import traceback
+        VOICE.update(state="failed", note=str(e)[:300])
+        vlog("FAILED: " + traceback.format_exc())
+
+
+def voice_start():
+    with VOICE_LOCK:
+        if VOICE["state"] in ("installing", "ready"):
+            return
+        VOICE["state"] = "installing"
+        VOICE["tried"] = time.time()
+    threading.Thread(target=voice_setup, daemon=True).start()
+
+
+def voice_say(hid, text):
+    """One sentence in that seat's voice, as WAV bytes. Only clean changes (pitch, a little low warmth), never distortion."""
+    import io
+    import wave
+    import numpy as np
+    v = VOICES.get(hid) or VOICES["desk"]
+    pitch, chest = float(v.get("pitch", 1)), float(v.get("chest", 0))
+    with SAY_LOCK:
+        style = sum(_kokoro.get_voice_style(n) * float(w) for n, w in v["mix"].items())
+        a, sr = _kokoro.create(text, voice=style, speed=float(v.get("speed", 1)) / pitch, lang=v.get("lang", "en-us"))
+    a = np.asarray(a, np.float32)
+    if pitch != 1:
+        a = np.interp(np.linspace(0, len(a) - 1, int(len(a) / pitch)), np.arange(len(a)), a).astype(np.float32)
+    if chest:
+        c = float(np.exp(-2 * np.pi * 220 / sr))
+        lp = np.empty_like(a)
+        y = 0.0
+        for i, x in enumerate(a.tolist()):
+            y = (1 - c) * x + c * y
+            lp[i] = y
+        a = a + chest * 1.8 * lp
+    peak = float(np.abs(a).max()) if len(a) else 1.0
+    a = a * (0.89 / (peak or 1.0))
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(sr)
+        w.writeframes((np.clip(a, -1, 1) * 32767).astype("<i2").tobytes())
+    return buf.getvalue()
+
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
@@ -250,6 +402,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, json.dumps(up_status()), "application/json")
         if p == "/api/status":
             return self.send(200, json.dumps(status()), "application/json")
+        if p == "/api/voice/status":  # ?start=1 sets the voices up (the first time they hold the mic)
+            if "start=1" in self.path and (VOICE["state"] == "off" or (VOICE["state"] == "failed" and time.time() - VOICE.get("tried", 0) > 120)):
+                voice_start()
+            return self.send(200, json.dumps({k: VOICE[k] for k in ("state", "note", "pct")}), "application/json")
         if p.startswith("/out/"):
             name = os.path.basename(p[5:].replace("%20", " "))
             kind = {"html": "text/html; charset=utf-8", "png": "image/png", "jpg": "image/jpeg", "svg": "image/svg+xml", "pdf": "application/pdf"}
@@ -262,6 +418,20 @@ class Handler(BaseHTTPRequestHandler):
         # Only the hub page sends this header, so other websites can't use the chats.
         if self.headers.get("Host") not in HOSTS or "1" not in (self.headers.get("X-Orbit-Hub"), self.headers.get("X-AMW-Hub")):
             return self.send(403, "forbidden", "text/plain")
+        if self.path == "/api/voice/say":
+            try:
+                data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
+                hid, text = str(data.get("helper") or "desk"), str(data["text"]).strip()
+                assert ID_RE.fullmatch(hid) and 0 < len(text) < 600
+            except Exception:
+                return self.send(400, "bad voice request", "text/plain")
+            if VOICE["state"] != "ready":
+                return self.send(503, json.dumps(VOICE), "application/json")
+            try:
+                return self.send(200, voice_say(hid, text), "audio/wav")
+            except Exception as e:
+                vlog("say failed: " + repr(e))
+                return self.send(500, str(e)[:300], "text/plain")
         if self.path == "/api/upgrade/hub":
             refresh_hub_page()
             return self.send(200, json.dumps({"ok": True}), "application/json")
@@ -420,6 +590,8 @@ def main():
         sync_team()
     except Exception:
         pass
+    if os.path.exists(os.path.join(VOICE_HOME, "voices-v1.0.bin")):  # set up before: wake the voices now
+        voice_start()
     try:
         srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     except OSError:
