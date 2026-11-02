@@ -1,109 +1,57 @@
 {
- "version": "0.4.4",
+ "version": "0.4.5",
  "update": "Update-your-Orbit.md",
- "notes": "Your brand skin can have a quiet backdrop from your world, more than one surface, and panels that always read.",
+ "notes": "A lighter start: drop one file into any chat, see the sample hub first, a 15-minute interview, and your helpers ask the rest when it matters.",
  "changes": [
   {
-   "id": "skin-backdrops",
-   "title": "Brand skins can have a quiet backdrop texture from your own world (a stone wall, timber, a soft sky)",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "skin-variants",
-   "title": "One brand, more than one surface: skin variants, each in the Skin button",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html"
-   ]
-  },
-  {
-   "id": "skin-contrast",
-   "title": "Contrast rule: panels never the same colour as the ground, unless you ask",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "neutral-sample",
-   "title": "The sample hub shows a neutral business; skin previews use your own business",
+   "id": "plain-chat-start",
+   "title": "Setup starts in a plain chat: drop in the OS file and type start, no Project to make first",
    "tag": "orbit-only",
    "files": [
-    "os/hub.html",
-    "os/Update-your-Orbit.md"
+    "os/Orbit.zip"
    ]
   },
   {
-   "id": "mentor-lessons-in-hub",
-   "title": "Mentor lessons inside the hub: a drawing of each idea, one question at a time, layers ticked",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html",
-    "os/hub-server.py"
-   ]
-  },
-  {
-   "id": "path-by-modules",
-   "title": "Your path laid out in modules, three layers per topic",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html"
-   ]
-  },
-  {
-   "id": "recos-from-chats",
-   "title": "Any chat can suggest a better way to work; one click adds it to Recos",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html",
-    "os/hub-server.py"
-   ]
-  },
-  {
-   "id": "rows-open-in-hub",
-   "title": "Clients, posts, topics and months open their page in the hub",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/hub.html"
-   ]
-  },
-  {
-   "id": "council-in-depth",
-   "title": "Council in depth: Mentor SWOT read, Board meetings and deep dives with a Chair, Front Desk top three and pace call (OS 7b)",
-   "tag": "both",
-   "from": "amw",
-   "files": [
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "lessons-fallback",
-   "title": "Without hub chats switched on, lessons and chats open in Claude instead",
+   "id": "see-it-first",
+   "title": "See it first: the setup chat opens with the sample hub before any questions",
    "tag": "orbit-only",
    "files": [
-    "os/hub.html"
+    "os/Orbit.zip"
    ]
   },
   {
-   "id": "autopilot-rule",
-   "title": "The autopilot rule: every automation is set and forget; when it needs you, it does 99% of the prep, says the one thing to do and waits for your go",
-   "tag": "both",
-   "from": "amw",
+   "id": "interview-15",
+   "title": "The interview is about 15 minutes: 14 questions, only what your team needs to feel like yours on day one",
+   "tag": "orbit-only",
    "files": [
-    "os/Update-your-Orbit.md",
-    "os/hub-server.py"
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "still-to-learn",
+   "title": "Helpers ask the rest just in time (Still to learn): a few questions when the work needs them, never a second interview",
+   "tag": "both",
+   "files": [
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "say-what-it-does",
+   "title": "Along the way, the odd glimpse of what your team will do with what you've just said: reassuring, never a pitch",
+   "tag": "both",
+   "files": [
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "clear-before-build",
+   "title": "Clear before we build: what Orbit will do for you, and any worries you mentioned settled, before anything is installed",
+   "tag": "orbit-only",
+   "files": [
+    "os/Orbit.zip"
    ]
   }
  ]

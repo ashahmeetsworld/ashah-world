@@ -1,5 +1,5 @@
 #!/bin/bash
-# Orbit · Phase 2: chats inside your hub. Run by double-clicking "Turn on hub chats" in your Orbit Hub folder.
+# Orbit · Phase 2: chats inside your hub. Run by double-clicking "Bring your hub to life" in your Orbit Hub folder.
 # Installs Claude Code and a tiny helper (uv), signs Claude Code in to YOUR Claude plan (no API key, no extra cost),
 # connects Notion, and switches your hub over. Safe to run again any time: it only does what's missing.
 SITE="https://ashahmeetsworld.github.io/ashah-world/os"
@@ -10,7 +10,7 @@ export PATH="$BIN:$PATH"
 unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN   # always your plan, never paid API
 say() { printf "\n  \033[36m%s\033[0m\n" "$1"; }
 note() { printf "  %s\n" "$1"; }
-stop_here() { printf "\n  \033[33m%s\033[0m\n  Run Turn on hub chats again when you're ready. Nothing is broken: your hub works as before.\n" "$1"; read -n 1 -s -r -p "  Press any key to close." </dev/tty; exit 1; }
+stop_here() { printf "\n  \033[33m%s\033[0m\n  Run Bring your hub to life again when you're ready. Nothing is broken: your hub works as before.\n" "$1"; read -n 1 -s -r -p "  Press any key to close." </dev/tty; exit 1; }
 find_claude() { command -v claude || { [ -x "$BIN/claude" ] && echo "$BIN/claude"; }; }
 find_uv() { command -v uv || { [ -x "$BIN/uv" ] && echo "$BIN/uv"; }; }
 

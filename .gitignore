@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 .env
+
+# Orbit old download addresses: copies of public/os/Orbit.zip made at build (scripts/orbit-links.mjs)
+public/os/Orbit-v*.zip

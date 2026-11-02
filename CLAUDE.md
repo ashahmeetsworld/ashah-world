@@ -53,12 +53,12 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 ## Orbit (live 25 Oct 2026)
 - Free lead magnet page `/orbit/` (`src/pages/orbit.astro`), linked from the footer's second row (magnets, offers, ventures) and, since 31 Oct 2026, the header nav (Passage, Orbit, then Work, About, Contact). Aurora look; never mixed with ember/firefly.
 - Sign-ups: `OrbitSignup.astro` (page, redirects home after 8 s) and `OsNudge.astro` (site pop-up, confirms in place). Both post to the Brevo form in `site.json` → `orbitFormUrl`; empty = preview mode (confirms without sending).
-- The download is `public/os/Orbit-v<version>.zip`; the Brevo emails link to it, so update them when the file name changes.
+- The download is `public/os/Orbit.zip` (from 2 Nov 2026): the only real zip, overwritten on every release; the file name never changes. Old addresses in emails already sent (`os/Orbit-v0.4.zip`, `os/Orbit-v0.3.3.zip`) are copies made at build by `scripts/orbit-links.mjs` (prebuild), so every button anyone ever got serves the newest Orbit. Never commit a versioned zip; add old names to that script instead.
 
 ## Orbit v0.4 page (30 Oct 2026)
 - `/orbit/` now runs the v0.4 sections built as a mock-up: `src/orbit/sections-a.html` / `sections-b.html` (markup, split around the bottom `OrbitSignup`), `sections.js` (inline scripts) and `src/styles/orbit-v04.css` (scoped under `.nx`). Images and the sample hub (`hub-demo.html`, the real hub on made-up data) are in `public/orbit/`; `__BASE__` in the markup becomes the base path.
 - Problem headline: "Spread thin across everything. Deep in nothing." The door in `AnklesScene.astro` sits lower, on its own horizon line; the lights are a faint algae blue.
-- The tag reads "Orbit v0.4" and the download is `public/os/Orbit-v0.4.zip` (30 Oct). `Orbit-v0.3.3.zip` stays so links in emails already sent keep working.
+- The version tag reads from `public/os/latest.json`. The download is `public/os/Orbit.zip` (see above).
 - Never use people's names in sample content (Ashah's standing rule).
 
 ## Passage (live 31 Oct 2026)
