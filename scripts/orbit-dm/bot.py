@@ -16,7 +16,6 @@ Python standard library only.
 import json, os, re, sys, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
 
-GRAPH = "https://graph.facebook.com/v21.0"
 def clean_token(raw):
     """Forgive paste slips: a copied 'IG_ACCESS_TOKEN=' prefix, quotes, spaces, line breaks."""
     t = re.sub(r"\s+", "", raw or "")
@@ -26,6 +25,8 @@ def clean_token(raw):
 
 
 TOKEN = clean_token(os.environ.get("IG_ACCESS_TOKEN", ""))
+# Instagram-login tokens (start "IG") use graph.instagram.com; Facebook-login tokens use graph.facebook.com
+GRAPH = "https://graph.instagram.com/v21.0" if TOKEN.startswith("IG") else "https://graph.facebook.com/v21.0"
 IG_ID = os.environ.get("IG_USER_ID", "").strip() or "17841443383606084"
 DRY = os.environ.get("DRY_RUN", "") not in ("", "0", "false")
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -122,6 +123,13 @@ def main():
     cutoff = now - timedelta(days=WINDOW_DAYS)
     # safe hint for debugging a bad paste: never prints the token itself
     print(f"token check: {len(TOKEN)} characters, starts with {TOKEN[:2]!r}")
+    global IG_ID
+    if TOKEN.startswith("IG"):
+        me, err = api("GET", "me", fields="user_id,username")
+        if err:
+            sys.exit(f"Could not read the account: {err.get('message')}")
+        IG_ID = str(me.get("user_id") or me.get("id"))
+        print(f"account: @{me.get('username')}")
     media, err = api("GET", f"{IG_ID}/media", fields="id,timestamp,permalink,caption", limit=25)
     if err:
         sys.exit(f"Could not read posts: {err.get('message')}")
