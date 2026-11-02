@@ -387,8 +387,11 @@ def run_upgrade(version, update):
         new_team = os.path.join(UP_DIR, "team")
         if os.path.isdir(new_team) and os.listdir(new_team):
             if os.path.isdir(TEAM_DIR):
-                stamp = time.strftime("%Y-%m-%d-%H%M")
-                shutil.copytree(TEAM_DIR, os.path.join(HUB, "backups", f"team-before-v{version}-{stamp}"))
+                base = os.path.join(HUB, "backups", f"team-before-v{version}-{time.strftime('%Y-%m-%d-%H%M%S')}")
+                dest, n = base, 2
+                while os.path.exists(dest):  # never overwrite an earlier backup
+                    dest, n = f"{base}-{n}", n + 1
+                shutil.copytree(TEAM_DIR, dest)
             shutil.copytree(new_team, TEAM_DIR, dirs_exist_ok=True)
             sync_team()
         refresh_hub_page()

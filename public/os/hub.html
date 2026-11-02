@@ -2678,7 +2678,7 @@ body.in-chat #orbitBar,body.in-chat .foot{display:none}
    On launch day the main page opens with a dawn takeover: "Coach now available". */
 (() => {
 const SITE = "https://ashahmeetsworld.github.io/ashah-world/os/";
-const FROM = Date.parse("2026-11-02T23:00:00Z");   // 10am, 3 Nov 2026, Melbourne
+const FROM = Date.parse("2026-11-02T12:00:00Z");   // live from 11pm, 2 Nov 2026, Melbourne (Ashah: live now)
 const C = "#F4B45E";
 const preview = /coach-preview/.test(location.search + location.hash);
 const live = () => preview || Date.now() >= FROM;
@@ -2895,7 +2895,7 @@ const newer = (a, b) => { a = String(a).split(".").map(Number); b = String(b).sp
 const EF = (u, o) => (typeof _f === "function" ? _f : window.fetch)(u, o);  /* past the hub's own /api shim, straight to the engine */
 const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
 const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
-const markDone = v => { ORBIT.world.orbit = String(v); ORBIT.save(); put("orbit-whatsnew", String(v)); put("orbit-later", String(v)); };
+const markDone = v => { ORBIT.world.orbit = String(v); ORBIT.save(); put("orbit-whatsnew", String(v)); put("orbit-later", String(v)); put("orbit-later-text", ""); };
 const ICON = { sun: "☀", mail: "✉", spark: "✦", ring: "◎", door: "⌂" };
 
 window.orbitUpgrade = async function (L, msg, mine) {
@@ -2923,18 +2923,28 @@ function ring(pct) {
 async function panel(L, mine) {
   document.getElementById("orbitNew")?.remove();
   document.getElementById("upPanel")?.remove();
-  document.body.insertAdjacentHTML("beforeend", `<div id="upPanel"><div class="uph"><b>Operations</b><span>Updating to v${esc(L.version)}</span><a href="#" id="upHide" title="Hide (it keeps going)">–</a></div>
+  document.body.insertAdjacentHTML("beforeend", `<div id="upPanel"><div class="uph"><b>Operations</b><span>Updating to v${esc(L.version)}</span><a href="#" id="upHide" title="Close (it keeps going)">–</a></div>
     <div class="upr">${ring(3)}</div><p class="upl">Upgrading your team now. Nothing you've made gets deleted. Keep working: this runs on its own, usually 5 to 10 minutes.</p><ul class="ups"></ul></div>`);
-  document.getElementById("upHide").onclick = ev => { ev.preventDefault(); document.getElementById("upPanel").classList.toggle("min"); };
+  document.body.insertAdjacentHTML("beforeend", `<a href="#" id="upMini" title="Open the update"><span class="umr">${ring(3)}</span><span class="umt">3%</span></a>`);
+  document.getElementById("upHide").onclick = ev => { ev.preventDefault(); show(false); };
+  document.querySelector("#upPanel .uph b").onclick = () => show(false);
+  document.getElementById("upMini").onclick = ev => { ev.preventDefault(); show(true); };
   let r;
   try { r = await EF("/api/upgrade", { method: "POST", headers: H, body: JSON.stringify({ version: L.version, from: mine, update: SITE + (L.update || "Update-your-Orbit.md") }) }); } catch (e) {}
   if (!r || !r.ok) return fail(r ? await r.text() : "The hub's engine didn't answer.");
   poll(L);
 }
+/* close the panel: it tucks away and a small glowing counter floats out of the way; click it to open again */
+function show(open) {
+  document.getElementById("upPanel")?.classList.add("was");
+  document.getElementById("upPanel")?.classList.toggle("shut", !open);
+  document.getElementById("upMini")?.classList.toggle("on", !open);
+}
 function draw(st) {
   const p = document.getElementById("upPanel"); if (!p) return;
   const steps = st.steps || [], n = steps.length, pct = st.state === "done" ? 100 : Math.min(92, 6 + n * 11);
   p.querySelector(".upr").innerHTML = ring(pct);
+  const m = document.getElementById("upMini"); if (m) { m.querySelector(".umr").innerHTML = ring(pct); m.querySelector(".umt").textContent = Math.round(pct) + "%"; }
   p.querySelector(".ups").innerHTML = steps.map((s, i) => `<li class="${i === n - 1 && st.state !== "done" ? "on" : "ok"}">${i === n - 1 && st.state !== "done" ? "◌" : "✓"} ${esc(s)}</li>`).join("") || `<li class="on">◌ Reading the update</li>`;
 }
 function fail(t) {
@@ -2949,9 +2959,16 @@ async function poll(L) {
   if (st.state === "running") return setTimeout(() => poll(L), 2500);
   if (st.state === "done") {
     const p = document.getElementById("upPanel"); p.querySelector(".uph span").innerHTML = `<i style="color:#45E992;font-style:normal">✓ Done</i>`;
-    markDone(L.version); setTimeout(() => { p.remove(); whatsNew(L, st.later); }, 1400); return;
+    markDone(L.version); put("orbit-later-text", st.later || "");
+    setTimeout(() => { p.remove(); document.getElementById("upMini")?.remove(); refreshAsk(L); }, 1400); return;
   }
   fail(st.error);
+}
+
+/* Done: one Refresh pop-up loads the new Orbit, then What's new shows */
+function refreshAsk(L) {
+  document.body.insertAdjacentHTML("beforeend", `<div id="upDone"><div class="udin">${ring(100)}<h2>Your team is updated.</h2><p>Refresh to load the new Orbit.</p><a href="#" id="upRefresh">Refresh</a></div></div>`);
+  document.getElementById("upRefresh").onclick = ev => { ev.preventDefault(); location.reload(); };
 }
 
 /* What's new, in B's glow */
@@ -2970,7 +2987,7 @@ function whatsNew(L, later) {
 setTimeout(async () => {
   const v = get("orbit-whatsnew"); if (!v || get("orbit-whatsnew-seen") === v || ORBIT.sample()) return;
   let L; try { L = await (await fetch(SITE + "latest.json", { cache: "no-store" })).json(); } catch (e) { return; }
-  if (L && String(L.version) === v) whatsNew(L);
+  if (L && String(L.version) === v) whatsNew(L, get("orbit-later-text") || "");
 }, 1200);
 })();
 </script>
@@ -2978,7 +2995,13 @@ setTimeout(async () => {
 #upQuick{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:96;display:flex;gap:10px;align-items:center;padding:10px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 94%,transparent);border:1px solid var(--hi);color:var(--t);font:400 13.5px system-ui,sans-serif;box-shadow:0 0 30px -8px var(--hi)}
 #upQuick span{width:12px;height:12px;border-radius:50%;border:2px solid var(--hi);border-right-color:transparent;animation:upspin .8s linear infinite}@keyframes upspin{to{transform:rotate(360deg)}}
 #upPanel{position:fixed;top:0;right:0;bottom:0;z-index:111;width:min(420px,100vw);display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 24px;background:rgba(6,9,20,.97);border-left:1px solid color-mix(in srgb,#7FD8F0 35%,transparent);box-shadow:-20px 0 60px -30px #7FD8F0;color:var(--t);font:400 13.5px/1.55 var(--sans,system-ui);animation:upin .45s ease both}
-#upPanel.min{transform:translateX(calc(100% - 64px))}#upPanel .uph{display:flex;align-items:baseline;gap:12px;width:100%}#upPanel .uph b{font:italic 400 24px var(--serif);flex:1}#upPanel .uph span{color:var(--s);font-size:12px}#upPanel .uph a{color:var(--s);font-size:20px;text-decoration:none}
+#upPanel{transition:transform .45s ease}#upPanel.shut,#upPanel.was{animation:none}#upPanel.shut{transform:translateX(105%);pointer-events:none}#upPanel .uph b{cursor:pointer}
+#upMini{position:fixed;right:18px;bottom:78px;z-index:110;display:flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:99px;background:rgba(6,9,20,.92);border:1px solid color-mix(in srgb,#7FD8F0 45%,transparent);box-shadow:0 0 24px -8px #7FD8F0;color:#EAFBFF;text-decoration:none;font:400 12.5px var(--sans,system-ui);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .35s,transform .35s}
+#upMini.on{opacity:1;transform:none;pointer-events:auto}#upMini .umr svg{width:34px;height:34px;display:block}#upMini .umr text{display:none}#upMini .umt{font:italic 400 19px 'Cormorant Garamond',Georgia,serif;min-width:38px}#upMini:hover{border-color:#7FD8F0}
+#upDone{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:16px;background:rgba(3,5,12,.72);backdrop-filter:blur(3px);animation:cdin .6s ease both;color:#EEEAF6;font:400 15px/1.55 'DM Sans',system-ui,sans-serif}
+#upDone .udin{width:min(380px,100%);text-align:center;padding:26px 24px 28px;border-radius:22px;background:rgba(6,9,20,.96);border:1px solid color-mix(in srgb,#7FD8F0 40%,transparent);box-shadow:0 0 60px -20px #7FD8F0}
+#upDone h2{font:italic 400 30px/1.15 'Cormorant Garamond',Georgia,serif;margin:6px 0 4px}#upDone p{color:rgba(238,234,246,.65);margin:0 0 18px}
+#upDone a{display:inline-block;padding:11px 30px;border-radius:99px;border:1px solid #7FD8F0;box-shadow:0 0 22px -6px #7FD8F0;color:#EAFBFF;text-decoration:none}#upPanel .uph{display:flex;align-items:baseline;gap:12px;width:100%}#upPanel .uph b{font:italic 400 24px var(--serif);flex:1}#upPanel .uph span{color:var(--s);font-size:12px}#upPanel .uph a{color:var(--s);font-size:20px;text-decoration:none}
 #upPanel .upr{margin:22px 0 6px}#upPanel .upl{color:var(--s);text-align:center;margin:0 0 8px}#upPanel .upl a{color:#7FD8F0}
 #upPanel .ups{list-style:none;padding:0;margin:8px 0 0;width:100%;max-height:45vh;overflow:auto}#upPanel .ups li{padding:5px 0;border-top:1px solid rgba(255,255,255,.06)}#upPanel .ups li.ok{color:var(--t)}#upPanel .ups li.on{color:#7FD8F0}
 @keyframes upin{from{transform:translateX(100%)}to{transform:none}}
