@@ -28,7 +28,7 @@ OUT_DIR = os.path.join(CHAT_DIR, "out")
 HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 ID_RE = re.compile(r"[a-z][a-z0-9-]{0,30}")
 SID_RE = re.compile(r"[0-9a-f-]{36}")
-NAMES = {"desk": "Front Desk", "mentor": "Mentor", "board": "Advisory Board", "ops": "Operations", "fo": "Funnel",
+NAMES = {"desk": "Personal Assistant", "mentor": "Mentor", "board": "Advisory Board", "ops": "Operations", "fo": "Funnel",
          "bd": "Business Development", "cs": "Client Success", "cp": "Content", "cd": "Creative Director"}
 BUSY = {}
 FILES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8", "json": "application/json", "png": "image/png",
@@ -42,7 +42,21 @@ Replies are short and plain: the point first, like explaining to a smart 9-year-
 Put drafts in the reply itself. For anything visual (a board, a storyboard, a one-pager, a calendar), write ONE self-contained .html file into the out folder (out/<short-name>.html, dark background, light text) and say its name in one line: the hub shows it as a button.
 Never send, post, publish or change anything outside this chat without their clear OK here. Never ask them to open a terminal or run a command.
 Set and forget: anything you set up runs on autopilot until it hits a hard wall. If you need them, do 99% of the prep, pause, tell them exactly what one action to take, and wait for their "go" to finish.
-Ongoing suggestions: whenever this chat shows a better way to work (a correction, a preference, friction, a repeated step a routine, skill or memory could handle), offer it then. Add one last line exactly: RECO: <the suggestion, one short line> | <Routine, Skill, Memory, Hub, Tool or Process>. At most one per reply, only when genuinely useful."""
+Ongoing suggestions: whenever this chat shows a better way to work (a correction, a preference, friction, a repeated step a routine, skill or memory could handle), offer it then. Add one last line exactly: RECO: <the suggestion, one short line> | <Routine, Skill, Memory, Hub, Tool or Process>. At most one per reply, only when genuinely useful.
+The team mailbox (Orbit v0.4.6; your hub carries it, nothing to set up): your helpers keep each other posted so {who} isn't the messenger.
+- Start: their message may begin with a [Team mailbox] block. Read it first. Use the updates, answer any ask you can with a line ANSWER: <id> | <the answer, one line>, and use answers to your own asks. Say what changed in one line only if it matters; never repeat the block back.
+- Mid-chat: don't know something another helper would know? Ask them, not {who}: ASK: <helper or All> | <the question>. Tell {who} "asked the team" and carry on. Only a real blocker goes to {who}: ASK: You | <the question>.
+- End: anything from this chat another helper needs? UPDATE: <helper or All> | <what changed, one line>. Something for the hub itself (a new button, something now live, a recurring job)? HUB: <what> | <where it might go>.
+- Catch: when {who} drops an idea in passing ("never use...", "I'd love it if..."), route it: apply it if it's yours, UPDATE the helper who owns it, or RECO it if it's a better way to work. Then show it in one line: 🪝 caught: "<their words>" → <where it went>.
+- A reco from their hub that you were asked to apply has landed? DONE: <reco id> | <what changed, a few words>.
+These lines go on their own lines at the very end, plain text, only when real. The hub turns them into small cards; never explain them."""
+
+OPS_EXTRA = """
+You keep their hub. A "hub post" (an idea for the hub from another helper) gets fitted by you: say in one line where it fits best, then end with
+BUILD: <button, live or job> | <helper> | <label> | <the button's prompt, the thing's type, or how often the job runs> | <where it lands, in plain words> | <hub post id>
+button = a new button in that helper's room; live = something now live, listed on home; job = a recurring job on the tracker. The hub asks them "Add to your hub?", backs up first and offers Undo.
+If it doesn't fit any of those, say so plainly and suggest the closest thing. Recos check-outs: apply each with their OK, and close each one with its DONE line when it lands.
+Weekly look-back: only fresh, open Recos. Anything untouched for 30 days is already marked outdated in their hub, with Keep or Let go: don't bring it up."""
 
 LESSON = """You are {who}'s Mentor, teaching one layer of one topic inside their hub's lesson page. Layers: 1 foundations, 2 working depth, 3 mastery.
 Every reply is short and plain (no walls of text, never more than about 120 words of prose), like explaining to a smart 9-year-old, warm but not cheesy.
@@ -144,6 +158,8 @@ def run_chat(hid, msg, sid=None):
     else:
       brief = BRIEF.format(name=name, who=who, skill_line=(f"Follow the orbit-{hid} skill: it's how you work." if skill else
                          "Your full instructions are in their Claude Project for you; here, work from CLAUDE.md, the sources folder and their Notion."))
+      if hid == "ops":
+          brief += OPS_EXTRA
     cmd = [exe, "-p", msg, "--output-format", "json", "--append-system-prompt", brief,
            "--allowedTools", "Read", "Glob", "Grep", "WebSearch", "WebFetch", "Skill", "mcp__notion", "Edit(./out/**)", "Write(./out/**)",
            "--disallowedTools", "Bash", "PowerShell", "NotebookEdit"]

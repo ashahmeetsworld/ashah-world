@@ -1,57 +1,75 @@
 {
- "version": "0.4.5",
+ "version": "0.4.6",
  "update": "Update-your-Orbit.md",
- "notes": "A lighter start: drop one file into any chat, see the sample hub first, a 15-minute interview, and your helpers ask the rest when it matters.",
+ "notes": "Your team keeps each other posted, and you only hear what needs you. Recos stay tidy, and the Front Desk is now your Personal Assistant.",
  "changes": [
   {
-   "id": "plain-chat-start",
-   "title": "Setup starts in a plain chat: drop in the OS file and type start, no Project to make first",
+   "id": "team-mailbox",
+   "title": "Team mailbox: helpers ask each other, share news and hand over hub ideas, right in your hub",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit.zip"
-   ]
-  },
-  {
-   "id": "see-it-first",
-   "title": "See it first: the setup chat opens with the sample hub before any questions",
-   "tag": "orbit-only",
-   "files": [
-    "os/Orbit.zip"
-   ]
-  },
-  {
-   "id": "interview-15",
-   "title": "The interview is about 15 minutes: 14 questions, only what your team needs to feel like yours on day one",
-   "tag": "orbit-only",
-   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
     "os/Orbit.zip",
     "os/Update-your-Orbit.md"
    ]
   },
   {
-   "id": "still-to-learn",
-   "title": "Helpers ask the rest just in time (Still to learn): a few questions when the work needs them, never a second interview",
-   "tag": "both",
-   "files": [
-    "os/Orbit.zip",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "say-what-it-does",
-   "title": "Along the way, the odd glimpse of what your team will do with what you've just said: reassuring, never a pitch",
-   "tag": "both",
-   "files": [
-    "os/Orbit.zip",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "clear-before-build",
-   "title": "Clear before we build: what Orbit will do for you, and any worries you mentioned settled, before anything is installed",
+   "id": "mailbox-round",
+   "title": "Every chat starts already in the loop: the hub hands each helper its unread updates and open questions",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit.zip"
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "catch",
+   "title": "Ideas you drop in passing get caught and sent to the right helper, and you see it happen",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "blockers-once-a-day",
+   "title": "Only real blockers reach you, once a day, from your Personal Assistant; asks left open 2 days move on by themselves",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html"
+   ]
+  },
+  {
+   "id": "add-to-hub",
+   "title": "Operations fits hub ideas in: Add to your hub?, backed up first, with Undo",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "recos-tidy",
+   "title": "Recos stay tidy: picked ones move to In progress, close themselves when done, and old ones are marked outdated with Keep or Let go",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "personal-assistant",
+   "title": "The Front Desk is now your Personal Assistant",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
    ]
   }
  ]
