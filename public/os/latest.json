@@ -8,7 +8,7 @@
    "title": "Setup starts in a plain chat: drop in the OS file and type start, no Project to make first",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit-v0.4.zip"
+    "os/Orbit.zip"
    ]
   },
   {
@@ -16,7 +16,7 @@
    "title": "See it first: the setup chat opens with the sample hub before any questions",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit-v0.4.zip"
+    "os/Orbit.zip"
    ]
   },
   {
@@ -24,7 +24,7 @@
    "title": "The interview is about 15 minutes: 14 questions, only what your team needs to feel like yours on day one",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit-v0.4.zip",
+    "os/Orbit.zip",
     "os/Update-your-Orbit.md"
    ]
   },
@@ -33,7 +33,7 @@
    "title": "Helpers ask the rest just in time (Still to learn): a few questions when the work needs them, never a second interview",
    "tag": "both",
    "files": [
-    "os/Orbit-v0.4.zip",
+    "os/Orbit.zip",
     "os/Update-your-Orbit.md"
    ]
   },
@@ -42,7 +42,7 @@
    "title": "Along the way, the odd glimpse of what your team will do with what you've just said: reassuring, never a pitch",
    "tag": "both",
    "files": [
-    "os/Orbit-v0.4.zip",
+    "os/Orbit.zip",
     "os/Update-your-Orbit.md"
    ]
   },
@@ -51,7 +51,7 @@
    "title": "Clear before we build: what Orbit will do for you, and any worries you mentioned settled, before anything is installed",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit-v0.4.zip"
+    "os/Orbit.zip"
    ]
   }
  ]
