@@ -11,6 +11,10 @@ on:
         description: "Only report matches, send nothing"
         type: boolean
         default: false
+      diag:
+        description: "Also print account checks (no secrets)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -31,5 +35,6 @@ jobs:
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          DIAG: ${{ inputs.diag && '1' || '' }}
           # scheduled runs check every minute for ~50 min; manual runs check once
           LOOP_MINUTES: ${{ github.event_name == 'schedule' && '50' || '0' }}

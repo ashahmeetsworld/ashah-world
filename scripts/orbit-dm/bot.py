@@ -124,6 +124,12 @@ def main():
     # safe hint for debugging a bad paste: never prints the token itself
     print(f"token check: {len(TOKEN)} characters, starts with {TOKEN[:2]!r}")
     global IG_ID
+    if os.environ.get("DIAG"):
+        for path, f in [("me", "id,name"), ("me/permissions", None),
+                        ("me/accounts", "name,id,instagram_business_account"),
+                        (IG_ID, "username,id")]:
+            res, err = api("GET", path, **({"fields": f} if f else {}))
+            print(f"diag {path}: {json.dumps(res or err)[:600]}")
     if TOKEN.startswith("IG"):
         me, err = api("GET", "me", fields="user_id,username")
         if err:
