@@ -3111,10 +3111,12 @@ async function poll(L) {
   fail(st.error);
 }
 
-/* Done: one Refresh pop-up loads the new Orbit, then What's new shows */
+/* Done: a quiet notification in the corner (no takeover). Refresh loads the new Orbit, then What's new shows.
+   Closed without refreshing? What's new waits for the next time the hub opens. */
 function refreshAsk(L) {
-  document.body.insertAdjacentHTML("beforeend", `<div id="upDone"><div class="udin">${ring(100)}<h2>Your team is updated.</h2><p>Refresh to load the new Orbit.</p><a href="#" id="upRefresh">Refresh</a></div></div>`);
+  document.body.insertAdjacentHTML("beforeend", `<div id="upDone" role="status"><span class="udr">${ring(100)}</span><span class="udt"><b>Your team is updated.</b><i>Refresh to load the new Orbit.</i></span><a href="#" id="upRefresh">Refresh</a><a href="#" id="upDoneX" title="Later">×</a></div>`);
   document.getElementById("upRefresh").onclick = ev => { ev.preventDefault(); location.reload(); };
+  document.getElementById("upDoneX").onclick = ev => { ev.preventDefault(); document.getElementById("upDone")?.remove(); };
 }
 
 /* What's new, in B's glow */
@@ -3144,10 +3146,11 @@ setTimeout(async () => {
 #upPanel{transition:transform .45s ease}#upPanel.shut,#upPanel.was{animation:none}#upPanel.shut{transform:translateX(105%);pointer-events:none}#upPanel .uph b{cursor:pointer}
 #upMini{position:fixed;right:18px;bottom:78px;z-index:110;display:flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:99px;background:rgba(6,9,20,.92);border:1px solid color-mix(in srgb,#7FD8F0 45%,transparent);box-shadow:0 0 24px -8px #7FD8F0;color:#EAFBFF;text-decoration:none;font:400 12.5px var(--sans,system-ui);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .35s,transform .35s}
 #upMini.on{opacity:1;transform:none;pointer-events:auto}#upMini .umr svg{width:34px;height:34px;display:block}#upMini .umr text{display:none}#upMini .umt{font:italic 400 19px 'Cormorant Garamond',Georgia,serif;min-width:38px}#upMini:hover{border-color:#7FD8F0}
-#upDone{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:16px;background:rgba(3,5,12,.72);backdrop-filter:blur(3px);animation:cdin .6s ease both;color:#EEEAF6;font:400 15px/1.55 'DM Sans',system-ui,sans-serif}
-#upDone .udin{width:min(380px,100%);text-align:center;padding:26px 24px 28px;border-radius:22px;background:rgba(6,9,20,.96);border:1px solid color-mix(in srgb,#7FD8F0 40%,transparent);box-shadow:0 0 60px -20px #7FD8F0}
-#upDone h2{font:italic 400 30px/1.15 'Cormorant Garamond',Georgia,serif;margin:6px 0 4px}#upDone p{color:rgba(238,234,246,.65);margin:0 0 18px}
-#upDone a{display:inline-block;padding:11px 30px;border-radius:99px;border:1px solid #7FD8F0;box-shadow:0 0 22px -6px #7FD8F0;color:#EAFBFF;text-decoration:none}#upPanel .uph{display:flex;align-items:baseline;gap:12px;width:100%}#upPanel .uph b{font:italic 400 24px var(--serif);flex:1}#upPanel .uph span{color:var(--s);font-size:12px}#upPanel .uph a{color:var(--s);font-size:20px;text-decoration:none}
+#upDone{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:110;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 32px);padding:8px 10px 8px 8px;border-radius:18px;background:rgba(6,9,20,.94);border:1px solid color-mix(in srgb,#7FD8F0 45%,transparent);box-shadow:0 0 30px -10px #7FD8F0;color:#EEEAF6;font:400 13px/1.35 'DM Sans',system-ui,sans-serif;animation:udin .45s ease both}
+@media (max-width:1180px){#upDone{top:64px}}
+@keyframes udin{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translateX(-50%)}}
+#upDone .udr svg{width:38px;height:38px;display:block}#upDone .udr text{display:none}#upDone .udt{display:flex;flex-direction:column}#upDone .udt b{font:italic 400 18px 'Cormorant Garamond',Georgia,serif;color:#fff}#upDone .udt i{font-style:normal;color:rgba(238,234,246,.6);font-size:12px}
+#upDone #upRefresh{padding:7px 16px;border-radius:99px;border:1px solid #7FD8F0;box-shadow:0 0 18px -6px #7FD8F0;color:#EAFBFF;text-decoration:none}#upDone #upDoneX{color:rgba(238,234,246,.5);text-decoration:none;font-size:18px;padding:0 4px}
 #upPanel .upr{margin:22px 0 6px}#upPanel .upl{color:var(--s);text-align:center;margin:0 0 8px}#upPanel .upl a{color:#7FD8F0}
 #upPanel .ups{list-style:none;padding:0;margin:8px 0 0;width:100%;max-height:45vh;overflow:auto}#upPanel .ups li{padding:5px 0;border-top:1px solid rgba(255,255,255,.06)}#upPanel .ups li.ok{color:var(--t)}#upPanel .ups li.on{color:#7FD8F0}
 @keyframes upin{from{transform:translateX(100%)}to{transform:none}}
