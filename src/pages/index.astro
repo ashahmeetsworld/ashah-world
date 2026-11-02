@@ -438,7 +438,7 @@ const skills = [
   .scene { -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 78%, transparent 100%); }
   .finale .panel { position: relative; max-width: 640px; margin: -120px auto 0; z-index: 1; }
   /* desktop: the scene is sized to the screen; the card starts a little below the horizon (which sits ~72% down the scene), never over the sun */
-  @media (min-width: 761px) { .finale { --sh: clamp(300px, calc((100svh - 600px) * 1.39), 520px); } .scene { aspect-ratio: auto; height: var(--sh); min-height: 0; max-height: none; } .finale .panel { margin-top: calc(28px - .28 * var(--sh)); } }
+  @media (min-width: 761px) { .finale { --sh: clamp(300px, calc((100svh - 520px) * 1.39), 540px); } .scene { aspect-ratio: auto; height: var(--sh); min-height: 0; max-height: none; } .finale .panel { margin-top: calc(28px - .28 * var(--sh)); padding: 28px 34px; } .finale .panel :global(.signup .body) { margin-bottom: 18px; } }
   .big { font-size: clamp(60px, 10vw, 140px); line-height: .95; margin-bottom: 22px; text-shadow: 0 0 50px rgba(242, 180, 140, .25); }
   .finale .lede { color: var(--ink); margin: 0 0 30px; max-width: 30ch; }
   .panel { padding: 34px; background: rgba(7, 11, 24, .62); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
