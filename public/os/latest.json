@@ -1,57 +1,121 @@
 {
- "version": "0.4.5",
+ "version": "0.4.7",
  "update": "Update-your-Orbit.md",
- "notes": "A lighter start: drop one file into any chat, see the sample hub first, a 15-minute interview, and your helpers ask the rest when it matters.",
+ "notes": "Coach now available, and updates now happen inside your hub. Open the sunrise door in your Council to build your Coach: a few quick questions, 5 to 10 minutes.",
+ "team_since": "0.4.6",
+ "hold": "2026-11-02T12:00:00Z",
+ "show": "coach",
+ "whatsnew": [
+  {
+   "icon": "sun",
+   "title": "A Coach in your Council.",
+   "line": "Your life outside work, kept strong. Open the sunrise door."
+  },
+  {
+   "icon": "ring",
+   "title": "Updates happen right here.",
+   "line": "Press Update and your hub does the rest, then shows you what's new."
+  },
+  {
+   "icon": "mail",
+   "title": "Your team talks to each other.",
+   "line": "You only hear what truly needs you."
+  },
+  {
+   "icon": "spark",
+   "title": "Recos stay tidy.",
+   "line": "Picked ones close themselves when the work lands."
+  }
+ ],
  "changes": [
   {
-   "id": "plain-chat-start",
-   "title": "Setup starts in a plain chat: drop in the OS file and type start, no Project to make first",
-   "tag": "orbit-only",
+   "id": "coach",
+   "title": "A Coach joins your Council (the sunrise door): you pick your areas, it builds your daily few in your Notion and holds you to it",
+   "tag": "hub",
    "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Coach-setup.md",
+    "os/Update-your-Orbit.md",
     "os/Orbit.zip"
    ]
   },
   {
-   "id": "see-it-first",
-   "title": "See it first: the setup chat opens with the sample hub before any questions",
-   "tag": "orbit-only",
+   "id": "update-in-hub",
+   "title": "Update inside your hub: a quick reload for hub-only updates; for team updates your hub runs the update itself while Operations shows each step, then What's new",
+   "tag": "hub",
    "files": [
-    "os/Orbit.zip"
+    "os/hub.html",
+    "os/hub-server.py"
    ]
   },
   {
-   "id": "interview-15",
-   "title": "The interview is about 15 minutes: 14 questions, only what your team needs to feel like yours on day one",
+   "id": "team-mailbox",
+   "title": "Team mailbox: helpers ask each other, share news and hand over hub ideas, right in your hub",
    "tag": "orbit-only",
    "files": [
+    "os/hub.html",
+    "os/hub-server.py",
     "os/Orbit.zip",
     "os/Update-your-Orbit.md"
    ]
   },
   {
-   "id": "still-to-learn",
-   "title": "Helpers ask the rest just in time (Still to learn): a few questions when the work needs them, never a second interview",
-   "tag": "both",
-   "files": [
-    "os/Orbit.zip",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "say-what-it-does",
-   "title": "Along the way, the odd glimpse of what your team will do with what you've just said: reassuring, never a pitch",
-   "tag": "both",
-   "files": [
-    "os/Orbit.zip",
-    "os/Update-your-Orbit.md"
-   ]
-  },
-  {
-   "id": "clear-before-build",
-   "title": "Clear before we build: what Orbit will do for you, and any worries you mentioned settled, before anything is installed",
+   "id": "mailbox-round",
+   "title": "Every chat starts already in the loop: the hub hands each helper its unread updates and open questions",
    "tag": "orbit-only",
    "files": [
-    "os/Orbit.zip"
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "catch",
+   "title": "Ideas you drop in passing get caught and sent to the right helper, and you see it happen",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "blockers-once-a-day",
+   "title": "Only real blockers reach you, once a day, from your Personal Assistant; asks left open 2 days move on by themselves",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html"
+   ]
+  },
+  {
+   "id": "add-to-hub",
+   "title": "Operations fits hub ideas in: Add to your hub?, backed up first, with Undo",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py"
+   ]
+  },
+  {
+   "id": "recos-tidy",
+   "title": "Recos stay tidy: picked ones move to In progress, close themselves when done, and old ones are marked outdated with Keep or Let go",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
+   ]
+  },
+  {
+   "id": "personal-assistant",
+   "title": "The Front Desk is now your Personal Assistant",
+   "tag": "orbit-only",
+   "files": [
+    "os/hub.html",
+    "os/hub-server.py",
+    "os/Orbit.zip",
+    "os/Update-your-Orbit.md"
    ]
   }
  ]

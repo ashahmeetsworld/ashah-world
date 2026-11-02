@@ -77,7 +77,7 @@
   .pill.quiet { color: var(--s); }
   .badge { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--b); background: var(--g1); color: var(--c); box-shadow: 0 0 30px -6px var(--c); flex: none; }
 
-  /* Front Desk */
+  /* Personal Assistant */
   .desk { position: relative; }
   .stage { position: relative; height: 640px; transition: height 1.2s var(--ease); }
   .col { position: absolute; top: 40px; width: min(330px, 24vw); display: flex; flex-direction: column; gap: 12px; transition: opacity .7s ease, transform 1s var(--ease); }
@@ -188,24 +188,35 @@
   </header>
   <main id="view"><p class="empty" style="margin-top:20vh;text-align:center">Opening the doors…</p></main>
 </div>
-<form class="ask" id="ask"><input id="q" autocomplete="off" placeholder="Ask the Front Desk…" aria-label="Ask"><button>ENTER</button></form>
-<div class="foot">Orbit v0.4.3</div>
+<form class="ask" id="ask"><input id="q" autocomplete="off" placeholder="Ask your Personal Assistant…" aria-label="Ask"><button>ENTER</button></form>
+<div class="foot">Orbit v0.4.6</div>
 
 <script src="orbit-world.js"></script>
 <script>
 /* Orbit v0.4 · your hub. Your world lives in this browser (and in your backup file). Nothing here reaches anyone else. */
-const ORBIT_VERSION = "0.4.3";
+const ORBIT_VERSION = "0.4.7";
 const ORBIT_KEY = "orbit-world";
 const ORBIT = (() => {
-  const SAMPLE = {"orbit": "0.4.5", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "Your business", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds the people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who says yes, from hello to the next time."}, "fo": {"name": "Funnel", "line": "The site, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns your ideas into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like you."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free sign-up gift", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The sign-up gift is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0011", "title": "A caf\u00e9 group", "url": "", "props": {"Status": "Qualified", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Studios", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "2026-10-29", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "New", "Kind": "Content", "Seat": "Content", "Date": "2026-10-28", "Why": "One sitting instead of four", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Sales", "Seat": "Business Development", "Date": "2026-10-27", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Warm, clear and unhurried. Made with care."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Work that outlasts the moment it was made for."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who choose one good thing over five quick ones."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Make Monday to Thursday. Fridays for admin. Weekends off."}]};
+  const SAMPLE = {"orbit": "0.4.6", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "Your business", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds the people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who says yes, from hello to the next time."}, "fo": {"name": "Funnel", "line": "The site, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns your ideas into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like you."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free sign-up gift", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The sign-up gift is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0011", "title": "A café group", "url": "", "props": {"Status": "Qualified", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Studios", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "-2", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Business Development", "Date": "-3", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "In progress", "Kind": "Process", "Seat": "Content", "Date": "-6", "Checked": "-1", "Why": "One sitting instead of four"}}, {"id": "r4", "title": "Save the welcome email as a template", "url": "", "props": {"Status": "Done", "Kind": "Skill", "Seat": "Funnel", "Date": "-9", "Note": "Saved in Funnel's instructions"}}, {"id": "r5", "title": "A monthly check of old links", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Funnel", "Date": "-40", "SampleOld": true}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}, "mailbox": [{"id": "p1", "kind": "Update", "from": "cd", "to": "all", "text": "Captions now skip exclamation marks. It's in the brand rules.", "date": "-0", "status": "Open", "readBy": ["cd"]}, {"id": "p2", "kind": "Ask", "from": "bd", "to": "you", "text": "Two shops want a call this week. Which day suits you?", "date": "-1", "status": "Open", "readBy": ["bd"]}, {"id": "p3", "kind": "Ask", "from": "cp", "to": "cd", "text": "Is the new colour for headlines only, or buttons too?", "date": "-1", "status": "Open", "readBy": ["cp"]}, {"id": "p4", "kind": "Hub", "from": "cd", "to": "ops", "text": "A Brand board button in the Creative Director's room", "where": "Creative Director's room", "date": "-1", "status": "Open", "readBy": ["cd"]}, {"id": "p5", "kind": "Ask", "from": "cs", "to": "bd", "text": "What did the last client say about the price?", "date": "-3", "status": "Answered", "answer": "It felt fair for the time it saves.", "answeredBy": "bd", "answered": "-2", "readBy": ["cs", "bd"]}]}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Warm, clear and unhurried. Made with care."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Work that outlasts the moment it was made for."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who choose one good thing over five quick ones."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Make Monday to Thursday. Fridays for admin. Weekends off."}]};
   const b64d = s => decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
   let W = null, sample = false;
+  // v0.4.6 · a fresh world file never loses the team's mailbox or Recos: rows only this browser has come along, and the newer copy of a row wins
+  function carry(from, to) {
+    const H = to.hub = to.hub || {}, h = from.hub || {};
+    ["mailbox", "recos"].forEach(k => {
+      const mine = h[k] || [], theirs = H[k] = H[k] || [];
+      mine.forEach(r => { const i = theirs.findIndex(x => x.id === r.id); if (i < 0) theirs.push(r); else if ((r.u || "") > (theirs[i].u || "")) theirs[i] = r; });
+    });
+  }
   // A world can arrive in the address (#world=...), from a file, or from this browser's memory.
   try { const m = location.hash.match(/world=([A-Za-z0-9_\-+/=]+)/); if (m) { W = JSON.parse(b64d(m[1])); localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", (window.ORBIT_WORLD && window.ORBIT_WORLD.made) || W.made || ""); history.replaceState(null, "", location.pathname + "#home"); } } catch (e) {}
   if (!W) { try { W = JSON.parse(localStorage.getItem(ORBIT_KEY) || "null"); } catch (e) {} }
   // Your Orbit Hub folder: orbit-world.js next to this page. A newer file wins; otherwise the moves made here since are kept.
-  try { const F = window.ORBIT_WORLD; if (F && F.hub && (!W || (F.made || "") > (localStorage.getItem("orbit-world-made") || ""))) { W = F; localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", F.made || ""); } } catch (e) {}
-  if (!W) { W = JSON.parse(JSON.stringify(SAMPLE)); sample = true; }
+  try { const F = window.ORBIT_WORLD; if (F && F.hub && (!W || (F.made || "") > (localStorage.getItem("orbit-world-made") || ""))) { if (W) carry(W, F); W = F; localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", F.made || ""); } } catch (e) {}
+  if (!W) { W = JSON.parse(JSON.stringify(SAMPLE)); sample = true;
+    const rel = v => typeof v === "string" && /^-\d+$/.test(v) ? new Date(Date.now() + +v * 864e5 - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10) : v;
+    (W.hub.mailbox || []).forEach(p => ["date", "answered"].forEach(k => p[k] = rel(p[k])));
+    (W.hub.recos || []).forEach(r => ["Date", "Checked"].forEach(k => r.props[k] = rel(r.props[k]))); }
   const save = () => { if (sample) return; try { localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); } catch (e) {} };
   const today = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
   const api = {
@@ -218,6 +229,14 @@ const ORBIT = (() => {
       h.flows = h.flows || {}; h.stages = h.stages || {}; h.skills = h.skills || {}; h.errors = {};
       h.studio = h.studio || { cap: 0, spent: 0, month: today().slice(0, 7) };
       h.writes = true; h.today = today(); h.projects = W.projects || {}; h.chat = location.port === "4777";
+      // v0.4.6 · the mailbox shows where you already look: notes between helpers in "Between departments", real blockers in "Waiting on you"
+      const M = api.mail, L = (W.hub || {}).mailbox || [], fresh = d => (new Date(today()) - new Date(d)) / 864e5 <= 2;
+      L.forEach(p => {
+        if (p.status !== "Open" && !(p.kind === "Update" && fresh(p.date))) return;
+        if (p.to === "you") { if (p.status === "Open") h.waiting.unshift({ id: p.id, title: p.text, url: "", props: { Status: "Waiting", Seat: M.name(p.from) }, kind: "Your team asks" }); return; }
+        if (p.kind === "Update" && p.to !== "all" && (p.readBy || []).includes(p.to)) return;
+        h.handoffs.push({ id: p.id, title: (p.kind === "Hub" ? "Hub: " : p.kind === "Ask" ? "Ask: " : "") + p.text, url: "", props: { From: M.name(p.from), To: p.to === "all" ? "Every seat" : M.name(p.to), Status: "Open" } });
+      });
       return h;
     },
     // a proven layer is ticked on its topic; all three proven makes it Complete
@@ -233,6 +252,96 @@ const ORBIT = (() => {
       h.recos.unshift({ id: "r" + Date.now().toString(36), title: String(text || "").slice(0, 200), url: "", props: { Status: "New", Kind: kind || "Process", Seat: seat || "Operations", Date: today() } });
       save();
     },
+    // v0.4.6 · Recos tidy: one place to change a reco, so every change is dated (the outdated check reads it)
+    recoSet(id, patch) {
+      const r = ((W.hub || {}).recos || []).find(x => x.id === id); if (!r) return null;
+      Object.assign(r.props, patch, { Touched: today() }); r.u = new Date().toISOString(); save(); return r;
+    },
+    // v0.4.6 · the team mailbox: helpers keep each other posted, here in the world file. Nothing is ever deleted.
+    mail: (() => {
+      const COUNCIL = { desk: "Personal Assistant", mentor: "Mentor", board: "Advisory Board" };
+      const list = () => { const h = W.hub = W.hub || {}; return h.mailbox = h.mailbox || []; };
+      const name = id => id === "you" ? "You" : id === "all" ? "All" : ((W.helpers || {})[id] || {}).name || COUNCIL[id] || id;
+      const ids = () => Object.keys(W.helpers || {}).concat(Object.keys(COUNCIL));
+      // "Content", "content helper", "All", "You", "Personal Assistant" -> an id
+      const who = t => {
+        t = String(t || "").toLowerCase().replace(/^(to|for)\s+/, "").replace(/[^a-z ]/g, " ").trim();
+        if (!t || /^(all|everyone|every seat|the team|team)$/.test(t)) return "all";
+        if (/^(you|me|founder|ashah)$/.test(t) || t === String((W.you || {}).first_name || "").toLowerCase()) return "you";
+        if (/front desk|assistant|desk/.test(t)) return "desk";
+        if (ids().includes(t)) return t;
+        const hit = ids().find(i => { const n = name(i).toLowerCase(); return n === t || n.split(" ")[0] === t.split(" ")[0]; });
+        return hit || "all";
+      };
+      const touch = p => { p.u = new Date().toISOString(); };
+      const api = {
+        list, name, who,
+        post(kind, fromId, toTxt, text, where) {
+          text = String(text || "").trim().slice(0, 400); if (!text) return null;
+          const to = kind === "Hub" ? "ops" : who(toTxt), L = list();
+          const same = L.find(p => p.kind === kind && p.from === fromId && p.text === text && p.status === "Open");
+          if (same) return same;
+          const p = { id: "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 4), kind, from: fromId, to, text, where: String(where || "").slice(0, 120), date: today(), status: "Open", readBy: [fromId] };
+          touch(p); L.unshift(p); save(); return p;
+        },
+        set(id, patch) { const p = list().find(x => x.id === id); if (!p) return null; Object.assign(p, patch); touch(p); save(); return p; },
+        answer(id, fromId, text) { return api.set(id, { status: "Answered", answer: String(text || "").slice(0, 400), answeredBy: fromId, answered: today() }); },
+        // what a helper should know before it replies: updates for it, asks it could answer, answers to its own asks
+        unread(hid) {
+          const forMe = p => p.to === hid || (p.to === "all" && p.from !== hid);
+          const L = list(), seen = p => (p.readBy || []).includes(hid);
+          return {
+            updates: L.filter(p => p.kind === "Update" && forMe(p) && !seen(p)),
+            asks: L.filter(p => p.kind === "Ask" && p.status === "Open" && forMe(p) && !seen(p)),
+            answers: L.filter(p => p.kind === "Ask" && p.from === hid && p.status === "Answered" && !p.delivered),
+            hub: hid === "ops" ? L.filter(p => p.kind === "Hub" && p.status === "Open" && !seen(p)) : []
+          };
+        },
+        // the feed a chat starts with (empty when there's nothing new); reading it ticks this helper off
+        feed(hid) {
+          if (sample) return "";
+          const u = api.unread(hid); ["updates", "asks", "answers", "hub"].forEach(k => u[k] = u[k].slice(0, 8));  // a short feed; the rest comes next time
+          const line = p => `- (${p.id}) ${name(p.from)}${p.to === "all" ? " to All" : ""}: ${p.text}`;
+          const parts = [];
+          if (u.updates.length) parts.push("Updates for you:\n" + u.updates.map(line).join("\n"));
+          if (u.asks.length) parts.push("Asks you might answer (reply with ANSWER: <id> | <answer> if you can):\n" + u.asks.map(line).join("\n"));
+          if (u.answers.length) parts.push("Answers to your asks:\n" + u.answers.map(p => `- (${p.id}) you asked "${p.text}". ${name(p.answeredBy)}: ${p.answer}`).join("\n"));
+          if (u.hub.length) parts.push("Hub posts waiting for you to fit in:\n" + u.hub.map(p => line(p) + (p.where ? ` (suggested place: ${p.where})` : "")).join("\n"));
+          if (!parts.length) return "";
+          u.updates.concat(u.asks, u.hub).forEach(p => { p.readBy = (p.readBy || []).concat(hid); touch(p); });
+          u.answers.forEach(p => { p.delivered = today(); touch(p); });
+          save();
+          return "[Team mailbox, from my hub. Read it before you answer me. Don't repeat it back: if something here changes what we're doing, say so in one line.]\n" + parts.join("\n") + "\n[End of mailbox]\n\n";
+        },
+        // the postie: asks open more than 2 days move on, so nothing waits forever (runs when the hub opens)
+        postie() {
+          if (sample) return 0;
+          const now = new Date(today() + "T00:00:00"), old = d => (now - new Date((d || today()) + "T00:00:00")) / 864e5 > 2;
+          let n = 0;
+          list().forEach(p => {
+            if (p.kind !== "Ask" || p.status !== "Open" || p.to === "you" || !old(p.moved || p.date)) return;
+            const next = p.to === "all" ? "ops" : p.to === "ops" ? "you" : "all";
+            p.trail = (p.trail || []).concat(p.to); p.to = next; p.moved = today(); p.readBy = [p.from]; touch(p); n++;
+          });
+          if (n) save();
+          return n;
+        },
+        blockers: () => list().filter(p => p.to === "you" && p.status === "Open"),
+        hubPosts: () => list().filter(p => p.kind === "Hub" && p.status === "Open")
+      };
+      return api;
+    })(),
+    // v0.4.6 · Operations builds a hub post in: back up first, one-click undo
+    build(spec, postId) {
+      const snap = JSON.stringify(W); try { localStorage.setItem("orbit-undo", snap); } catch (e) {}
+      const h = W.hub = W.hub || {}, hid = spec.helper, t = today(), rid = x => x + Date.now().toString(36);
+      if (spec.kind === "button") { h.skills = h.skills || {}; (h.skills[hid] = h.skills[hid] || []).push({ label: spec.label.slice(0, 40), skill: hid, prompt: spec.prompt || spec.label }); }
+      else if (spec.kind === "live") (h.live = h.live || []).unshift({ id: rid("l"), title: spec.label, url: spec.url || "", props: { Status: "Live", Type: spec.prompt || "", Owner: api.mail.name(hid) } });
+      else if (spec.kind === "job") { const row = { id: rid("m"), title: spec.label, url: "", props: { Seat: api.mail.name(hid), Cadence: spec.prompt || "Weekly", "Last done": "", "Next due": t } }; (h.machine = h.machine || []).push(row); (h.machine_all = h.machine_all || []).push(JSON.parse(JSON.stringify(row))); }
+      if (postId) api.mail.set(postId, { status: "Built", built: t, where: spec.where || spec.kind });
+      save(); return true;
+    },
+    undo() { try { const s = localStorage.getItem("orbit-undo"); if (!s) return false; W = JSON.parse(s); localStorage.removeItem("orbit-undo"); save(); return true; } catch (e) { return false; } },
     // a move made in the hub is kept in the world, so it's still there tomorrow
     move(db, id, status) {
       const h = W.hub || {}, pools = [h.flows && h.flows[db], h.calendar, h.waiting, h.machine, h.machine_all];
@@ -256,6 +365,7 @@ const ORBIT = (() => {
       r.readAsText(file);
     }
   };
+  try { api.mail.postie(); } catch (e) {}
   return api;
 })();
 const _f = window.fetch;
@@ -562,10 +672,10 @@ function roomContent(dp) {
   else if (dp.id === "bd") middle = rowsCard(c, "clock", "Follow-ups due", d.waiting.filter(r => r.kind === "Follow-up due"), r => title(r), r => esc(fmt(r.props["Next date"])), "No follow-ups due this week.", e.pipeline);
   else if (dp.id === "ops") middle = rowsCard(c, "chat", "Paste-backs to approve", d.waiting.filter(r => r.kind !== "Follow-up due"), r => title(r), r => esc(r.props.Seat), "None waiting.", e.pastebacks);
   else middle = rowsCard(c, "radio", "Live", d.live, r => title(r), r => esc(r.props.Owner || r.props.Type), "Nothing listed.", e.live);
-  return `<div class="rh"><span class="caps eb">${ic("home", 12)}Front Desk · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
+  return `<div class="rh"><span class="caps eb">${ic("home", 12)}Personal Assistant · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
     <div class="title"><span class="badge">${ic(dp.icon, 20)}</span><h1 class="serif">${esc(dp.name)}</h1></div><p>${esc(dp.line)}</p>
     <div class="pills"><a class="pill on" href="#" data-open="${dp.skill}">${ic("chat", 13)}Open a chat</a>${dp.studio ? `<a class="pill" href="#studio">${ic("easel", 13)}Into the Studio</a>` : ""}${dp.id === "ops" ? `<a class="pill" href="#recos">${ic("compass", 13)}Recos</a>` : ""}
-    <a class="pill quiet" href="#home">${ic("back", 13)}Front Desk</a></div></div>
+    <a class="pill quiet" href="#home">${ic("back", 13)}Personal Assistant</a></div></div>
     <div class="cols">${shelfCard(dp.id, "Skills", c, dp.skill)}${middle}${rowsCard(c, "swap", "For " + esc(dp.name), forMe, x => x.l, x => x.r, "Nothing waiting from the other departments.", e.handoffs || e.machine)}</div>`;
 }
 
@@ -641,7 +751,7 @@ function recosView() {
       <h4><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></h4><p>${esc(p.Why || "")}</p>
       <button class="pill${on ? " on" : ""}" data-cart="${esc(x.url)}">${on ? "In the cart ✓" : "Add to cart"}</button></div>`; }).join("");
   const n = cart.filter(u => r.some(x => x.url === u)).length;
-  return `<div class="rh enter" style="margin-top:40px"><span class="caps eb">${ic("home", 12)}Front Desk · Recos</span>
+  return `<div class="rh enter" style="margin-top:40px"><span class="caps eb">${ic("home", 12)}Personal Assistant · Recos</span>
     <div class="title"><span class="badge">${ic("compass", 20)}</span><h1 class="serif">Recos</h1></div>
     <p>Ways the OS could run better, spotted by the seats and the weekly look-back. Pick what's worth it, then check out to Operations.</p></div>
     ${err(e)}<div class="recos enter" style="animation-delay:.1s">${items || `<p class="empty">Nothing to pick this week.</p>`}</div>
@@ -665,7 +775,7 @@ function turnTo(i) { let t = -ANG(i); while (t - ROT > 180) t -= 360; while (t -
 function setAsk(skill, who) { const q = document.getElementById("q"); q.placeholder = `Ask ${who}…`; q.dataset.skill = skill; }
 function navTo(top) {
   const at = ["room", "recos"].includes(top) ? "home" : ["mentor", "board"].includes(top) ? "council" : top;
-  document.getElementById("nav").innerHTML = [["home", "Front Desk", "home"], ["council", "Council", "door"]]
+  document.getElementById("nav").innerHTML = [["home", "Personal Assistant", "home"], ["council", "Council", "door"]]
     .map(([h, n, i]) => `<a href="#${h}" class="${h === at ? "on" : ""}">${ic(i, 12)}${n}</a>`).join("");
 }
 function route() {
@@ -686,7 +796,7 @@ function route() {
     } else {
       setTint(COL.desk); desk.classList.remove("focus"); room.classList.remove("on");
       focusTimer = setTimeout(() => { room.innerHTML = ""; }, 800);
-      setAsk("desk", "the Front Desk"); scrollTo({ top: 0, behavior: "smooth" });
+      setAsk("desk", "your Personal Assistant"); scrollTo({ top: 0, behavior: "smooth" });
     }
     return;
   }
@@ -864,10 +974,10 @@ roomContent = function (dp) {
   return html.replace(/ style="--c:[^"]*"/g, ""); // cards take the page colour, so switching employee fades rather than cuts
 };
 function roomHead(dp) {
-  return `<div class="rh"><span class="caps eb">${ic("home", 12)}Front Desk · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
+  return `<div class="rh"><span class="caps eb">${ic("home", 12)}Personal Assistant · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
     <div class="title"><span class="badge">${ic(dp.icon, 20)}</span><h1 class="serif">${esc(dp.name)}</h1></div><p>${esc(dp.line)}</p>
     <div class="pills"><a class="pill on" href="#" data-open="${dp.skill}">${ic("chat", 13)}Open a chat</a>${dp.studio ? `<a class="pill" href="#studio">${ic("easel", 13)}Into the Studio</a>` : ""}${dp.id === "ops" ? `<a class="pill" href="#recos">${ic("compass", 13)}Recos</a>` : ""}
-    <a class="pill quiet" href="#home">${ic("back", 13)}Front Desk</a></div></div>`;
+    <a class="pill quiet" href="#home">${ic("back", 13)}Personal Assistant</a></div></div>`;
 }
 function flowRoom(dp) { return roomHead(dp) + `<div id="flow" data-dp="${dp.id}">${flowHTML(dp)}</div>`; }
 function redrawFlow(dp, moved) {
@@ -988,7 +1098,7 @@ const mod = (icon, label, lines, foot) => `<div class="card mod"><div class="k">
 const sig = (icon, label, body, note) => `<div class="card sig"><div class="k">${ic(icon, 13)}<span class="caps">${label}</span>${note ? `<span class="n">${note}</span>` : ""}</div>${body}</div>`;
 const TAILORED = {
   ops: { tabs: ["Sync", "Paste-backs", "Recos", "Routines", "Tool stack", "Change log"],
-    sig: () => sig("ops", "Every seat at a glance", `<div class="seats">${[...DEPTS.map(d => [d.name, "1.0"]), ["Front Desk", "1.0", 1], ["Mentor", "1.0", 1], ["Board", "1.0", 1]].map(s => `<div class="seat${s[2] ? " wait" : ""}"><span class="dt"></span><b>${s[0]}</b><em>v${s[1]}${s[2] ? " · to save" : " · reads the map"}</em></div>`).join("")}</div>`, "skills"),
+    sig: () => sig("ops", "Every seat at a glance", `<div class="seats">${[...DEPTS.map(d => [d.name, "1.0"]), ["Personal Assistant", "1.0", 1], ["Mentor", "1.0", 1], ["Board", "1.0", 1]].map(s => `<div class="seat${s[2] ? " wait" : ""}"><span class="dt"></span><b>${s[0]}</b><em>v${s[1]}${s[2] ? " · to save" : " · reads the map"}</em></div>`).join("")}</div>`, "skills"),
     mods: () => [mod("clock", "Routines", (DATA.machine_all || DATA.machine || []).slice(0, 4).map(r => [esc(r.title), esc([r.props.Seat, fmt(r.props["Next due"])].filter(Boolean).join(" · "))])),
       mod("compass", "Recos", (DATA.recos || []).slice(0, 3).map(r => [esc(r.title), esc(r.props.Effort || "")]), `<p class="go"><a href="#recos">All Recos →</a></p>`),
       mod("chat", "Paste-backs to approve", (DATA.waiting || []).filter(r => r.kind !== "Follow-up due").slice(0, 4).map(r => [title(r), esc(r.props.Seat || "")]))] },
@@ -1162,7 +1272,7 @@ document.head.appendChild(roomStyle);
 
 /* ---------- leaving the hub ---------- */
 const EMBER = (window.ORBIT_SKIN_NOW && ORBIT_SKIN_NOW.ember) || "#FF8A3D";
-const SKILL_NAMES = { "mentor": "the Mentor", "board": "the Advisory Board", "desk": "the Front Desk", "cp": "Field Notes", "cd": "the Codes" };
+const SKILL_NAMES = { "mentor": "the Mentor", "board": "the Advisory Board", "desk": "your Personal Assistant", "cp": "Field Notes", "cd": "the Codes" };
 const skillName = s => (DEPTS.find(d => d.skill === s) || {}).name || SKILL_NAMES[s] || s;
 function leave(where, what, quote, go) {
   document.querySelector(".leave")?.remove();
@@ -1235,7 +1345,7 @@ function pageHead(eyebrow, icon, name, line, pills) {
 const back = (href, label) => `<a class="pill quiet" href="${href}">${ic("back", 13)}${esc(label)}</a>`;
 const blank = () => `<div class="pg-blank enter"><p class="empty">Nothing here yet.</p></div>`;
 const dpBy = id => DEPTS.find(d => d.id === id);
-const seatHome = id => dpBy(id) ? ["#room/" + id, dpBy(id).name] : id === "mentor" ? ["#mentor", "Mentor"] : id === "board" ? ["#board", "Advisory Board"] : id.startsWith("studio") ? ["#studio", "Studio"] : ["#home", "Front Desk"];
+const seatHome = id => dpBy(id) ? ["#room/" + id, dpBy(id).name] : id === "mentor" ? ["#mentor", "Mentor"] : id === "board" ? ["#board", "Advisory Board"] : id.startsWith("studio") ? ["#studio", "Studio"] : ["#home", "Personal Assistant"];
 const seatCol = id => dpBy(id) ? colOf(dpBy(id)) : id === "mentor" ? COL.mentor : id === "board" ? COL.board : id.startsWith("studio") ? COL.studio : COL.desk;
 
 /* ---------- source-of-truth pages: Brand DNA, the Codes, the Offer, ICP ---------- */
@@ -1583,7 +1693,7 @@ function splitReco(text) {
   if (!m) return { text, reco: null };
   return { text: text.slice(0, m.index).trim(), reco: { t: m[1], k: RECO_KINDS.includes(m[2]) ? m[2] : "Process" } };
 }
-const seatLabel = s => { const d = DEPTS.find(x => x.skill === s); return d ? d.name : s === "mentor" ? "Mentor" : s === "board" ? "Advisory Board" : "Front Desk"; };
+const seatLabel = s => { const d = DEPTS.find(x => x.skill === s); return d ? d.name : s === "mentor" ? "Mentor" : s === "board" ? "Advisory Board" : "Personal Assistant"; };
 const recoHTML = (m, i) => m.reco ? `<div class="lreco${m.reco.done ? " done" : ""}">${ic("bulb", 13)}<div><span class="caps">Suggestion · ${esc(m.reco.k)}</span><p>${esc(m.reco.t)}</p>
   ${m.reco.done ? `<em>${esc(m.reco.done)}</em>` : `<div class="pills"><button class="pill on" data-reco="${i}">${ic("compass", 13)}Add to Recos</button><button class="pill quiet" data-noreco="${i}">Not now</button></div>`}</div></div>` : "";
 function wireRecos2(view, list, seat, redraw, say) {
@@ -2109,7 +2219,7 @@ route = function () {
   if (top !== "foundations" || !DATA) return _routeOrbit();
   navTo("foundations");
   const view = document.getElementById("view"); view.dataset.v = "foundations"; clearTimeout(focusTimer);
-  setTint(COL.desk); view.innerHTML = foundationsView(); setAsk("desk", "the Front Desk"); wire(view); scrollTo(0, 0);
+  setTint(COL.desk); view.innerHTML = foundationsView(); setAsk("desk", "your Personal Assistant"); wire(view); scrollTo(0, 0);
 };
 window.removeEventListener("hashchange", _routeOrbit);
 window.addEventListener("hashchange", route);
@@ -2147,7 +2257,7 @@ if (ORBIT.sample()) {
     say(g ? `This is a demo. Once your team is set up, this opens your helper and runs the <b>${esc(g[1])}</b> session with you, ending in your own first draft.`
           : "This is a demo, so nothing runs from here. Once your team is set up, this opens the right helper with the request ready to go.");
   }, true);
-  document.addEventListener("submit", ev => { if (ev.target.id === "ask") { ev.preventDefault(); ev.stopImmediatePropagation(); say("This is a demo. Once you're set up, questions here go straight to your Front Desk."); } }, true);
+  document.addEventListener("submit", ev => { if (ev.target.id === "ask") { ev.preventDefault(); ev.stopImmediatePropagation(); say("This is a demo. Once you're set up, questions here go straight to your Personal Assistant."); } }, true);
 }
 
 /* ---------- the tour: five stops, skippable, replayable ---------- */
@@ -2159,7 +2269,7 @@ const go = h => { if (location.hash !== "#" + h) location.hash = h; };
 const STOPS = [
   ["home", "#ring", "Your team", "Your helpers, around your name.", "Tap any of them to open their room: their work from start to finish, and the one thing that needs you."],
   ["home", ".col.left .card", "Waiting on you", "Only what needs you today.", "Due, overdue, or waiting for your yes. Nothing else, so you can get back to making."],
-  ["home", "#ask", "Ask", "Ask the Front Desk anything.", "It opens a chat with the right helper, your message ready to send."],
+  ["home", "#ask", "Ask", "Ask your Personal Assistant anything.", "It opens a chat with the right helper, your message ready to send."],
   ["council", ".doors, .view .card, #view", "In your corner", "A Mentor and an Advisory Board.", "The Mentor teaches one idea at a time. The Board weighs in on the big calls, with seats named after your values."],
   ["foundations", ".fgrid", "Foundations", "The basics, already started.", "Planted from your interview. Anything missing has a guided session below, run by the helper who keeps it."]
 ];
@@ -2207,16 +2317,194 @@ addEventListener("message", e => { const d = e.data || {}; if (d.tour != null &&
   let L; try { L = await (await fetch(SITE + "latest.json", { cache: "no-store" })).json(); } catch (e) { return; }
   if (!L || !L.version || !newer(String(L.version), mine)) return;
   try { if (localStorage.getItem("orbit-later") === L.version) return; } catch (e) {}
+  if (L.hold && Date.now() < Date.parse(L.hold)) return;   // a release that goes live at a set time
   const file = SITE + (L.update || "Update-your-Orbit.md");
   const msg = `Upgrade my Orbit to v${L.version}. Read the update file in full: ${file} (if you can't fetch it, open it in a new tab through Claude in Chrome). Then follow it exactly, as if I'd dropped it in and typed start.`;
   document.body.insertAdjacentHTML("beforeend", `<div id="orbitNew" style="position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:95;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 32px);padding:10px 12px 10px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 94%,transparent);border:1px solid var(--hi);box-shadow:0 0 30px -8px color-mix(in srgb,var(--hi) 60%,transparent);color:var(--t);font:400 13.5px/1.4 system-ui,sans-serif">
     <span><b style="font-weight:600">Orbit v${esc(L.version)} is out.</b> ${esc(L.notes || "")}</span>
     <a href="#" id="onUp" class="pill on" style="margin:0">Upgrade</a><a href="${esc(file)}" download style="color:rgba(238,234,246,.7);font-size:12.5px">the file</a><a href="#" id="onLater" style="color:rgba(238,234,246,.6);font-size:12.5px">Later</a></div>`);
-  document.getElementById("onUp").onclick = ev => { ev.preventDefault(); openClaude("ops", msg); };
+  document.getElementById("onUp").onclick = ev => { ev.preventDefault(); if (typeof window.orbitUpgrade === "function") return window.orbitUpgrade(L, msg, mine); openClaude("ops", msg); };
   document.getElementById("onLater").onclick = ev => { ev.preventDefault(); try { localStorage.setItem("orbit-later", L.version); } catch (e) {} document.getElementById("orbitNew").remove(); };
 })();
 })();
 </script>
+
+<script>
+/* ---------- Orbit v0.4.6 · the team mailbox and a tidy Recos list ----------
+   Helpers end a reply with plain lines (ASK:, UPDATE:, HUB:, ANSWER:, DONE:, BUILD:, RECO:). The hub turns them into
+   small cards and keeps everything in the world file on this computer. Only real blockers reach the founder, once a day,
+   through the Personal Assistant. Nothing is ever deleted. */
+const MAIL_IC = { Ask: "chat", Update: "radio", Hub: "home" };
+const today0 = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+const daysAgo = d => d ? Math.round((new Date(today0()) - new Date(d)) / 864e5) : 0;
+// in the sample hub nothing runs: a short note instead
+const demoSay = t => { document.getElementById("demoNote")?.remove(); document.body.insertAdjacentHTML("beforeend", `<div id="demoNote" style="position:fixed;left:50%;bottom:110px;transform:translateX(-50%);z-index:90;max-width:min(440px,calc(100vw - 32px));padding:14px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--hi) 35%,transparent);background:color-mix(in srgb,var(--pane) 94%,transparent);color:var(--t);font:400 14px/1.5 system-ui,sans-serif;text-align:center">${t}</div>`); setTimeout(() => document.getElementById("demoNote")?.remove(), 5200); };
+const ago = d => { const n = daysAgo(d); return n <= 0 ? "today" : n === 1 ? "yesterday" : n + " days ago"; };
+
+// read a reply: the plain lines come out, the rest is what the founder sees
+function orbitLines(text) {
+  const out = { text: "", reco: null, asks: [], updates: [], hubs: [], answers: [], dones: [], builds: [], catches: [] }, keep = [];
+  const KINDS = ["Routine", "Skill", "Memory", "Hub", "Tool", "Process", "Curriculum"];
+  String(text || "").replace(/\r/g, "").split("\n").forEach(line => {
+    const m = line.match(/^\s*(?:[-*]\s*)?\**(RECO|ASK|UPDATE|HUB|ANSWER|DONE|BUILD)\**\s*:\s*(.+?)\s*$/i);
+    if (/^\s*🪝/.test(line)) { out.catches.push(line.trim().replace(/^🪝\s*/, "")); return; }
+    if (!m) return keep.push(line);
+    const k = m[1].toUpperCase(), parts = m[2].split("|").map(x => x.trim());
+    if (k === "RECO") { if (!out.reco) out.reco = { t: parts[0], k: KINDS.find(x => x.toLowerCase() === (parts[1] || "").toLowerCase()) || "Process" }; }
+    else if (k === "ASK" || k === "UPDATE") { const p = parts.length > 1 ? { to: parts[0], t: parts.slice(1).join(" | ") } : { to: "All", t: parts[0] }; (k === "ASK" ? out.asks : out.updates).push(p); }
+    else if (k === "HUB") out.hubs.push({ t: parts[0], where: parts[1] || "" });
+    else if (k === "ANSWER") { if (parts.length > 1) out.answers.push({ id: parts[0].replace(/[()]/g, ""), t: parts.slice(1).join(" | ") }); }
+    else if (k === "DONE") out.dones.push({ id: parts[0].replace(/[()]/g, ""), t: parts[1] || "Done" });
+    else if (k === "BUILD") { const [kind, helper, label, detail, where, post] = parts; if (/^(button|live|job)$/i.test(kind || "") && label) out.builds.push({ kind: kind.toLowerCase(), helper: ORBIT.mail.who(helper) === "all" ? "ops" : ORBIT.mail.who(helper), label, prompt: detail || "", where: where || "", post: (post || "").replace(/[()]/g, "") }); }
+  });
+  out.text = keep.join("\n").trim();
+  return out;
+}
+
+// carry out a reply's lines, and say what happened in a few small notes under it
+function orbitApply(hid, L) {
+  const M = ORBIT.mail, notes = [];
+  L.asks.forEach(a => { const p = M.post("Ask", hid, a.to, a.t); if (p) notes.push({ ic: "chat", t: p.to === "you" ? "Needs you: on your Personal Assistant's list" : `Asked ${M.name(p.to)}` }); });
+  L.updates.forEach(a => { const p = M.post("Update", hid, a.to, a.t); if (p) notes.push({ ic: "radio", t: `Posted to ${M.name(p.to)}` }); });
+  L.answers.forEach(a => { const p = M.answer(a.id, hid, a.t); if (p) notes.push({ ic: "chat", t: `Answered ${M.name(p.from)}'s question` }); });
+  L.dones.forEach(a => { const r = ORBIT.recoSet(a.id, { Status: "Done", Note: a.t, Done: today0() }); if (r) notes.push({ ic: "compass", t: `Reco done: ${r.title}` }); });
+  return { from: hid, notes, catches: L.catches, hubs: L.hubs.map(h => hid === "ops" ? Object.assign(h, { state: "sent", id: (M.post("Hub", hid, "ops", h.t, h.where) || {}).id }) : Object.assign(h, { state: "ask" })), builds: L.builds.map(b => Object.assign(b, { state: "ask" })) };
+}
+
+// the small notes and cards under a reply (used by the chat panel)
+function orbitMailHTML(m, i) {
+  const x = m.mail; if (!x) return "";
+  const notes = x.notes.map(n => `<span class="mnote">${ic(n.ic, 11)}${esc(n.t)}</span>`).join("");
+  const caught = x.catches.map(c => `<span class="mnote catch">${ic("spark", 11)}caught: ${esc(c.replace(/^caught:\s*/i, ""))}</span>`).join("");
+  const hubs = x.hubs.map((h, j) => `<div class="ocreco"><span class="caps">${ic("home", 11)}For your hub</span><p>${esc(h.t)}${h.where ? ` <i>(${esc(h.where)})</i>` : ""}</p>${h.state === "ask" ? `<button class="pill" data-hubsend="${i}:${j}">Send to Operations</button><button class="pill quiet" data-hubskip="${i}:${j}">Not now</button>` : `<i>${h.state === "sent" ? "Sent to Operations. It fits it in and asks you first." : "Left out"}</i>`}</div>`).join("");
+  const builds = x.builds.map((b, j) => `<div class="ocreco"><span class="caps">${ic("layers", 11)}Add to your hub?</span><p>${esc({ button: "A new button", live: "Listed as live", job: "A new recurring job" }[b.kind])}: <b>${esc(b.label)}</b>${b.where ? `, in ${esc(b.where)}` : ""}.</p>${b.state === "ask" ? `<button class="pill on" data-build="${i}:${j}">Add it</button><button class="pill quiet" data-buildskip="${i}:${j}">Not now</button>` : b.state === "built" ? `<i>Added. Your world was backed up first.</i> <button class="pill quiet" data-undo="${i}:${j}">Undo</button>` : `<i>${b.state === "undone" ? "Undone. Back as it was." : "Left out"}</i>`}</div>`).join("");
+  return (notes || caught ? `<div class="mnotes">${notes}${caught}</div>` : "") + hubs + builds;
+}
+function orbitMailWire(box, msgs, redraw) {
+  const at = v => { const [i, j] = v.split(":").map(Number); return [msgs[i] && msgs[i].mail, j]; };
+  box.querySelectorAll("[data-hubsend]").forEach(b => b.onclick = () => { const [x, j] = at(b.dataset.hubsend); const h = x.hubs[j]; const p = ORBIT.mail.post("Hub", x.from || "ops", "ops", h.t, h.where); h.state = "sent"; h.id = p && p.id; redraw(); });
+  box.querySelectorAll("[data-hubskip]").forEach(b => b.onclick = () => { const [x, j] = at(b.dataset.hubskip); x.hubs[j].state = "skip"; redraw(); });
+  box.querySelectorAll("[data-build]").forEach(b => b.onclick = () => { const [x, j] = at(b.dataset.build); const s = x.builds[j]; ORBIT.build(s, s.post || ""); s.state = "built"; redraw(); orbitRefresh(); });
+  box.querySelectorAll("[data-buildskip]").forEach(b => b.onclick = () => { const [x, j] = at(b.dataset.buildskip); x.builds[j].state = "skip"; redraw(); });
+  box.querySelectorAll("[data-undo]").forEach(b => b.onclick = () => { const [x, j] = at(b.dataset.undo); if (ORBIT.undo()) { x.builds[j].state = "undone"; redraw(); orbitRefresh(); } });
+}
+// redraw the hub behind the chat with the world as it is now
+async function orbitRefresh() { try { DATA = await (await fetch("/api/hub")).json(); const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); } catch (e) {} }
+
+/* ---------- Recos, tidy: only what's still worth deciding ---------- */
+const RECO_STALE = 30;
+const recoOpen = r => !r.props.Status || r.props.Status === "New";
+const recoOld = r => recoOpen(r) && (ORBIT.sample() ? !!r.props.SampleOld : daysAgo(r.props.Touched || r.props.Date) > RECO_STALE);
+function recoGroups() {
+  const all = DATA.recos || [];
+  return { fresh: all.filter(r => recoOpen(r) && !recoOld(r)), old: all.filter(recoOld), going: all.filter(r => r.props.Status === "In progress"), done: all.filter(r => r.props.Status === "Done").slice(0, 5) };
+}
+function cartIds() { try { return JSON.parse(localStorage.getItem("orbit-reco-cart") || "[]"); } catch (e) { return []; } }
+function cartIdsSet(v) { try { localStorage.setItem("orbit-reco-cart", JSON.stringify(v)); } catch (e) {} }
+recoCard = function () {
+  const g = recoGroups(), r = g.fresh;
+  const head = `<div class="k">${ic("compass", 13)}<span class="caps">Recos</span>${r.length ? `<span class="n">${r.length} new</span>` : ""}</div>`;
+  const body = r.length ? r.slice(0, 2).map(x => `<div class="item"><h4>${esc(x.title)}</h4><p>${[x.props.Kind, x.props.Seat].filter(Boolean).map(esc).join(" · ")}</p></div>`).join("")
+    : `<p class="empty">${g.going.length ? `${g.going.length} in progress. Nothing new to pick.` : "No suggestions right now. Your team is running clean."}</p>`;
+  return `<a class="card reco-link" href="#recos" style="${glass(COL.tech)}">${head}${body}<p class="go">Review and pick →</p></a>`;
+};
+recosView = function () {
+  const g = recoGroups(), cart = cartIds(), meta = p => [p.Kind, p.Seat].filter(Boolean).map(esc).join(" · ");
+  const pick = x => { const on = cart.includes(x.id);
+    return `<div class="card reco${on ? " in" : ""}" style="${glass(COL.tech)}"><div class="k">${ic(KIND_IC[x.props.Kind] || "spark", 13)}<span class="caps">${meta(x.props)}</span><span class="n">${esc(ago(x.props.Date))}</span></div>
+      <h4>${esc(x.title)}</h4>${x.props.Why ? `<p>${esc(x.props.Why)}</p>` : ""}<button class="pill${on ? " on" : ""}" data-rcart="${esc(x.id)}">${on ? "In the cart ✓" : "Add to cart"}</button></div>`; };
+  const row = (x, right) => `<div class="sk r"><span style="color:var(--t);font-size:13px;white-space:normal">${esc(x.title)}</span><span>${right}</span></div>`;
+  const n = cart.filter(id => g.fresh.concat(g.old).some(x => x.id === id)).length;
+  return `<div class="rh enter" style="margin-top:40px"><span class="caps eb">${ic("home", 12)}Personal Assistant · Recos</span>
+    <div class="title"><span class="badge">${ic("compass", 20)}</span><h1 class="serif">Recos</h1></div>
+    <p>Ways your team could run better, spotted as you work. Pick what's worth it, then check out to Operations.</p></div>
+    <div class="recos enter" style="animation-delay:.1s">${g.fresh.map(pick).join("") || `<p class="empty">Nothing new to pick.</p>`}</div>
+    <div class="cartbar"><span>${n ? `${n} in the cart` : "Cart is empty"}</span><button class="pill on" data-rcheckout ${n ? "" : "disabled"}>${ic("chat", 13)}Check out to Operations</button></div>
+    ${g.going.length ? `<div class="card enter" style="${glass(COL.tech)};margin-top:22px"><div class="k">${ic("clock", 13)}<span class="caps">In progress</span><span class="n">${g.going.length}</span></div>${g.going.map(x => row(x, esc(x.props.Seat || "Operations") + " · since " + esc(fmt(x.props.Checked || x.props.Touched)))).join("")}</div>` : ""}
+    ${g.old.length ? `<div class="card enter" style="${glass(COL.tech)};margin-top:14px;opacity:.85"><div class="k">${ic("clock", 13)}<span class="caps">Outdated · untouched ${RECO_STALE}+ days</span><span class="n">${g.old.length}</span></div>${g.old.map(x => row(x, `<button class="pill quiet" data-rkeep="${esc(x.id)}">Keep</button> <button class="pill quiet" data-rgo="${esc(x.id)}">Let go</button>`)).join("")}</div>` : ""}
+    ${g.done.length ? `<div class="card enter" style="${glass(COL.tech)};margin-top:14px"><div class="k">${ic("spark", 13)}<span class="caps">Done lately</span></div>${g.done.map(x => row(x, esc(x.props.Note || "Done"))).join("")}</div>` : ""}`;
+};
+wireRecos = function (el) {
+  el.querySelectorAll("[data-rcart]").forEach(b => b.onclick = () => { const id = b.dataset.rcart, c = cartIds(); cartIdsSet(c.includes(id) ? c.filter(x => x !== id) : c.concat(id)); route(); });
+  el.querySelectorAll("[data-rkeep]").forEach(b => b.onclick = () => { ORBIT.recoSet(b.dataset.rkeep, {}); orbitRefresh(); });
+  el.querySelectorAll("[data-rgo]").forEach(b => b.onclick = () => { ORBIT.recoSet(b.dataset.rgo, { Status: "Let go" }); orbitRefresh(); });
+  const co = el.querySelector("[data-rcheckout]");
+  if (co) co.onclick = () => {
+    if (ORBIT.sample()) return demoSay("This is a demo. In your hub, checking out sends your picks to Operations, and each one closes itself when it lands.");
+    const picked = (DATA.recos || []).filter(x => cartIds().includes(x.id) && recoOpen(x)); if (!picked.length) return;
+    picked.forEach(x => ORBIT.recoSet(x.id, { Status: "In progress", Checked: today0() }));
+    const list = picked.map((x, i) => `${i + 1}. (${x.id}) ${x.title} (${x.props.Kind || "Reco"}, ${x.props.Seat || "any helper"})`).join("\n");
+    cartIdsSet([]); orbitRefresh();
+    openClaude("ops", `Recos check-out. Apply these one at a time, with my OK at each step:\n${list}`);
+  };
+};
+
+/* ---------- Operations' room: hub posts to fit in, and the whole mailbox ---------- */
+if (typeof TAILORED === "object" && TAILORED.ops) {
+  const _opsMods = TAILORED.ops.mods;
+  TAILORED.ops.mods = () => {
+    const was = _opsMods(), posts = ORBIT.mail.hubPosts();
+    return [was[0],
+      mod("compass", "Recos", recoGroups().fresh.slice(0, 3).map(r => [esc(r.title), esc(r.props.Effort || "")]), `<p class="go"><a href="#recos">All Recos →</a></p>`),
+      mod("home", `For your hub${posts.length ? " · " + posts.length : ""}`, posts.slice(0, 4).map(p => [`${esc(p.text)}<br><span style="color:var(--s);font-size:11.5px">from ${esc(ORBIT.mail.name(p.from))}</span>`, `<button class="pill" data-fit="${esc(p.id)}">Add to your hub?</button>`]), `<p class="go"><a href="#mailbox">Team mailbox →</a></p>`)];
+  };
+}
+document.addEventListener("click", ev => {
+  const b = ev.target.closest("[data-fit]"); if (!b) return;
+  ev.preventDefault(); if (ORBIT.sample()) return demoSay("This is a demo. In your hub, this opens Operations: it says where the idea fits, and adds it once you say yes.");
+  const p = ORBIT.mail.list().find(x => x.id === b.dataset.fit); if (!p) return;
+  openClaude("ops", `Add this to my hub? From ${ORBIT.mail.name(p.from)}: "${p.text}"${p.where ? ` (they suggest ${p.where})` : ""}. Hub post ${p.id}.`);
+});
+
+/* ---------- the team mailbox page ---------- */
+function mailboxView() {
+  const L = ORBIT.mail.list(), N = ORBIT.mail.name;
+  const row = p => `<div class="sk r"><span style="color:var(--t);font-size:13px;white-space:normal">${ic(MAIL_IC[p.kind] || "chat", 12)} ${esc(p.text)}${p.answer ? `<br><span style="color:var(--s)">${esc(N(p.answeredBy))}: ${esc(p.answer)}</span>` : ""}<br><span style="color:var(--s);font-size:11.5px">${esc(N(p.from))} → ${esc(N(p.to))} · ${esc(ago(p.date))}${p.trail && p.trail.length ? " · moved on by the postie" : ""}</span></span><span>${esc(p.status === "Open" ? (p.kind === "Update" ? "" : "Open") : p.status)}</span></div>`;
+  const box = (icon, label, rows, empty) => `<div class="card enter" style="${glass(COL.tech)};margin-top:14px"><div class="k">${ic(icon, 13)}<span class="caps">${label}</span>${rows.length ? `<span class="n">${rows.length}</span>` : ""}</div>${rows.length ? rows.slice(0, 30).map(row).join("") : `<p class="empty">${empty}</p>`}</div>`;
+  return `<div style="height:40px"></div>` + pageHead(`${ic("home", 12)}Personal Assistant · Team mailbox`, "chat", "Team mailbox", "Your helpers keep each other posted here. You only hear what needs you.", back("#room/ops", "Operations"))
+    + box("clock", "Needs you", ORBIT.mail.blockers(), "Nothing needs you.")
+    + box("chat", "Open asks", L.filter(p => p.kind === "Ask" && p.status === "Open" && p.to !== "you"), "No open questions.")
+    + box("home", "For your hub", L.filter(p => p.kind === "Hub" && p.status === "Open"), "Nothing waiting to go in.")
+    + box("radio", "Updates", L.filter(p => p.kind === "Update"), "No updates yet.")
+    + box("spark", "Answered and built", L.filter(p => p.kind !== "Update" && p.status !== "Open"), "Nothing yet.");
+}
+
+/* ---------- the Personal Assistant: real blockers, once a day ---------- */
+function paNote() {
+  const B = ORBIT.mail.blockers(), day = today0(); let seen = ""; try { seen = localStorage.getItem("orbit-pa-day") || ""; } catch (e) {}
+  if (!B.length || seen === day || document.getElementById("paNote")) return;
+  const greet = document.querySelector("#desk .greet"); if (!greet) return;
+  greet.insertAdjacentHTML("afterend", `<div class="card" id="paNote" style="${glass(COL.people)}"><div class="k">${ic("clock", 13)}<span class="caps">Your team needs you</span><span class="n">${B.length}</span></div>
+    ${B.slice(0, 3).map(p => `<div class="item"><h4>${esc(p.text)}</h4><p>${esc(ORBIT.mail.name(p.from))} · <a href="#" data-paans="${esc(p.id)}">Answer</a></p></div>`).join("")}
+    <p class="go"><a href="#" id="paOk">Got it, not now</a> · <a href="#mailbox">Team mailbox</a></p></div>`);
+  document.getElementById("paOk").onclick = ev => { ev.preventDefault(); try { localStorage.setItem("orbit-pa-day", day); } catch (e) {} document.getElementById("paNote").remove(); };
+  document.querySelectorAll("[data-paans]").forEach(a => a.onclick = ev => { ev.preventDefault(); if (ORBIT.sample()) return demoSay("This is a demo. In your hub, this opens a chat with the helper who asked, ready for your answer.");
+    const p = ORBIT.mail.list().find(x => x.id === a.dataset.paans); if (!p) return;
+    try { localStorage.setItem("orbit-pa-day", day); } catch (e) {}
+    ORBIT.mail.set(p.id, { status: "Answered", answer: "Taken to a chat with " + ORBIT.mail.name(p.from), answeredBy: "you", answered: today0() });
+    openClaude(p.from, `About your question for me: "${p.text}". My answer: `); });
+}
+
+/* routing: the mailbox page, and the Personal Assistant note on home */
+const _routeMail = route;
+window.removeEventListener("hashchange", route);
+route = function () {
+  const top = (location.hash.replace("#", "") || "home").split("/")[0];
+  if (top === "mailbox" && DATA && !DATA.setup) {
+    navTo("home"); clearTimeout(focusTimer); const view = document.getElementById("view"); view.dataset.v = "mailbox";
+    setTint(COL.tech); view.innerHTML = mailboxView(); setAsk("ops", "Operations"); wire(view); scrollTo(0, 0); return;
+  }
+  _routeMail();
+  if (top === "home" && DATA && !DATA.setup) setTimeout(paNote, 900);
+};
+window.addEventListener("hashchange", route);
+if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }  // the first page may have drawn before this loaded
+</script>
+<style>
+.mnotes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.mnote{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--s);padding:3px 9px;border-radius:99px;border:1px solid var(--h)}
+.mnote.catch{border-style:dashed;border-color:color-mix(in srgb,var(--hi,#7FD8F0) 45%,transparent);color:var(--t)}
+#paNote{animation:rise .5s ease both}#paNote .go a{color:var(--hi,#7FD8F0)}
+</style>
 
 <script>
 /* ---------- Orbit Phase 2: chats inside the hub ----------
@@ -2235,7 +2523,8 @@ const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
 
 // ----- opened as a file: move over to the engine if it's running -----
 if (!ON_ENGINE) {
-  openClaude = webOpen; startChat = (skill, text) => webOpen(skill, text);  // no engine: chats open in Claude
+  const webFeed = (skill, text) => webOpen(skill, /^Upgrade my Orbit/.test(String(text || "")) ? text : ORBIT.mail.feed(skill) + (text || ""));  // v0.4.6: the chat starts already in the loop
+  openClaude = webFeed; startChat = (skill, text) => webFeed(skill, text);  // no engine: chats open in Claude
   if (location.protocol !== "file:" || ORBIT.sample()) return webLessons();
   const ping = new Image();
   ping.onload = () => {
@@ -2305,11 +2594,12 @@ function draw() {
   p.querySelector(".och b").textContent = cap(nameOf(cur));
   const box = p.querySelector(".ocm");
   box.innerHTML = (c.msgs.length ? "" : `<p class="ocempty">Ask ${esc(nameOf(cur))} anything. It knows your Orbit and reads your Notion.</p>`) +
-    c.msgs.map((m, i) => `<div class="ocb ${m.r}">${m.r === "me" ? `<p>${esc(m.t).replace(/\n/g, "<br>")}</p>` : md(m.t)}${(m.reco ? `<div class="ocreco"><span class="caps">${ic("spark", 11)}A better way</span><p>${esc(m.reco.t)}</p>${m.reco.added ? `<i>In your Recos</i>` : `<button class="pill" data-reco="${i}">Add to Recos</button>`}</div>` : "") + (m.files || []).map(f => `<a class="pill" href="/out/${encodeURIComponent(f)}" target="_blank" rel="noopener">${ic("easel", 13)}Open ${esc(f.replace(/\.[a-z]+$/i, "").replace(/[-_]/g, " "))}</a>`).join("")}</div>`).join("") +
+    c.msgs.map((m, i) => `<div class="ocb ${m.r}">${m.r === "me" ? `<p>${esc(m.t).replace(/\n/g, "<br>")}</p>` : md(m.t)}${(m.reco ? `<div class="ocreco"><span class="caps">${ic("spark", 11)}A better way</span><p>${esc(m.reco.t)}</p>${m.reco.added ? `<i>In your Recos</i>` : `<button class="pill" data-reco="${i}">Add to Recos</button>`}</div>` : "") + orbitMailHTML(m, i) + (m.files || []).map(f => `<a class="pill" href="/out/${encodeURIComponent(f)}" target="_blank" rel="noopener">${ic("easel", 13)}Open ${esc(f.replace(/\.[a-z]+$/i, "").replace(/[-_]/g, " "))}</a>`).join("")}</div>`).join("") +
     (busy ? `<div class="ocb ai think"><p>${esc(cap(nameOf(cur)))} is thinking<span>.</span><span>.</span><span>.</span></p><p class="hint">Looking things up in Notion can take a minute.</p></div>` : "");
   box.scrollTop = box.scrollHeight;
   p.querySelector("button[type=submit]").disabled = busy;
-  box.querySelectorAll("[data-reco]").forEach(b => b.onclick = () => { const m = c.msgs[+b.dataset.reco]; if (!m || !m.reco) return; ORBIT.reco(m.reco.t, m.reco.k, nameOf(cur)); m.reco.added = true; store(state); draw(); });
+  box.querySelectorAll("[data-reco]").forEach(b => b.onclick = () => { const m = c.msgs[+b.dataset.reco]; if (!m || !m.reco) return; ORBIT.reco(m.reco.t, m.reco.k, nameOf(cur)); m.reco.added = true; store(state); draw(); orbitRefresh(); });
+  orbitMailWire(box, c.msgs, () => { store(state); draw(); });
 }
 
 function panel() {
@@ -2329,13 +2619,15 @@ async function send(text) {
   c.msgs.push({ r: "me", t: text }); busy = true; store(state); draw();
   let reply;
   try {
-    const r = await (typeof _f === "function" ? _f : fetch)("/api/chat", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: id, msg: text, sid: c.sid || null }) });
+    const feed = ORBIT.mail.feed(id);  // v0.4.6: unread updates, open asks and answers, handed over quietly before the founder's words
+    const r = await (typeof _f === "function" ? _f : fetch)("/api/chat", { method: "POST", headers: { "Content-Type": "application/json", "X-Orbit-Hub": "1" }, body: JSON.stringify({ helper: id, msg: feed + text, sid: c.sid || null }) });
     const body = await r.text();
     if (!r.ok) throw new Error(body || "The hub's engine didn't answer.");
     reply = JSON.parse(body);
     if (reply.sid) c.sid = reply.sid;
-    const rm = String(reply.text || "").match(/\n?\s*RECO:\s*(.+?)\s*\|\s*([A-Za-z]+)\s*$/);
-    c.msgs.push({ r: "ai", t: rm ? reply.text.slice(0, rm.index).trim() : reply.text, files: reply.files || [], reco: rm ? { t: rm[1], k: rm[2] } : null });
+    const L = orbitLines(reply.text), mail = orbitApply(id, L);
+    c.msgs.push({ r: "ai", t: L.text, files: reply.files || [], reco: L.reco, mail });
+    if (mail.notes.length || mail.hubs.length) orbitRefresh();
   } catch (e) {
     c.msgs.push({ r: "ai err", t: String(e.message || e).replace(/^TypeError: Failed to fetch$/, "The hub's engine isn't running. Double-click Start Orbit Hub again.") });
   }
@@ -2376,6 +2668,350 @@ body.in-chat #orbitBar,body.in-chat .foot{display:none}
 .ocf{display:flex;gap:8px;align-items:flex-end;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--h)}
 .ocf textarea{flex:1;resize:none;background:var(--panel,rgba(5,7,15,.7));border:1px solid var(--h);border-radius:12px;padding:10px 12px;color:var(--t);font:13.5px/1.45 var(--sans);outline:none}
 .ocf textarea:focus{border-color:var(--c,var(--hi,#7FD8F0))}.ocf button[disabled]{opacity:.5}
+</style>
+
+<script>
+/* ---------- Orbit v0.4.7 · the Coach ----------
+   A third seat at the Council: the sunrise. It keeps life outside work strong across the leverage points.
+   Build my Coach runs Coach-setup.md (Orbit site) as a chat that builds a Coach page in their own Notion and ends with a
+   COACH: line; the hub keeps that as world.coach (their daily few, extras and week), and ticks as world.coachLog.
+   On launch day the main page opens with a dawn takeover: "Coach now available". */
+(() => {
+const SITE = "https://ashahmeetsworld.github.io/ashah-world/os/";
+const FROM = Date.parse("2026-11-02T12:00:00Z");   // live from 11pm, 2 Nov 2026, Melbourne (Ashah: live now)
+const C = "#F4B45E";
+const preview = /coach-preview/.test(location.search + location.hash);
+const live = () => preview || Date.now() >= FROM;
+const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+COL.coach = COL.coach || C;
+SKILL_NAMES.coach = "your Coach";
+const SUN = '<circle cx="12" cy="14" r="4"/><path d="M3 18h18M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10M2 14h2M20 14h2"/>';
+P.sun = SUN;
+const AREAS = ["Physical", "Spiritual", "Mental", "Emotional", "Relational", "Financial"];
+const ACOL = { Physical: C, Spiritual: "#45E992", Mental: "#6F9BFF", Emotional: "#FF9AB8", Relational: "#B49CFF", Financial: "#7FD8F0" };
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const SAMPLE_COACH = { few: [{ a: "Physical", h: "Move for 30 minutes" }, { a: "Spiritual", h: "10 minutes of breathwork" }, { a: "Mental", h: "One chapter" }, { a: "Relational", h: "One real message" }], extras: ["Cold exposure"], week: ["Gym", "Walk", "Gym", "Walk", "Gym", "Rest", "Long walk"] };
+const SETUP = `Set up my Coach. Read the Coach setup file in full: ${SITE}Coach-setup.md (if you can't fetch it, open it in a new tab through Claude in Chrome). Then follow it exactly, as if I'd dropped it in and typed start.`;
+const plan = () => { const c = coach(); if (!c) return ""; return ` My plan as it is in my hub (the latest; if my Coach page in Notion differs, update it to match): daily few: ${c.few.map(f => `${f.a}: ${f.h}`).join("; ")}.${c.extras && c.extras.length ? ` Extras: ${c.extras.join(", ")}.` : ""}${c.week ? ` Week: ${c.week.map((w, i) => DAYS[i] + " " + w).join(", ")}.` : ""}`; };
+const ASK = t => `Coach: read my Coach page in Notion first.${plan()} ${t}`;
+
+/* their Coach: from the world file (or the sample) */
+const W = () => ORBIT.world;
+const coach = () => ORBIT.sample() ? SAMPLE_COACH : (W().coach || null);
+const log = () => { const w = W(); if (!w.coachLog) w.coachLog = {}; return w.coachLog; };
+const pad = n => String(n).padStart(2, "0"), iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n), dow = d => (d.getDay() + 6) % 7;
+function setCoach(c) {
+  if (!c || ORBIT.sample()) return;
+  const clean = { few: (c.few || []).filter(x => x && (x.h || x.habit)).slice(0, 8).map(x => ({ a: String(x.a || x.area || "Physical").slice(0, 30), h: String(x.h || x.habit).slice(0, 80) })),
+    extras: (c.extras || []).map(x => String(x).slice(0, 60)).filter(Boolean).slice(0, 6), week: Array.isArray(c.week) && c.week.length === 7 ? c.week.map(x => String(x || "").slice(0, 30)) : null,
+    why: c.why ? String(c.why).slice(0, 200) : "" };
+  if (/^https:\/\/claude\.ai\/project\/[0-9a-f-]{36}/.test(String(c.project || ""))) { W().projects = Object.assign({}, W().projects || {}, { coach: String(c.project) }); if (typeof DATA !== "undefined" && DATA) DATA.projects = W().projects; }
+  W().coach = clean; ORBIT.save(); put("orbit-coach-built", "1");
+}
+// the skip rule, per habit: skip one day, never two in a row; three in a row earns the pass back
+function chain(key) {
+  const L = log(), today = new Date(), t0 = iso(today), days = Object.keys(L).filter(d => (L[d] || {})[key]).sort();
+  const first = days[0] ? new Date(days[0] + "T00:00:00") : today;
+  let pass = true, run = 0, broke = false;
+  for (let d = first; iso(d) < t0; d = addDays(d, 1)) {
+    if ((L[iso(d)] || {})[key]) { run++; if (!pass && run >= 3) { pass = true; broke = false; } }
+    else { if (pass) pass = false; else broke = true; run = 0; }
+  }
+  const done = !!(L[t0] || {})[key];
+  if (done && !pass && run + 1 >= 3) pass = true;
+  const need = pass ? 0 : 3 - (run + (done ? 1 : 0));
+  const note = !days.length && !done ? "start today" : pass ? "skip pass ready" : broke ? `chain broke · ${need} in a row resets it` : need < 3 || done ? `pass back after ${need} more` : "skip used · not today";
+  return { done, streak: run + (done ? 1 : 0), note };
+}
+function tick(key) {
+  if (ORBIT.sample()) return demoSay ? demoSay("In your own hub, this ticks today off and keeps your streak.") : 0;
+  const L = log(), t0 = iso(new Date()); L[t0] = L[t0] || {};
+  if (L[t0][key]) delete L[t0][key]; else L[t0][key] = 1;
+  ORBIT.save(); route();
+}
+// a COACH: line at the end of the setup chat fills the room (the chat panel never shows it)
+if (typeof orbitLines === "function") {
+  const _ol = orbitLines;
+  orbitLines = function (text) {
+    const keep = String(text || "").split("\n").filter(line => {
+      const m = line.match(/^\s*\**COACH\**\s*:\s*(\{.*\})\s*$/);
+      if (!m) return true;
+      try { setCoach(JSON.parse(m[1])); setTimeout(route, 50); } catch (e) {}
+      return false;
+    }).join("\n");
+    return _ol(keep);
+  };
+}
+const build = () => { put("orbit-coach-built", "1"); openClaude("coach", SETUP); };
+
+/* the sunrise door, after the Board's (same as the Mentor's and the Board's) */
+function door() {
+  return `<a class="door coachdoor" href="#coach" style="${glass(C)}"><span class="arch"><span class="spill"></span><span class="ic">${ic("sun", 30, 1.1)}</span>${figure}</span>
+    <span class="caps" style="margin-top:22px;color:var(--c)">Coach</span><h2>The sunrise</h2><p>Train, breathe, show up. Every day.</p><span class="pill on">${ic("door", 13)}Go inside</span></a>`;
+}
+const scene = `<svg class="scene" viewBox="0 0 560 360"><defs><radialGradient id="cr-sun"><stop offset="0" stop-color="#FFF3DC" stop-opacity=".95"/><stop offset=".3" stop-color="${C}" stop-opacity=".35"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="330" cy="250" r="108" fill="url(#cr-sun)"/><path d="M290 250 A40 40 0 0 1 370 250 Z" fill="#FFF3DC"/>
+  ${[-70, -45, -20, 20, 45, 70].map(a => { const r = a * Math.PI / 180; return `<line x1="${330 + 58 * Math.sin(r)}" y1="${250 - 58 * Math.cos(r)}" x2="${330 + 86 * Math.sin(r)}" y2="${250 - 86 * Math.cos(r)}" stroke="${C}" stroke-opacity=".5" stroke-width="1.2"/>`; }).join("")}
+  <path d="M20 262 Q160 236 300 250 T540 246" fill="none" stroke="${rgba(C, .35)}"/><line x1="20" y1="250" x2="540" y2="250" stroke="${rgba(C, .18)}"/>
+  <g fill="#03050C"><circle cx="190" cy="226" r="4"/><path d="M184 249 L186 233 Q190 230 194 233 L196 249 Z"/><path d="M186 236 L176 226 M194 236 L204 226" stroke="#03050C" stroke-width="2.4" stroke-linecap="round"/></g></svg>`;
+const ico = d => `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+
+/* the Coach's room: like the founder's own, filled with theirs */
+function coachView() {
+  const cc = coach(), t = new Date(), today = cc && cc.week ? cc.week[dow(t)] : "";
+  const pill = (attr, i, label, on) => `<a class="pill${on ? " on" : ""}" href="#" ${attr}>${ic(i, 13)}${label}</a>`;
+  const open = (txt) => `data-open="coach" data-text="${esc(ASK(txt))}"`;
+  const pills = !cc
+    ? pill("data-coach-build", "spark", "Build my Coach", 1)
+    : (today && !/^rest/i.test(today) ? pill(open(`Walk me through today's session (${today}), one step at a time.`), "spark", `Today: ${esc(today)}`, 1) : pill(open("Check in with me: what's the one thing that matters most today?"), "spark", "Check in", 1))
+      + pill(open("Find me a session for today: three options with real links, how long each is, and why it fits today."), "leaf", "Find a session")
+      + (today && !/^rest/i.test(today) ? pill(open("Check in with me: how am I across my areas, one quick question at a time, then the one thing that matters most today."), "chat", "Check in") : "")
+      + pill(open("Run my weekly look-back: wins, the habit that slipped, and one tiny change for next week."), "cal", "Weekly look-back");
+  const rows = cc ? cc.few.map((f, i) => { const k = "f:" + f.h, ch = chain(k), c = ACOL[f.a] || C;
+      return `<div class="three-row" style="--hc:${c}"><i class="${ch.done ? "on" : ""}" data-ctick="${esc(k)}" title="Tick today"></i><span>${esc(f.a)} <em>· ${esc(f.h)}</em></span><em>${ch.done ? "done ✓" : esc(ch.note)}</em></div>`; }).join("")
+      + (cc.extras && cc.extras.length ? `<div class="cz-x">${cc.extras.map(x => { const k = "x:" + x, on = !!(log()[iso(t)] || {})[k] && !ORBIT.sample(); return `<button type="button" data-ctick="${esc(k)}" class="${on ? "on" : ""}">${on ? "✓ " : ""}${esc(x)}</button>`; }).join("")}</div>` : "")
+    : `<p>Not set up yet. Build my Coach: a few quick questions, 5 to 10 minutes. Skip any and come back to it later.</p>`;
+  const lev = AREAS.map(a => { const f = cc && cc.few.find(x => x.a.toLowerCase().startsWith(a.slice(0, 5).toLowerCase())); return `<div>${a}<em class="${f ? "on" : ""}">${f ? esc(f.h.length > 18 ? f.h.slice(0, 17) + "…" : f.h) : "not picked"}</em></div>`; }).join("");
+  const week = cc && cc.week ? `<div class="cz-week">${cc.week.map((w, i) => `<span class="${i === dow(t) ? "on" : ""}">${DAYS[i][0]}<br>${esc((w || "Rest").slice(0, 7))}</span>`).join("")}</div>` : "";
+  return `${scene}<div class="rh cz enter" style="margin-top:60px"><span class="caps eb">${ic("sun", 12)}The Council · the sunrise</span>
+    <div class="title"><span class="badge">${ic("sun", 20)}</span><h1 class="serif">Coach</h1></div><p>Keeps your life outside work strong, so the work stays strong. Encouraging, and holds you to it.</p>
+    <div class="pills">${pills}<a class="pill quiet" href="#council">${ic("back", 13)}The Council</a></div></div>
+    <div class="cols cz enter" style="animation-delay:.15s;margin-top:200px">
+      <div class="card"><div class="k">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}<span class="caps">Today's few</span>${cc ? `<a href="#" class="n" data-cedit>Edit</a>` : ""}</div>${rows}${week}</div>
+      <div class="card"><div class="k">${ico('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>')}<span class="caps">Leverage points</span></div><div class="lev">${lev}</div></div>
+      <div class="card"><div class="k">${ico('<path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8z"/>')}<span class="caps">Holds you to it</span></div>
+        <p>Skip one day, never two. After a skip, three in a row earns the pass back. Every week, a look-back.</p></div></div>`;
+}
+/* edit the few, the extras and the week right here (also how a Claude-tab setup lands in the hub) */
+function editor() {
+  if (ORBIT.sample()) return demoSay("In your own hub, Edit changes your daily few, extras and which day is which.");
+  const cc = coach() || { few: [], extras: [], week: null }, wk = cc.week || ["", "", "", "", "", "", ""];
+  const few = AREAS.map(a => { const f = cc.few.find(x => x.a.toLowerCase().startsWith(a.slice(0, 5).toLowerCase())); return `<label><span>${a}</span><input name="f-${a}" value="${esc(f ? f.h : "")}" placeholder="leave blank to skip"></label>`; }).join("");
+  document.querySelector(".p2m")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div class="p2m"><form class="p2c cz-ed"><h3>Your daily few</h3>
+    <p class="hint">One small thing per area, small enough for a bad day. Change it any time here: your Coach updates your Notion page to match next time you talk.</p>${few}
+    <label><span>Extras</span><input name="extras" value="${esc((cc.extras || []).join(", "))}" placeholder="e.g. Cold exposure, Face and neck"></label>
+    <div class="cz-wk">${DAYS.map((d, i) => `<label><span>${d}</span><input name="w${i}" value="${esc(wk[i] || "")}" placeholder="Rest"></label>`).join("")}</div>
+    <div class="pills" style="margin-top:14px"><button class="pill on">Save</button><a href="#" class="pill quiet" data-x>Cancel</a></div></form></div>`);
+  const m = document.querySelector(".p2m"), f = m.querySelector("form");
+  m.onclick = ev => { if (ev.target === m || ev.target.dataset.x !== undefined) { ev.preventDefault(); m.remove(); } };
+  f.onsubmit = ev => { ev.preventDefault(); const v = Object.fromEntries(new FormData(f));
+    const week = DAYS.map((d, i) => (v["w" + i] || "").trim());
+    setCoach({ why: cc.why, few: AREAS.map(a => ({ a, h: (v["f-" + a] || "").trim() })).filter(x => x.h), extras: (v.extras || "").split(",").map(x => x.trim()).filter(Boolean), week: week.some(Boolean) ? week.map(x => x || "Rest") : null });
+    m.remove(); route(); };
+}
+function wireCoach(el) {
+  el.querySelectorAll("[data-coach-build]").forEach(b => b.onclick = ev => { ev.preventDefault(); build(); });
+  el.querySelectorAll("[data-ctick]").forEach(b => b.onclick = () => tick(b.dataset.ctick));
+  el.querySelectorAll("[data-cedit]").forEach(b => b.onclick = ev => { ev.preventDefault(); editor(); });
+}
+
+const _routeCoach = route;
+route = function () {
+  const top = (location.hash.replace("#", "") || "home").split("/")[0];
+  if (!live() || !DATA || DATA.setup) return _routeCoach();
+  if (top === "coach") {
+    navTo("council"); const view = document.getElementById("view"); view.dataset.v = "coach"; clearTimeout(focusTimer);
+    setTint(C); view.innerHTML = coachView(); setAsk("coach", "your Coach"); wire(view); wireCoach(view); scrollTo(0, 0); return;
+  }
+  _routeCoach();
+  if (top === "council") {
+    const doors = document.querySelector(".doors");
+    if (doors && !doors.querySelector(".coachdoor")) { doors.classList.add("three"); doors.insertAdjacentHTML("beforeend", door()); }
+  }
+};
+window.removeEventListener("hashchange", _routeCoach);
+window.addEventListener("hashchange", route);
+
+/* launch day: the dawn takeover on the main page, once */
+function takeover() {
+  if (!live() || ORBIT.sample() || get("orbit-coach-seen") || coach() || document.getElementById("coachDawn")) return;
+  const top = (location.hash.replace("#", "") || "home").split("/")[0];
+  if (top !== "home") return;
+  if (document.getElementById("tourWelcome")) return;   // a brand-new hub: the welcome goes first, the Coach next time
+  document.body.insertAdjacentHTML("beforeend", `<div id="coachDawn" role="dialog" aria-label="Coach now available"><div class="cdin">
+    <span class="caps">Orbit · new at your Council</span><h1>Coach now available</h1>
+    <p>Your own training for a whole life, not just the work. You pick what matters. Your Coach builds it in your Notion and holds you to it.</p>
+    <div class="cdchips">${["Physical", "Spiritual", "Emotional", "Mental", "Relationships"].map(a => `<span>${a}</span>`).join("")}</div>
+    <a href="#" class="cdgo" id="cdGo">Build my Coach</a><span class="cdsmall">A few quick questions, 5 to 10 minutes. Skip any and come back to it later.</span><a href="#" class="cdno" id="cdNo">Not now</a></div>${sunArt(420)}</div>`);
+  const close = () => { put("orbit-coach-seen", "1"); const d = document.getElementById("coachDawn"); d.classList.add("out"); setTimeout(() => d.remove(), 600); };
+  document.getElementById("cdGo").onclick = ev => { ev.preventDefault(); close(); location.hash = "coach"; build(); };
+  document.getElementById("cdNo").onclick = ev => { ev.preventDefault(); close(); };
+}
+function sunArt(w) {
+  return `<svg class="cdsun" width="${w}" height="${w * .6}" viewBox="0 0 200 120" aria-hidden="true"><defs><radialGradient id="cgl" cx="50%" cy="100%" r="60%"><stop offset="0" stop-color="#FFE7B8" stop-opacity=".9"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="100" cy="100" r="90" fill="url(#cgl)" opacity=".5"/><path d="M60 100a40 40 0 0 1 80 0z" fill="#FFF3DC"/>${[-60, -35, -12, 12, 35, 60].map(a => { const r = a * Math.PI / 180; return `<line x1="${100 + 52 * Math.sin(r)}" y1="${100 - 52 * Math.cos(r)}" x2="${100 + 70 * Math.sin(r)}" y2="${100 - 70 * Math.cos(r)}" stroke="${C}" stroke-width="2" stroke-linecap="round"/>`; }).join("")}<line x1="10" y1="100" x2="190" y2="100" stroke="${C}" stroke-opacity=".6"/></svg>`;
+}
+setTimeout(takeover, 1900);   // after the page and any welcome have drawn
+if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }
+})();
+</script>
+<style>
+.doors.three{gap:64px}
+.cz .k svg{color:#F4B45E}.cz .k .n{margin-left:auto;font-size:11px;color:var(--s)}
+.cz .three-row{display:flex;align-items:center;gap:10px;padding:7px 0}.cz .three-row+.three-row{border-top:1px solid rgba(242,239,232,.08)}
+.cz .three-row i{width:11px;height:11px;border-radius:50%;flex:none;border:1.5px solid var(--hc);cursor:pointer}.cz .three-row i.on{background:var(--hc)}.cz .three-row i:hover{box-shadow:0 0 10px -2px var(--hc)}
+.cz .three-row span{flex:1}.cz .three-row em{font-style:normal;font-size:11.5px;color:var(--s)}
+.cz .lev{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:4px;font-size:12.5px}
+.cz .lev div{display:flex;justify-content:space-between;gap:8px}.cz .lev em{font-style:normal;color:var(--s);font-size:11px;text-align:right}.cz .lev em.on{color:#F4B45E}
+.cz-x{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.cz-x button{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid rgba(242,239,232,.15);color:var(--s);cursor:pointer;background:none}
+.cz-x button.on{border-color:rgba(244,180,94,.6);color:var(--t);background:rgba(244,180,94,.1)}
+.cz-week{display:flex;gap:4px;margin-top:10px}.cz-week span{flex:1;text-align:center;padding:3px 0;border-radius:5px;font-size:10px;line-height:1.35;background:rgba(242,239,232,.05);color:var(--s)}
+.cz-week span.on{background:rgba(244,180,94,.16);color:#F4B45E}
+.cz-ed{width:min(520px,100%);max-height:86vh;overflow:auto}.cz-ed label{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}.cz-ed label span{width:84px;flex:none;color:var(--s)}
+.cz-ed input{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid var(--h);border-radius:8px;padding:7px 10px;color:var(--t);font:13px var(--sans);outline:none}.cz-ed input:focus{border-color:#F4B45E}
+.cz-wk{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0 10px;margin-top:6px}.cz-wk label span{width:34px}
+#coachDawn{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:16px;overflow:hidden;background:radial-gradient(ellipse at 50% 115%,rgba(244,180,94,.5),rgba(60,30,20,.55) 35%,rgba(3,5,12,.97) 70%);backdrop-filter:blur(4px);animation:cdin 1.4s ease both}
+#coachDawn.out{animation:cdout .6s ease both}
+#coachDawn .cdin{position:relative;z-index:2;text-align:center;max-width:760px;margin-top:-8vh;color:#EEEAF6;font:400 16px/1.55 'DM Sans',system-ui,sans-serif}
+#coachDawn .caps{color:#F4B45E;letter-spacing:.28em;font-size:11px}
+#coachDawn h1{margin:12px 0;font:italic 400 clamp(46px,8vw,88px)/1.05 'Cormorant Garamond',Georgia,serif;animation:cdrise 1.6s .2s ease both}
+#coachDawn p{color:rgba(238,234,246,.8);font-size:clamp(15px,2vw,17px);margin:0 auto 20px;max-width:560px}
+.cdchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 24px}.cdchips span{padding:6px 14px;border-radius:99px;border:1px solid rgba(244,180,94,.45);font:italic 400 18px 'Cormorant Garamond',serif;color:#FFE7B8}
+#coachDawn .cdgo{display:inline-block;padding:14px 30px;border-radius:99px;border:1px solid #F4B45E;box-shadow:0 0 26px -6px #F4B45E;color:#FFF3DC;font-size:17px;text-decoration:none}
+#coachDawn .cdgo:hover{box-shadow:0 0 40px -4px #F4B45E}
+#coachDawn .cdsmall{display:block;margin-top:12px;color:rgba(255,231,184,.75);font-size:13px}
+#coachDawn .cdno{display:block;margin-top:14px;color:rgba(238,234,246,.55);font-size:13px;text-decoration:none}
+#coachDawn .cdsun{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(420px,90vw);height:auto;animation:cdsun 2.2s ease both}
+@keyframes cdin{from{opacity:0}to{opacity:1}}@keyframes cdout{to{opacity:0}}
+@keyframes cdrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes cdsun{from{transform:translate(-50%,40%)}to{transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){#coachDawn,#coachDawn h1,#coachDawn .cdsun{animation:none}}
+</style>
+
+<script>
+/* ---------- Orbit v0.4.7 · Upgrade inside the hub ----------
+   A hub-only release (latest.json "team_since" is older than theirs): a quick reload, then What's new.
+   A team release: the hub's engine runs the update on their own Claude plan (POST /api/upgrade) while the
+   Operations panel shows a glowing ring and each step; then What's new. No engine? The old way: a Claude tab. */
+(() => {
+const SITE = "https://ashahmeetsworld.github.io/ashah-world/os/";
+const HI = "#7FD8F0";
+const ON_ENGINE = location.protocol === "http:" && location.port === "4777";
+const H = { "Content-Type": "application/json", "X-Orbit-Hub": "1" };
+const newer = (a, b) => { a = String(a).split(".").map(Number); b = String(b).split(".").map(Number); for (let i = 0; i < Math.max(a.length, b.length); i++) { if ((a[i] || 0) !== (b[i] || 0)) return (a[i] || 0) > (b[i] || 0); } return false; };
+const EF = (u, o) => (typeof _f === "function" ? _f : window.fetch)(u, o);  /* past the hub's own /api shim, straight to the engine */
+const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const markDone = v => { ORBIT.world.orbit = String(v); ORBIT.save(); put("orbit-whatsnew", String(v)); put("orbit-later", String(v)); put("orbit-later-text", ""); };
+const ICON = { sun: "☀", mail: "✉", spark: "✦", ring: "◎", door: "⌂" };
+
+window.orbitUpgrade = async function (L, msg, mine) {
+  const team = L.team_since && newer(L.team_since, mine);
+  let engine = false;
+  if (ON_ENGINE) { try { const r = await EF("/api/upgrade/status"); engine = r.ok; } catch (e) {} }
+  if (!team) {                                            // A · quick: fresh hub page, then What's new
+    document.getElementById("orbitNew")?.remove();
+    document.body.insertAdjacentHTML("beforeend", `<div id="upQuick"><span></span>Loading the new Orbit…</div>`);
+    if (engine) { try { await EF("/api/upgrade/hub", { method: "POST", headers: H, body: "{}" }); } catch (e) {} }
+    markDone(L.version); setTimeout(() => location.reload(), 900); return;
+  }
+  if (!engine) return openClaude("ops", msg);            // no engine on this computer: the update runs in a Claude tab
+  panel(L, mine);
+};
+
+/* C · the Operations panel, with B's glowing ring */
+function ring(pct) {
+  const c = 2 * Math.PI * 54, off = c * (1 - pct / 100);
+  return `<svg width="150" height="150" viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/>
+    <circle cx="70" cy="70" r="54" fill="none" stroke="${HI}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 70 70)" style="filter:drop-shadow(0 0 8px ${HI});transition:stroke-dashoffset .8s"/>
+    <circle cx="${70 + 54 * Math.sin(2 * Math.PI * pct / 100)}" cy="${70 - 54 * Math.cos(2 * Math.PI * pct / 100)}" r="5" fill="#EAFBFF" style="filter:drop-shadow(0 0 6px ${HI})"/>
+    <text x="70" y="78" text-anchor="middle" fill="#fff" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="26">${Math.round(pct)}%</text></svg>`;
+}
+async function panel(L, mine) {
+  document.getElementById("orbitNew")?.remove();
+  document.getElementById("upPanel")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div id="upPanel"><div class="uph"><b>Operations</b><span>Updating to v${esc(L.version)}</span><a href="#" id="upHide" title="Close (it keeps going)">–</a></div>
+    <div class="upr">${ring(3)}</div><p class="upl">Upgrading your team now. Nothing you've made gets deleted. Keep working: this runs on its own, usually 5 to 10 minutes.</p><ul class="ups"></ul></div>`);
+  document.body.insertAdjacentHTML("beforeend", `<a href="#" id="upMini" title="Open the update"><span class="umr">${ring(3)}</span><span class="umt">3%</span></a>`);
+  document.getElementById("upHide").onclick = ev => { ev.preventDefault(); show(false); };
+  document.querySelector("#upPanel .uph b").onclick = () => show(false);
+  document.getElementById("upMini").onclick = ev => { ev.preventDefault(); show(true); };
+  let r;
+  try { r = await EF("/api/upgrade", { method: "POST", headers: H, body: JSON.stringify({ version: L.version, from: mine, update: SITE + (L.update || "Update-your-Orbit.md") }) }); } catch (e) {}
+  if (!r || !r.ok) return fail(r ? await r.text() : "The hub's engine didn't answer.");
+  poll(L);
+}
+/* close the panel: it tucks away and a small glowing counter floats out of the way; click it to open again */
+function show(open) {
+  document.getElementById("upPanel")?.classList.add("was");
+  document.getElementById("upPanel")?.classList.toggle("shut", !open);
+  document.getElementById("upMini")?.classList.toggle("on", !open);
+}
+function draw(st) {
+  const p = document.getElementById("upPanel"); if (!p) return;
+  const steps = st.steps || [], n = steps.length, pct = st.state === "done" ? 100 : Math.min(92, 6 + n * 11);
+  p.querySelector(".upr").innerHTML = ring(pct);
+  const m = document.getElementById("upMini"); if (m) { m.querySelector(".umr").innerHTML = ring(pct); m.querySelector(".umt").textContent = Math.round(pct) + "%"; }
+  p.querySelector(".ups").innerHTML = steps.map((s, i) => `<li class="${i === n - 1 && st.state !== "done" ? "on" : "ok"}">${i === n - 1 && st.state !== "done" ? "◌" : "✓"} ${esc(s)}</li>`).join("") || `<li class="on">◌ Reading the update</li>`;
+}
+function fail(t) {
+  const p = document.getElementById("upPanel"); if (!p) return;
+  p.querySelector(".upl").innerHTML = `Something got in the way: ${esc(String(t || "").slice(0, 200))}. Nothing was changed. <a href="#" id="upRetry">Try again</a> or <a href="#" id="upTab">run it in Claude</a>.`;
+  document.getElementById("upRetry").onclick = ev => { ev.preventDefault(); location.reload(); };
+  document.getElementById("upTab").onclick = ev => { ev.preventDefault(); p.remove(); _openClaudeOut ? _openClaudeOut("ops", `Upgrade my Orbit. Read the update file in full: ${SITE}Update-your-Orbit.md and follow it exactly, as if I'd dropped it in and typed start.`) : 0; };
+}
+async function poll(L) {
+  let st; try { st = await (await EF("/api/upgrade/status", { cache: "no-store" })).json(); } catch (e) { return setTimeout(() => poll(L), 3000); }
+  draw(st);
+  if (st.state === "running") return setTimeout(() => poll(L), 2500);
+  if (st.state === "done") {
+    const p = document.getElementById("upPanel"); p.querySelector(".uph span").innerHTML = `<i style="color:#45E992;font-style:normal">✓ Done</i>`;
+    markDone(L.version); put("orbit-later-text", st.later || "");
+    setTimeout(() => { p.remove(); document.getElementById("upMini")?.remove(); refreshAsk(L); }, 1400); return;
+  }
+  fail(st.error);
+}
+
+/* Done: one Refresh pop-up loads the new Orbit, then What's new shows */
+function refreshAsk(L) {
+  document.body.insertAdjacentHTML("beforeend", `<div id="upDone"><div class="udin">${ring(100)}<h2>Your team is updated.</h2><p>Refresh to load the new Orbit.</p><a href="#" id="upRefresh">Refresh</a></div></div>`);
+  document.getElementById("upRefresh").onclick = ev => { ev.preventDefault(); location.reload(); };
+}
+
+/* What's new, in B's glow */
+function whatsNew(L, later) {
+  const items = (L.whatsnew || []).slice(0, 4);
+  document.getElementById("upNew")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div id="upNew"><div class="unin"><span class="caps">What's new · Orbit v${esc(L.version)}</span><h1>Your team just levelled up.</h1>
+    <ul>${items.map(x => `<li><span>${ICON[x.icon] || "✦"}</span><span><b>${esc(x.title)}</b> ${esc(x.line || "")}</span></li>`).join("")}</ul>
+    ${later ? `<p class="unlater">One thing for later: ${esc(later)}</p>` : ""}
+    <div class="unbtn">${L.show ? `<a href="#" class="go" id="unShow">Show me</a>` : ""}<a href="#" id="unOk">Got it</a></div></div></div>`);
+  const close = () => { put("orbit-whatsnew-seen", L.version); document.getElementById("upNew")?.classList.add("out"); setTimeout(() => document.getElementById("upNew")?.remove(), 500); };
+  document.getElementById("unOk").onclick = ev => { ev.preventDefault(); close(); };
+  const s = document.getElementById("unShow"); if (s) s.onclick = ev => { ev.preventDefault(); close(); location.hash = L.show; };
+}
+// after a quick reload: What's new once
+setTimeout(async () => {
+  const v = get("orbit-whatsnew"); if (!v || get("orbit-whatsnew-seen") === v || ORBIT.sample()) return;
+  let L; try { L = await (await fetch(SITE + "latest.json", { cache: "no-store" })).json(); } catch (e) { return; }
+  if (L && String(L.version) === v) whatsNew(L, get("orbit-later-text") || "");
+}, 1200);
+})();
+</script>
+<style>
+#upQuick{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:96;display:flex;gap:10px;align-items:center;padding:10px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 94%,transparent);border:1px solid var(--hi);color:var(--t);font:400 13.5px system-ui,sans-serif;box-shadow:0 0 30px -8px var(--hi)}
+#upQuick span{width:12px;height:12px;border-radius:50%;border:2px solid var(--hi);border-right-color:transparent;animation:upspin .8s linear infinite}@keyframes upspin{to{transform:rotate(360deg)}}
+#upPanel{position:fixed;top:0;right:0;bottom:0;z-index:111;width:min(420px,100vw);display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 24px;background:rgba(6,9,20,.97);border-left:1px solid color-mix(in srgb,#7FD8F0 35%,transparent);box-shadow:-20px 0 60px -30px #7FD8F0;color:var(--t);font:400 13.5px/1.55 var(--sans,system-ui);animation:upin .45s ease both}
+#upPanel{transition:transform .45s ease}#upPanel.shut,#upPanel.was{animation:none}#upPanel.shut{transform:translateX(105%);pointer-events:none}#upPanel .uph b{cursor:pointer}
+#upMini{position:fixed;right:18px;bottom:78px;z-index:110;display:flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:99px;background:rgba(6,9,20,.92);border:1px solid color-mix(in srgb,#7FD8F0 45%,transparent);box-shadow:0 0 24px -8px #7FD8F0;color:#EAFBFF;text-decoration:none;font:400 12.5px var(--sans,system-ui);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .35s,transform .35s}
+#upMini.on{opacity:1;transform:none;pointer-events:auto}#upMini .umr svg{width:34px;height:34px;display:block}#upMini .umr text{display:none}#upMini .umt{font:italic 400 19px 'Cormorant Garamond',Georgia,serif;min-width:38px}#upMini:hover{border-color:#7FD8F0}
+#upDone{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:16px;background:rgba(3,5,12,.72);backdrop-filter:blur(3px);animation:cdin .6s ease both;color:#EEEAF6;font:400 15px/1.55 'DM Sans',system-ui,sans-serif}
+#upDone .udin{width:min(380px,100%);text-align:center;padding:26px 24px 28px;border-radius:22px;background:rgba(6,9,20,.96);border:1px solid color-mix(in srgb,#7FD8F0 40%,transparent);box-shadow:0 0 60px -20px #7FD8F0}
+#upDone h2{font:italic 400 30px/1.15 'Cormorant Garamond',Georgia,serif;margin:6px 0 4px}#upDone p{color:rgba(238,234,246,.65);margin:0 0 18px}
+#upDone a{display:inline-block;padding:11px 30px;border-radius:99px;border:1px solid #7FD8F0;box-shadow:0 0 22px -6px #7FD8F0;color:#EAFBFF;text-decoration:none}#upPanel .uph{display:flex;align-items:baseline;gap:12px;width:100%}#upPanel .uph b{font:italic 400 24px var(--serif);flex:1}#upPanel .uph span{color:var(--s);font-size:12px}#upPanel .uph a{color:var(--s);font-size:20px;text-decoration:none}
+#upPanel .upr{margin:22px 0 6px}#upPanel .upl{color:var(--s);text-align:center;margin:0 0 8px}#upPanel .upl a{color:#7FD8F0}
+#upPanel .ups{list-style:none;padding:0;margin:8px 0 0;width:100%;max-height:45vh;overflow:auto}#upPanel .ups li{padding:5px 0;border-top:1px solid rgba(255,255,255,.06)}#upPanel .ups li.ok{color:var(--t)}#upPanel .ups li.on{color:#7FD8F0}
+@keyframes upin{from{transform:translateX(100%)}to{transform:none}}
+#upNew{position:fixed;inset:0;z-index:10003;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at 50% 120%,rgba(127,216,240,.38),rgba(3,5,12,.96) 60%);backdrop-filter:blur(4px);animation:cdin 1s ease both;color:#EEEAF6;font:400 15px/1.55 'DM Sans',system-ui,sans-serif}
+#upNew.out{animation:cdout .5s ease both}#upNew .unin{width:min(580px,100%);text-align:center}
+#upNew .caps{letter-spacing:.28em;font-size:11px;color:#7FD8F0}#upNew h1{font:italic 400 clamp(38px,6vw,56px)/1.1 'Cormorant Garamond',Georgia,serif;margin:10px 0 16px}
+#upNew ul{list-style:none;padding:0;margin:0 auto 18px;text-align:left;display:inline-block}#upNew li{display:flex;gap:12px;margin:10px 0}#upNew li b{font:italic 400 20px 'Cormorant Garamond',serif;color:#fff}
+#upNew .unlater{color:rgba(238,234,246,.6);font-size:13px}#upNew .unbtn{display:flex;gap:10px;justify-content:center}
+#upNew .unbtn a{padding:11px 22px;border-radius:99px;border:1px solid rgba(255,255,255,.2);color:#EEEAF6;text-decoration:none}#upNew .unbtn a.go{border-color:#7FD8F0;box-shadow:0 0 22px -6px #7FD8F0;color:#EAFBFF}
+@keyframes cdin{from{opacity:0}to{opacity:1}}@keyframes cdout{to{opacity:0}}
 </style>
 
 </body>
