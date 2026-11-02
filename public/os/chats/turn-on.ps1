@@ -1,4 +1,4 @@
-# Orbit · Phase 2: chats inside your hub. Run by double-clicking "Turn on hub chats" in your Orbit Hub folder.
+# Orbit · Phase 2: chats inside your hub. Run by double-clicking "Bring your hub to life" in your Orbit Hub folder.
 # Installs Claude Code and a tiny helper (uv), signs Claude Code in to YOUR Claude plan (no API key, no extra cost),
 # connects Notion, and switches your hub over. Safe to run again any time: it only does what's missing.
 $ErrorActionPreference = "Continue"
@@ -14,7 +14,7 @@ Remove-Item Env:ANTHROPIC_API_KEY, Env:ANTHROPIC_AUTH_TOKEN -ErrorAction Silentl
 
 function Say($t) { Write-Host ""; Write-Host "  $t" -ForegroundColor Cyan }
 function Note($t) { Write-Host "  $t" }
-function Stop-Here($t) { Write-Host ""; Write-Host "  $t" -ForegroundColor Yellow; Write-Host "  Run Turn on hub chats again when you're ready. Nothing is broken: your hub works as before."; exit }
+function Stop-Here($t) { Write-Host ""; Write-Host "  $t" -ForegroundColor Yellow; Write-Host "  Run Bring your hub to life again when you're ready. Nothing is broken: your hub works as before."; exit }
 function Find-Claude { $c = Get-Command claude -ErrorAction SilentlyContinue; if ($c) { return $c.Source }; foreach ($p in @("$Bin\claude.exe", "$env:APPDATA\npm\claude.cmd")) { if (Test-Path $p) { return $p } }; return $null }
 function Find-Uv { $c = Get-Command uv -ErrorAction SilentlyContinue; if ($c) { return $c.Source }; if (Test-Path "$Bin\uv.exe") { return "$Bin\uv.exe" }; return $null }
 

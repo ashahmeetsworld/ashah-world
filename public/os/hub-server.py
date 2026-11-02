@@ -5,7 +5,7 @@ each helper chat with you right there, through Claude Code signed in to your own
 Claude plan. No API key, no extra cost: it uses your plan's normal usage.
 Nothing here is sent anywhere except your chats, to Claude, like any Claude chat.
 
-Started by "Start Orbit Hub" once "Turn on hub chats" has run. Needs only Python 3
+Started by "Start Orbit Hub" once "Bring your hub to life" (once called "Turn on hub chats") has run. Needs only Python 3
 (the start file brings its own through uv) and Claude Code.
 """
 import json
@@ -119,7 +119,7 @@ def friendly(err):
     if "limit" in low and ("usage" in low or "rate" in low or "reached" in low):
         return "You've reached your Claude plan's limit for now. It resets by itself: claude.ai → Settings → Usage shows when."
     if "login" in low or "log in" in low or "authenticat" in low or "not logged" in low or "oauth" in low:
-        return "Claude isn't signed in on this computer any more. Double-click Turn on hub chats in your Orbit Hub folder to sign in again (one click)."
+        return "Claude isn't signed in on this computer any more. Double-click Bring your hub to life (Turn on hub chats in older folders) in your Orbit Hub folder to sign in again (one click)."
     return "Something went wrong on Claude's side: " + err[:240]
 
 
@@ -133,7 +133,7 @@ def out_files():
 def run_chat(hid, msg, sid=None):
     exe = claude_bin()
     if not exe:
-        raise FileNotFoundError("Claude Code isn't on this computer yet. Double-click Turn on hub chats in your Orbit Hub folder.")
+        raise FileNotFoundError("Claude Code isn't on this computer yet. Double-click Bring your hub to life (Turn on hub chats in older folders) in your Orbit Hub folder.")
     sync_team()
     w = world()
     name = helper_name(hid, w)
