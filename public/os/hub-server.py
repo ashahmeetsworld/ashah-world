@@ -204,7 +204,7 @@ def status():
 
 
 # ---------- Voices (Orbit v0.4.8) ----------
-# The Personal Assistant and the Council (Mentor, Advisory Board, Coach) answer out loud, each in its own voice,
+# The Personal Assistant, the Council (Mentor, Advisory Board, Coach) and the six helpers answer out loud, each in its own voice,
 # made on this computer for free (Kokoro, open source, Apache 2.0). Set up once, the first time they hold the mic:
 # the voice engine goes into ~/.orbit/voice-lib and the voices (about 350MB) into ~/.orbit/voice. Until it's ready,
 # the hub uses the browser's own voice. Nothing is sent anywhere.
@@ -218,6 +218,13 @@ VOICES = {
     "coach": {"mix": {"am_onyx": 1}, "lang": "en-us", "speed": 1.0, "pitch": 0.907, "chest": 0.467},
     "mentor": {"mix": {"bm_george": 1}, "lang": "en-gb", "speed": 0.92},
     "board": {"mix": {"bm_lewis": 1}, "lang": "en-gb", "speed": 0.95},
+    # the team, each voiced to their personality
+    "ops": {"mix": {"am_echo": 1}, "lang": "en-us", "speed": 1.0},          # witty: dry, quick
+    "cd": {"mix": {"af_bella": 1}, "lang": "en-us", "speed": 1.0},          # expressive: warm, vivid
+    "cp": {"mix": {"af_sky": 1}, "lang": "en-us", "speed": 1.05},           # playful: light, bubbly
+    "bd": {"mix": {"am_michael": 1}, "lang": "en-us", "speed": 0.97},       # magnetic: smooth, assured
+    "fo": {"mix": {"af_kore": 1}, "lang": "en-us", "speed": 1.02},          # direct: clear, no-nonsense
+    "cs": {"mix": {"af_jessica": 1}, "lang": "en-us", "speed": 0.95},       # nurturing: gentle, caring
 }
 VOICE = {"state": "off", "note": "", "pct": 0}
 VOICE_LOCK = threading.Lock()

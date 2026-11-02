@@ -2673,14 +2673,15 @@ body.in-chat #orbitBar,body.in-chat .foot{display:none}
 
 <script>
 /* ---------- Orbit v0.4.8 · voices ----------
-   The Personal Assistant and the Council (Mentor, Advisory Board, Coach) answer out loud, each in its own voice.
+   The Personal Assistant, the Council (Mentor, Advisory Board, Coach) and the six helpers answer out loud, each in its own voice.
+   Close the chat (or start a new one) and the voice stops.
    Hold the mic (or hold Space) and talk, let go to send. Holding again cuts the reply off. Never hands-free:
    it would pick up the founder talking to other people in the room.
    The voices are made on this computer by the engine (/api/voice/*). Until they're set up, or on an older engine,
    the browser's own voice reads the reply. */
 (() => {
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-const VOICED = { desk: 1, mentor: 1, board: 1, coach: 1 };
+const VOICED = { desk: 1, mentor: 1, board: 1, coach: 1, ops: 1, cd: 1, cp: 1, bd: 1, fo: 1, cs: 1 };  // everyone with a voice in the engine
 const EF = (u, o) => (typeof _f === "function" ? _f : window.fetch)(u, o);
 const NOTE = "[Voice chat: they're talking out loud with you and will hear your reply read aloud. Answer in 1 to 3 short spoken sentences, in plain everyday words. No lists, headings, markdown, links or emoji. If there's more, give the headline and offer to go deeper.]\n\n";
 let voiceNext = 0, spoken = null, vstate = { state: "off" };  // voiceNext: when the last spoken message was sent
@@ -2736,7 +2737,7 @@ const Speaker = (() => {
 /* Hooks the chat calls (see send() in the chat block). */
 window.orbitVoice = {
   note(seat) { spoken = Date.now() - voiceNext < 3000 && VOICED[seat] ? seat : null; voiceNext = 0; return spoken ? NOTE : ""; },
-  reply(seat, text) { if (spoken !== seat) return; spoken = null; if (text) Speaker.say(seat, text); },
+  reply(seat, text) { if (spoken !== seat) return; spoken = null; if (text && chatOpen()) Speaker.say(seat, text); },  // chat closed = no voice
   say: (seat, text) => Speaker.say(seat, text),
   stop: () => Speaker.stop()
 };
@@ -2793,7 +2794,15 @@ addEventListener("keyup", e => { if (e.code === "Space" && holding) { e.preventD
 addEventListener("keydown", e => { if (e.key === "Escape") Speaker.stop(); });
 
 addMic(document.getElementById("ask"));
-new MutationObserver(() => { const p = document.getElementById("oc"); if (p) addMic(p.querySelector("form")); }).observe(document.body, { childList: true });
+/* Close the chat (or start a new one) and the voice stops, and a reply still on its way stays silent. */
+function hush() { spoken = null; voiceNext = 0; Speaker.stop(); }
+let watched = null;
+new MutationObserver(() => {
+  const p = document.getElementById("oc"); if (!p || p === watched) return;
+  watched = p; addMic(p.querySelector("form"));
+  new MutationObserver(() => { if (!p.classList.contains("open")) hush(); }).observe(p, { attributes: true, attributeFilter: ["class"] });
+  p.addEventListener("click", e => { if (e.target.closest("#ocnew")) hush(); });
+}).observe(document.body, { childList: true });
 if (location.port === "4777") status(false);  // wakes the voices if they were set up before
 })();
 </script>

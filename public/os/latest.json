@@ -1,15 +1,15 @@
 {
  "version": "0.4.8",
  "update": "Update-your-Orbit.md",
- "notes": "Your Personal Assistant and Council now talk back, each in their own voice. Hold the mic, or hold Space, and just talk. Plus the Coach: open the sunrise door in your Council to build yours.",
+ "notes": "Your whole team now talks back, each in their own voice. Hold the mic, or hold Space, and just talk. Plus the Coach: open the sunrise door in your Council to build yours.",
  "team_since": "0.4.6",
  "hold": "2026-11-02T12:00:00Z",
  "show": "coach",
  "whatsnew": [
   {
    "icon": "spark",
-   "title": "Your Council talks back.",
-   "line": "Hold the mic, or Space, and talk. Let go to send. Each one answers in their own voice."
+   "title": "Your team talks back.",
+   "line": "Hold the mic, or Space, and talk. Let go to send. Everyone answers in their own voice."
   },
   {
    "icon": "sun",
@@ -30,7 +30,7 @@
  "changes": [
   {
    "id": "voices",
-   "title": "Your Personal Assistant, Mentor, Advisory Board and Coach answer out loud, each in their own voice, made free on your computer: hold the mic (or Space) to talk, let go to send, hold again to cut in",
+   "title": "Your Personal Assistant, Council and six helpers answer out loud, each in their own voice, made free on your computer: hold the mic (or Space) to talk, let go to send, hold again to cut in, close the chat to stop",
    "tag": "hub",
    "files": [
     "os/hub.html",
