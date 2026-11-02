@@ -1,0 +1,33 @@
+name: Orbit comment bot
+
+# Comment ORBIT on an Instagram post -> the Orbit link arrives by DM and the comment is hidden.
+# Script: scripts/orbit-dm/bot.py. Needs the repo secret IG_ACCESS_TOKEN.
+on:
+  schedule:
+    - cron: "*/5 * * * *" # every 5 minutes (GitHub can run it a few minutes late)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only report matches, send nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: orbit-dm
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/orbit-dm
+      - run: python3 scripts/orbit-dm/bot.py
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
