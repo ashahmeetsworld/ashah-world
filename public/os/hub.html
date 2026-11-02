@@ -2317,12 +2317,13 @@ addEventListener("message", e => { const d = e.data || {}; if (d.tour != null &&
   let L; try { L = await (await fetch(SITE + "latest.json", { cache: "no-store" })).json(); } catch (e) { return; }
   if (!L || !L.version || !newer(String(L.version), mine)) return;
   try { if (localStorage.getItem("orbit-later") === L.version) return; } catch (e) {}
+  if (L.hold && Date.now() < Date.parse(L.hold)) return;   // a release that goes live at a set time
   const file = SITE + (L.update || "Update-your-Orbit.md");
   const msg = `Upgrade my Orbit to v${L.version}. Read the update file in full: ${file} (if you can't fetch it, open it in a new tab through Claude in Chrome). Then follow it exactly, as if I'd dropped it in and typed start.`;
   document.body.insertAdjacentHTML("beforeend", `<div id="orbitNew" style="position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:95;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 32px);padding:10px 12px 10px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 94%,transparent);border:1px solid var(--hi);box-shadow:0 0 30px -8px color-mix(in srgb,var(--hi) 60%,transparent);color:var(--t);font:400 13.5px/1.4 system-ui,sans-serif">
     <span><b style="font-weight:600">Orbit v${esc(L.version)} is out.</b> ${esc(L.notes || "")}</span>
     <a href="#" id="onUp" class="pill on" style="margin:0">Upgrade</a><a href="${esc(file)}" download style="color:rgba(238,234,246,.7);font-size:12.5px">the file</a><a href="#" id="onLater" style="color:rgba(238,234,246,.6);font-size:12.5px">Later</a></div>`);
-  document.getElementById("onUp").onclick = ev => { ev.preventDefault(); openClaude("ops", msg); };
+  document.getElementById("onUp").onclick = ev => { ev.preventDefault(); if (typeof window.orbitUpgrade === "function") return window.orbitUpgrade(L, msg, mine); openClaude("ops", msg); };
   document.getElementById("onLater").onclick = ev => { ev.preventDefault(); try { localStorage.setItem("orbit-later", L.version); } catch (e) {} document.getElementById("orbitNew").remove(); };
 })();
 })();
@@ -2706,6 +2707,7 @@ function setCoach(c) {
   const clean = { few: (c.few || []).filter(x => x && (x.h || x.habit)).slice(0, 8).map(x => ({ a: String(x.a || x.area || "Physical").slice(0, 30), h: String(x.h || x.habit).slice(0, 80) })),
     extras: (c.extras || []).map(x => String(x).slice(0, 60)).filter(Boolean).slice(0, 6), week: Array.isArray(c.week) && c.week.length === 7 ? c.week.map(x => String(x || "").slice(0, 30)) : null,
     why: c.why ? String(c.why).slice(0, 200) : "" };
+  if (/^https:\/\/claude\.ai\/project\/[0-9a-f-]{36}/.test(String(c.project || ""))) { W().projects = Object.assign({}, W().projects || {}, { coach: String(c.project) }); if (typeof DATA !== "undefined" && DATA) DATA.projects = W().projects; }
   W().coach = clean; ORBIT.save(); put("orbit-coach-built", "1");
 }
 // the skip rule, per habit: skip one day, never two in a row; three in a row earns the pass back
@@ -2877,6 +2879,116 @@ if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; 
 @keyframes cdrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes cdsun{from{transform:translate(-50%,40%)}to{transform:translate(-50%,0)}}
 @media (prefers-reduced-motion:reduce){#coachDawn,#coachDawn h1,#coachDawn .cdsun{animation:none}}
+</style>
+
+<script>
+/* ---------- Orbit v0.4.7 · Upgrade inside the hub ----------
+   A hub-only release (latest.json "team_since" is older than theirs): a quick reload, then What's new.
+   A team release: the hub's engine runs the update on their own Claude plan (POST /api/upgrade) while the
+   Operations panel shows a glowing ring and each step; then What's new. No engine? The old way: a Claude tab. */
+(() => {
+const SITE = "https://ashahmeetsworld.github.io/ashah-world/os/";
+const HI = "#7FD8F0";
+const ON_ENGINE = location.protocol === "http:" && location.port === "4777";
+const H = { "Content-Type": "application/json", "X-Orbit-Hub": "1" };
+const newer = (a, b) => { a = String(a).split(".").map(Number); b = String(b).split(".").map(Number); for (let i = 0; i < Math.max(a.length, b.length); i++) { if ((a[i] || 0) !== (b[i] || 0)) return (a[i] || 0) > (b[i] || 0); } return false; };
+const EF = (u, o) => (typeof _f === "function" ? _f : window.fetch)(u, o);  /* past the hub's own /api shim, straight to the engine */
+const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const markDone = v => { ORBIT.world.orbit = String(v); ORBIT.save(); put("orbit-whatsnew", String(v)); put("orbit-later", String(v)); };
+const ICON = { sun: "☀", mail: "✉", spark: "✦", ring: "◎", door: "⌂" };
+
+window.orbitUpgrade = async function (L, msg, mine) {
+  const team = L.team_since && newer(L.team_since, mine);
+  let engine = false;
+  if (ON_ENGINE) { try { const r = await EF("/api/upgrade/status"); engine = r.ok; } catch (e) {} }
+  if (!team) {                                            // A · quick: fresh hub page, then What's new
+    document.getElementById("orbitNew")?.remove();
+    document.body.insertAdjacentHTML("beforeend", `<div id="upQuick"><span></span>Loading the new Orbit…</div>`);
+    if (engine) { try { await EF("/api/upgrade/hub", { method: "POST", headers: H, body: "{}" }); } catch (e) {} }
+    markDone(L.version); setTimeout(() => location.reload(), 900); return;
+  }
+  if (!engine) return openClaude("ops", msg);            // no engine on this computer: the update runs in a Claude tab
+  panel(L, mine);
+};
+
+/* C · the Operations panel, with B's glowing ring */
+function ring(pct) {
+  const c = 2 * Math.PI * 54, off = c * (1 - pct / 100);
+  return `<svg width="150" height="150" viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/>
+    <circle cx="70" cy="70" r="54" fill="none" stroke="${HI}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 70 70)" style="filter:drop-shadow(0 0 8px ${HI});transition:stroke-dashoffset .8s"/>
+    <circle cx="${70 + 54 * Math.sin(2 * Math.PI * pct / 100)}" cy="${70 - 54 * Math.cos(2 * Math.PI * pct / 100)}" r="5" fill="#EAFBFF" style="filter:drop-shadow(0 0 6px ${HI})"/>
+    <text x="70" y="78" text-anchor="middle" fill="#fff" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="26">${Math.round(pct)}%</text></svg>`;
+}
+async function panel(L, mine) {
+  document.getElementById("orbitNew")?.remove();
+  document.getElementById("upPanel")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div id="upPanel"><div class="uph"><b>Operations</b><span>Updating to v${esc(L.version)}</span><a href="#" id="upHide" title="Hide (it keeps going)">–</a></div>
+    <div class="upr">${ring(3)}</div><p class="upl">Upgrading your team now. Nothing you've made gets deleted. Keep working: this runs on its own, usually 5 to 10 minutes.</p><ul class="ups"></ul></div>`);
+  document.getElementById("upHide").onclick = ev => { ev.preventDefault(); document.getElementById("upPanel").classList.toggle("min"); };
+  let r;
+  try { r = await EF("/api/upgrade", { method: "POST", headers: H, body: JSON.stringify({ version: L.version, from: mine, update: SITE + (L.update || "Update-your-Orbit.md") }) }); } catch (e) {}
+  if (!r || !r.ok) return fail(r ? await r.text() : "The hub's engine didn't answer.");
+  poll(L);
+}
+function draw(st) {
+  const p = document.getElementById("upPanel"); if (!p) return;
+  const steps = st.steps || [], n = steps.length, pct = st.state === "done" ? 100 : Math.min(92, 6 + n * 11);
+  p.querySelector(".upr").innerHTML = ring(pct);
+  p.querySelector(".ups").innerHTML = steps.map((s, i) => `<li class="${i === n - 1 && st.state !== "done" ? "on" : "ok"}">${i === n - 1 && st.state !== "done" ? "◌" : "✓"} ${esc(s)}</li>`).join("") || `<li class="on">◌ Reading the update</li>`;
+}
+function fail(t) {
+  const p = document.getElementById("upPanel"); if (!p) return;
+  p.querySelector(".upl").innerHTML = `Something got in the way: ${esc(String(t || "").slice(0, 200))}. Nothing was changed. <a href="#" id="upRetry">Try again</a> or <a href="#" id="upTab">run it in Claude</a>.`;
+  document.getElementById("upRetry").onclick = ev => { ev.preventDefault(); location.reload(); };
+  document.getElementById("upTab").onclick = ev => { ev.preventDefault(); p.remove(); _openClaudeOut ? _openClaudeOut("ops", `Upgrade my Orbit. Read the update file in full: ${SITE}Update-your-Orbit.md and follow it exactly, as if I'd dropped it in and typed start.`) : 0; };
+}
+async function poll(L) {
+  let st; try { st = await (await EF("/api/upgrade/status", { cache: "no-store" })).json(); } catch (e) { return setTimeout(() => poll(L), 3000); }
+  draw(st);
+  if (st.state === "running") return setTimeout(() => poll(L), 2500);
+  if (st.state === "done") {
+    const p = document.getElementById("upPanel"); p.querySelector(".uph span").innerHTML = `<i style="color:#45E992;font-style:normal">✓ Done</i>`;
+    markDone(L.version); setTimeout(() => { p.remove(); whatsNew(L, st.later); }, 1400); return;
+  }
+  fail(st.error);
+}
+
+/* What's new, in B's glow */
+function whatsNew(L, later) {
+  const items = (L.whatsnew || []).slice(0, 4);
+  document.getElementById("upNew")?.remove();
+  document.body.insertAdjacentHTML("beforeend", `<div id="upNew"><div class="unin"><span class="caps">What's new · Orbit v${esc(L.version)}</span><h1>Your team just levelled up.</h1>
+    <ul>${items.map(x => `<li><span>${ICON[x.icon] || "✦"}</span><span><b>${esc(x.title)}</b> ${esc(x.line || "")}</span></li>`).join("")}</ul>
+    ${later ? `<p class="unlater">One thing for later: ${esc(later)}</p>` : ""}
+    <div class="unbtn">${L.show ? `<a href="#" class="go" id="unShow">Show me</a>` : ""}<a href="#" id="unOk">Got it</a></div></div></div>`);
+  const close = () => { put("orbit-whatsnew-seen", L.version); document.getElementById("upNew")?.classList.add("out"); setTimeout(() => document.getElementById("upNew")?.remove(), 500); };
+  document.getElementById("unOk").onclick = ev => { ev.preventDefault(); close(); };
+  const s = document.getElementById("unShow"); if (s) s.onclick = ev => { ev.preventDefault(); close(); location.hash = L.show; };
+}
+// after a quick reload: What's new once
+setTimeout(async () => {
+  const v = get("orbit-whatsnew"); if (!v || get("orbit-whatsnew-seen") === v || ORBIT.sample()) return;
+  let L; try { L = await (await fetch(SITE + "latest.json", { cache: "no-store" })).json(); } catch (e) { return; }
+  if (L && String(L.version) === v) whatsNew(L);
+}, 1200);
+})();
+</script>
+<style>
+#upQuick{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:96;display:flex;gap:10px;align-items:center;padding:10px 18px;border-radius:99px;background:color-mix(in srgb,var(--pane) 94%,transparent);border:1px solid var(--hi);color:var(--t);font:400 13.5px system-ui,sans-serif;box-shadow:0 0 30px -8px var(--hi)}
+#upQuick span{width:12px;height:12px;border-radius:50%;border:2px solid var(--hi);border-right-color:transparent;animation:upspin .8s linear infinite}@keyframes upspin{to{transform:rotate(360deg)}}
+#upPanel{position:fixed;top:0;right:0;bottom:0;z-index:111;width:min(420px,100vw);display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 24px;background:rgba(6,9,20,.97);border-left:1px solid color-mix(in srgb,#7FD8F0 35%,transparent);box-shadow:-20px 0 60px -30px #7FD8F0;color:var(--t);font:400 13.5px/1.55 var(--sans,system-ui);animation:upin .45s ease both}
+#upPanel.min{transform:translateX(calc(100% - 64px))}#upPanel .uph{display:flex;align-items:baseline;gap:12px;width:100%}#upPanel .uph b{font:italic 400 24px var(--serif);flex:1}#upPanel .uph span{color:var(--s);font-size:12px}#upPanel .uph a{color:var(--s);font-size:20px;text-decoration:none}
+#upPanel .upr{margin:22px 0 6px}#upPanel .upl{color:var(--s);text-align:center;margin:0 0 8px}#upPanel .upl a{color:#7FD8F0}
+#upPanel .ups{list-style:none;padding:0;margin:8px 0 0;width:100%;max-height:45vh;overflow:auto}#upPanel .ups li{padding:5px 0;border-top:1px solid rgba(255,255,255,.06)}#upPanel .ups li.ok{color:var(--t)}#upPanel .ups li.on{color:#7FD8F0}
+@keyframes upin{from{transform:translateX(100%)}to{transform:none}}
+#upNew{position:fixed;inset:0;z-index:10003;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at 50% 120%,rgba(127,216,240,.38),rgba(3,5,12,.96) 60%);backdrop-filter:blur(4px);animation:cdin 1s ease both;color:#EEEAF6;font:400 15px/1.55 'DM Sans',system-ui,sans-serif}
+#upNew.out{animation:cdout .5s ease both}#upNew .unin{width:min(580px,100%);text-align:center}
+#upNew .caps{letter-spacing:.28em;font-size:11px;color:#7FD8F0}#upNew h1{font:italic 400 clamp(38px,6vw,56px)/1.1 'Cormorant Garamond',Georgia,serif;margin:10px 0 16px}
+#upNew ul{list-style:none;padding:0;margin:0 auto 18px;text-align:left;display:inline-block}#upNew li{display:flex;gap:12px;margin:10px 0}#upNew li b{font:italic 400 20px 'Cormorant Garamond',serif;color:#fff}
+#upNew .unlater{color:rgba(238,234,246,.6);font-size:13px}#upNew .unbtn{display:flex;gap:10px;justify-content:center}
+#upNew .unbtn a{padding:11px 22px;border-radius:99px;border:1px solid rgba(255,255,255,.2);color:#EEEAF6;text-decoration:none}#upNew .unbtn a.go{border-color:#7FD8F0;box-shadow:0 0 22px -6px #7FD8F0;color:#EAFBFF}
+@keyframes cdin{from{opacity:0}to{opacity:1}}@keyframes cdout{to{opacity:0}}
 </style>
 
 </body>

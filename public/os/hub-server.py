@@ -246,6 +246,8 @@ class Handler(BaseHTTPRequestHandler):
         if p == "/api/quit":  # the start file uses this to switch to a new Orbit Hub folder
             self.send(200, "bye", "text/plain")
             return threading.Thread(target=self.server.shutdown, daemon=True).start()
+        if p == "/api/upgrade/status":
+            return self.send(200, json.dumps(up_status()), "application/json")
         if p == "/api/status":
             return self.send(200, json.dumps(status()), "application/json")
         if p.startswith("/out/"):
@@ -260,6 +262,16 @@ class Handler(BaseHTTPRequestHandler):
         # Only the hub page sends this header, so other websites can't use the chats.
         if self.headers.get("Host") not in HOSTS or "1" not in (self.headers.get("X-Orbit-Hub"), self.headers.get("X-AMW-Hub")):
             return self.send(403, "forbidden", "text/plain")
+        if self.path == "/api/upgrade/hub":
+            refresh_hub_page()
+            return self.send(200, json.dumps({"ok": True}), "application/json")
+        if self.path == "/api/upgrade":
+            try:
+                n = int(self.headers.get("Content-Length", 0))
+                start_upgrade(json.loads(self.rfile.read(n)) if 0 < n < 4000 else {})
+            except Exception:
+                return self.send(400, "bad upgrade", "text/plain")
+            return self.send(200, json.dumps(up_status()), "application/json")
         if self.path != "/api/chat":
             return self.send(404, "not found", "text/plain")
         try:
@@ -284,6 +296,120 @@ class Handler(BaseHTTPRequestHandler):
         finally:
             BUSY[hid] = False
         self.send(200, json.dumps(out), "application/json")
+
+
+# ---------- Upgrade inside the hub (Orbit v0.4.7) ----------
+# The hub's Update button runs the update here, on their own Claude plan, while the hub shows each step.
+# Claude works on a copy of the team folder (chats/upgrade/team); only when it finishes cleanly is the copy put back,
+# after a backup of the old one in <Orbit Hub>/backups. Nothing is ever deleted.
+SITE = "https://ashahmeetsworld.github.io/ashah-world/os/"
+UP_DIR = os.path.join(CHAT_DIR, "upgrade")
+UP = {"state": "idle", "error": "", "version": ""}
+
+UPGRADE = """You are their Orbit Operations helper, upgrading their Orbit team from inside their hub, on their own computer. They pressed Update in their hub: that is their OK for everything in the update file.
+Read the update file in full ({update}) and follow Part 1, in HUB MODE:
+- Their helpers' instructions live in ./upgrade/team/<helper id>.md (and ./upgrade/team/about.md is the shared CLAUDE.md). Refresh those files from Part 2, keeping every line they added or changed themselves. That is where the update lands.
+- Notion: make any changes the update asks for with the notion tools. Never delete, rename or overwrite anything they wrote.
+- No browser here: skip anything that needs Claude in Chrome (their claude.ai Projects) and skip making a zip or a fresh Orbit Hub folder (the hub updates itself). Don't ask them anything: there is nobody to answer. Fill blanks with a best guess marked [guess].
+- Progress: after each real step, append ONE short plain line to ./upgrade/progress.txt starting with "STEP: " (for example "STEP: Content's instructions refreshed"). Six to ten steps in all.
+- If something can only be done in Claude with Chrome (like their Projects' instructions), add one line "LATER: <what, in a few words>".
+- When everything is done, append "DONE: <one line on what changed>".
+Keep any reply to a single short line."""
+
+
+def up_lines():
+    try:
+        with open(os.path.join(UP_DIR, "progress.txt"), encoding="utf-8") as f:
+            return [l.strip() for l in f if l.strip()]
+    except OSError:
+        return []
+
+
+def up_status():
+    lines = up_lines()
+    later = [l[6:].strip() for l in lines if l.startswith("LATER:")]
+    return {"state": UP["state"], "error": UP["error"], "version": UP["version"],
+            "steps": [l[5:].strip() for l in lines if l.startswith("STEP:")][-14:], "later": "; ".join(later)[:200]}
+
+
+def fetch_site(name, dest):
+    import urllib.request
+    with urllib.request.urlopen(SITE + name, timeout=15) as r:
+        data = r.read()
+    if len(data) < 1000:
+        raise ValueError("too small")
+    tmp = dest + ".new"
+    with open(tmp, "wb") as f:
+        f.write(data)
+    os.replace(tmp, dest)
+
+
+def refresh_hub_page():
+    """The newest hub page from the Orbit site, the same one Start Orbit Hub fetches."""
+    try:
+        fetch_site("hub.html", os.path.join(HUB, "Your hub.html"))
+    except Exception:
+        pass
+    try:
+        fetch_site("hub-server.py", os.path.join(HERE, "hub-server.py"))  # used from the next start
+    except Exception:
+        pass
+
+
+def run_upgrade(version, update):
+    try:
+        exe = claude_bin()
+        if not exe:
+            raise RuntimeError("Claude Code isn't on this computer yet.")
+        if os.path.isdir(UP_DIR):
+            shutil.rmtree(UP_DIR)
+        os.makedirs(UP_DIR)
+        if os.path.isdir(TEAM_DIR):
+            shutil.copytree(TEAM_DIR, os.path.join(UP_DIR, "team"))
+        else:
+            os.makedirs(os.path.join(UP_DIR, "team"))
+        with open(os.path.join(UP_DIR, "progress.txt"), "w", encoding="utf-8") as f:
+            f.write("STEP: Read the update\n")
+        sync_team()
+        msg = f"Upgrade my Orbit to v{version}. Run it in hub mode, now."
+        cmd = [exe, "-p", msg, "--output-format", "json", "--append-system-prompt", UPGRADE.format(update=update),
+               "--allowedTools", "Read", "Glob", "Grep", "WebFetch", "Skill", "mcp__notion", "Edit(./upgrade/**)", "Write(./upgrade/**)",
+               "--disallowedTools", "Bash", "PowerShell", "NotebookEdit"]
+        env = {k: v for k, v in os.environ.items() if k not in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL")}
+        r = subprocess.run(cmd, cwd=CHAT_DIR, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=2400,
+                           creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        try:
+            out = json.loads(r.stdout)
+        except ValueError:
+            raise RuntimeError(friendly((r.stderr or r.stdout or "no answer came back").strip()))
+        if out.get("is_error"):
+            raise RuntimeError(friendly(str(out.get("result") or out.get("subtype") or "error")))
+        new_team = os.path.join(UP_DIR, "team")
+        if os.path.isdir(new_team) and os.listdir(new_team):
+            if os.path.isdir(TEAM_DIR):
+                stamp = time.strftime("%Y-%m-%d-%H%M")
+                shutil.copytree(TEAM_DIR, os.path.join(HUB, "backups", f"team-before-v{version}-{stamp}"))
+            shutil.copytree(new_team, TEAM_DIR, dirs_exist_ok=True)
+            sync_team()
+        refresh_hub_page()
+        with open(os.path.join(UP_DIR, "progress.txt"), "a", encoding="utf-8") as f:
+            f.write("STEP: Your hub page refreshed\n")
+        UP["state"] = "done"
+    except subprocess.TimeoutExpired:
+        UP["state"], UP["error"] = "error", "it took too long"
+    except Exception as e:
+        UP["state"], UP["error"] = "error", str(e)[:240]
+
+
+def start_upgrade(data):
+    version = str(data.get("version") or "")
+    update = str(data.get("update") or SITE + "Update-your-Orbit.md")
+    assert re.fullmatch(r"\d+\.\d+(\.\d+)?", version) and update.startswith(SITE)
+    with LOCK:
+        if UP["state"] == "running":
+            return
+        UP.update(state="running", error="", version=version)
+    threading.Thread(target=run_upgrade, args=(version, update), daemon=True).start()
 
 
 def main():

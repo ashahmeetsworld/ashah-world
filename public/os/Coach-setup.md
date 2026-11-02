@@ -71,6 +71,9 @@ They never have to open Notion to change anything: the hub's Coach room has an E
 5. **Daily log** (a table): Day (title, e.g. "Mon 3 Nov") · Date · Habit (relation to Habits) · Done (checkbox) · Note.
 6. **Look-backs** (a table): Week (title) · Date · Wins · Slipped · One tiny change.
 
+### 5b · The Coach's own Project (only if Claude in Chrome is on)
+So Coach chats outside the hub open in the right place, like their other helpers: in Chrome, open a new tab at claude.ai/projects and make a Project called **COUNCIL - Coach** (skip this if one exists; never rename or delete a Project). Paste into its instructions: the "How your Coach works" text from the Coach page, the section "After setup" below, and one line: "Their plan lives on the Coach page in their Notion: read it first, every chat." Note its link (claude.ai/project/...). Chrome off? Skip this quietly: chats inside the hub don't need it.
+
 ### 6 · Done (one message, 4 lines)
 > *Your Coach is ready.* [link to the Coach page]
 > Your daily few: [the habits, one line].
@@ -78,7 +81,7 @@ They never have to open Notion to change anything: the hub's Coach room has an E
 > Today's first tick is the easiest one: [the smallest habit]. Go.
 
 Then end that message with one last line, exactly this shape, on one line (the hub reads it to fill the Coach room and hides it):
-`COACH: {"why":"<their why>","few":[{"a":"Physical","h":"<habit>"},...],"extras":["<extra>",...],"week":["<Mon>","<Tue>","<Wed>","<Thu>","<Fri>","<Sat>","<Sun>"]}`
+`COACH: {"why":"<their why>","project":"<the COUNCIL - Coach Project link, or leave out>","few":[{"a":"Physical","h":"<habit>"},...],"extras":["<extra>",...],"week":["<Mon>","<Tue>","<Wed>","<Thu>","<Fri>","<Sat>","<Sun>"]}`
 Use the area names Physical, Spiritual, Mental, Emotional, Relational, Financial (or theirs). Leave `week` out if they have no rhythm. If this chat is in Claude rather than the hub, also say: "In your hub, open the Coach room and press Edit to put your few in, or it fills itself next time you chat there."
 
 ---
