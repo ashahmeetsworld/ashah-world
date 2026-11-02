@@ -57,6 +57,7 @@ const skills = [
         <a class="go aurora-line" href={u('/contact/')}><span class="t">Work with me</span> <Arrow /></a>
       </div>
     </div>
+    <div class="bars" aria-hidden="true"><span class="bar top"></span><span class="bar bot"></span></div>
     <p class="scroll label">Scroll · step inside</p>
   </section>
 
@@ -230,6 +231,16 @@ const skills = [
 </Base>
 
 <script>
+  // Title card bars (2 Nov 2026): they slide away over the first third of a screen of scrolling.
+  (() => {
+    const hero = document.querySelector('.hero') as HTMLElement | null;
+    if (!hero) return;
+    let raf = 0;
+    const set = () => { raf = 0; hero.style.setProperty('--open', Math.min(1, scrollY / (innerHeight * 0.35)).toFixed(3)); };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(set); }, { passive: true });
+    set();
+  })();
+
   import { wireAll } from '../lib/carousel';
   import { loadFeed, carousels, slidesOf } from '../lib/feed';
   // Phone swipe row for the skill cards: dots underneath show where you are; tap one to jump.
@@ -292,6 +303,25 @@ const skills = [
   @keyframes sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
   @media (max-width: 759px) { .hero-title { white-space: normal; font-size: clamp(64px, 18vw, 92px); } .hero-title .br { display: inline; } }
   @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
+  /* Title card (2 Nov 2026): you arrive in a cinema frame, the moon centred over your name. As you scroll, the black bars
+     slide away and the full night opens up. One light source (the moon), the name in its light, the figure on the jetty below. */
+  .hero :global(.hs) { --mx: 50% !important; --my: 21% !important; --moon: clamp(70px, 7vw, 104px) !important; }
+  .hero { align-items: start; --open: 0; }
+  .hero-copy { padding-top: calc(19vh + 96px); padding-bottom: 0; }
+  .hero-title { font-size: clamp(64px, 9.4vw, 164px); filter: drop-shadow(0 0 50px rgba(221, 232, 255, .35)); }
+  .hero .eyebrow { letter-spacing: .5em; font-size: 11px; }
+  .hero .lede { margin: 18px auto 26px; }
+  .bars { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+  .bar { position: absolute; left: 0; right: 0; height: 9vh; background: #03040A; will-change: transform; }
+  .bar.top { top: 0; transform: translateY(calc(-100% * var(--open))); }
+  .bar.bot { bottom: 0; transform: translateY(calc(100% * var(--open))); }
+  .hero .scroll { z-index: 4; bottom: calc(4.5vh - 6px); color: #9AA0C0; }
+  @media (max-width: 759px) {
+    .hero :global(.hs) { --my: 14% !important; }
+    .hero { align-items: end; }
+    .hero-copy { padding-top: 0; padding-bottom: 14vh; }
+    .bar { height: 6vh; }
+  }
   .hero .lede { margin: 28px 0 34px; }
   .ctas { display: flex; flex-wrap: wrap; gap: 14px 40px; }
   /* Work with me: same link, but its line of light is the Ubiquity aurora */
