@@ -15,7 +15,15 @@ import json, os, re, sys, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
 
 GRAPH = "https://graph.facebook.com/v21.0"
-TOKEN = os.environ.get("IG_ACCESS_TOKEN", "").strip()
+def clean_token(raw):
+    """Forgive paste slips: a copied 'IG_ACCESS_TOKEN=' prefix, quotes, spaces, line breaks."""
+    t = re.sub(r"\s+", "", raw or "")
+    if "=" in t and t.split("=", 1)[0].upper().endswith("TOKEN"):
+        t = t.split("=", 1)[1]
+    return t.strip("\"'`")
+
+
+TOKEN = clean_token(os.environ.get("IG_ACCESS_TOKEN", ""))
 IG_ID = os.environ.get("IG_USER_ID", "").strip() or "17841443383606084"
 DRY = os.environ.get("DRY_RUN", "") not in ("", "0", "false")
 LINK = "https://ashahmeetsworld.github.io/ashah-world/orbit/"
@@ -80,6 +88,8 @@ def main():
         return
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=WINDOW_DAYS)
+    # safe hint for debugging a bad paste: never prints the token itself
+    print(f"token check: {len(TOKEN)} characters, starts with {TOKEN[:2]!r}")
     media, err = api("GET", f"{IG_ID}/media", fields="id,timestamp,permalink", limit=25)
     if err:
         sys.exit(f"Could not read posts: {err.get('message')}")
