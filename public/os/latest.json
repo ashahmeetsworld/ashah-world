@@ -1,33 +1,66 @@
 {
- "version": "0.4.8",
+ "version": "0.4.9",
  "update": "Update-your-Orbit.md",
- "notes": "Your whole team now talks back, each in their own voice. Hold the mic, or hold Space, and just talk. Plus the Coach: open the sunrise door in your Council to build yours.",
+ "notes": "Every helper's page is new: one way in, then each one works its own way. Skills on every step, and chats that sit beside the page while it updates.",
  "team_since": "0.4.6",
  "hold": "2026-11-02T12:00:00Z",
- "show": "coach",
+ "show": "room/bd",
  "whatsnew": [
   {
    "icon": "spark",
-   "title": "Your team talks back.",
-   "line": "Hold the mic, or Space, and talk. Let go to send. Everyone answers in their own voice."
-  },
-  {
-   "icon": "sun",
-   "title": "A Coach in your Council.",
-   "line": "Your life outside work, kept strong. Open the sunrise door."
+   "title": "Every helper has a new page.",
+   "line": "Business Development, Customer Care and Content walk you one step at a time. Creative Director is a wall of shelves. Operations and Funnel sit in an orb."
   },
   {
    "icon": "ring",
-   "title": "Updates happen right here.",
-   "line": "Press Update and your hub does the rest, then shows you what's new."
+   "title": "Skills on every step.",
+   "line": "Each step and page has buttons for its jobs, like Scan for new people or Find the biggest drop. Tap one and the helper starts."
   },
   {
    "icon": "mail",
-   "title": "Your team talks to each other.",
-   "line": "You only hear what truly needs you."
+   "title": "Chats sit beside the page.",
+   "line": "The page moves over to make room, and redraws after every reply, so you watch the change land."
+  },
+  {
+   "icon": "sun",
+   "title": "A Today card on every page.",
+   "line": "The one thing that needs you, with Show me or Later."
   }
  ],
  "changes": [
+  {
+   "id": "helper-rooms",
+   "title": "Every helper page is rebuilt: the same way in from the wheel, then One step at a time (Business Development, Customer Care, Content), The wall (Creative Director) or The orb (Operations, Funnel), with a Today card on each",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "Each helper's page is cleaner, and each one works in the way that suits its job.",
+   "notice": "Open any helper from the wheel and you land on one clear Today card, then that helper's own layout."
+  },
+  {
+   "id": "helper-skills",
+   "title": "Skills on every pipeline step and on Brand DNA, the Codes, the Offer and ICP: tap one and the helper starts that job in a chat",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "Buttons for each job, right on the step or page it belongs to.",
+   "notice": "On a step like Discovered you'll see Scan for new people; tap it and the chat starts."
+  },
+  {
+   "id": "live-page",
+   "title": "While a chat is open the page moves over to sit beside it, and redraws after every reply",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "You see the page change while you talk.",
+   "notice": "Open a chat and the page slides left instead of hiding behind it."
+  },
   {
    "id": "voices",
    "title": "Your Personal Assistant, Council and six helpers answer out loud, each in their own voice, made free on your computer: hold the mic (or Space) to talk, let go to send, hold again to cut in, close the chat to stop",

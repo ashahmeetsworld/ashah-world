@@ -194,7 +194,7 @@
 <script src="orbit-world.js"></script>
 <script>
 /* Orbit v0.4 · your hub. Your world lives in this browser (and in your backup file). Nothing here reaches anyone else. */
-const ORBIT_VERSION = "0.4.8";
+const ORBIT_VERSION = "0.4.9";
 const ORBIT_KEY = "orbit-world";
 const ORBIT = (() => {
   const SAMPLE = {"orbit": "0.4.6", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "Your business", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds the people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who says yes, from hello to the next time."}, "fo": {"name": "Funnel", "line": "The site, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns your ideas into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like you."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free sign-up gift", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The sign-up gift is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0011", "title": "A café group", "url": "", "props": {"Status": "Qualified", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Studios", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "-2", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Business Development", "Date": "-3", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "In progress", "Kind": "Process", "Seat": "Content", "Date": "-6", "Checked": "-1", "Why": "One sitting instead of four"}}, {"id": "r4", "title": "Save the welcome email as a template", "url": "", "props": {"Status": "Done", "Kind": "Skill", "Seat": "Funnel", "Date": "-9", "Note": "Saved in Funnel's instructions"}}, {"id": "r5", "title": "A monthly check of old links", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Funnel", "Date": "-40", "SampleOld": true}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}, "mailbox": [{"id": "p1", "kind": "Update", "from": "cd", "to": "all", "text": "Captions now skip exclamation marks. It's in the brand rules.", "date": "-0", "status": "Open", "readBy": ["cd"]}, {"id": "p2", "kind": "Ask", "from": "bd", "to": "you", "text": "Two shops want a call this week. Which day suits you?", "date": "-1", "status": "Open", "readBy": ["bd"]}, {"id": "p3", "kind": "Ask", "from": "cp", "to": "cd", "text": "Is the new colour for headlines only, or buttons too?", "date": "-1", "status": "Open", "readBy": ["cp"]}, {"id": "p4", "kind": "Hub", "from": "cd", "to": "ops", "text": "A Brand board button in the Creative Director's room", "where": "Creative Director's room", "date": "-1", "status": "Open", "readBy": ["cd"]}, {"id": "p5", "kind": "Ask", "from": "cs", "to": "bd", "text": "What did the last client say about the price?", "date": "-3", "status": "Answered", "answer": "It felt fair for the time it saves.", "answeredBy": "bd", "answered": "-2", "readBy": ["cs", "bd"]}]}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Warm, clear and unhurried. Made with care."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Work that outlasts the moment it was made for."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who choose one good thing over five quick ones."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Make Monday to Thursday. Fridays for admin. Weekends off."}]};
@@ -3163,5 +3163,567 @@ setTimeout(async () => {
 @keyframes cdin{from{opacity:0}to{opacity:1}}@keyframes cdout{to{opacity:0}}
 </style>
 
+<script>/* Orbit v0.4.9 · helper skills (from A·M·W Hub, 3 Nov 2026) */
+/* A·M·W Hub · Helper skills v1.0 (3 Nov 2026)
+   One way to work with every helper: a skill is a button for one job. Tap it and a chat opens inside the hub
+   to do that job with you. The chat is saved where you tapped it, so you can pick it up again from there.
+   Three places skills live:
+   1. On each stage of a pipeline (Business Development, Client Success, Gigs and Jobs, Funnel OS's audit, Content Producer's month).
+   2. In one dock above the chat bar, with that room's own skills (the old Skills shelf, same skills.json).
+   3. Beside pages like Brand DNA, the Codes, the Offer and ICP, and the Operations and Creative Director tabs.
+   Loaded last. Wraps flowHTML, roomContent, wire, startChat, chatDraw, docPage, tabPage and route; nothing else changes.
+   Chats here are listed in this browser (localStorage "amw-place-chats"); the chat itself lives in Claude Code on this PC. */
+(function () {
+  if (typeof DEPTS === "undefined") return;
+
+  /* ---------- 1. skills for each stage ---------- */
+  const S = (label, prompt) => ({ label, prompt });
+  const STAGE_SKILLS = {
+    bd: {
+      "Discovered": [S("Scan for new people", "Run this week's prospect scan. Ask me where to look first if you need to, then add the people who fit to the Pipeline at Discovered, with my OK."), S("Score the fit", "Score the people at Discovered against the ICP. Tell me who to move on and who to drop.")],
+      "Qualified": [S("Find their pain points", "Research the pain points of the people at Qualified, one short line each.")],
+      "Signalling": [S("Write the first hellos", "Write the first touch for each person at Signalling, ready for my OK. Nothing gets sent.")],
+      "Engaged": [S("Draft the follow-ups", "Draft the next follow-up for each person at Engaged, ready for my OK.")],
+      "Shared Value": [S("Build a diagnostic deck", "Build a diagnostic pitch deck outline for one person at Shared Value. Ask me which one.")],
+      "Proposal": [S("Draft the proposal", "Draft the proposal for the person at Proposal. Ask me what to offer if you don't know.")],
+      "Conversation": [S("Prep my call", "Prep me for my next sales call: who they are, what they need, 3 questions to ask."), S("Debrief a call", "Debrief my last sales call with me, one question at a time, then update the Pipeline with my OK.")],
+    },
+    cs: {
+      "Hand-off": [S("Take the hand-off", "Take the hand-off from Business Development and set up the client in Clients, with my OK.")],
+      "Onboarding": [S("Onboard a client", "Run onboarding for the client at Onboarding: the welcome and the kickoff plan.")],
+      "Delivery": [S("Check-in", "Draft a check-in for the client at Delivery, ready for my OK.")],
+      "Wrap-up": [S("Ask for a testimonial", "Draft the testimonial ask for the client at Wrap-up, ready for my OK.")],
+      "Graded": [S("Grade and log lessons", "Grade the engagement and log the lessons, with my OK.")],
+    },
+    gj: {
+      "Shortlisted": [S("Scan for gigs and jobs", "Run the gig and job scan and shortlist the best fits, with my OK."), S("Tailor my resume", "Tailor my resume and cover letter for one shortlisted role. Ask me which one.")],
+      "Applied": [S("Follow up", "Draft a follow-up for applications sent 7 or more days ago, ready for my OK.")],
+      "Replied": [S("Draft my reply", "Draft my reply to the one that wrote back, ready for my OK.")],
+      "Interview": [S("Prep my interview", "Prep me for the interview: the role, likely questions, my best stories.")],
+      "Offer": [S("Weigh the offer", "Help me weigh the offer, plainly: what I get, what it costs me, my call.")],
+      "Declined": [S("What I learnt", "What can I learn from the ones that said no?")],
+      "Closed": [S("What I learnt", "What can I learn from the closed ones?")],
+    },
+    fo: {
+      "Pull numbers": [S("Pull this month's numbers", "Pull this month's funnel numbers, read only, and fill Funnel KPIs with my OK.")],
+      "Fill the map": [S("Fill the funnel map", "Fill the five stages of the funnel map from this month's numbers.")],
+      "Diagnose": [S("Find the biggest drop", "Find the biggest drop in the funnel this month and say why, plainly.")],
+      "Prescribe": [S("Write 2 to 3 fixes", "Write 2 to 3 fixes for the biggest drop. For each: what changes, what stays the same, and what saying no means.")],
+      "Approve": [S("Explain each fix", "Explain each fix I'm being asked to approve, in plain words, one at a time.")],
+      "Build": [S("Change a landing page", "Let's make an approved landing page change. Show me the plan first."), S("Change an email flow", "Let's make an approved change to an email flow. Show me the plan first.")],
+      "Measure": [S("Compare with last month", "Compare this month's funnel with last month: did the fixes work?")],
+    },
+    cp: {
+      "Worksheet": [S("Do the monthly worksheet", "Let's do this month's worksheet. Ask me the riff questions one at a time.")],
+      "Macro": [S("Hooks and scripts", "Write hooks and scripts for this month's macro pieces (YouTube and newsletter).")],
+      "Waterfall": [S("Waterfall it", "Waterfall this month's macro pieces into Instagram, LinkedIn and X.")],
+      "Drafts": [S("Field Notes carousel", "Make a Field Notes carousel from this month's drafts. Ask me which piece."), S("Shot list", "Make a shot list for this month's video.")],
+      "Scheduled": [S("Check the calendar", "Check this month's calendar: anything missing, clashing or not approved?")],
+    },
+  };
+  const stageNow = dp => {
+    if (dp.id === "cp") { const st = typeof monthState === "function" ? monthState() : null; const i = MS.sel ?? (st ? st.at : 0); return { name: CP_STAGES[i][0], items: [] }; }
+    const St = FS[dp.id]; if (!St) return null; const s = St.stages[St.sel]; if (!s) return null;
+    return { name: s[0], items: (St.items || []).filter(x => x.st === St.sel).map(x => x.t) };
+  };
+
+  /* ---------- 3. skills beside pages and tabs ---------- */
+  const PAGE_SKILLS = {
+    "doc/brand-dna": ["cd", [S("Sharpen the voice", "Read my last month of posts. Does Brand DNA match how I really talk? Suggest changes, one at a time, for my OK."), S("Score this month's posts", "Score this month's posted work against Brand DNA. One action for any strand under 4."), S("Talk it through", "Let's talk through Brand DNA. What feels out of date?")]],
+    "doc/codes": ["cd", [S("Check a piece against the Codes", "Check this piece against the Codes:"), S("Propose a Codes change", "I want to change the Codes. Ask me what and why, then write it up for the change queue.")]],
+    "doc/offer": ["bd", [S("Sharpen the offer", "Read the Offer and suggest the 3 changes that would make it easier to say yes to."), S("Check the price", "Check the Offer's price against who it's for. Plainly: too high, too low or right?"), S("Test it on a lead", "Test the Offer against one lead in the Pipeline. Ask me which one.")]],
+    "doc/icp": ["bd", [S("Sharpen it", "Read the ICP and sharpen it with me: who's in, who's out, how we score them. One change at a time."), S("Test a lead against it", "Test a lead against the ICP. Ask me which one."), S("Find where they hang out", "Where do the people in the ICP spend their time online and off? Plainly, with where to look first.")]],
+    "tab/cd/projects": ["cd", [S("Project brief", "Write a project brief with me. Ask me what the project is first.")]],
+    "tab/cd/lab": ["cd", [S("Creative lab", "Open the creative lab for a new campaign idea.")]],
+    "tab/cd/pinterest-scan": ["cd", [S("Monthly Pinterest scan", "Run this month's Pinterest scan.")]],
+    "tab/ops/sync": ["ops", [S("Sync check", "Run a sync check across the seats, the OS map and Notion.")]],
+    "tab/ops/routines": ["ops", [S("Check my routines", "Check the routines: what's overdue, what never runs, what to drop.")]],
+    "tab/ops/tool-stack": ["ops", [S("Tool stack review", "Review the tool stack: which seat uses which tool, and what's unused.")]],
+    "tab/ops/change-log": ["ops", [S("What changed this week", "Summarise what changed in the OS this week, plainly.")]],
+    "tab/ops/paste-backs": ["ops", [S("Turn them into one list", "Turn the waiting paste-back blocks into one clean list for me to approve.")]],
+  };
+  const pageName = key => { const d = { "doc/brand-dna": "Brand DNA", "doc/codes": "The Codes", "doc/offer": "The Offer", "doc/icp": "ICP" }[key]; if (d) return d; const t = key.split("/")[2] || ""; return t.replace(/-/g, " ").replace(/^./, c => c.toUpperCase()); };
+
+  /* ---------- chats saved where they started ---------- */
+  const LS = "amw-place-chats";
+  const ledger = () => { try { return JSON.parse(localStorage.getItem(LS) || "[]"); } catch (e) { return []; } };
+  const saveLedger = L => { try { localStorage.setItem(LS, JSON.stringify(L.slice(0, 300))); } catch (e) {} };
+  const chatsAt = place => ledger().filter(c => c.place === place && c.msgs && c.msgs.length).sort((a, b) => b.at - a.at);
+  const ago = t => { const m = Math.round((Date.now() - t) / 6e4); return m < 2 ? "just now" : m < 60 ? m + " min ago" : m < 1440 ? Math.round(m / 60) + " h ago" : Math.round(m / 1440) === 1 ? "yesterday" : Math.round(m / 1440) + " days ago"; };
+
+  const IS_ORBIT = typeof ORBIT !== "undefined";  // Orbit has its own side panel for chats
+  let PENDING = null;
+  if (!IS_ORBIT) startChat = function (skill, text) {
+    CHAT = { skill, sid: null, msgs: [], draft: text || "", back: location.hash || "#home" };
+    if (PENDING) { Object.assign(CHAT, PENDING, { cid: "c" + Date.now().toString(36) }); PENDING = null; }
+    saveChat(); location.hash = "#chat"; if (location.hash === "#chat") route();
+  };
+  function runAt(place, placeLabel, it, extra) {
+    if (!it) return;
+    PENDING = { place, placeLabel, title: it.label, back: "#" + (location.hash.replace("#", "") || "home") };
+    const text = (it.prompt || "") + (extra ? "\n\n" + extra : "");
+    if (typeof runSkill === "function" && (it.skill === "amw-mentor" || it.skill === "amw-advisory-board")) { PENDING = null; return runSkill(it); }
+    startChat(it.skill, text);
+  }
+  function resume(cid) {
+    const c = ledger().find(x => x.cid === cid); if (!c) return;
+    if (window.scResume) return window.scResume(c);
+    CHAT = { skill: c.skill, sid: c.sid, msgs: c.msgs, draft: "", back: location.hash || c.back, cid: c.cid, place: c.place, placeLabel: c.placeLabel, title: c.title };
+    saveChat(); location.hash = "#chat"; if (location.hash === "#chat") route();
+  }
+  const _chatDraw = chatDraw;
+  if (!IS_ORBIT) chatDraw = function (view) {
+    _chatDraw(view);
+    const C = CHAT; if (!C || !C.cid) return;
+    if (C.msgs.length) { const L = ledger().filter(x => x.cid !== C.cid); L.unshift({ cid: C.cid, place: C.place, placeLabel: C.placeLabel, back: C.back, title: C.title, skill: C.skill, sid: C.sid, msgs: C.msgs, at: Date.now() }); saveLedger(L); }
+    const m = view.querySelector(".lmsgs");
+    if (m && !view.querySelector(".hs-strip")) m.insertAdjacentHTML("beforebegin", `<div class="hs-strip"><span class="caps">✦ ${esc(C.title || "Skill")}</span><span>Saved under ${esc(C.placeLabel || "")}</span></div>`);
+  };
+
+  /* ---------- small builders ---------- */
+  const chipBtn = (place, i, it) => `<button class="hs-sk" data-hs="${esc(place)}|${i}" title="${esc(it.prompt || "")}">${esc(it.label)}</button>`;
+  const chatList = (place, max = 3) => { const cs = chatsAt(place); if (!cs.length) return ""; return `<div class="hs-chats"><span class="caps">Chats here</span>${cs.slice(0, max).map(c => `<button class="hs-chat" data-hsc="${esc(c.cid)}"><b>${esc(c.title || "Chat")}</b><em>${esc(ago(c.at))}</em></button>`).join("")}</div>`; };
+  const REG = {}; // place -> { label, skills:[{label,skill,prompt}], extra }
+
+  /* stage skills inside the Now card */
+  const _flowHTML = flowHTML;
+  flowHTML = function (dp) {
+    let html = _flowHTML(dp);
+    html = stripShelf(html);
+    const map = STAGE_SKILLS[dp.id], now = stageNow(dp); if (!map || !now) return html;
+    const list = (map[now.name] || []).map(x => Object.assign({ skill: dp.skill }, x));
+    const place = `stage/${dp.id}/${slug(now.name)}`, label = `${dp.name} › ${now.name}`;
+    REG[place] = { label, skills: list, extra: `Where we are: ${dp.name}, at ${now.name}.${now.items.length ? " Here now: " + now.items.slice(0, 12).join(", ") + "." : ""}` };
+    if (!list.length && !chatsAt(place).length) return html;
+    const block = `<div class="hs-stage"><span class="caps">Skills for ${esc(now.name)}</span><div class="hs-row">${list.map((it, i) => chipBtn(place, i, it)).join("")}</div>${chatList(place)}</div>`;
+    const at = html.indexOf('<div class="pills" style="margin-top:16px">');
+    return at < 0 ? html : html.slice(0, at) + block + html.slice(at);
+  };
+  /* the old Skills shelf card moves to the dock */
+  function stripShelf(html) { return html.replace(/<div class="card"[^>]*><div class="k"><svg[\s\S]*?<\/svg><span class="caps">Skills<\/span>[\s\S]*?<\/form><\/div>/, ""); }
+  const _roomContent = roomContent;
+  roomContent = function (dp) { return stripShelf(_roomContent(dp)); };
+
+  /* ---------- 2. the dock above the chat bar ---------- */
+  function dockFor(h) {
+    const [top, a, b] = h.split("/");
+    if (top === "room") { const dp = dpBy(a); if (!dp) return null; return { place: "room/" + dp.id, label: dp.name, shelf: dp.id, def: dp.skill, skills: ((DATA.skills || {})[dp.id] || []) }; }
+    if (top === "tab") { const k = `tab/${a}/${b}`, dp = dpBy(a); const own = (PAGE_SKILLS[k] || [null, []])[1].map(x => Object.assign({ skill: dp ? dp.skill : "amw-operations" }, x)); return dp ? { place: k, label: `${dp.name} › ${pageName(k)}`, skills: own.length ? own : ((DATA.skills || {})[dp.id] || []), def: dp.skill } : null; }
+    return null;
+  }
+  function drawDock() {
+    document.getElementById("hs-dock")?.remove(); document.body.classList.remove("hs-docked");
+    if (!DATA || DATA.setup) return;
+    const h = location.hash.replace("#", "") || "home", D = dockFor(h); if (!D || !D.skills.length && !D.shelf) return;
+    REG[D.place] = { label: D.label, skills: D.skills };
+    const chats = chatsAt(D.place);
+    document.body.insertAdjacentHTML("beforeend", `<div id="hs-dock"><span class="caps">Skills</span>${D.skills.map((it, i) => `<span class="hs-d">${chipBtn(D.place, i, it)}${D.shelf ? `<i class="hs-x" data-hsx="${i}" title="Take off">×</i>` : ""}</span>`).join("")}
+      ${D.shelf ? `<button class="hs-sk hs-add" data-hsadd title="Add a skill">+</button>` : ""}${chats.length ? `<button class="hs-sk hs-past" data-hspast>Past chats · ${chats.length}</button>` : ""}
+      ${D.shelf ? `<form class="hs-form"><input name="label" placeholder="Button name" required><input name="prompt" placeholder="What should it do?"><button class="pill on">Save</button></form>` : ""}
+      ${chats.length ? `<div class="hs-pop">${chatList(D.place, 8)}</div>` : ""}</div>`);
+    document.body.classList.add("hs-docked");
+    const dock = document.getElementById("hs-dock"); wireHS(dock);
+    dock.querySelector("[data-hsadd]")?.addEventListener("click", () => dock.classList.toggle("adding"));
+    dock.querySelector("[data-hspast]")?.addEventListener("click", () => dock.classList.toggle("past"));
+    dock.querySelectorAll("[data-hsx]").forEach(x => x.onclick = () => { if (!x.dataset.sure) { x.dataset.sure = 1; x.textContent = "remove?"; return; } DATA.skills[D.shelf].splice(+x.dataset.hsx, 1); saveSkills(); setTimeout(drawDock, 300); });
+    const f = dock.querySelector(".hs-form");
+    if (f) f.onsubmit = ev => { ev.preventDefault(); const v = Object.fromEntries(new FormData(f)); DATA.skills = DATA.skills || {}; (DATA.skills[D.shelf] = DATA.skills[D.shelf] || []).push({ label: v.label.trim(), skill: D.def, prompt: (v.prompt || "").trim() }); saveSkills(); setTimeout(drawDock, 300); };
+  }
+
+  /* ---------- 3. pages: skills and chats under the page head ---------- */
+  function pageBlock(key) {
+    const P = PAGE_SKILLS[key]; if (!P) return "";
+    const dp = dpBy(P[0]), list = P[1].map(x => Object.assign({ skill: dp.skill }, x)), label = pageName(key);
+    REG[key] = { label: `${dp.name} › ${label}`, skills: list, extra: `We're working on the ${label} page.` };
+    return `<div class="hs-page enter"><div><span class="caps">Skills for this page</span><div class="hs-row">${list.map((it, i) => chipBtn(key, i, it)).join("")}</div></div>${chatList(key, 4)}</div>`;
+  }
+  const _docPage = docPage;
+  docPage = async function (view, key) {
+    const p = _docPage(view, key);
+    const head = view.querySelector(".rh"); if (head && !view.querySelector(".hs-page")) { head.insertAdjacentHTML("afterend", pageBlock("doc/" + key)); wireHS(view.querySelector(".hs-page")); }
+    return p;
+  };
+
+  /* ---------- wiring ---------- */
+  function wireHS(el) {
+    if (!el || !el.querySelectorAll) return;
+    el.querySelectorAll("[data-hs]").forEach(b => b.onclick = ev => { ev.preventDefault(); ev.stopPropagation(); const [place, i] = b.dataset.hs.split("|"), R = REG[place]; if (!R) return; runAt(place, R.label, R.skills[+i], R.extra); });
+    el.querySelectorAll("[data-hsc]").forEach(b => b.onclick = ev => { ev.preventDefault(); ev.stopPropagation(); resume(b.dataset.hsc); });
+  }
+  const _wire = wire;
+  wire = function (el) { _wire(el); wireHS(el); };
+  const _route = route;
+  route = function () { _route(); setTimeout(drawDock, 20); };
+  window.removeEventListener("hashchange", _route);
+  window.addEventListener("hashchange", route);
+
+  /* ---------- look ---------- */
+  const css = document.createElement("style");
+  css.textContent = `
+  .hs-sk{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--b);background:var(--g2);border-radius:99px;padding:6px 14px;font-size:12px;color:var(--t);cursor:pointer;transition:border-color .2s,background .2s;white-space:nowrap}
+  .hs-sk:before{content:"✦";color:var(--c);font-size:10px}.hs-sk:hover{border-color:var(--c);background:var(--g1)}
+  .hs-add:before,.hs-past:before{content:none}.hs-add{padding:6px 12px}
+  .hs-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .hs-stage{margin-top:18px;padding-top:14px;border-top:1px solid var(--h)}
+  .hs-chats{margin-top:12px;display:flex;flex-direction:column;gap:2px}.hs-chats .caps{margin-bottom:4px}
+  .hs-chat{display:flex;gap:10px;align-items:baseline;text-align:left;padding:6px 0;border-top:1px solid var(--h);cursor:pointer;color:var(--t);background:none;border-left:0;border-right:0;border-bottom:0}
+  .hs-chat b{font:italic 400 15.5px var(--serif)}.hs-chat em{margin-left:auto;font-style:normal;font-size:11px;color:var(--s)}.hs-chat:hover b{color:var(--c)}
+  .hs-page{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin:0 0 22px;padding:16px 20px;border:1px solid var(--b);border-radius:14px;background:var(--g3)}
+  .hs-page .hs-chats{margin-top:0}
+  #hs-dock{position:fixed;left:50%;bottom:98px;transform:translateX(-50%);z-index:3;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;width:min(860px,calc(100% - 32px))}
+  #hs-dock>.caps{margin-right:4px}
+  #hs-dock .hs-sk{background:rgba(8,12,28,.78);backdrop-filter:blur(10px)}
+  .hs-d{position:relative;display:inline-flex}.hs-x{position:absolute;right:-6px;top:-8px;font-style:normal;font-size:11px;line-height:1;padding:3px 6px;border-radius:99px;background:rgba(8,12,28,.95);border:1px solid var(--h);color:var(--s);cursor:pointer;opacity:0;transition:opacity .2s}
+  .hs-d:hover .hs-x,.hs-x[data-sure]{opacity:1}
+  .hs-form,.hs-pop{display:none;position:absolute;bottom:46px;left:50%;transform:translateX(-50%);width:min(420px,100%);padding:14px;border:1px solid var(--b);border-radius:14px;background:rgba(8,12,28,.96);backdrop-filter:blur(14px);flex-direction:column;gap:8px}
+  .hs-form input{background:transparent;border:1px solid var(--h);border-radius:8px;padding:8px 10px;color:var(--t);font:13px var(--sans)}
+  #hs-dock.adding .hs-form,#hs-dock.past .hs-pop{display:flex}
+  body.hs-docked main{padding-bottom:190px}
+  body.hs-docked .notes{bottom:150px}
+  body.in-chat #hs-dock{display:none}
+  .hs-strip{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 4px 10px;border-bottom:1px solid var(--h);margin-bottom:10px;font-size:12px;color:var(--s)}.hs-strip .caps{color:var(--c)}
+  @media (max-width:760px){.hs-page{grid-template-columns:1fr}#hs-dock{bottom:94px}}`;
+  document.head.appendChild(css);
+
+  window.HS = { takePending: () => { const p = PENDING; PENDING = null; return p; }, STAGE_SKILLS, PAGE_SKILLS, REG, chipBtn, chatList, chatsAt, ledger, runAt, resume, wireHS, ago, pageName, stripShelf };
+  if (DATA) route();
+})();
+</script>
+<script>/* Orbit v0.4.9 · helper rooms (from A·M·W Hub, 3 Nov 2026) */
+/* A·M·W Hub · Helper rooms v1.0 (3 Nov 2026)
+   Every helper page is entered the same way (the Home wheel turns, then shrinks to the top), and every page
+   opens with the same spine: where you are, the helper's name and one line, a Today card, the Ask bar.
+   Below the spine, each helper works its own way:
+     One step at a time  Business Development, Client Success, Content Producer, Gigs and Jobs
+     The wall            Creative Director (shelves of the things it looks after)
+     The orb             Operations, Funnel OS (the helper in the middle, what it looks after around it)
+   Skills and chats come from helper-skills.js (loaded just before this file). Nothing else changes.
+   Undo: delete the helper-rooms.js line in index.html. */
+(function () {
+  if (typeof DEPTS === "undefined" || !window.HS) return;
+  const H = window.HS;
+  const KIND = { bd: "step", cs: "step", cp: "step", gj: "step", cd: "wall", ops: "orb", fo: "orb" };
+  const AMBER = "#F3B562";
+  const IS_ORBIT = typeof ORBIT !== "undefined";
+  const freshRecos = () => typeof recosNew === "function" ? recosNew() : typeof recoGroups === "function" ? recoGroups().fresh : (DATA.recos || []).filter(r => !r.props.Status || r.props.Status === "New");
+  const UI = { zoom: {}, orb: {}, more: {}, drawer: null };
+
+  /* ---------- small things ---------- */
+  const laterKey = id => "amw-hr-later-" + id + "-" + TODAY();
+  const isLater = id => { try { return localStorage.getItem(laterKey(id)) === "1"; } catch (e) { return false; } };
+  const setLater = id => { try { localStorage.setItem(laterKey(id), "1"); } catch (e) {} };
+  const machineFor = name => seatRows(name).slice().sort((a, b) => (a.props["Next due"] || "9") < (b.props["Next due"] || "9") ? -1 : 1);
+  const placeOfSeat = (dp, place) => place === "room/" + dp.id || place.startsWith("stage/" + dp.id + "/") || place.startsWith("tab/" + dp.id + "/") || place.startsWith("orb/" + dp.id + "/") || (place.startsWith("doc/") && (H.PAGE_SKILLS[place] || [])[0] === dp.id);
+  const seatChats = dp => H.ledger().filter(c => c.msgs && c.msgs.length && placeOfSeat(dp, c.place || "")).sort((a, b) => b.at - a.at);
+  const reg = (place, label, skills, extra) => { H.REG[place] = { label, skills, extra }; return place; };
+  const skillRow = (place, list) => list.length ? `<div class="hs-row">${list.map((it, i) => H.chipBtn(place, i, it)).join("")}</div>` : "";
+
+  /* ---------- the Today card: the one thing that matters on this page ---------- */
+  function today(dp) {
+    const F = FLOWS[dp.id];
+    if (dp.id === "cp") {
+      const { active, at } = monthState(); if (!active) return null;
+      const d = rowsOf("calendar").filter(r => r.props.Status === "Drafted").length;
+      return d ? { text: `${plural(d, "piece")} drafted and waiting for your OK.`, go: { stage: 3, label: "Show me" } } : { text: `${active.title} is at ${CP_STAGES[at][0]}. ${["Your riff starts the month.", "Big pieces first.", "Cut them into small posts.", "Words and artboards.", "The month is done."][at]}`, go: { stage: at, label: "Take me there" } };
+    }
+    if (KIND[dp.id] === "step" && F && !F.audit) {
+      const S = flowState(dp.id), n = F.now(S);
+      return n ? { text: n.title + ". " + n.body, go: { stage: n.stage, label: "Show me" } } : { text: "Nothing needs you here today.", quiet: true };
+    }
+    if (dp.id === "ops") {
+      const r = freshRecos().length, p = (DATA.waiting || []).filter(x => x.kind !== "Follow-up due").length;
+      if (r) return { text: `${plural(r, "tune-up")} ready. Each one says what changes before anything does.`, go: { orb: "tune-ups", label: "Show me" } };
+      if (p) return { text: `${plural(p, "write-up")} from the other helpers waiting for your OK.`, go: { orb: "waiting", label: "Show me" } };
+      return { text: "Everything's running.", quiet: true };
+    }
+    if (dp.id === "fo") {
+      const S = flowState("fo"), due = S.row && S.row.props["Next due"];
+      return S.sel === 6 ? { text: "This month's audit is done. The fixes get measured next month.", quiet: true } : { text: `The monthly funnel audit${due ? " is due " + fmt(due) : " is ready to run"}. About 20 minutes, with your OK before anything changes.`, go: { orb: "audit", label: "Start it" } };
+    }
+    if (dp.id === "cd") {
+      const m = machineFor("Creative")[0], ho = handoffsFor(dp.name)[0];
+      if (ho) return { text: `${ho.props.From || "Someone"} handed you "${ho.title}".`, go: { href: ho.url, label: "Open it" } };
+      return m ? { text: `Next up: ${m.title}${m.props["Next due"] ? ", " + fmt(m.props["Next due"]) : ""}.`, go: { href: "#tab/cd/pinterest-scan", label: "Get ready" } } : null;
+    }
+    return null;
+  }
+  function todayCard(dp) {
+    const t = today(dp); if (!t || isLater(dp.id)) return "";
+    const go = t.go ? (t.go.href ? `<a class="pill on" href="${esc(t.go.href)}"${/^http/.test(t.go.href) ? ' target="_blank" rel="noopener"' : ""}>${esc(t.go.label)}</a>` : `<button class="pill on" data-hrgo='${esc(JSON.stringify(t.go))}'>${esc(t.go.label)}</button>`) : "";
+    return `<div class="hr-today${t.quiet ? " quiet" : ""}"><span class="caps">Today</span><p>${esc(t.text)}</p>${t.quiet ? "" : `<div class="pills">${go}<button class="pill" data-hrlater>Later</button></div>`}</div>`;
+  }
+
+  /* ---------- the spine: the same on every helper page ---------- */
+  function spine(dp) {
+    const links = (dp.page ? [[NOTION + dp.page, "Notion page", 1]] : []).concat(dp.id === "bd" ? [["#doc/icp", "ICP"], ["#doc/offer", "The Offer"]] : [], dp.studio ? [["#studio", "Studio"]] : [], dp.id === "ops" ? [["#recos", "Recos"]] : []);
+    const n = seatChats(dp).length;
+    return `<div class="hr-spine hr-in"><div class="hr-id"><span class="caps eb">${ic("home", 12)}<a href="#home">Front Desk</a> · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
+      <div class="title"><span class="badge">${ic(dp.icon, 20)}</span><h1 class="serif">${esc(dp.name)}</h1></div><p>${esc(dp.line)}</p>
+      <div class="hr-links">${links.map(l => `<a href="${l[0]}"${l[2] ? ' target="_blank" rel="noopener"' : ""}>${esc(l[1])}</a>`).join("")}${IS_ORBIT ? `<button data-open="${dp.skill}">Chat →</button>` : `<button data-hrdrawer>${n ? `All ${n} chats →` : "Chats →"}</button>`}</div></div>
+      ${todayCard(dp)}</div>`;
+  }
+
+  /* ---------- 1. One step at a time ---------- */
+  function stepModel(dp) {
+    if (dp.id === "cp") {
+      const { active, at } = monthState(), sel = MS.sel ?? at, cal = rowsOf("calendar");
+      const piecesAt = i => i === 1 ? cal.filter(r => isMacro(r) && r.props.Status === "Idea") : i === 2 ? cal.filter(r => !isMacro(r) && r.props.Status === "Idea") : i === 3 ? cal.filter(r => ["Drafted", "Approved"].includes(r.props.Status)) : i === 4 ? cal.filter(r => r.props.Status === "Scheduled") : [];
+      const plain = [["Worksheet", "your riff for the month"], ["Big pieces", "YouTube and the newsletter"], ["Small pieces", "cut for Instagram, LinkedIn and X"], ["Drafts", "words and artboards"], ["Scheduled", "on the calendar"]];
+      return { month: true, active, at, sel, n: 5, name: i => plain[i][0], key: i => CP_STAGES[i][0], sub: i => plain[i][1], count: i => piecesAt(i).length, needs: at,
+        items: i => piecesAt(i).map(r => ({ t: r.title, s: [r.props.Platform, r.props.Status, fmt(r.props.Date)].filter(Boolean).join(" · "), url: r.url })),
+        line: i => i === at && active ? ["When your worksheet lands, add it here. Then the big pieces begin.", "The big pieces first, written from your riff.", "Cut the big pieces into small posts.", "Words go back and forth with Claude. Thumbnails and hook frames happen in the Studio.", "The month is done and its orb is lit."][i] : i < at ? "Done for this month." : "Comes after the step before it." };
+    }
+    const F = FLOWS[dp.id], S = flowState(dp.id), now = F.now(S);
+    return { S, F, sel: S.sel, n: S.stages.length, name: i => S.stages[i][0], key: i => S.stages[i][0], sub: i => S.stages[i][1], count: i => S.items.filter(x => x.st === i).length, needs: now ? now.stage : -1,
+      items: i => S.items.filter(x => x.st === i), last: i => i >= (F.lastMove ?? S.stages.length - 1),
+      line: i => now && now.stage === i ? now.body : S.items.some(x => x.st === i) ? "Move each one on when it's done here." : ((F.empty || {})[i] || "Nothing at this step right now.") };
+  }
+  function stepHTML(dp) {
+    const M = stepModel(dp), cur = M.sel, sAttr = M.month ? "data-mstage" : "data-stage";
+    const dots = `<div class="hr-dots">${Array.from({ length: M.n }, (_, i) => `<button class="${i === cur ? "on" : ""}${i === M.needs ? " needs" : ""}" ${sAttr}="${i}"><i></i>${esc(M.name(i))}${M.count(i) ? `<em>${M.count(i)}</em>` : ""}</button>`).join("")}</div>`;
+    const top = `<div class="hr-steptop">${dots}<div class="hr-toggle"><button data-hrzoom>${UI.zoom[dp.id] ? "Back to one step" : "All steps ⤢"}</button></div></div>`;
+    if (UI.zoom[dp.id]) return top + zoomHTML(dp, M, sAttr);
+    const place = reg(`stage/${dp.id}/${slug(M.key(cur))}`, `${dp.name} › ${M.name(cur)}`, ((H.STAGE_SKILLS[dp.id] || {})[M.key(cur)] || []).map(x => Object.assign({ skill: dp.skill }, x)),
+      `Where we are: ${dp.name}, at ${M.name(cur)}.${M.items(cur).length ? " Here now: " + M.items(cur).slice(0, 12).map(x => x.t).join(", ") + "." : ""}`);
+    reg(place + "#new", H.REG[place].label, [{ label: "Chat about " + M.name(cur), skill: dp.skill, prompt: `About ${M.name(cur)}:` }]);
+    const chats = H.chatsAt(place).slice(0, 4);
+    const tabs = `<div class="hr-tabs">${chats.map(c => `<button data-hsc="${esc(c.cid)}">${esc(c.title || "Chat")}<em>${esc(H.ago(c.at))}</em></button>`).join("")}<button class="new" data-hs="${esc(place)}#new|0">+ New chat</button></div>`;
+    const all = M.items(cur), cap = UI.more[dp.id] ? 400 : 18, xs = all.slice(0, cap);
+    const nextName = !M.month && cur < M.n - 1 ? M.S.stages[M.S.next(cur)][0] : "";
+    const chips = xs.map(x => `<div class="chip" ${x.url ? `data-row="${esc(x.url)}"` : ""} title="Open in Notion"${M.month || M.last(cur) ? ' style="padding-right:14px"' : ""}><b>${esc(x.t)}</b><em>${esc(x.s || "")}${x.due && x.due <= TODAY() && !M.month && cur < M.n - 1 ? " · due" : ""}</em>${M.month || M.last(cur) ? "" : `<i data-adv="${esc(x.id)}" title="Move to ${esc(nextName)}">→</i>`}</div>`).join("");
+    const more = all.length > cap ? `<button class="hr-more" data-hrmore>+ ${all.length - cap} more</button>` : "";
+    let actions = "";
+    if (M.month) {
+      const here = cur === M.at && M.active, next = CP_STAGES[M.at + 1], mName = M.active ? M.active.title.replace(/ \d{4}$/, "") : "";
+      const upload = here && M.at === 0 ? (DATA.writes ? `<div class="drop-ws"><label class="pill"><input type="file" id="ws-file" hidden>${ic("folder", 13)}Choose the file</label><span>or</span><input id="ws-link" placeholder="paste a link" autocomplete="off"><button class="pill on" id="ws-go">${ic("door", 13)}Add it and start</button></div><p class="hint" id="ws-msg"></p>` : `<p class="hint">Drop the worksheet on the ${esc(M.active.title)} row in Notion.</p>`) : "";
+      actions = upload + `<div class="pills">${here && M.at > 0 && next ? `<button class="pill on" data-mmove="${M.at + 1}">${M.at + 1 === 4 ? "Scheduled: light " + esc(mName) : "Move " + esc(mName) + " on"}</button>` : ""}${cur === 3 ? `<a class="pill" href="#studio">${ic("easel", 13)}Artboards in the Studio</a>` : ""}</div>`;
+    } else if (!M.last(cur)) actions = `<div class="pills"><button class="pill on" data-advall ${all.length ? "" : "disabled"}>Move all to ${esc(nextName)}</button></div>`;
+    const ghost = (i, side) => i < 0 || i >= M.n ? `<div class="hr-ghost ${side} empty"></div>` : `<button class="hr-ghost ${side}" ${sAttr}="${i}"><b class="serif">${esc(M.name(i))}</b><em>${M.count(i) ? M.count(i) + " here" : ""}</em></button>`;
+    const arrow = (i, d) => i < 0 || i >= M.n ? `<span class="hr-arrow-x"></span>` : `<button class="hr-arrow ${d}" ${sAttr}="${i}" title="${esc(M.name(i))}">${d === "l" ? "‹" : "›"}</button>`;
+    const sk = H.REG[place].skills;
+    const card = `<div class="card now hr-step"><div class="hr-sh"><h2 class="serif">${esc(M.name(cur))}</h2><span>Step ${cur + 1} of ${M.n}${M.sub(cur) ? " · " + esc(M.sub(cur)) : ""}</span></div>${tabs}
+      <p class="hr-line">${esc(M.line(cur))}</p>${chips ? `<div class="chips">${chips}${more}</div>` : ""}
+      ${sk.length ? `<div class="hr-skills"><span class="caps">Skills for this step</span>${skillRow(place, sk)}</div>` : ""}${actions}</div>`;
+    return top + `<div class="hr-stage">${ghost(cur - 1, "l")}${arrow(cur - 1, "l")}${card}${arrow(cur + 1, "r")}${ghost(cur + 1, "r")}</div>`;
+  }
+  function zoomHTML(dp, M, sAttr) {
+    const cards = Array.from({ length: M.n }, (_, i) => { const p = `stage/${dp.id}/${slug(M.key(i))}`, c = H.chatsAt(p).length;
+      return `<button class="hr-zc${i === M.needs ? " needs" : ""}${i === M.sel ? " on" : ""}" ${sAttr}="${i}"><span class="caps">Step ${i + 1}</span><b class="serif">${esc(M.name(i))}</b><em>${esc(M.sub(i))}</em><span class="hr-zn">${M.count(i) ? M.count(i) + " here" : "—"}${c ? ` · ${plural(c, "chat")}` : ""}</span></button>`; }).join("");
+    return `<div class="hr-zoom"><h3 class="serif">${esc(dp.name)}, start to finish</h3><p>Every step has its own chats. Tap one to step in.</p><div class="hr-zrow">${cards}</div></div>`;
+  }
+
+  /* ---------- 2. The wall (Creative Director) ---------- */
+  function wallHTML(dp) {
+    const m = machineFor("Creative"), find = re => m.find(r => re.test(r.title));
+    const chatsN = p => { const n = H.chatsAt(p).length; return n ? plural(n, "chat") : ""; };
+    const scan = find(/pinterest|scan/i), score = find(/score|dna/i);
+    const studio = ((DATA.skills || {})["studio-cd"] || []).length;
+    const ho = handoffsFor(dp.name);
+    const shelves = [
+      ["Sources of truth", "The rules everything else follows.", [["#doc/brand-dna", "Brand DNA", [score && score.props["Next due"] ? "next check " + fmt(score.props["Next due"]) : "", chatsN("doc/brand-dna")]], ["#doc/codes", "The Codes", ["colours, type, voice", chatsN("doc/codes")]]]],
+      ["Scans", "Your monthly look at what's out there.", [["#tab/cd/pinterest-scan", "Pinterest scan", [scan && scan.props["Next due"] ? "next " + fmt(scan.props["Next due"]) : "monthly", chatsN("tab/cd/pinterest-scan")]], ["#doc/brand-dna", "Brand DNA scorecard", ["after each scan"]]]],
+      ["Projects", "Briefs, shoots and the lab.", [["#tab/cd/projects", "Project briefs", [chatsN("tab/cd/projects") || "start one"]], ["#tab/cd/lab", "The lab", [chatsN("tab/cd/lab") || "this month's experiment"]], ["#studio", "In the Studio", [studio ? plural(studio, "skill") : "artboards"]]]],
+      ["For you", "What the other helpers handed over.", ho.length ? ho.slice(0, 3).map(r => [r.url || "#", r.title, ["from " + (r.props.From || "")]]) : [["", "Nothing handed over", ["you're all caught up"]]]],
+    ];
+    return `<div class="hr-wall hr-in2">${shelves.map(([h, p, tiles]) => `<div class="hr-shelf"><span class="caps">${esc(h)}</span><p>${esc(p)}</p>${tiles.map(([href, t, sub]) => href ? `<a class="hr-tile" href="${esc(href)}"${/^http/.test(href) ? ' target="_blank" rel="noopener"' : ""}><b class="serif">${esc(t)}</b><em>${esc(sub.filter(Boolean).join(" · "))}</em></a>` : `<div class="hr-tile quiet"><b class="serif">${esc(t)}</b><em>${esc(sub.join(""))}</em></div>`).join("")}</div>`).join("")}</div>`;
+  }
+
+  /* ---------- 3. The orb (Operations, Funnel OS) ---------- */
+  function orbItems(dp) {
+    if (dp.id === "ops") {
+      const r = freshRecos(), w = (DATA.waiting || []).filter(x => x.kind !== "Follow-up due"), all = DATA.machine_all || [], late = all.filter(x => x.props["Next due"] && x.props["Next due"] < TODAY() && !(x.props["Last done"] && x.props["Last done"] >= x.props["Next due"]));
+      return [
+        { k: "tune-ups", name: "Tune-ups", sub: r.length ? r.length + " ready" : "none right now", needs: r.length > 0, place: "orb/ops/tune-ups", skills: [{ label: "Explain them plainly", prompt: "Explain each new Reco plainly: what changes, what stays the same, what saying no means." }],
+          body: () => r.length ? r.slice(0, 6).map(x => `<div class="hr-row"><div><b>${esc(x.title)}</b><p>${esc(x.props.Why || "")}</p></div><button class="pill" data-open="amw-operations" data-text="${esc("Tell me about this Reco, plainly: what changes, what stays the same, what saying no means. " + x.title)}">Ask about it</button></div>`).join("") + `<p class="go"><a href="#recos">Pick which ones to do →</a></p>` : `<p class="empty">No tune-ups right now. The OS is running clean.</p>` },
+        { k: "routines", name: "Routines", sub: late.length ? late.length + " late" : all.length + " running", needs: late.length > 0, place: "tab/ops/routines",
+          body: () => all.length ? all.slice(0, 8).map(x => `<div class="hr-row"><div><b>${esc(x.title)}</b><p>${esc([x.props.Seat, x.props.Cadence].filter(Boolean).join(" · "))}</p></div><em class="${late.includes(x) ? "late" : ""}">${esc(fmt(x.props["Next due"]) || "")}</em></div>`).join("") + `<p class="go"><a href="#tab/ops/routines">The full list →</a></p>` : `<p class="empty">No routines on the tracker.</p>` },
+        { k: "waiting", name: "Waiting on you", sub: w.length ? w.length + " to OK" : "nothing", needs: w.length > 0 && !r.length, place: "tab/ops/paste-backs",
+          body: () => w.length ? w.slice(0, 6).map(x => `<div class="hr-row"><div><b>${esc(x.title)}</b><p>${esc(x.props.Seat || "")}</p></div><button class="pill" data-open="amw-operations" data-text="${esc("Apply “" + x.title + "”, with my OK at each change.")}">Do it with me</button></div>`).join("") : `<p class="empty">Nothing waiting.</p>` },
+        { k: "tools", name: "Tools", sub: "who uses what", place: "tab/ops/tool-stack", body: () => `<p>Every connector and which helper uses it. Ask Operations to check what's unused.</p>` },
+        { k: "changes", name: "Change log", sub: "what changed", place: "tab/ops/change-log", body: () => `<p>Every change to the OS, in plain words. Ask what changed this week.</p>` },
+      ];
+    }
+    const S = flowState("fo"), mags = rowsOf("magnets").slice().sort((a, b) => (+b.props["Sign-ups"] || 0) - (+a.props["Sign-ups"] || 0)), k = rowsOf("kpis");
+    return [
+      { k: "audit", name: "The audit", sub: S.sel === 6 ? "done this month" : "step " + (S.sel + 1) + " of 7", needs: S.sel < 6, place: `stage/fo/${slug(S.stages[S.sel][0])}`, skills: (H.STAGE_SKILLS.fo[S.stages[S.sel][0]] || []),
+        body: () => `<div class="hr-dots small">${S.stages.map((s, i) => `<button class="${i === S.sel ? "on" : ""}${i < S.sel ? " done" : ""}" data-hrfo="${i}"><i></i>${esc(s[0])}</button>`).join("")}</div><p>${esc(S.stages[S.sel][0])}: ${esc(S.stages[S.sel][1])}. Nothing on the site or in Brevo changes without your OK.</p><div class="pills"><button class="pill on" data-open="${dp.skill}" data-text="Run this month's funnel audit, from pulling the numbers to 2 to 3 fixes for my OK.">Start the audit</button></div>` },
+      { k: "funnel", name: "The funnel", sub: k.length ? plural(k.length, "stage") : "after the first audit", place: "orb/fo/funnel", skills: [{ label: "Where's the biggest drop?", prompt: "Look at the funnel with me. Where is the biggest drop right now, and why?" }], body: () => funnelCard().replace('style="grid-column:1 / -1"', "") },
+      { k: "magnets", name: "Lead magnets", sub: mags[0] ? (mags[0].props["Sign-ups"] || 0) + " on " + mags[0].title : "none yet", place: "orb/fo/magnets", skills: [{ label: "Which magnet is working?", prompt: "Compare my lead magnets: which one brings the most sign-ups, and what would lift the others?" }],
+        body: () => mags.length ? mags.slice(0, 6).map(m => `<div class="hr-row"><div><b>${esc(m.title)}</b></div><em>${esc(String(m.props["Sign-ups"] || 0))} sign-ups</em></div>`).join("") : `<p class="empty">No lead magnets yet.</p>` },
+      { k: "site", name: "Website", sub: "pages and landing pages", place: "orb/fo/site", skills: (H.STAGE_SKILLS.fo.Build || []).slice(0, 1), body: () => { const w = IS_ORBIT ? ((ORBIT.world || {}).you || {}).website : "https://ashahmeetsworld.github.io/ashah-world/"; return w ? `<p><a href="${esc(/^http/.test(w) ? w : "https://" + w)}" target="_blank" rel="noopener">Open your site ↗</a></p>` : `<p>Your site and landing pages. Every change shows you the plan first.</p>`; } },
+      { k: "emails", name: "Emails", sub: "your email flows", place: "orb/fo/emails", skills: (H.STAGE_SKILLS.fo.Build || []).slice(1, 2), body: () => `<p>The welcome flows and Letters. Every change shows you the plan first.</p>` },
+    ];
+  }
+  function orbHTML(dp) {
+    const items = orbItems(dp), sel = items.find(x => x.k === UI.orb[dp.id]);
+    const orb = big => `<div class="hr-orb${big ? "" : " small"}"><span>${esc(dp.name)}</span></div>`;
+    if (!sel) {
+      const n = items.length, R = 210;
+      const sats = items.map((it, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, x = Math.cos(a) * R, y = Math.sin(a) * R * .78;
+        return `<button class="hr-sat${it.needs ? " needs" : ""}" data-hrorb="${it.k}" style="left:calc(50% + ${x.toFixed(0)}px);top:calc(50% + ${y.toFixed(0)}px)"><i></i><b class="serif">${esc(it.name)}</b><em>${esc(it.sub)}</em></button>`; }).join("");
+      return `<div class="hr-orbit"><svg viewBox="-260 -200 520 400"><ellipse cx="0" cy="0" rx="210" ry="164" fill="none" stroke="var(--h)"/></svg>${orb(true)}${sats}</div>`;
+    }
+    const sk = (sel.skills || ((H.PAGE_SKILLS[sel.place] || [null, []])[1])).map(x => Object.assign({ skill: dp.skill }, x));
+    reg(sel.place, `${dp.name} › ${sel.name}`, sk, `We're looking at ${sel.name} in ${dp.name}.`);
+    return `<div class="hr-orbopen"><div class="hr-orbmenu">${orb(false)}${items.map(it => `<button class="${it === sel ? "on" : ""}${it.needs ? " needs" : ""}" data-hrorb="${it.k}">${esc(it.name)}<em>${esc(it.sub)}</em></button>`).join("")}<button class="back" data-hrorb="">← All of it</button></div>
+      <div class="card now hr-orbpanel"><div class="hr-sh"><h2 class="serif">${esc(sel.name)}</h2><span>${esc(sel.sub)}</span></div>${sel.body()}
+      ${sk.length ? `<div class="hr-skills"><span class="caps">Skills</span>${skillRow(sel.place, sk)}</div>` : ""}${H.chatList(sel.place, 4)}</div></div>`;
+  }
+
+  /* ---------- the chats drawer: every chat this helper has had ---------- */
+  function drawer(dp) {
+    document.getElementById("hr-drawer")?.remove();
+    const all = seatChats(dp), groups = [["Today", c => Date.now() - c.at < 864e5], ["This week", c => Date.now() - c.at < 7 * 864e5], ["Earlier", () => true]];
+    let left = all.slice(); const html = groups.map(([g, f]) => { const xs = left.filter(f); left = left.filter(c => !xs.includes(c)); return xs.length ? `<span class="caps">${g}</span>` + xs.map(c => `<button class="hr-dc" data-hsc="${esc(c.cid)}"><b>${esc(c.title || "Chat")}</b><em>${esc((c.placeLabel || "").split(" › ").slice(1).join(" › ") || dp.name)}</em></button>`).join("") : ""; }).join("");
+    document.body.insertAdjacentHTML("beforeend", `<div id="hr-drawer"><div class="hr-dh"><h3 class="serif">Every chat</h3><button data-hrclose>× Close</button></div><input placeholder="Search your chats…" id="hr-dq">
+      <div class="hr-dl">${html || `<p class="empty">No chats yet. Tap a skill, or + New chat on any step, and it'll be kept here.</p>`}</div>${`<button class="pill" data-open="${dp.skill}">+ New chat</button>`}</div>`);
+    const d = document.getElementById("hr-drawer"); H.wireHS(d); wire(d); requestAnimationFrame(() => d.classList.add("on"));
+    d.querySelector("[data-hrclose]").onclick = () => { d.classList.remove("on"); setTimeout(() => d.remove(), 300); };
+    d.querySelector("#hr-dq").oninput = e => { const q = e.target.value.toLowerCase(); d.querySelectorAll(".hr-dc").forEach(b => b.style.display = b.textContent.toLowerCase().includes(q) ? "" : "none"); };
+  }
+
+  /* ---------- putting it together ---------- */
+  const _roomContent = roomContent;
+  roomContent = function (dp) {
+    const kind = KIND[dp.id]; if (!kind) return _roomContent(dp);
+    const body = kind === "step" ? `<div id="flow" data-dp="${dp.id}" class="hr-in2">${flowHTML(dp)}</div>` : kind === "wall" ? wallHTML(dp) : `<div id="hr-orbwrap" class="hr-in2" data-dp="${dp.id}">${orbHTML(dp)}</div>`;
+    return (`<div class="hr-room hr-k-${kind}">` + spine(dp) + body + `</div>`).replace(/ style="--c:[^"]*"/g, "");
+  };
+  const _flowHTML = flowHTML;
+  flowHTML = function (dp) { return KIND[dp.id] === "step" ? stepHTML(dp) : _flowHTML(dp); };
+
+  function redrawHere(dp) {
+    if (KIND[dp.id] === "step") return redrawFlow(dp);
+    const w = document.getElementById("hr-orbwrap"); if (w) { w.innerHTML = orbHTML(dp); wire(w); }
+  }
+  window.HR = { redraw: dp => KIND[dp.id] === "wall" ? refresh() : redrawHere(dp), kind: id => KIND[id] };
+  const _wire = wire;
+  wire = function (el) {
+    _wire(el);
+    if (!el || !el.querySelectorAll) return;
+    const h = location.hash.replace("#", ""), dp = h.startsWith("room/") ? dpBy(h.split("/")[1]) : null; if (!dp || !KIND[dp.id]) return;
+    el.querySelectorAll("[data-hrzoom]").forEach(b => b.onclick = () => { UI.zoom[dp.id] = !UI.zoom[dp.id]; redrawFlow(dp); });
+    el.querySelectorAll("[data-hrmore]").forEach(b => b.onclick = () => { UI.more[dp.id] = 1; redrawFlow(dp); });
+    el.querySelectorAll("[data-stage],[data-mstage]").forEach(b => { const prev = b.onclick; b.onclick = ev => { UI.zoom[dp.id] = false; UI.more[dp.id] = 0; prev && prev(ev); }; });
+    el.querySelectorAll("[data-hrorb]").forEach(b => b.onclick = () => { UI.orb[dp.id] = b.dataset.hrorb || null; redrawHere(dp); });
+    el.querySelectorAll("[data-hrfo]").forEach(b => b.onclick = () => { const S = flowState("fo"); S.sel = +b.dataset.hrfo; redrawHere(dp); });
+    el.querySelectorAll("[data-hrdrawer]").forEach(b => b.onclick = () => drawer(dp));
+    el.querySelectorAll("[data-hrlater]").forEach(b => b.onclick = () => { setLater(dp.id); b.closest(".hr-today").classList.add("gone"); });
+    el.querySelectorAll("[data-hrgo]").forEach(b => b.onclick = () => {
+      const g = JSON.parse(b.dataset.hrgo);
+      if (g.orb) { UI.orb[dp.id] = g.orb; return redrawHere(dp); }
+      if (g.stage != null) { UI.zoom[dp.id] = false; if (dp.id === "cp") MS.sel = g.stage; else flowState(dp.id).sel = g.stage; redrawFlow(dp); document.getElementById("flow")?.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    });
+  };
+
+  /* ---------- look ---------- */
+  const css = document.createElement("style");
+  css.textContent = `
+  .hr-room{--amber:${AMBER};width:100%;max-width:1320px;margin:0 auto;box-sizing:border-box}
+  .pa.focus .stage{height:270px;min-height:0}
+  .hr-in{animation:hrUp .7s var(--ease,ease) .45s both}.hr-in2{animation:hrUp .8s var(--ease,ease) .65s both}
+  @keyframes hrUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .hr-spine{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,440px);gap:40px;align-items:start;margin:0 0 34px}
+  .hr-id .eb a{color:inherit;text-decoration:none}.hr-id .title{display:flex;align-items:center;gap:18px;margin:12px 0 10px}.hr-id h1{font-size:60px;line-height:1;margin:0}.hr-id>p{color:var(--s);margin:0 0 14px;font-size:14px}
+  .hr-links{display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px}.hr-links a,.hr-links button{color:var(--s);text-decoration:none;background:none;border:0;padding:0;cursor:pointer;font:inherit}.hr-links a:hover,.hr-links button:hover{color:var(--c)}.hr-links button{color:var(--c)}
+  .hr-today{border:1px solid rgba(243,181,98,.55);border-radius:14px;padding:16px 20px;background:linear-gradient(160deg,rgba(243,181,98,.10),rgba(8,12,28,.85) 70%);box-shadow:0 0 40px -14px var(--amber);transition:opacity .4s,transform .4s}
+  .hr-today .caps{color:var(--amber)}.hr-today p{margin:8px 0 12px;font-size:15px;line-height:1.5;color:var(--t)}.hr-today .pills{margin:0}
+  .hr-today.quiet{border-color:var(--h);box-shadow:none;background:transparent}.hr-today.quiet .caps{color:var(--s)}.hr-today.quiet p{margin-bottom:0;color:var(--s)}
+  .hr-today.gone{opacity:0;transform:translateY(-6px);pointer-events:none}
+  /* one step */
+  .hr-steptop{display:flex;align-items:center;gap:20px;margin:0 0 18px}
+  .hr-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;flex:1}
+  .hr-dots button{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:var(--s);font:13px var(--sans);cursor:pointer;padding:6px 0}
+  .hr-dots i{width:8px;height:8px;border-radius:50%;background:var(--c);opacity:.55}.hr-dots em{font-style:normal;font-size:11px;color:var(--s);border:1px solid var(--h);border-radius:99px;padding:0 7px}
+  .hr-dots button.on{color:var(--t)}.hr-dots button.on i{opacity:1;box-shadow:0 0 10px var(--c)}.hr-dots button.needs i{background:var(--amber);opacity:1;box-shadow:0 0 10px var(--amber)}
+  .hr-dots button.done i{opacity:.9}.hr-dots button.done{color:var(--t)}.hr-dots.small{justify-content:flex-start;gap:4px 16px;margin:4px 0 12px}
+  .hr-toggle button{background:none;border:0;color:var(--s);font:12.5px var(--sans);cursor:pointer;white-space:nowrap}.hr-toggle button:hover{color:var(--c)}
+  .hr-stage{display:grid;grid-template-columns:110px 40px minmax(0,1fr) 40px 110px;align-items:center;gap:14px}
+  .hr-ghost{align-self:stretch;min-height:260px;border:1px solid var(--h);border-radius:14px;background:rgba(8,12,28,.35);padding:18px 14px;text-align:left;cursor:pointer;color:var(--s);display:flex;flex-direction:column;gap:6px;opacity:.6;transition:opacity .3s}
+  .hr-ghost:hover{opacity:1}.hr-ghost b{font-size:20px;font-weight:400;font-style:italic;color:var(--t)}.hr-ghost em{font-style:normal;font-size:12px}.hr-ghost.r{text-align:right;align-items:flex-end}.hr-ghost.empty{border:0;background:none;cursor:default}
+  .hr-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--b);background:rgba(8,12,28,.7);color:var(--t);font-size:20px;cursor:pointer}.hr-arrow:hover{border-color:var(--c)}
+  .hr-step{padding:26px 30px;min-height:300px}
+  .hr-sh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}.hr-sh h2{font-size:40px;margin:0;font-weight:400;font-style:italic}.hr-sh span{color:var(--s);font-size:13px}
+  .hr-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}.hr-tabs button{border:1px solid var(--b);background:var(--g2);color:var(--t);border-radius:99px;padding:6px 14px;font:13px var(--sans);cursor:pointer;display:inline-flex;gap:8px;align-items:baseline}
+  .hr-tabs em{font-style:normal;font-size:11px;color:var(--s)}.hr-tabs button:hover{border-color:var(--c)}.hr-tabs .new{background:transparent;border-style:dashed;color:var(--s)}
+  .hr-line{font-size:15.5px;color:var(--t);margin:14px 0 6px;max-width:720px;line-height:1.5}
+  .hr-more{border:1px dashed var(--h);background:none;color:var(--s);border-radius:10px;padding:10px 14px;cursor:pointer;font:13px var(--sans)}
+  .hr-skills{margin-top:18px;padding-top:14px;border-top:1px solid var(--h)}.hr-step .pills,.hr-orbpanel .pills{margin-top:16px}
+  .hr-zoom{text-align:center}.hr-zoom h3{font-size:30px;font-weight:400;font-style:italic;margin:6px 0 4px}.hr-zoom>p{color:var(--s);font-size:13px;margin:0 0 22px}
+  .hr-zrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .hr-zc{display:flex;flex-direction:column;gap:6px;text-align:left;padding:16px;border:1px solid var(--b);border-radius:12px;background:rgba(8,12,28,.7);color:var(--t);cursor:pointer;min-height:150px;transition:border-color .2s,transform .2s}
+  .hr-zc:hover{border-color:var(--c);transform:translateY(-2px)}.hr-zc b{font-size:20px;font-weight:400;font-style:italic}.hr-zc em{font-style:normal;font-size:12px;color:var(--s)}.hr-zn{margin-top:auto;font-size:12px;color:var(--c)}
+  .hr-zc.needs{border-color:var(--amber);box-shadow:0 0 30px -10px var(--amber)}.hr-zc.needs .hr-zn{color:var(--amber)}
+  /* the wall */
+  .hr-wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+  .hr-shelf>.caps{color:var(--c)}.hr-shelf>p{color:var(--s);font-size:13px;margin:6px 0 14px;min-height:36px}
+  .hr-tile{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(160deg,var(--g2),rgba(8,12,28,.8));color:var(--t);text-decoration:none;transition:border-color .2s,transform .2s}
+  .hr-tile:hover{border-color:var(--c);transform:translateY(-2px)}.hr-tile b{font-size:20px;font-weight:400;font-style:italic}.hr-tile em{font-style:normal;font-size:12px;color:var(--s)}.hr-tile.quiet{opacity:.55;border-style:dashed}
+  /* the orb */
+  .hr-orbit{position:relative;height:470px;max-width:760px;margin:0 auto}.hr-orbit svg{position:absolute;inset:0;width:100%;height:100%}
+  .hr-orb{position:absolute;left:50%;top:50%;width:190px;height:190px;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 34% 30%,#fff 0,var(--c) 22%,rgba(8,12,28,.9) 78%);box-shadow:0 0 90px -10px var(--c);animation:hrBreath 6s ease-in-out infinite}
+  .hr-orb span{font:15px var(--sans);color:#03050C;font-weight:500}.hr-orb.small{position:relative;left:auto;top:auto;transform:none;width:84px;height:84px;margin:0 auto 18px;animation:none}.hr-orb.small span{display:none}
+  @keyframes hrBreath{50%{box-shadow:0 0 120px -6px var(--c)}}
+  .hr-sat{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--t);cursor:pointer;padding:6px}
+  .hr-sat i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--c);background:rgba(8,12,28,.9);margin-bottom:4px}.hr-sat b{font-size:20px;font-weight:400;font-style:italic}.hr-sat em{font-style:normal;font-size:12px;color:var(--s)}
+  .hr-sat:hover i{background:var(--c)}.hr-sat.needs i{border-color:var(--amber);box-shadow:0 0 14px var(--amber)}.hr-sat.needs em{color:var(--amber)}
+  .hr-orbopen{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:start}
+  .hr-orbmenu{display:flex;flex-direction:column}.hr-orbmenu button{display:flex;flex-direction:column;text-align:left;background:none;border:0;border-top:1px solid var(--h);padding:10px 2px;color:var(--s);cursor:pointer;font:italic 18px var(--serif)}
+  .hr-orbmenu button em{font:normal 11.5px var(--sans);color:var(--s)}.hr-orbmenu button.on{color:var(--t)}.hr-orbmenu button.needs em{color:var(--amber)}.hr-orbmenu .back{font:12.5px var(--sans);color:var(--c)}
+  .hr-orbpanel{padding:24px 28px}.hr-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 0;border-top:1px solid var(--h)}
+  .hr-row b{font-weight:500}.hr-row p{margin:2px 0 0;color:var(--s);font-size:12.5px}.hr-row em{font-style:normal;font-size:12px;color:var(--s);white-space:nowrap}.hr-row em.late{color:var(--amber)}
+  .hr-orbpanel>p{color:var(--s);font-size:14px}.hr-orbpanel .go a{color:var(--c)}
+  /* the chats drawer */
+  #hr-drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);z-index:60;padding:26px 24px;background:rgba(10,14,34,.97);border-left:1px solid var(--b);backdrop-filter:blur(16px);transform:translateX(100%);transition:transform .3s var(--ease,ease);display:flex;flex-direction:column;gap:12px}
+  #hr-drawer.on{transform:none}.hr-dh{display:flex;justify-content:space-between;align-items:baseline}.hr-dh h3{font-size:26px;font-weight:400;font-style:italic;margin:0}.hr-dh button{background:none;border:0;color:var(--s);cursor:pointer;font:12px var(--sans)}
+  #hr-dq{background:transparent;border:1px solid var(--h);border-radius:99px;padding:9px 14px;color:var(--t);font:13px var(--sans)}
+  .hr-dl{flex:1;overflow:auto;display:flex;flex-direction:column}.hr-dl .caps{margin:14px 0 4px}
+  .hr-dc{display:flex;justify-content:space-between;gap:10px;align-items:baseline;text-align:left;background:none;border:0;border-top:1px solid var(--h);padding:9px 0;color:var(--t);cursor:pointer}
+  .hr-dc b{font:italic 400 16px var(--serif)}.hr-dc em{font-style:normal;font-size:11px;color:var(--c);white-space:nowrap}.hr-dc:hover b{color:var(--c)}
+  @media (max-width:1100px){.hr-stage{grid-template-columns:40px minmax(0,1fr) 40px}.hr-ghost{display:none}.hr-wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:760px){.hr-spine{grid-template-columns:1fr;gap:18px}.hr-id h1{font-size:42px}.hr-stage{grid-template-columns:1fr}.hr-arrow{display:none}.hr-wall{grid-template-columns:1fr}
+    .hr-orbit{height:auto;display:flex;flex-direction:column;align-items:center;gap:10px}.hr-orbit svg{display:none}.hr-orbit .hr-orb{position:relative;left:auto;top:auto;transform:none;width:130px;height:130px;margin-bottom:10px}.hr-sat{position:static;transform:none}
+    .hr-orbopen{grid-template-columns:1fr}.hr-steptop{flex-direction:column}}`;
+  document.head.appendChild(css);
+
+  if (DATA) route();
+})();
+</script>
+<script>/* Orbit v0.4.9 · live page (from A·M·W Hub, 3 Nov 2026) */
+/* Orbit v0.4.9 · the page stays beside the chat and updates live.
+   Chats already open in Orbit's side panel. Now the page moves over to make room for it (on wide screens),
+   and after every reply the hub redraws from your world as it is now: a helper page redraws only its working
+   part, so nothing replays its entrance. */
+(function () {
+  if (typeof orbitRefresh !== "function") return;
+  orbitRefresh = async function () {
+    try {
+      const sels = {}; Object.keys(FS || {}).forEach(k => sels[k] = FS[k].sel);
+      DATA = await (await fetch("/api/hub")).json();
+      FS = {}; Object.keys(sels).forEach(k => { try { const S = flowState(k); if (sels[k] != null && sels[k] < S.stages.length) S.sel = sels[k]; } catch (e) {} });
+      const h = location.hash.replace("#", "") || "home", [top, a] = h.split("/"), dp = top === "room" ? dpBy(a) : null;
+      if (dp && window.HR && HR.kind(dp.id)) HR.redraw(dp);
+      else { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }
+    } catch (e) {}
+  };
+  // after each reply lands in the panel, redraw the page behind it
+  let seen = 0;
+  const watch = () => {
+    const box = document.querySelector("#oc .ocm"); if (!box || box.dataset.live) return !!box;
+    box.dataset.live = 1;
+    new MutationObserver(() => {
+      const n = box.querySelectorAll(".ocb.ai:not(.think)").length;
+      if (n > seen && !box.querySelector(".think")) { seen = n; orbitRefresh(); } else if (n < seen) seen = n;
+    }).observe(box, { childList: true });
+    return true;
+  };
+  const t = setInterval(() => { if (watch()) clearInterval(t); }, 800);
+  const st = document.createElement("style");
+  st.textContent = `@media (min-width:1100px){body:has(#oc.open) main{padding-right:480px;transition:padding .5s}}
+  body:has(#oc.open) #ask, body:has(#oc.open) #hs-dock{opacity:0;pointer-events:none}`;
+  document.head.appendChild(st);
+})();
+</script>
 </body>
 </html>
