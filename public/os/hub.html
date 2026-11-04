@@ -189,12 +189,12 @@
   <main id="view"><p class="empty" style="margin-top:20vh;text-align:center">Opening the doors…</p></main>
 </div>
 <form class="ask" id="ask"><input id="q" autocomplete="off" placeholder="Ask your Personal Assistant…" aria-label="Ask"><button>ENTER</button></form>
-<div class="foot">Orbit v0.4.6</div>
+<div class="foot">Orbit v0.5</div>
 
 <script src="orbit-world.js"></script>
 <script>
 /* Orbit v0.4 · your hub. Your world lives in this browser (and in your backup file). Nothing here reaches anyone else. */
-const ORBIT_VERSION = "0.4.9";
+const ORBIT_VERSION = "0.5.0";
 const ORBIT_KEY = "orbit-world";
 const ORBIT = (() => {
   const SAMPLE = {"orbit": "0.4.6", "guides": {"brand": "In progress"}, "you": {"first_name": "", "name": "Sample", "brand": "Your business", "website": ""}, "values": ["Craft", "Warmth", "Patience", "Play", "Honesty", "Community", "Freedom"], "helpers": {"bd": {"name": "Business Development", "line": "Finds the people who'd love the work."}, "cs": {"name": "Customer Care", "line": "Looks after everyone who says yes, from hello to the next time."}, "fo": {"name": "Funnel", "line": "The site, the sign-up gift and the emails."}, "cp": {"name": "Content", "line": "Turns your ideas into posts, in your words."}, "cd": {"name": "Creative Director", "line": "Keeps every piece looking and sounding like you."}, "ops": {"name": "Operations", "line": "Keeps it all running, and guards the weekends."}}, "projects": {}, "hub": {"live": [{"id": "demo0001", "title": "Free sign-up gift", "url": "", "props": {"Status": "Live", "Type": "Lead magnet", "Owner": "Funnel"}}], "handoffs": [{"id": "demo0002", "title": "The sign-up gift is live: point posts to it", "url": "", "props": {"From": "Funnel", "To": "Content, Business Development", "Status": "Open"}}], "machine": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-11-09"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "machine_all": [{"id": "demo0005", "title": "Sync check", "url": "", "props": {"Seat": "Operations", "Cadence": "Weekly", "Last done": "2026-10-24", "Next due": "2026-10-31"}}, {"id": "demo0004", "title": "Weekly prospect scan", "url": "", "props": {"Seat": "Business Development", "Cadence": "Weekly", "Last done": "2026-10-26", "Next due": "2026-11-02"}}, {"id": "demo0006", "title": "Monthly funnel audit", "url": "", "props": {"Seat": "Funnel", "Cadence": "Monthly", "Last done": "2026-10-10", "Next due": "2026-10-28"}}, {"id": "demo0003", "title": "Monthly worksheet", "url": "", "props": {"Seat": "Content", "Cadence": "Monthly", "Last done": "2026-10-15", "Next due": "2026-11-15"}}], "waiting": [{"id": "demo0007", "title": "Brand: one line on the feel", "url": "", "props": {"Status": "Waiting", "Seat": "Creative Director"}, "kind": "Paste-back to approve"}, {"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-11-01", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}, "kind": "Follow-up due"}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}, "kind": "Follow-up due"}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "flows": {"pipeline": [{"id": "demo0008", "title": "A local studio", "url": "", "props": {"Status": "Engaged", "Next date": "2026-10-30", "Next step": "Send the diagnostic", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0009", "title": "A small shop", "url": "", "props": {"Status": "Signalling", "Next date": "2026-11-04", "Next step": "Comment on their latest post", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0010", "title": "A record label", "url": "", "props": {"Status": "Discovered", "Lane": "Retail", "Tier": "B"}}, {"id": "demo0011", "title": "A café group", "url": "", "props": {"Status": "Qualified", "Lane": "Retail", "Tier": "A"}}, {"id": "demo0012", "title": "A gallery", "url": "", "props": {"Status": "Shared Value", "Lane": "Studios", "Tier": "A"}}, {"id": "demo0013", "title": "An independent artist", "url": "", "props": {"Status": "Discovered", "Lane": "Music", "Tier": "C"}}], "calendar": [{"id": "demo0014", "title": "Behind the scenes: the making", "url": "", "props": {"Date": "2026-11-01", "Platform": "Instagram", "Status": "Drafted"}}, {"id": "demo0015", "title": "Why we do it slowly", "url": "", "props": {"Date": "2026-11-04", "Platform": "LinkedIn", "Status": "Idea"}}, {"id": "demo0016", "title": "Newsletter: this month's letter", "url": "", "props": {"Date": "2026-11-05", "Platform": "Newsletter", "Status": "Approved"}}], "clients": [{"id": "demo0017", "title": "Sample pilot", "url": "", "props": {"Status": "Onboarding", "Next action": "Kick-off call", "Proof permission": "Not asked"}}], "kpis": [{"id": "demo0020", "title": "Reach", "url": "", "props": {"Order": "0", "Metric": "Views", "This month": 1800, "Last month": 1500}}, {"id": "demo0021", "title": "Visit", "url": "", "props": {"Order": "1", "Metric": "Site visits", "This month": 240, "Last month": 190}}, {"id": "demo0022", "title": "Join", "url": "", "props": {"Order": "2", "Metric": "Sign-ups", "This month": 18, "Last month": 11}}, {"id": "demo0023", "title": "Nurture", "url": "", "props": {"Order": "3", "Metric": "Opens", "This month": 64, "Last month": 52}}, {"id": "demo0024", "title": "Converse", "url": "", "props": {"Order": "4", "Metric": "Conversations", "This month": 3, "Last month": 2}}], "magnets": [{"id": "demo0025", "title": "Orbit", "url": "", "props": {"Status": "Live", "Sign-ups": 18}}], "campaigns": [{"id": "demo0026", "title": "Nov 2026", "url": "", "props": {"Status": "Planning", "Stage": "Drafts"}}, {"id": "demo0027", "title": "Dec 2026", "url": "", "props": {"Status": "Planning", "Stage": "Worksheet"}}, {"id": "demo0028", "title": "Jan 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0029", "title": "Feb 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}, {"id": "demo0030", "title": "Mar 2027", "url": "", "props": {"Status": "Planning", "Stage": ""}}]}, "stages": {"pipeline": ["Discovered", "Qualified", "Signalling", "Engaged", "Shared Value", "Proposal", "Conversation"], "calendar": ["Idea", "Drafted", "Approved", "Scheduled", "Posted"], "clients": ["Hand-off", "Onboarding", "Delivery", "Wrap-up", "Graded"], "campaigns": ["Worksheet", "Macro", "Waterfall", "Drafts", "Scheduled"]}, "curriculum": [{"id": "demo0031", "title": "Positioning a free offer", "url": "", "props": {"Area": "Business", "Status": "Learning", "Order": 1, "Last lesson": "2026-10-27"}}, {"id": "demo0032", "title": "Pricing creative work", "url": "", "props": {"Area": "Business", "Status": "Planned", "Order": 2}}, {"id": "demo0033", "title": "Story structure for short video", "url": "", "props": {"Area": "Craft", "Status": "Suggested", "Order": 3}}], "writes": true, "font": "atkinson", "recos": [{"id": "r1", "title": "Turn Decisions into a database", "url": "", "props": {"Status": "New", "Kind": "Process", "Seat": "Operations", "Date": "-2", "Why": "Easier to read back", "Effort": "Small"}}, {"id": "r3", "title": "Add a two-day follow-up to outreach", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Business Development", "Date": "-3", "Why": "Most replies come on the second nudge", "Effort": "Medium"}}, {"id": "r2", "title": "Batch captions with the monthly worksheet", "url": "", "props": {"Status": "In progress", "Kind": "Process", "Seat": "Content", "Date": "-6", "Checked": "-1", "Why": "One sitting instead of four"}}, {"id": "r4", "title": "Save the welcome email as a template", "url": "", "props": {"Status": "Done", "Kind": "Skill", "Seat": "Funnel", "Date": "-9", "Note": "Saved in Funnel's instructions"}}, {"id": "r5", "title": "A monthly check of old links", "url": "", "props": {"Status": "New", "Kind": "Routine", "Seat": "Funnel", "Date": "-40", "SampleOld": true}}], "studio": {"cap": 10, "spent": 0, "month": "2026-10"}, "errors": {}, "today": "2026-10-30", "skills": {"system": [{"label": "What's on today", "skill": "desk", "prompt": "What's on today and what's due soon?"}, {"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Turn paste-backs into one list", "skill": "ops", "prompt": "Turn the waiting paste-back blocks into one clean list for me to approve."}, {"label": "Monthly usage check", "skill": "ops", "prompt": "Run the monthly usage check: what loads before I type, and what we can cut."}, {"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}], "ops": [{"label": "Sync check", "skill": "ops", "prompt": "Run a sync check across the seats, the OS map and Notion."}, {"label": "Tool stack review", "skill": "ops", "prompt": "Review the tool stack: which seat uses which tool, and what's unused."}, {"label": "Skill update", "skill": "ops", "prompt": "I want to update a skill. Ask me which one and what's changing."}, {"label": "Update the OS map", "skill": "ops", "prompt": "Check the OS map is current and propose changes."}], "cd": [{"label": "Monthly Pinterest scan", "skill": "cd", "prompt": "Run this month's Pinterest scan."}, {"label": "Project brief", "skill": "cd", "prompt": "Write a project brief with me. Ask me what the project is first."}, {"label": "Brand DNA scorecard", "skill": "cd", "prompt": "Score this piece against the Brand DNA:"}, {"label": "Creative lab", "skill": "cd", "prompt": "Open the creative lab for a new campaign idea."}], "cp": [{"label": "Monthly worksheet", "skill": "cp", "prompt": "Make next month's content worksheet."}, {"label": "Hooks and scripts", "skill": "cp", "prompt": "Turn my ideas into hooks and scripts:"}, {"label": "Shot list", "skill": "cp", "prompt": "Make a shot list and recording plan for:"}, {"label": "Field Notes carousel", "skill": "cp", "prompt": "Make a Field Notes carousel about:"}, {"label": "Waterfall", "skill": "cp", "prompt": "Waterfall this piece into Instagram, LinkedIn and X posts:"}], "bd": [{"label": "Weekly prospect scan", "skill": "bd", "prompt": "Run this week's prospect scan."}, {"label": "Follow-ups due", "skill": "bd", "prompt": "Which follow-ups are due this week? Draft them for my OK."}, {"label": "Sales call prep", "skill": "bd", "prompt": "Prep me for a sales call with:"}, {"label": "ICP review", "skill": "bd", "prompt": "Review the ICP against what we've learned lately."}], "fo": [{"label": "Monthly funnel audit", "skill": "fo", "prompt": "Run the monthly funnel audit."}, {"label": "Landing page change", "skill": "fo", "prompt": "I want to change a landing page. Ask me which and what."}, {"label": "Email flow", "skill": "fo", "prompt": "Review the Brevo email flows and suggest one fix."}], "cs": [{"label": "Onboard a client", "skill": "cs", "prompt": "Onboard a new client or pilot:"}, {"label": "Check-in", "skill": "cs", "prompt": "Prep a check-in for:"}, {"label": "Ask for a testimonial", "skill": "cs", "prompt": "Draft a testimonial ask for:"}], "mentor": [{"label": "Next lesson", "skill": "mentor", "prompt": "What should I learn next?"}, {"label": "Review my path", "skill": "mentor", "prompt": "Review my path so far."}], "board": [{"label": "Ask the Board", "skill": "board", "prompt": "I have a crucial call to bring to the board:"}, {"label": "Monthly meeting", "skill": "board", "prompt": "Run this month's board meeting."}, {"label": "State of the strategy", "skill": "board", "prompt": "Give me the state of the strategy."}]}, "mailbox": [{"id": "p1", "kind": "Update", "from": "cd", "to": "all", "text": "Captions now skip exclamation marks. It's in the brand rules.", "date": "-0", "status": "Open", "readBy": ["cd"]}, {"id": "p2", "kind": "Ask", "from": "bd", "to": "you", "text": "Two shops want a call this week. Which day suits you?", "date": "-1", "status": "Open", "readBy": ["bd"]}, {"id": "p3", "kind": "Ask", "from": "cp", "to": "cd", "text": "Is the new colour for headlines only, or buttons too?", "date": "-1", "status": "Open", "readBy": ["cp"]}, {"id": "p4", "kind": "Hub", "from": "cd", "to": "ops", "text": "A Brand board button in the Creative Director's room", "where": "Creative Director's room", "date": "-1", "status": "Open", "readBy": ["cd"]}, {"id": "p5", "kind": "Ask", "from": "cs", "to": "bd", "text": "What did the last client say about the price?", "date": "-3", "status": "Answered", "answer": "It felt fair for the time it saves.", "answeredBy": "bd", "answered": "-2", "readBy": ["cs", "bd"]}]}, "docs": {}, "foundations": [{"id": "brand", "name": "Your brand", "title": "The seed", "line": "Voice, look and story, in one place", "owner": "cd", "status": "Half there", "text": "Warm, clear and unhurried. Made with care."}, {"id": "mission", "name": "Your mission", "title": "The compass", "line": "Why you do it, in one line", "owner": "ops", "status": "Ready", "text": "Work that outlasts the moment it was made for."}, {"id": "customer", "name": "Your customer", "title": "The guest of honour", "line": "Who you're for, and what they need", "owner": "bd", "status": "Half there", "text": "People who choose one good thing over five quick ones."}, {"id": "offer", "name": "Your offer", "title": "The menu", "line": "Priced from the life you want", "owner": "bd", "status": "Missing", "text": ""}, {"id": "funnel", "name": "Your funnel", "title": "The path", "line": "How a stranger becomes a client", "owner": "fo", "status": "Missing", "text": ""}, {"id": "values", "name": "Your values", "title": "The table", "line": "Seven values, in order: one advisor each", "owner": "ops", "status": "Ready", "text": "Craft, Warmth, Patience, Play, Honesty, Community, Freedom."}, {"id": "routine", "name": "Your routine", "title": "The weekly beat", "line": "When you make, rest and ship", "owner": "ops", "status": "Ready", "text": "Make Monday to Thursday. Fridays for admin. Weekends off."}]};
@@ -207,6 +207,8 @@ const ORBIT = (() => {
       const mine = h[k] || [], theirs = H[k] = H[k] || [];
       mine.forEach(r => { const i = theirs.findIndex(x => x.id === r.id); if (i < 0) theirs.push(r); else if ((r.u || "") > (theirs[i].u || "")) theirs[i] = r; });
     });
+    // v0.5 · money, seasons and the Coach live in the world too: a fresh world file keeps them
+    ["money", "seasons", "coach", "coachLog"].forEach(k => { if (from[k] && !to[k]) to[k] = from[k]; });
   }
   // A world can arrive in the address (#world=...), from a file, or from this browser's memory.
   try { const m = location.hash.match(/world=([A-Za-z0-9_\-+/=]+)/); if (m) { W = JSON.parse(b64d(m[1])); localStorage.setItem(ORBIT_KEY, JSON.stringify(W)); localStorage.setItem("orbit-world-made", (window.ORBIT_WORLD && window.ORBIT_WORLD.made) || W.made || ""); history.replaceState(null, "", location.pathname + "#home"); } } catch (e) {}
@@ -775,7 +777,7 @@ function turnTo(i) { let t = -ANG(i); while (t - ROT > 180) t -= 360; while (t -
 function setAsk(skill, who) { const q = document.getElementById("q"); q.placeholder = `Ask ${who}…`; q.dataset.skill = skill; }
 function navTo(top) {
   const at = ["room", "recos"].includes(top) ? "home" : ["mentor", "board"].includes(top) ? "council" : top;
-  document.getElementById("nav").innerHTML = [["home", "Personal Assistant", "home"], ["council", "Council", "door"]]
+  document.getElementById("nav").innerHTML = [["home", "Home", "home"], ["council", "Council", "door"]]
     .map(([h, n, i]) => `<a href="#${h}" class="${h === at ? "on" : ""}">${ic(i, 12)}${n}</a>`).join("");
 }
 function route() {
@@ -2991,6 +2993,7 @@ function sunArt(w) {
   <circle cx="100" cy="100" r="90" fill="url(#cgl)" opacity=".5"/><path d="M60 100a40 40 0 0 1 80 0z" fill="#FFF3DC"/>${[-60, -35, -12, 12, 35, 60].map(a => { const r = a * Math.PI / 180; return `<line x1="${100 + 52 * Math.sin(r)}" y1="${100 - 52 * Math.cos(r)}" x2="${100 + 70 * Math.sin(r)}" y2="${100 - 70 * Math.cos(r)}" stroke="${C}" stroke-width="2" stroke-linecap="round"/>`; }).join("")}<line x1="10" y1="100" x2="190" y2="100" stroke="${C}" stroke-opacity=".6"/></svg>`;
 }
 setTimeout(takeover, 1900);   // after the page and any welcome have drawn
+window.ORBIT_COACH = { coach, chain, log, build, editor, ASK, ACOL };   // v0.5 · Home's Health tab uses the same few
 if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }
 })();
 </script>
@@ -3457,7 +3460,7 @@ setTimeout(async () => {
   function spine(dp) {
     const links = (dp.page ? [[NOTION + dp.page, "Notion page", 1]] : []).concat(dp.id === "bd" ? [["#doc/icp", "ICP"], ["#doc/offer", "The Offer"]] : [], dp.studio ? [["#studio", "Studio"]] : [], dp.id === "ops" ? [["#recos", "Recos"]] : []);
     const n = seatChats(dp).length;
-    return `<div class="hr-spine hr-in"><div class="hr-id"><span class="caps eb">${ic("home", 12)}<a href="#home">Front Desk</a> · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
+    return `<div class="hr-spine hr-in"><div class="hr-id"><span class="caps eb">${ic("home", 12)}<a href="#home">Home</a> · ${esc(dp.name)}${dp.intern ? " · intern" : ""}</span>
       <div class="title"><span class="badge">${ic(dp.icon, 20)}</span><h1 class="serif">${esc(dp.name)}</h1></div><p>${esc(dp.line)}</p>
       <div class="hr-links">${links.map(l => `<a href="${l[0]}"${l[2] ? ' target="_blank" rel="noopener"' : ""}>${esc(l[1])}</a>`).join("")}${IS_ORBIT ? `<button data-open="${dp.skill}">Chat →</button>` : `<button data-hrdrawer>${n ? `All ${n} chats →` : "Chats →"}</button>`}</div></div>
       ${todayCard(dp)}</div>`;
@@ -3725,5 +3728,468 @@ setTimeout(async () => {
   document.head.appendChild(st);
 })();
 </script>
+<script>/* Orbit v0.5 · your hub's Home (from A·M·W Hub, 4 Nov 2026)
+   Home is the founder's own Personal Assistant home: one ranked stack on the left (Today, This week, Running),
+   the wheel in the middle, four life tabs (Work, Money, Health, People) and a clear Recos link.
+   Colour has one job: ember = needs you today, grey = coming up, season colour = running. Home fits one frame.
+   Seasons are optional (Settings › Seasons): 56-day Build and Live seasons, a tide line under the nav and a Season page.
+   Health is your Coach's daily few. Money is a simple month: money in, bills, spending, pots. All of it lives in your world file. */
+(() => {
+const EMBER = "#F4B45E", GREY = "rgba(242,239,232,.55)", BUILD = "#45E992", LIVE = "#6F9BFF";
+const W = () => ORBIT.world;
+const seasonOn = () => !!((W().seasons || {}).on);
+const seasonCol = () => !seasonOn() ? BUILD : (document.documentElement.dataset.season === "live" ? LIVE : BUILD);
+const pad = n => String(n).padStart(2, "0"), iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const M3 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const say = t => (typeof demoSay === "function" ? demoSay(t) : null);
+
+/* ---------- styles ---------- */
+const css = `
+  header { position: relative; }
+  header nav { position: absolute; left: 50%; top: 30px; transform: translateX(-50%); }
+  body.pa-lock, html.pa-lock { overflow: hidden; height: 100%; }
+  body.pa-lock main { padding-bottom: 0; }
+  .pa .stage { height: calc(100vh - 150px); min-height: 480px; }
+  .pa:not(.focus) .wheel { left: 50%; top: var(--wt, 330px); transform: translate(-50%, -50%) scale(var(--ws, 1)); }
+  .pa .col.right { display: none; }
+  .pa .col.left { top: 14px; width: min(340px, 26vw); gap: 0; bottom: 6px; display: flex; flex-direction: column; }
+  .pa .greet h1 { font-size: clamp(36px, 5.2vh, 50px); margin: 8px 0 6px; }
+  .pa .greet p { margin: 0; }
+  .pa .pa-h { font-size: 9.5px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--s); margin: clamp(12px, 2.2vh, 20px) 0 8px; display: flex; justify-content: space-between; }
+  .pa .pa-h.ember { color: ${EMBER}; }
+  .pa .pa-h a { color: var(--s); letter-spacing: 2px; } .pa .pa-h a:hover { color: var(--t); }
+  .pa .pa-today { display: block; border: 1px solid rgba(244,180,94,.6); border-radius: 10px; padding: 14px 18px;
+    background: linear-gradient(160deg, rgba(244,180,94,.14), rgba(244,180,94,.03)), rgba(10,14,30,.8); box-shadow: 0 0 40px -18px ${EMBER}; }
+  .pa .pa-today h4 { margin: 0; font: italic 400 21px/1.2 var(--serif); }
+  .pa .pa-today p { margin: 3px 0 0; color: var(--s); font-size: 12px; } .pa .pa-today p a { color: ${EMBER}; }
+  .pa .pa-calm { border-color: rgba(242,239,232,.12); box-shadow: none; background: rgba(10,14,30,.72); }
+  .pa .pa-list { border: 1px solid rgba(242,239,232,.12); background: rgba(10,14,30,.72); border-radius: 10px; padding: 4px 18px; backdrop-filter: blur(14px); }
+  .pa .pa-row { display: flex; gap: 10px; align-items: baseline; padding: 8px 0; }
+  .pa .pa-row + .pa-row { border-top: 1px solid rgba(242,239,232,.12); }
+  .pa .pa-row .t { flex: 1 1 auto; font: italic 400 17px/1.25 var(--serif); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pa .pa-row .m { flex: 0 1 auto; max-width: 46%; overflow: hidden; text-overflow: ellipsis; margin-left: auto; color: var(--s); font-size: 11.5px; white-space: nowrap; }
+  .pa .pa-row i.d { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 2px; flex: none; }
+  .pa .pa-more { color: var(--s); font-size: 11.5px; padding: 6px 0 8px; }
+  .pa-key { position: fixed; right: 56px; bottom: 120px; z-index: 3; display: flex; gap: 16px; color: var(--s); font-size: 11.5px; pointer-events: none; }
+  .pa-key i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+  .pa .pa-pane { display: none; } .pa .pa-pane.on { display: block; }
+  .pa .col.left > .greet { flex: none; }
+  .pa .col.left > .pa-pane.on { flex: 1 1 0; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+  .pa .col.left > .pa-pane.on::-webkit-scrollbar { display: none; }
+  .pa .pa-tabs { display: flex; gap: 10px; flex: none; margin-top: auto; padding-top: clamp(10px, 1.6vh, 16px); }
+  .pa .pa-tabs button { position: relative; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; cursor: pointer;
+    border: 1px solid rgba(242,239,232,.12); background: rgba(10,14,30,.6); color: rgba(242,239,232,.55); transition: all .25s; }
+  .pa .pa-tabs button:hover { color: var(--t); border-color: rgba(242,239,232,.3); }
+  .pa .pa-tabs button.on { color: var(--t); border-color: rgba(242,239,232,.5); background: rgba(242,239,232,.08); }
+  .pa .pa-tabs svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .pa .pa-tabs span { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 6px; background: rgba(10,14,30,.95); border: 1px solid rgba(242,239,232,.2); color: var(--t); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 5; }
+  .pa .pa-tabs button:hover span { opacity: 1; }
+  /* Recos: one clear way in, under the tabs */
+  .pa .pa-recos { flex: none; display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 11px 16px; border-radius: 12px; color: var(--t);
+    border: 1px solid rgba(127,216,240,.55); background: rgba(127,216,240,.07); box-shadow: 0 0 22px -6px rgba(127,216,240,.45); transition: box-shadow .3s, background .3s; }
+  .pa .pa-recos:hover { background: rgba(127,216,240,.12); box-shadow: 0 0 30px -4px rgba(127,216,240,.6); }
+  .pa .pa-recos .ri { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #7FD8F0; display: grid; place-items: center; color: #7FD8F0; flex: none; }
+  .pa .pa-recos b { font-weight: 500; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: #7FD8F0; }
+  .pa .pa-recos span.l { flex: 1; font-size: 12px; color: var(--s); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pa .pa-recos span.n { background: #7FD8F0; color: #03040A; border-radius: 10px; padding: 2px 8px; font-size: 11px; white-space: nowrap; }
+  /* Health and Money panes */
+  .pa .hx-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; }
+  .pa .hx-row + .hx-row { border-top: 1px solid rgba(242,239,232,.12); }
+  .pa .hx-row button.tk { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--hc); flex: none; cursor: pointer; display: grid; place-items: center; color: #03040A; font-size: 11px; }
+  .pa .hx-row button.tk.on { background: var(--hc); box-shadow: 0 0 12px -2px var(--hc); }
+  .pa .hx-row .t { flex: 1; min-width: 0; font: italic 400 17px/1.25 var(--serif); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pa .hx-row .t em { font-style: normal; font-family: var(--sans); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--hc); display: block; }
+  .pa .hx-row .m { color: var(--s); font-size: 11px; white-space: nowrap; }
+  .pa .hx-week { display: flex; gap: 4px; margin: 10px 0 4px; }
+  .pa .hx-week span { flex: 1; text-align: center; font-size: 10px; color: var(--s); border-radius: 6px; padding: 5px 0; border: 1px solid transparent; line-height: 1.3; }
+  .pa .hx-week span.on { border-color: rgba(244,180,94,.6); color: var(--t); }
+  .pa .hx-week span b { display: block; height: 4px; margin: 4px auto 0; width: 70%; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .pa .hx-week span b i { display: block; height: 100%; background: ${EMBER}; }
+  .pa .hx-x { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .pa .hx-x button { font-size: 11.5px; padding: 6px 12px; border-radius: 16px; border: 1px solid rgba(242,239,232,.18); color: var(--s); cursor: pointer; }
+  .pa .hx-x button.on { color: var(--t); border-color: ${EMBER}; }
+  .pa .hx-acts { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 12px; }
+  .pa .hx-acts a { color: var(--s); } .pa .hx-acts a:hover { color: var(--t); } .pa .hx-acts a.go { color: ${EMBER}; }
+  .pa .mx-big { display: flex; align-items: baseline; gap: 10px; }
+  .pa .mx-big b { font: italic 400 40px/1 var(--serif); } .pa .mx-big span { color: var(--s); font-size: 12px; }
+  .pa .mx-bar { height: 5px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; margin: 10px 0 4px; display: flex; }
+  .pa .mx-bar i { display: block; height: 100%; }
+  .pa .mx-key { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--s); }
+  .pa .mx-key i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .pa .mx-pot { padding: 8px 0; } .pa .mx-pot + .mx-pot { border-top: 1px solid rgba(242,239,232,.12); }
+  .pa .mx-pot div { display: flex; justify-content: space-between; font-size: 12px; color: var(--s); } .pa .mx-pot div em { font: italic 400 16px/1.2 var(--serif); color: var(--t); }
+  .pa .mx-pot u { display: block; height: 3px; border-radius: 2px; background: rgba(255,255,255,.08); margin-top: 6px; text-decoration: none; overflow: hidden; } .pa .mx-pot u i { display: block; height: 100%; background: #7FD8F0; }
+  .p2m .mx-form label { display: flex; gap: 10px; align-items: center; margin: 8px 0; } .p2m .mx-form label span { width: 90px; color: var(--s); font-size: 12px; flex: none; }
+  .p2m .mx-form input, .p2m .mx-form select { flex: 1; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid rgba(242,239,232,.25); color: var(--t); padding: 6px 2px; font: inherit; outline: none; }
+  .p2m .mx-form .mx-l { max-height: 180px; overflow: auto; margin: 6px 0 12px; font-size: 12.5px; }
+  .p2m .mx-form .mx-l div { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(242,239,232,.08); }
+  .p2m .mx-form .mx-l a { color: var(--s); }
+  .pa #paNote, html.pa-lock .notes { display: none !important; }   /* the stack already holds these */
+  #orbitSample { top: 70px !important; }
+  html[data-season] .usage { top: 98px !important; }
+  @media (max-width: 1100px) { .pa-key { display: none; } }
+  @media (max-width: 860px) { .pa .col.left { width: auto; } }`;
+const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
+
+/* ---------- the stack ---------- */
+const dot = c => `<i class="d" style="background:${c}"></i>`;
+const lnk = r => r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title || "Untitled")}</a>` : esc(r.title || "Untitled");
+const row = (r, meta, c) => `<div class="pa-row"><span class="t">${dot(c)}${lnk(r)}</span><span class="m">${esc(meta || "")}</span></div>`;
+const list = (items, max, c, empty) => {
+  if (!items.length) return `<div class="pa-list"><div class="pa-row"><span class="t" style="color:var(--s)">${empty}</span></div></div>`;
+  const more = items.length > max ? `<div class="pa-more">+${items.length - max} more</div>` : "";
+  return `<div class="pa-list">${items.slice(0, max).map(([r, m]) => row(r, m, c)).join("")}${more}</div>`;
+};
+const TABS = [
+  ["work", "Work", '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18"/>'],
+  ["money", "Money", '<circle cx="12" cy="12" r="9"/><path d="M15 9a3 3 0 0 0-3-1.5c-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2A3 3 0 0 1 9 15M12 6v1.5M12 16.5V18"/>'],
+  ["health", "Health", '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'],
+  ["people", "People", '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.5-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.7 3 2.5 3.5 5.2"/>']
+];
+let tab = "work"; try { tab = localStorage.getItem("orbit-tab") || "work"; } catch (e) {}
+const recosNewCount = () => (typeof recosNew === "function" ? recosNew() : typeof recoGroups === "function" ? recoGroups().fresh : ((DATA && DATA.recos) || []).filter(r => !r.props.Status || r.props.Status === "New")).length;
+const fitScale = () => Math.max(.55, Math.min(1, (innerHeight - 300) / 620));
+
+let LINES = {};
+deskView = function () {
+  const d = DATA, e = d.errors || {};
+  const spokes = DEPTS.map((dp, i) => { const a = ANG(i) * Math.PI / 180; return `<line id="sp-${dp.id}" x1="270" y1="270" x2="${270 + 230 * Math.sin(a)}" y2="${270 - 230 * Math.cos(a)}" stroke="${rgba(colOf(dp), .16)}" stroke-width=".8" style="transition:stroke 1s"/>`; }).join("");
+  const nodes = DEPTS.map((dp, i) => {
+    const a = ANG(i) * Math.PI / 180, x = 50 + 50 * Math.sin(a), y = 50 - 50 * Math.cos(a), n = handoffsFor(dp.name).length;
+    return `<a class="node${y < 40 ? " top" : ""}" id="n-${dp.id}" href="#room/${dp.id}" aria-label="${esc(dp.name)}" style="left:${x}%;top:${y}%;${glass(colOf(dp))}"><span class="nd"><span class="dot"></span>
+      <span class="lab"><span class="ni">${ic(dp.icon, 13)}</span><span class="nm">${dp.name}${n ? `<sup>${n}</sup>` : ""}</span></span></span></a>`;
+  }).join("");
+  const today = new Date(d.today + "T00:00:00").toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" });
+  const w = d.waiting || [], cal = d.calendar || [], live = d.live || [], ho = d.handoffs || [], mach = d.machine || [];
+  const small = innerHeight < 820, maxWeek = small ? 2 : 3, maxRun = small ? 2 : 3;
+  const top = w[0];
+  const week = [
+    ...w.slice(1).map(r => [r, [r.kind, fmt(r.props["Next date"])].filter(Boolean).join(" · ")]),
+    ...cal.map(r => [r, [fmt(r.props.Date), r.props.Platform].filter(Boolean).join(" · ")]),
+    ...mach.map(r => [r, [fmt(r.props["Next due"]), r.props.Seat].filter(Boolean).join(" · ")])
+  ];
+  const running = [...live.map(r => [r, r.props.Type || r.props.Owner || "live"]), ...ho.map(r => [r, `→ ${r.props.To || ""}`])];
+  const line = top ? `One thing needs you today.${week.length ? ` ${week.length === 1 ? "One more" : week.length + " more"} this week.` : ""}` : "Nothing needs you today. A good day to make something.";
+  LINES.work = line;
+  const todayCard = top
+    ? `<div class="pa-today"><h4>${lnk(top)}</h4><p>${esc([top.kind, top.props.Seat || top.props.Owner, fmt(top.props["Next date"])].filter(Boolean).join(" · "))}${top.kind === "Your team asks" ? ` · <a href="#" data-paans="${esc(top.id)}">Answer</a>` : ""}</p></div>`
+    : `<div class="pa-today pa-calm"><h4>All clear</h4><p>Nothing is waiting on you.</p></div>`;
+  const errs = [e.pastebacks, e.pipeline, e.calendar, e.live, e.handoffs, e.machine].filter(Boolean);
+  const rn = recosNewCount();
+  return `<div class="desk pa enter" id="desk"><div class="stage">
+    <div class="col left">
+      <div class="greet"><span class="caps">${esc(today)}</span><h1 class="serif">${greeting()}.</h1><p>${line}</p></div>
+      <div class="pa-pane" data-pane="work">
+        <div class="pa-h${top ? " ember" : ""}">Today</div>${todayCard}
+        <div class="pa-h">This week</div>${list(week, maxWeek, GREY, "Nothing else this week.")}
+        <div class="pa-h">Running</div>${list(running, maxRun, seasonCol(), "Nothing running yet.")}
+        ${errs.length ? `<p class="err">${esc(errs[0])}</p>` : ""}</div>
+      <div class="pa-pane" data-pane="money"></div>
+      <div class="pa-pane" data-pane="health"></div>
+      <div class="pa-pane" data-pane="people"></div>
+      <div class="pa-tabs">${TABS.map(([k, n, p]) => `<button type="button" data-tab="${k}" aria-label="${n}"><svg viewBox="0 0 24 24">${p}</svg><span>${n}</span></button>`).join("")}</div>
+      <a class="pa-recos" href="#recos"><span class="ri">${ic("bulb", 14)}</span><b>Recos</b><span class="l">Ideas from your team</span>${rn ? `<span class="n">${rn} new</span>` : ""}<span>›</span></a>
+      <div class="quick" hidden></div>
+    </div>
+    <div class="wheel">${wheelFrame()}<div class="ring" id="ring"><svg class="spokes" viewBox="0 0 540 540">${spokes}</svg>${nodes}</div>
+      <div class="hub"><i></i><span class="caps">${esc(ORBIT.brand())}</span></div></div>
+    <div class="col right"></div></div>
+    <div class="room" id="room"></div></div>`;
+};
+// the once-a-day blockers card is now the top of the stack
+paNote = function () {};
+
+/* ---------- tabs ---------- */
+function paTab(k) {
+  const desk = document.querySelector(".pa"); if (!desk) return;
+  tab = k; try { localStorage.setItem("orbit-tab", k); } catch (e) {}
+  desk.querySelectorAll(".pa-pane").forEach(p => p.classList.toggle("on", p.dataset.pane === k));
+  desk.querySelectorAll(".pa-tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === k));
+  const p = desk.querySelector(".greet p"), pane = desk.querySelector(`[data-pane="${k}"]`);
+  if (k === "money") moneyPane(pane, p); else if (k === "health") healthPane(pane, p); else if (k === "people") peoplePane(pane, p); else if (p && LINES.work) p.textContent = LINES.work;
+}
+window.paTab = paTab;
+function wireDesk() {
+  const desk = document.querySelector(".pa"); if (!desk || desk.dataset.w) return;
+  desk.dataset.w = 1;
+  desk.querySelectorAll(".pa-tabs button").forEach(b => b.onclick = () => paTab(b.dataset.tab));
+  desk.addEventListener("click", ev => {
+    const a = ev.target.closest("[data-paans]"); if (!a) return;
+    ev.preventDefault();
+    if (ORBIT.sample()) return say("This is a demo. In your hub, this opens a chat with the helper who asked, ready for your answer.");
+    const p = ORBIT.mail.list().find(x => x.id === a.dataset.paans); if (!p) return;
+    ORBIT.mail.set(p.id, { status: "Answered", answer: "Taken to a chat with " + ORBIT.mail.name(p.from), answeredBy: "you", answered: iso(new Date()) });
+    openClaude(p.from, `About your question for me: "${p.text}". My answer: `);
+  });
+  paTab(tab);
+}
+
+/* ---------- Health: your Coach's daily few ---------- */
+const OC = () => window.ORBIT_COACH;
+function healthPane(el, p) {
+  const C = OC(); if (!el) return;
+  const cc = C ? C.coach() : null, t = new Date(), L = C ? C.log() : {};
+  if (!cc) {
+    if (p) p.textContent = "Your Coach keeps life outside work strong.";
+    el.innerHTML = `<div class="pa-h ember">Health</div><div class="pa-today"><h4>Build my Coach</h4><p>A few quick questions, 5 to 10 minutes. You pick what matters, it keeps you to it.</p></div>
+      <div class="hx-acts"><a href="#" class="go" data-hx="build">Build my Coach ›</a><a href="#coach">The Coach's room ›</a></div>`;
+  } else {
+    const rows = cc.few.map(f => { const k = "f:" + f.h, ch = C.chain(k), c = C.ACOL[f.a] || EMBER;
+      return `<div class="hx-row" style="--hc:${c}"><button type="button" class="tk${ch.done ? " on" : ""}" data-hk="${esc(k)}" title="Tick today">${ch.done ? "✓" : ""}</button><span class="t"><em>${esc(f.a)}</em>${esc(f.h)}</span><span class="m">${ch.done ? (ch.streak > 1 ? ch.streak + " days" : "done") : esc(ch.note)}</span></div>`; }).join("");
+    const done = cc.few.filter(f => C.chain("f:" + f.h).done).length;
+    if (p) p.textContent = done === cc.few.length && done ? "All done today. Rest easy." : `${done} of ${cc.few.length} done today.`;
+    const mon = new Date(t.getFullYear(), t.getMonth(), t.getDate() - ((t.getDay() + 6) % 7));
+    const week = ["M", "T", "W", "T", "F", "S", "S"].map((n, i) => { const d = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + i), k = iso(d), row = L[k] || {};
+      const c = cc.few.filter(f => row["f:" + f.h]).length, pc = cc.few.length ? c / cc.few.length * 100 : 0;
+      return `<span class="${k === iso(t) ? "on" : ""}" title="${esc(cc.week ? cc.week[i] || "Rest" : "")}">${n}<br>${esc(((cc.week && cc.week[i]) || "").slice(0, 5))}<b><i style="width:${pc}%"></i></b></span>`; }).join("");
+    const ex = (cc.extras || []).map(x => { const k = "x:" + x, on = !!(L[iso(t)] || {})[k] && !ORBIT.sample(); return `<button type="button" data-hk="${esc(k)}" class="${on ? "on" : ""}">${on ? "✓ " : ""}${esc(x)}</button>`; }).join("");
+    el.innerHTML = `<div class="pa-h ember">Today's few <a href="#" data-hx="edit">Edit</a></div><div class="pa-list">${rows || `<div class="hx-row"><span class="t" style="color:var(--s)">No habits yet. Edit to add one.</span></div>`}</div>
+      ${ex ? `<div class="hx-x">${ex}</div>` : ""}<div class="pa-h">This week</div><div class="hx-week">${week}</div>
+      <div class="hx-acts"><a href="#" class="go" data-hx="check">Check in with my Coach</a><a href="#" data-hx="find">Find a session</a><a href="#coach">Room ›</a></div>`;
+  }
+  el.querySelectorAll("[data-hk]").forEach(b => b.onclick = () => { if (ORBIT.sample()) return say("In your own hub, this ticks today off and keeps your streak."); const L2 = C.log(), k0 = iso(new Date()); L2[k0] = L2[k0] || {}; if (L2[k0][b.dataset.hk]) delete L2[k0][b.dataset.hk]; else L2[k0][b.dataset.hk] = 1; ORBIT.save(); healthPane(el, p); });
+  el.querySelectorAll("[data-hx]").forEach(b => b.onclick = ev => { ev.preventDefault(); const k = b.dataset.hx;
+    if (k === "build") return C.build();
+    if (k === "edit") return C.editor();
+    if (ORBIT.sample()) return say("This is a demo. Once your team is set up, this opens your Coach with the request ready to go.");
+    if (k === "check") openClaude("coach", C.ASK("Check in with me: how am I across my areas, one quick question at a time, then the one thing that matters most today."));
+    if (k === "find") openClaude("coach", C.ASK("Find me a session for today: three options with real links, how long each is, and why it fits today."));
+  });
+}
+
+/* ---------- Money: a simple month ---------- */
+const SAMPLE_MONEY = { cur: "$", entries: [{ id: "e1", d: "-3", amt: 2400, label: "Client project", kind: "in" }, { id: "e2", d: "-2", amt: 64, label: "Groceries", kind: "out" }, { id: "e3", d: "-1", amt: 18, label: "Coffee with a lead", kind: "out" }],
+  bills: [{ id: "b1", name: "Rent", amt: 1200, day: 1, paid: true }, { id: "b2", name: "Phone", amt: 45, day: 12 }, { id: "b3", name: "Software", amt: 30, day: 20 }], pots: [{ id: "p1", name: "Tax", target: 3000, saved: 1100 }, { id: "p2", name: "Rainy day", target: 5000, saved: 2600 }] };
+const money = () => { if (ORBIT.sample()) return SAMPLE_MONEY; const w = W(); if (!w.money) w.money = { cur: "$", entries: [], bills: [], pots: [] }; return w.money; };
+const relDay = d => /^-\d+$/.test(String(d)) ? iso(new Date(Date.now() + (+d) * 864e5)) : d;
+const fmtM = (n, cur) => (n < 0 ? "−" : "") + (cur || "$") + Math.round(Math.abs(n)).toLocaleString("en-AU");
+function month() {
+  const m = money(), t = new Date(), ym = iso(t).slice(0, 7), key = "paid-" + ym;
+  const E = (m.entries || []).filter(x => relDay(x.d).slice(0, 7) === ym);
+  const inc = E.filter(x => x.kind === "in").reduce((a, x) => a + (+x.amt || 0), 0), spent = E.filter(x => x.kind === "out").reduce((a, x) => a + (+x.amt || 0), 0);
+  const bills = (m.bills || []).reduce((a, b) => a + (+b.amt || 0), 0), isPaid = b => ORBIT.sample() ? !!b.paid : !!(b[key]);
+  const left = inc - bills - spent;
+  const due = (m.bills || []).filter(b => !isPaid(b)).sort((a, b) => ((a.day || 1) - t.getDate() + 31) % 31 - ((b.day || 1) - t.getDate() + 31) % 31);
+  return { m, inc, spent, bills, left, due, key, isPaid, cur: m.cur || "$" };
+}
+function moneyPane(el, p) {
+  if (!el) return;
+  const x = month(), tot = Math.max(x.inc, x.bills + x.spent, 1);
+  if (p) p.textContent = x.inc ? (x.left >= 0 ? `${fmtM(x.left, x.cur)} left this month, after bills.` : `${fmtM(-x.left, x.cur)} short this month. Worth a look.`) : "Add what's come in this month to see what's left.";
+  const due = x.due.slice(0, innerHeight < 820 ? 2 : 3).map(b => `<div class="hx-row" style="--hc:#7FD8F0"><button type="button" class="tk" data-paid="${esc(b.id)}" title="Paid"></button><span class="t">${esc(b.name)}</span><span class="m">${fmtM(+b.amt || 0, x.cur)} · ${b.day ? "the " + b.day + (["th", "st", "nd", "rd"][((b.day % 100) - 20) % 10] || ["th", "st", "nd", "rd"][b.day % 100] || "th") : "monthly"}</span></div>`).join("");
+  const pots = (x.m.pots || []).slice(0, 2).map(q => `<div class="mx-pot"><div><em>${esc(q.name)}</em><span>${fmtM(+q.saved || 0, x.cur)} of ${fmtM(+q.target || 0, x.cur)}</span></div><u><i style="width:${Math.min(100, (+q.saved || 0) / Math.max(1, +q.target || 1) * 100)}%"></i></u></div>`).join("");
+  el.innerHTML = `<div class="pa-h${x.left < 0 ? " ember" : ""}">This month · ${M3[new Date().getMonth()]}</div>
+    <div class="pa-list" style="padding:14px 18px"><div class="mx-big"><b>${fmtM(x.left, x.cur)}</b><span>left</span></div>
+      <div class="mx-bar"><i style="width:${x.bills / tot * 100}%;background:#7FD8F0"></i><i style="width:${x.spent / tot * 100}%;background:${EMBER}"></i></div>
+      <div class="mx-key"><span><i style="background:${BUILD}"></i>In ${fmtM(x.inc, x.cur)}</span><span><i style="background:#7FD8F0"></i>Bills ${fmtM(x.bills, x.cur)}</span><span><i style="background:${EMBER}"></i>Spent ${fmtM(x.spent, x.cur)}</span></div></div>
+    <div class="pa-h">Bills to pay</div><div class="pa-list">${due || `<div class="hx-row"><span class="t" style="color:var(--s)">All paid this month.</span></div>`}</div>
+    ${pots ? `<div class="pa-h">Pots</div><div class="pa-list">${pots}</div>` : ""}
+    <div class="hx-acts"><a href="#" class="go" data-mx="in">+ Money in</a><a href="#" data-mx="out">+ Spent</a><a href="#" data-mx="edit">Bills and pots</a></div>`;
+  el.querySelectorAll("[data-paid]").forEach(b => b.onclick = () => { if (ORBIT.sample()) return say("In your own hub, this marks the bill paid for this month."); const bl = x.m.bills.find(z => z.id === b.dataset.paid); if (bl) { bl[x.key] = 1; ORBIT.save(); moneyPane(el, p); } });
+  el.querySelectorAll("[data-mx]").forEach(b => b.onclick = ev => { ev.preventDefault(); moneyForm(b.dataset.mx, () => moneyPane(el, p)); });
+}
+function moneyForm(kind, done) {
+  if (ORBIT.sample()) return say("In your own hub, this is where you add money in, spending, bills and pots. It all stays in your world file.");
+  const m = money(), rid = k => k + Date.now().toString(36);
+  document.querySelector(".p2m")?.remove();
+  const listBills = () => (m.bills || []).map(b => `<div><span>${esc(b.name)} · ${fmtM(+b.amt || 0, m.cur)} · day ${b.day || 1}</span><a href="#" data-rb="${esc(b.id)}">remove</a></div>`).join("") || `<div><span>No bills yet.</span></div>`;
+  const listPots = () => (m.pots || []).map(q => `<div><span>${esc(q.name)} · ${fmtM(+q.saved || 0, m.cur)} of ${fmtM(+q.target || 0, m.cur)}</span><a href="#" data-rp="${esc(q.id)}">remove</a></div>`).join("") || `<div><span>No pots yet.</span></div>`;
+  const body = kind === "edit"
+    ? `<h3>Bills and pots</h3><p class="hint">Bills repeat every month. Pots are what you're saving toward.</p>
+       <div class="mx-l" id="mxB">${listBills()}</div>
+       <label><span>New bill</span><input name="bn" placeholder="e.g. Rent"></label><label><span>Amount</span><input name="ba" inputmode="decimal" placeholder="0"></label><label><span>Day of month</span><input name="bd" inputmode="numeric" placeholder="1"></label>
+       <div class="mx-l" id="mxP">${listPots()}</div>
+       <label><span>New pot</span><input name="pn" placeholder="e.g. Tax"></label><label><span>Target</span><input name="pt" inputmode="decimal" placeholder="0"></label><label><span>Saved so far</span><input name="ps" inputmode="decimal" placeholder="0"></label>
+       <label><span>Currency</span><input name="cur" value="${esc(m.cur || "$")}" maxlength="3"></label>`
+    : `<h3>${kind === "in" ? "Money in" : "Spent"}</h3><label><span>What</span><input name="label" placeholder="${kind === "in" ? "e.g. Client project" : "e.g. Groceries"}" required></label>
+       <label><span>Amount</span><input name="amt" inputmode="decimal" required placeholder="0"></label><label><span>Date</span><input name="d" type="date" value="${iso(new Date())}"></label>
+       ${(m.pots || []).length && kind === "in" ? `<label><span>Into a pot</span><select name="pot"><option value="">No, it's for spending</option>${m.pots.map(q => `<option value="${esc(q.id)}">${esc(q.name)}</option>`).join("")}</select></label>` : ""}`;
+  document.body.insertAdjacentHTML("beforeend", `<div class="p2m"><form class="p2c mx-form">${body}<div class="pills" style="margin-top:14px"><button class="pill on">Save</button><a href="#" class="pill quiet" data-x>Close</a></div></form></div>`);
+  const md = document.querySelector(".p2m"), f = md.querySelector("form");
+  md.onclick = ev => { if (ev.target === md || ev.target.dataset.x !== undefined) { ev.preventDefault(); md.remove(); done(); } };
+  md.querySelectorAll("[data-rb]").forEach(a => a.onclick = ev => { ev.preventDefault(); m.bills = m.bills.filter(b => b.id !== a.dataset.rb); ORBIT.save(); md.querySelector("#mxB").innerHTML = listBills(); });
+  md.querySelectorAll("[data-rp]").forEach(a => a.onclick = ev => { ev.preventDefault(); m.pots = m.pots.filter(q => q.id !== a.dataset.rp); ORBIT.save(); md.querySelector("#mxP").innerHTML = listPots(); });
+  const num = v => Math.max(0, parseFloat(String(v || "").replace(/[^0-9.]/g, "")) || 0);
+  f.onsubmit = ev => { ev.preventDefault(); const v = Object.fromEntries(new FormData(f));
+    if (kind === "edit") {
+      if ((v.bn || "").trim()) (m.bills = m.bills || []).push({ id: rid("b"), name: v.bn.trim().slice(0, 40), amt: num(v.ba), day: Math.min(31, Math.max(1, parseInt(v.bd) || 1)) });
+      if ((v.pn || "").trim()) (m.pots = m.pots || []).push({ id: rid("p"), name: v.pn.trim().slice(0, 40), target: num(v.pt), saved: num(v.ps) });
+      m.cur = (v.cur || "$").trim().slice(0, 3) || "$";
+    } else {
+      const amt = num(v.amt); if (!amt) return;
+      if (v.pot) { const q = m.pots.find(z => z.id === v.pot); if (q) q.saved = (+q.saved || 0) + amt; }
+      else (m.entries = m.entries || []).push({ id: rid("e"), d: v.d || iso(new Date()), amt, label: (v.label || "").trim().slice(0, 60), kind });
+    }
+    ORBIT.save(); md.remove(); done(); };
+}
+
+/* ---------- People: who's waiting on you ---------- */
+function peoplePane(el, p) {
+  if (!el) return;
+  const d = DATA || {}, asks = (ORBIT.mail && ORBIT.mail.blockers ? ORBIT.mail.blockers() : []).map(x => [{ title: x.text, url: "", props: {} }, ORBIT.mail.name(x.from)]);
+  const fol = (d.waiting || []).filter(r => /follow/i.test(r.kind || "")).map(r => [r, [fmt(r.props["Next date"]), r.props["Next step"]].filter(Boolean).join(" · ")]);
+  const cl = ((d.flows || {}).clients || []).map(r => [r, [r.props.Status, r.props["Next action"]].filter(Boolean).join(" · ")]);
+  const n = asks.length + fol.length;
+  if (p) p.textContent = n ? `${n === 1 ? "One person is" : n + " people are"} waiting on you.` : "Nobody is waiting on you.";
+  el.innerHTML = `<div class="pa-h${asks.length ? " ember" : ""}">Your team asks</div>${list(asks, 2, EMBER, "No questions for you.")}
+    <div class="pa-h">Follow-ups</div>${list(fol, 3, GREY, "No follow-ups due.")}
+    <div class="pa-h">Clients</div>${list(cl, 2, seasonCol(), "No clients yet.")}`;
+}
+
+/* ---------- Home fits one frame ---------- */
+const key = document.createElement("div"); key.className = "pa-key";
+function lock() {
+  const h = (location.hash.replace("#", "") || "home").split("/")[0], home = h === "home" && !!document.querySelector(".pa");
+  document.body.classList.toggle("pa-lock", home); document.documentElement.classList.toggle("pa-lock", home);
+  document.documentElement.style.setProperty("--ws", fitScale());
+  const stage = document.querySelector(".pa .stage");
+  if (stage) { const t = stage.getBoundingClientRect().top + scrollY; document.documentElement.style.setProperty("--wt", Math.round((110 + innerHeight - 190) / 2 - t) + "px"); }
+  const k = `<span>${dot(EMBER)}Needs you today</span><span>${dot(GREY)}Coming up</span><span>${dot(seasonCol())}Running</span>`;
+  if (key.dataset.k !== k) { key.dataset.k = k; key.innerHTML = k; }
+  key.style.display = home ? "" : "none";
+}
+addEventListener("hashchange", lock); addEventListener("resize", lock);
+document.body.appendChild(key);
+new MutationObserver(() => { requestAnimationFrame(() => { lock(); wireDesk(); }); }).observe(document.getElementById("view"), { childList: true });
+
+/* ---------- Seasons (optional) ---------- */
+const LEN = 56, DAY = 864e5, RED_FROM = 5;
+const WORDS = ["relax", "enjoy", "live", "be seen", "shine", "play", "breathe", "celebrate", "connect", "share"];
+const word = WORDS[Math.floor(Math.random() * WORDS.length)];
+const fmtD = d => d.getDate() + " " + M3[d.getMonth()];
+const START = () => { const s = (W().seasons || {}).start || iso(new Date()); const [y, m, dd] = s.split("-").map(Number); return new Date(y, m - 1, dd); };
+function season(now) {
+  const S = START(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const n = Math.max(0, Math.round((today - S) / DAY)), i = Math.floor(n / LEN), s = new Date(S.getTime() + i * LEN * DAY);
+  return { i, live: i % 2 === 1, day: n - i * LEN + 1, left: LEN - (n - i * LEN + 1), s, e: new Date(s.getTime() + (LEN - 1) * DAY) };
+}
+const seasonAt = j => { const s = new Date(START().getTime() + j * LEN * DAY); return { i: j, live: j % 2 === 1, s, e: new Date(s.getTime() + (LEN - 1) * DAY) }; };
+document.head.insertAdjacentHTML("beforeend", `<style>
+  .season-bar{position:relative;z-index:3;height:30px;margin:14px 0 0;pointer-events:none;transition:opacity 1.1s ease}
+  .season-bar .ln{position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.08)}
+  .season-bar .fill{position:absolute;left:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--sc));box-shadow:0 0 8px var(--sc)}
+  .season-bar .orb{position:absolute;top:-8px;width:17px;height:17px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle at 60% 40%,#fff,var(--sc));box-shadow:0 0 18px var(--sc);animation:sbBreathe 6s ease-in-out infinite;pointer-events:auto;cursor:pointer}
+  .season-bar.red .orb{animation:sbPulse 1.8s ease-in-out infinite}
+  .season-bar .lab{position:absolute;top:12px;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;letter-spacing:4.5px;text-transform:uppercase;color:var(--sc)}
+  .season-bar .sb-go{pointer-events:auto;display:table;margin:9px auto 0;border:1px solid var(--sc);border-radius:99px;padding:3px 10px;color:var(--sc);text-decoration:none;transition:box-shadow .3s}
+  .season-bar .sb-go:hover{box-shadow:0 0 14px -2px var(--sc)}
+  html:not([data-page="home"]) .season-bar .sb-go{display:none}
+  .season-bar .a,.season-bar .z{position:absolute;top:12px;font-size:9.5px;letter-spacing:4.5px;text-transform:uppercase;color:rgba(242,239,232,.55)}
+  .season-bar .a{left:56px}.season-bar .z{right:56px}
+  @keyframes sbBreathe{50%{box-shadow:0 0 28px var(--sc)}} @keyframes sbPulse{50%{transform:scale(1.25);box-shadow:0 0 34px var(--sc)}}
+  @media (prefers-reduced-motion:reduce){.season-bar .orb{animation:none}}
+  .sp{text-align:center;padding-top:10px;max-width:1080px;margin:0 auto}
+  .sp h1{margin:6px 0 10px;font:italic 400 46px/1.05 var(--serif)} .sp h1 b{font-weight:500;color:var(--spc)}
+  .sp .moon{width:96px;height:96px;border-radius:50%;margin:0 auto 6px;background:radial-gradient(circle at 40% 35%,#F7FFF9,var(--spc));box-shadow:0 0 40px -6px var(--spc)}
+  .sp .trk{width:min(460px,100%);height:4px;border-radius:4px;background:rgba(255,255,255,.08);margin:0 auto;overflow:hidden} .sp .trk i{display:block;height:100%;background:var(--spc)}
+  .sp .ln{color:var(--s);margin-top:10px}
+  .sp .sec{display:flex;justify-content:space-between;margin:34px 0 12px;text-align:left}
+  .sp .fc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;text-align:left}
+  .sp .fc div{position:relative;min-height:92px;border:1px solid color-mix(in srgb,var(--spc) 30%,transparent);border-radius:10px;padding:16px 18px;background:linear-gradient(160deg,color-mix(in srgb,var(--spc) 16%,transparent),color-mix(in srgb,var(--spc) 4%,transparent)),rgba(8,12,28,.82)}
+  .sp .fc h4{margin:4px 0 0;font:italic 400 20px/1.2 var(--serif)}
+  .sp .fc .x{position:absolute;top:8px;right:10px;color:var(--s);cursor:pointer;font-size:15px}
+  .sp .fc .sug{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--spc)}
+  .sp .fc .acts{display:flex;gap:10px;margin-top:8px;font-size:11.5px} .sp .fc .acts a{color:var(--spc);cursor:pointer} .sp .fc .acts a+a{color:var(--s)}
+  .sp .fc div.add{border-style:dashed;background:transparent;display:grid;place-items:center;color:var(--s);cursor:pointer}
+  .sp .fc input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--spc);outline:none;color:var(--t);font:italic 400 19px/1.3 var(--serif);padding:4px 0}
+  .sp .strip{display:flex;gap:4px;overflow-x:auto;text-align:left}
+  .sp .blk{flex:1 0 70px;border-radius:6px;padding:8px;font-size:10.5px;line-height:1.35;color:var(--s);border:1px solid transparent;cursor:pointer}
+  .sp .blk.b{background:rgba(69,233,146,.10)} .sp .blk.l{background:rgba(111,155,255,.12)} .sp .blk b{display:block;color:var(--t);font-weight:500;font-size:11px}
+  .sp .blk.now{border-color:var(--spc);box-shadow:0 0 14px -4px var(--spc)} .sp .blk.sel{border-color:var(--t)}
+  .sp .nav{display:flex;align-items:center;justify-content:center;gap:18px}
+  .sp .nav button{font-size:22px;color:var(--s);width:36px;height:36px;border-radius:50%;border:1px solid rgba(242,239,232,.12);cursor:pointer} .sp .nav button:disabled{opacity:.25;cursor:default}
+  .sp .back{margin:28px 18px 0 0;display:inline-block;color:var(--s);font-size:12px} .sp .back:hover{color:var(--t)}
+  @media (max-width:760px){.sp .fc{grid-template-columns:minmax(0,1fr)}}
+  .sp-set{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:18px;font-size:12px;color:var(--s)} .sp-set input{background:transparent;border:1px solid rgba(242,239,232,.2);border-radius:8px;color:var(--t);padding:4px 8px}
+</style>`);
+const page = () => { document.documentElement.dataset.page = (location.hash.replace("#", "") || "home").split("/")[0]; };
+page(); addEventListener("hashchange", page);
+function bar() {
+  let el = document.getElementById("season-bar");
+  if (!seasonOn()) { if (el) el.remove(); delete document.documentElement.dataset.season; return; }
+  if (!el) { el = document.createElement("div"); el.id = "season-bar"; const h = document.querySelector("header"); h ? h.insertAdjacentElement("afterend", el) : document.body.prepend(el); }
+  const x = season(new Date()), red = x.left < RED_FROM, col = red ? "#FF4D4D" : x.live ? LIVE : BUILD, pc = x.day / LEN * 100, next = new Date(x.e.getTime() + DAY);
+  let label = x.live ? `Live · time to ${word}` : `Build · day ${x.day}`;
+  if (red) label = `${x.live ? "Live" : "Build"} · ${x.left === 0 ? "last day" : x.left + (x.left === 1 ? " day" : " days") + " left"}`;
+  el.className = "season-bar" + (red ? " red" : ""); el.style.setProperty("--sc", col);
+  el.title = `${x.live ? "Live" : "Build"} season · ${fmtD(x.s)} to ${fmtD(x.e)} · day ${x.day} of ${LEN}`;
+  const lp = Math.min(Math.max(pc, 10), 84);
+  el.innerHTML = `<div class="ln"></div><div class="fill" style="width:${pc}%"></div><div class="orb" style="left:${pc}%" title="Season" onclick="location.hash='#season'"></div>
+    <span class="lab" style="left:${lp}%">${label}<a class="sb-go" href="#season">Season ›</a></span>
+    ${pc > 16 ? `<span class="a">${fmtD(x.s)}</span>` : ""}${pc < 76 ? `<span class="z">${fmtD(next)} · ${x.live ? "Build" : "Live"}</span>` : ""}`;
+  document.documentElement.dataset.season = x.live ? "live" : "build";
+}
+setInterval(bar, 10 * 60 * 1000);
+const FOCUS = { build: { words: "Make · fix · set up", items: ["Finish one thing that's half built", "Set up what next season needs", "Fix what slows you down"] },
+  live: { words: "Launch · post · show up", items: ["Show up where your people are", "Open new conversations", "Launch what's ready"] } };
+let SEL = null, adding = false;
+const focusOf = () => { const s = W().seasons = W().seasons || {}; s.focus = s.focus || {}; return s.focus; };
+function slots(j) {
+  const saved = focusOf()[String(j)];
+  if (saved) return saved.map(x => ({ t: x.t, sug: !!x.s }));
+  if (j <= season(new Date()).i) return FOCUS[j % 2 ? "live" : "build"].items.map(t => ({ t, sug: true }));
+  return [];
+}
+function saveSlots(j, L) { focusOf()[String(j)] = L.slice(0, 3).map(x => ({ t: x.t, s: !!x.sug })); ORBIT.save(); drawSeason(); }
+function seasonView() {
+  if (!seasonOn()) return `<div class="sp enter" style="--spc:${BUILD}"><div class="moon"></div><h1><b>Seasons</b></h1>
+    <p class="ln">Two kinds of season, 56 days each, back to back. <b style="color:${BUILD}">Build</b>: make, fix, set up. <b style="color:${LIVE}">Live</b>: launch, post, show up.<br>A thin tide line under the menu shows where you are, and each season holds up to three focuses.</p>
+    <div class="sp-set">Your first Build season starts <input type="date" id="spStart" value="${iso(new Date())}"><a href="#" class="pill on" id="spOn">Turn on seasons</a></div>
+    <a class="back" href="#home">‹ Back home</a></div>`;
+  const x = season(new Date()), j = SEL == null ? x.i : SEL, y = seasonAt(j), here = j === x.i, col = y.live ? LIVE : BUILD, f = FOCUS[y.live ? "live" : "build"];
+  const daysTo = Math.round((y.s - new Date(new Date().toDateString())) / DAY);
+  let strip = ""; for (let k = Math.max(0, x.i - 1); k < x.i + 8; k++) { const z = seasonAt(k); strip += `<div class="blk ${z.live ? "l" : "b"}${k === x.i ? " now" : ""}${k === j && !here ? " sel" : ""}" data-s="${k}"><b>${z.live ? "Live" : "Build"}</b>${fmtD(z.s)}<br>${fmtD(z.e)}</div>`; }
+  const L = slots(j);
+  const cards = L.map((s, n) => `<div>${s.sug ? `<span class="sug">Suggested</span>` : ""}<h4>${esc(s.t)}</h4>${s.sug ? `<span class="acts"><a data-keep="${n}">Keep</a><a data-drop="${n}">Remove</a></span>` : `<span class="x" data-drop="${n}" title="Remove">×</span>`}</div>`).join("")
+    + (L.length < 3 ? (adding ? `<div><span class="caps">New focus</span><input id="sp-add" maxlength="120" placeholder="What matters this season?"></div>` : `<div class="add" data-add>+ Add a focus</div>`) : "");
+  const line = here ? `Day ${x.day} of ${LEN} · ${x.left === 0 ? "last day" : x.left + (x.left === 1 ? " day" : " days")} to ${x.live ? "Build" : "Live"} · ${fmtD(x.s)} to ${fmtD(x.e)}`
+    : j < x.i ? `Finished · ${fmtD(y.s)} to ${fmtD(y.e)} ${y.e.getFullYear()}` : `Starts in ${daysTo} days · ${fmtD(y.s)} to ${fmtD(y.e)} ${y.e.getFullYear()}`;
+  return `<div class="sp enter" style="--spc:${col}"><div class="moon" style="opacity:${here ? .35 + .65 * x.day / LEN : j < x.i ? 1 : .3}"></div>
+    <div class="caps">${here ? `Today · ${fmtD(new Date())} ${new Date().getFullYear()}` : j < x.i ? "Looking back" : "Planning ahead"}</div>
+    <div class="nav"><button type="button" data-prev ${j <= 0 ? "disabled" : ""} aria-label="Previous season">‹</button><h1><b>${y.live ? "Live" : "Build"}</b> season</h1><button type="button" data-next aria-label="Next season">›</button></div>
+    <div class="trk"><i style="width:${here ? x.day / LEN * 100 : j < x.i ? 100 : 0}%"></i></div><div class="ln">${line}</div>
+    <div class="sec"><span class="caps">Focus this season · up to 3</span><span class="caps">${f.words}</span></div><div class="fc">${cards}</div>
+    <div class="sec"><span class="caps">The cycle · 56 days each · tap one to plan it</span><a href="#" class="caps" id="spOff" style="color:var(--s)">Turn seasons off</a></div><div class="strip">${strip}</div>
+    ${here ? "" : `<a class="back" href="#" data-today>‹ Today's season</a>`}<a class="back" href="#home">‹ Back home</a></div>`;
+}
+function drawSeason() {
+  const v = document.getElementById("view"); if (!v || v.dataset.v !== "season") return;
+  v.innerHTML = seasonView();
+  const on = (q, fn) => v.querySelectorAll(q).forEach(b => b.onclick = ev => { ev.preventDefault(); fn(b); });
+  on("#spOn", () => { const s = W().seasons = W().seasons || {}; s.on = true; s.start = (document.getElementById("spStart").value || iso(new Date())); ORBIT.save(); bar(); drawSeason(); });
+  on("#spOff", () => { W().seasons.on = false; ORBIT.save(); bar(); location.hash = "#home"; });
+  if (!seasonOn()) return;
+  const x = season(new Date()), j = SEL == null ? x.i : SEL, go = k => { SEL = k; adding = false; drawSeason(); };
+  v.querySelectorAll("[data-s]").forEach(b => b.onclick = () => go(+b.dataset.s));
+  on("[data-prev]", () => go(Math.max(0, j - 1))); on("[data-next]", () => go(j + 1)); on("[data-today]", () => go(x.i));
+  on("[data-add]", () => { adding = true; drawSeason(); const i = document.getElementById("sp-add"); i && i.focus(); });
+  on("[data-keep]", b => { const L = slots(j); L[+b.dataset.keep].sug = false; saveSlots(j, L); });
+  on("[data-drop]", b => { const L = slots(j); L.splice(+b.dataset.drop, 1); saveSlots(j, L); });
+  const inp = document.getElementById("sp-add");
+  if (inp) inp.onkeydown = ev => { if (ev.key === "Enter" && inp.value.trim()) { adding = false; saveSlots(j, slots(j).concat([{ t: inp.value.trim(), sug: false }])); } if (ev.key === "Escape") { adding = false; drawSeason(); } };
+}
+// the Seasons switch sits with Back up and Load
+const ob = document.getElementById("orbitBar");
+if (ob && !document.getElementById("seasonsBtn")) { ob.insertAdjacentHTML("afterbegin", `<button id="seasonsBtn" title="Build and Live seasons: optional">Seasons</button>`); document.getElementById("seasonsBtn").onclick = () => { location.hash = "#season"; }; }
+
+/* ---------- routing ---------- */
+const _routeV5 = route;
+route = function () {
+  const top = (location.hash.replace("#", "") || "home").split("/")[0];
+  bar();
+  if (DATA && !DATA.setup && top === "season") {
+    navTo("home"); clearTimeout(focusTimer); const v = document.getElementById("view"); v.dataset.v = "season"; SEL = null; adding = false;
+    setTint(COL.desk); drawSeason(); setAsk("desk", "your Personal Assistant"); scrollTo(0, 0); return;
+  }
+  _routeV5();
+  lock(); wireDesk();
+};
+window.removeEventListener("hashchange", _routeV5);
+window.addEventListener("hashchange", route);
+if (DATA) { const v = document.getElementById("view"); if (v) v.dataset.v = ""; route(); }
+})();
+</script>
+
 </body>
 </html>

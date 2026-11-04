@@ -1,33 +1,77 @@
 {
- "version": "0.4.9",
+ "version": "0.5.0",
  "update": "Update-your-Orbit.md",
- "notes": "Every helper's page is new: one way in, then each one works its own way. Skills on every step, and chats that sit beside the page while it updates.",
+ "notes": "Your hub's Home is now the founder's own: one list of what needs you, the wheel, and tabs for Work, Money, Health and People. Recos has a clear way in, and seasons are there if you want them.",
  "team_since": "0.4.6",
  "hold": "2026-11-02T12:00:00Z",
- "show": "room/bd",
+ "show": "home",
  "whatsnew": [
   {
-   "icon": "spark",
-   "title": "Every helper has a new page.",
-   "line": "Business Development, Customer Care and Content walk you one step at a time. Creative Director is a wall of shelves. Operations and Funnel sit in an orb."
+   "icon": "sun",
+   "title": "A new Home.",
+   "line": "One list on the left: Today, This week, Running. Ember means it needs you today. The wheel sits in the middle."
   },
   {
    "icon": "ring",
-   "title": "Skills on every step.",
-   "line": "Each step and page has buttons for its jobs, like Scan for new people or Find the biggest drop. Tap one and the helper starts."
+   "title": "Work, Money, Health, People.",
+   "line": "Four tabs under the list. Money is a simple month with bills and pots. Health is your Coach's daily few."
+  },
+  {
+   "icon": "spark",
+   "title": "Recos, one tap away.",
+   "line": "Your team's ideas sit in a clear link at the bottom left of Home."
   },
   {
    "icon": "mail",
-   "title": "Chats sit beside the page.",
-   "line": "The page moves over to make room, and redraws after every reply, so you watch the change land."
-  },
-  {
-   "icon": "sun",
-   "title": "A Today card on every page.",
-   "line": "The one thing that needs you, with Show me or Later."
+   "title": "Seasons, if you want them.",
+   "line": "Build and Live, 56 days each. Turn them on from Seasons at the bottom of the page."
   }
  ],
  "changes": [
+  {
+   "id": "pa-home",
+   "title": "Home is the founder's own Personal Assistant home: one ranked list (Today, This week, Running), the wheel in the middle, and it fits one screen",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "Home shows what needs you first, in one list.",
+   "notice": "Open Home: the top card is the one thing that needs you today."
+  },
+  {
+   "id": "life-tabs",
+   "title": "Four tabs on Home: Work, Money (a simple month: money in, bills, spending, pots), Health (your Coach's daily few, ticked right on Home) and People (who's waiting on you)",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "Your money, your health and your people sit next to the work.",
+   "notice": "Tap the tabs under the list on Home."
+  },
+  {
+   "id": "recos-link",
+   "title": "A clear Recos link at the bottom left of Home",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "Your team's ideas are one tap away.",
+   "notice": "Look for the glowing Recos link under the tabs."
+  },
+  {
+   "id": "seasons",
+   "title": "Optional seasons: 56-day Build and Live seasons with a tide line under the menu and a Season page with up to three focuses each",
+   "tag": "hub",
+   "from": "amw",
+   "files": [
+    "os/hub.html"
+   ],
+   "plain": "A rhythm for making and for showing up, if you want one.",
+   "notice": "Tap Seasons at the bottom of the page to turn them on."
+  },
   {
    "id": "helper-rooms",
    "title": "Every helper page is rebuilt: the same way in from the wheel, then One step at a time (Business Development, Customer Care, Content), The wall (Creative Director) or The orb (Operations, Funnel), with a Today card on each",
