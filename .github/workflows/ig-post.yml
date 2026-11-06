@@ -1,0 +1,41 @@
+name: Instagram posting robot
+
+# Publishes each scheduled Instagram post on time with the Meta API.
+# Runs on GitHub's servers, so it works with no Claude usage and the PC off.
+# Schedule: scripts/ig-post/slots.json (Melbourne time). Media and captions: branch nov-orbit-swap.
+# It checks Instagram first, so a post that is already live is never posted twice.
+on:
+  schedule:
+    - cron: "*/10 * * * *" # GitHub can start these late; a slot stays postable for 24 h
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Post this one folder now (e.g. reel1). Leave empty to post whatever is due."
+        type: string
+        default: ""
+      dry_run:
+        description: "Build the post but don't publish it"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ig-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/ig-post
+      - run: python3 scripts/ig-post/post.py
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          ONLY: ${{ inputs.only }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
