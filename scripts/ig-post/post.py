@@ -100,9 +100,9 @@ def publish(f, cap):
 S = json.load(open(os.path.join(HERE, "slots.json")))
 tz = ZoneInfo(S["tz"])
 now = dt.datetime.now(tz)
-# Wait a few minutes past the slot so a Claude routine posting the same slot goes first;
-# the caption check below then sees it and skips.
-GRACE = dt.timedelta(minutes=8)
+# Backup poster: wait 30 min past the slot so the Claude routine (if running) posts first;
+# posted_since() then sees that post and skips. If Claude never fires, this posts it.
+GRACE = dt.timedelta(minutes=30)
 due = []
 for f, t in S["slots"]:
     when = dt.datetime.strptime(t, "%Y-%m-%d %H:%M").replace(tzinfo=tz)
