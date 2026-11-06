@@ -116,6 +116,11 @@ live = {key(m.get("caption") or ""): m.get("permalink")
 failed = False
 for f, t in due:
     cap = caption(f)
+    if "orbit" in cap.lower():
+        # Orbit is off every touchpoint (6 Nov 2026): never post a caption that still mentions it
+        failed = True
+        print(f"{f} ({t}): HELD, caption on {BRANCH} still mentions Orbit")
+        continue
     if key(cap) in live:
         print(f"{f} ({t}): already on Instagram {live[key(cap)]}")
         continue
