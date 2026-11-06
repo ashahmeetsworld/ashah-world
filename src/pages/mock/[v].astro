@@ -1,0 +1,191 @@
+---
+// MOCK-UP ONLY (Nov 2026): three layouts for the simpler Home. Never merge.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Arrow from '../../components/Arrow.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import HeroScene from '../../components/HeroScene.astro';
+import MissionSky from '../../components/MissionSky.astro';
+import DawnScene from '../../components/DawnScene.astro';
+import Door from '../../components/Door.astro';
+import Signup from '../../components/Signup.astro';
+import NightPass from '../../components/NightPass.astro';
+import site from '../../data/site.json';
+import about from '../../data/about.json';
+import { u } from '../../lib/url';
+export function getStaticPaths() { return [{ params: { v: 'a' } }, { params: { v: 'b' } }, { params: { v: 'c' } }]; }
+const { v } = Astro.params;
+const work = (await getCollection('work', (e) => !e.data.draft && e.data.featured)).sort((a, b) => a.data.order - b.data.order);
+const mission = about.mission.replace(/^My mission is to /, '').replace(/^./, (c) => c.toUpperCase());
+const order = v === 'a' ? ['about', 'passage', 'work'] : v === 'b' ? ['passage', 'about', 'work'] : ['rooms', 'work'];
+---
+<Base>
+  <NightPass />
+  <section class="hero">
+    <HeroScene />
+    <div class="wrap hero-copy">
+      <p class="eyebrow">{site.tagline}</p>
+      <h1 class="hero-title">Ashah <br class="br" />Meets World</h1>
+      <p class="lede">{site.intro}</p>
+      <div class="ctas">
+        <a class="go glow" href={u('/work/')}>See the work <Arrow /></a>
+        <a class="go" href="#contact">Say hello <Arrow /></a>
+      </div>
+    </div>
+    <div class="bars" aria-hidden="true"><span class="bar top"></span><span class="bar bot"></span></div>
+  </section>
+
+  {order.map((s) => (
+    s === 'about' ? (
+      <section class="pad hello" id="about">
+        <div class="wrap grid-2">
+          <div class="rv">
+            <p class="eyebrow">Hello</p>
+            <h2>I'm Ashah.</h2>
+            {about.intro.map((t) => <p class="body">{t}</p>)}
+          </div>
+          <div class="rv mission-mini">
+            <MissionSky />
+            <blockquote class="quote"><p>{mission}</p><footer class="label">The mission</footer></blockquote>
+          </div>
+        </div>
+      </section>
+    ) : s === 'passage' ? (
+      <section class={`pad door-sec${v === 'b' ? ' big' : ''}`}>
+        <div class="glow-v" aria-hidden="true"></div>
+        <div class="wrap door-in">
+          <div class="rv door-art"><Door /></div>
+          <div class="rv door-copy">
+            <p class="eyebrow v">Passage · an offer by A·M·W</p>
+            <h2 class="p-title">Step inside.</h2>
+            <p class="lede">Three months to make your next drop the one you always thought it would be.</p>
+            <p class="body small">For creative, culture-led founders and brands.</p>
+            <a class="go p-go" href={u('/passage/')}>See how it works <Arrow /></a>
+          </div>
+        </div>
+      </section>
+    ) : s === 'rooms' ? (
+      <section class="pad rooms" id="about">
+        <div class="wrap rooms-in">
+          <div class="room rv">
+            <p class="eyebrow">Hello</p>
+            <h2>I'm Ashah.</h2>
+            <p class="body">{about.intro[0]}</p>
+            <blockquote class="quote sm"><p>{mission}</p><footer class="label">The mission</footer></blockquote>
+          </div>
+          <div class="room door-card rv">
+            <div class="mini-door"><Door /></div>
+            <p class="eyebrow v">Passage · an offer by A·M·W</p>
+            <h2 class="p-title">Step inside.</h2>
+            <p class="body">Three months to make your next drop the one you always thought it would be.</p>
+            <a class="go p-go" href={u('/passage/')}>See how it works <Arrow /></a>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="pad work" id="work">
+        <div class="wrap">
+          <div class="row-head rv">
+            <div><p class="eyebrow">Selected work</p><h2>Worlds I've built.</h2></div>
+            <a class="go" href={u('/work/')}>All work <Arrow /></a>
+          </div>
+          <div class="work-grid">
+            {work.slice(0, 3).map((w, i) => <div class={`rv w${i}`}><WorkCard entry={w} /></div>)}
+          </div>
+        </div>
+      </section>
+    )
+  ))}
+
+  <section class="finale" id="contact">
+    <div class="scene"><DawnScene /></div>
+    <div class="wrap">
+      <div class={`c-grid${v === 'c' ? ' duo' : ''}`}>
+        <div class="panel rv">
+          <p class="eyebrow">Say hello</p>
+          <h2 class="c-title">Open the door.</h2>
+          <p class="body">Collabs, freelance projects, a question, or just hello. Tell me what you’re building and I’ll come back within a few days.</p>
+          <form>
+            <div class="two"><label class="field"><span>Name</span><input /></label><label class="field"><span>Email</span><input /></label></div>
+            <label class="field"><span>What are you working on?</span><textarea placeholder="The drop, the vision, the timeline…"></textarea></label>
+            <button class="btn aurora" type="button"><span>Send it into the world</span></button>
+          </form>
+        </div>
+        <div class={`panel rv${v === 'c' ? '' : ' letters'}`}><Signup /></div>
+      </div>
+    </div>
+  </section>
+</Base>
+<script>
+  const hero = document.querySelector('.hero') as HTMLElement | null;
+  if (hero) { const set = () => { const o = Math.min(1, scrollY / (innerHeight * 0.3)); hero.style.setProperty('--open', o.toFixed(3)); hero.classList.toggle('opened', o >= 1); }; addEventListener('scroll', set, { passive: true }); set(); }
+</script>
+<style>
+  .hero { position: relative; min-height: 100svh; display: grid; align-items: start; overflow: hidden; --open: 0; }
+  .hero :global(.hs) { -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent); mask-image: linear-gradient(180deg, #000 62%, transparent); --mx: 50% !important; --my: 21% !important; --moon: clamp(70px, 7vw, 104px) !important; }
+  .hero-copy { position: relative; z-index: 2; display: grid; justify-items: center; text-align: center; padding-top: calc(19vh + 96px); }
+  .hero-title { font-size: clamp(64px, 9.4vw, 164px); line-height: .95; white-space: nowrap; padding: 0 .08em .1em; width: fit-content;
+    background: linear-gradient(100deg, #FFFFFF, #E6ECFF 18%, #BFEFF7 34%, #E9D8FF 50%, #F7CBA8 66%, #FFE7C4 80%, #FFFFFF 96%); background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 50px rgba(221, 232, 255, .35)); }
+  .hero-title .br { display: none; }
+  .hero .eyebrow { letter-spacing: .5em; font-size: 11px; }
+  .hero .lede { margin: 18px auto 26px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: center; }
+  .bars { position: fixed; inset: 0; z-index: 45; pointer-events: none; opacity: calc(1 - var(--open)); }
+  .hero.opened .bars { visibility: hidden; }
+  .bar { position: absolute; left: 0; right: 0; height: 9vh; background: #03040A; }
+  .bar.top { top: 0; } .bar.bot { bottom: 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 7vw, 110px); align-items: center; }
+  h2 { margin-bottom: 22px; }
+  .hello .body { margin: 0 0 18px; }
+  .mission-mini { position: relative; isolation: isolate; padding-block: clamp(40px, 5vw, 70px); background: radial-gradient(60% 65% at 45% 50%, rgba(58, 31, 102, .34), transparent 72%); }
+  .mission-mini :global(.ms) { z-index: -1; opacity: .75; left: -14%; width: 128%; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
+  .quote { margin: 0; padding-left: clamp(20px, 3vw, 40px); border-left: 1px solid var(--peach); }
+  .quote p { font: italic 400 clamp(26px, 3vw, 40px)/1.28 var(--serif); margin: 0 0 22px; }
+  .quote.sm { margin-top: 34px; } .quote.sm p { font-size: clamp(22px, 2.2vw, 28px); }
+  .quote footer { color: var(--peach); }
+  /* Passage door: violet glow, amber title (its own look) */
+  .door-sec, .rooms, .work, .finale { position: relative; overflow: hidden; }
+  .glow-v { position: absolute; inset: 10% 30% 10% 0; background: radial-gradient(closest-side, rgba(140, 87, 248, .22), transparent); filter: blur(30px); pointer-events: none; }
+  .door-in { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; position: relative; }
+  .door-art :global(svg) { width: 100%; max-width: 440px; display: block; margin-inline: auto; }
+  .door-sec.big { padding-block: clamp(120px, 14vw, 200px); }
+  .door-sec.big .p-title { font-size: clamp(64px, 8vw, 120px); }
+  .eyebrow.v { color: #B9A2FF; }
+  .p-title { font-size: clamp(52px, 6vw, 88px); line-height: 1; width: fit-content; padding-right: .08em;
+    background: linear-gradient(100deg, #FFE7C4, #F7CBA8 45%, #F2B48C 70%, #C9A6FF); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 28px rgba(140, 87, 248, .45)); }
+  .door-copy .lede { max-width: 26ch; margin: 0 0 14px; }
+  .small { color: var(--ink-3); font-size: 15px; margin: 0 0 30px; }
+  .go.p-go { border-color: #8C57F8; } .go.p-go:hover { color: #C9A6FF; }
+  .rooms-in { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .room { padding: clamp(28px, 4vw, 54px); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(22, 30, 70, .45), rgba(7, 11, 24, .2)); }
+  .door-card { background: radial-gradient(90% 70% at 50% 20%, rgba(140, 87, 248, .2), transparent 70%), rgba(7, 11, 24, .3); }
+  .mini-door :global(svg) { width: 200px; display: block; margin: -20px 0 6px -30px; }
+  .door-card .body { margin: 0 0 28px; max-width: 34ch; }
+  .row-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; margin-bottom: clamp(40px, 5vw, 64px); }
+  .work-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(36px, 5vw, 64px) clamp(24px, 4vw, 56px); }
+  .work-grid .w0 { grid-row: span 2; }
+  .work-grid .w0 :global(.frame) { aspect-ratio: 4 / 5; }
+  .finale { padding-bottom: 60px; }
+  .scene { position: relative; height: clamp(300px, 40vw, 520px); -webkit-mask-image: linear-gradient(180deg, transparent, #000 24%, #000 78%, transparent); mask-image: linear-gradient(180deg, transparent, #000 24%, #000 78%, transparent); }
+  .c-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; margin-top: -140px; position: relative; z-index: 1; align-items: start; }
+  .c-grid.duo { grid-template-columns: 1fr 1fr; }
+  .panel { padding: clamp(24px, 3vw, 40px); background: rgba(7, 11, 24, .62); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .c-title { font-size: clamp(44px, 5vw, 72px); margin-bottom: 14px; }
+  .panel .body { margin: 0 0 26px; }
+  form { display: grid; gap: 18px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  form .btn { justify-self: start; }
+  @media (max-width: 760px) {
+    .hero { align-items: end; }
+    .hero-copy { padding-top: 0; padding-bottom: 14vh; }
+    .hero-title { white-space: normal; font-size: clamp(64px, 18vw, 92px); } .hero-title .br { display: inline; }
+    .bar { height: 6vh; }
+    .grid-2, .door-in, .rooms-in, .c-grid, .c-grid.duo, .two, .work-grid { grid-template-columns: 1fr; }
+    .work-grid .w0 { grid-row: auto; }
+    .door-art :global(svg) { max-width: 300px; }
+    .c-grid { margin-top: -60px; }
+    .pad { padding-block: 88px; }
+  }
+</style>
