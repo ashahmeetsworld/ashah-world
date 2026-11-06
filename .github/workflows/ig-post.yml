@@ -2,7 +2,7 @@ name: Instagram posting robot
 
 # Publishes each scheduled Instagram post on time with the Meta API.
 # Runs on GitHub's servers, so it works with no Claude usage and the PC off.
-# Schedule: scripts/ig-post/slots.json (Melbourne time). Media and captions: branch nov-orbit-swap.
+# Schedule: scripts/ig-post/slots.json (Melbourne time). Already-live slots: scripts/ig-post/posted.json. Media and captions: branch nov-orbit-swap.
 # It checks Instagram first, so a post that is already live is never posted twice.
 on:
   schedule:

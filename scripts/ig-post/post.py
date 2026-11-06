@@ -111,10 +111,28 @@ for f, t in S["slots"]:
 if not due:
     sys.exit(print(f"{now:%a %d %b %H:%M} Melbourne: nothing due"))
 
-live = {key(m.get("caption") or ""): m.get("permalink")
-        for m in api("GET", f"{U}/media", fields="caption,permalink", limit=40).get("data", [])}
+# Slots known to be live already (edit when posting by hand)
+posted = json.load(open(os.path.join(HERE, "posted.json")))
+recent = api("GET", f"{U}/media", fields="caption,permalink,timestamp", limit=40).get("data", [])
+live = {key(m.get("caption") or ""): m.get("permalink") for m in recent}
+
+
+def posted_since(when):
+    """A post already went up at or after this slot's time (posts are days apart), so the slot is done.
+    Works even if the caption was edited after it went live."""
+    for m in recent:
+        ts = dt.datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
+        if ts >= when - dt.timedelta(minutes=15):
+            return m.get("permalink")
 failed = False
 for f, t in due:
+    when = dt.datetime.strptime(t, "%Y-%m-%d %H:%M").replace(tzinfo=tz)
+    if f in posted:
+        print(f"{f} ({t}): already posted {posted[f]}")
+        continue
+    if not ONLY and posted_since(when):
+        print(f"{f} ({t}): a post already went up after this slot {posted_since(when)}")
+        continue
     cap = caption(f)
     if "orbit" in cap.lower():
         # Orbit is off every touchpoint (6 Nov 2026): never post a caption that still mentions it
