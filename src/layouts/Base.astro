@@ -10,7 +10,6 @@ import cgItalic from '@fontsource/cormorant-garamond/files/cormorant-garamond-la
 import dmSans from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import OsNudge from '../components/OsNudge.astro';
 import MobileNav from '../components/MobileNav.astro';
 import site from '../data/site.json';
 import { u } from '../lib/url';
@@ -43,7 +42,6 @@ const ogImage = new URL(u(image), Astro.site);
     <Header />
     <main><slot /></main>
     <Footer />
-    <OsNudge />
     <MobileNav />
     <script is:inline>
       // Every new page opens at the top (back/forward still returns you to where you were; #anchors still jump).

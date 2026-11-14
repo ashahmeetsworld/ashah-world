@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Signup from '../components/Signup.astro';
 import site from '../data/site.json';
 import SocialIcons from '../components/SocialIcons.astro';
 const socials = site.socials.filter((s) => s.url);
@@ -47,12 +46,6 @@ const socials = site.socials.filter((s) => s.url);
         )}
       </div>
     </div>
-  </section>
-  <!-- Letters from the world: a soft dusk glow, like the fireflies, so the list feels like part of the community -->
-  <section class="news">
-    <div class="halo" style="width:640px;height:420px;left:-120px;top:60px;background:var(--mauve);opacity:.26"></div>
-    <div class="halo" style="width:420px;height:280px;left:12%;top:170px;background:#C2605A;opacity:.16"></div>
-    <div class="wrap"><hr class="rule" /><div class="news-in"><Signup /></div></div>
   </section>
 </Base>
 <script>
