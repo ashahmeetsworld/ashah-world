@@ -15,20 +15,11 @@ const year = new Date().getFullYear();
     <div class="nav-col">
     <div class="links">
       <a href={u('/work/')}>Work</a>
-      <a href={u('/#about')}>About</a>
       {/* <a href={u('/ubiquity/')}>Ubiquity</a>  archived 15 Oct 2026 */}
-      <a href={u('/#contact')}>Contact</a>
+      <a href={u('/contact/')}>Contact</a>
       {/* <a href={u('/community/')}>Community</a>  hidden 17 Oct 2026; page kept as src/pages/_community.astro */}
     </div>
-    {/* second row: magnets, offers and ventures */}
-    <div class="links ventures">
-      <a class="passage-link" href={u('/passage/')}>Passage</a>
-      <a class="orbit-link" href={u('/orbit/')}>Orbit</a>
-      {/* Lucid (coming soon, doors open 4 Jan 2027): footer only, never the header. Hover pops a tiny "Coming soon" above it with a spark burst. */}
-      <span class="lucid-wrap">
-        <a class="lucid-link" href={u('/lucid/')}>Lucid</a>
-        <span class="smoke" aria-hidden="true"><span>Coming soon</span></span>
-      </span>
+    {/* Nov 2026 (Ashah): Passage, Orbit and Lucid are off the navs. Passage is reached from the Home door. */}
     </div>
     </div>
   </div>

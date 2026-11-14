@@ -55,7 +55,7 @@ const skills = [
       <p class="lede">{site.intro}</p>
       <div class="ctas">
         <a class="go glow" href={u('/work/')}>See the work <Arrow /></a>
-        <a class="go aurora-line" href="#contact"><span class="t">Say hello</span> <Arrow /></a>
+        <a class="go aurora-line" href={u('/contact/')}><span class="t">Say hello</span> <Arrow /></a>
       </div>
     </div>
     <div class="bars" aria-hidden="true"><span class="bar top"></span><span class="bar bot"></span></div>
@@ -200,24 +200,7 @@ const skills = [
   <!-- ─── First light: the sunset, then the newsletter ─── -->
   <section class="finale">
     <div class="scene"><DawnScene /></div>
-    <div class="wrap c-grid" id="contact">
-      <div class="rv panel">
-        <p class="eyebrow">Say hello</p>
-        <h2 class="c-title">Open the door.</h2>
-        <p class="body">Collabs, freelance projects, a question, or just hello. Tell me what you’re building and I’ll come back within a few days.</p>
-        <form id="contact-form" action={site.contactFormUrl} method="post">
-          <input type="hidden" name="_subject" value="New enquiry · Ashah Meets World" />
-          <div class="two">
-            <label class="field"><span>Name</span><input name="name" autocomplete="name" required /></label>
-            <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
-          </div>
-          <label class="field"><span>What are you working on?</span><textarea name="message" placeholder="The drop, the vision, the timeline…"></textarea></label>
-          <button class="btn aurora" type="submit"><span>Send it into the world</span></button>
-          <p class="note status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-      <div class="rv panel" id="letters"><Signup /></div>
-    </div>
+    <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
   </section>
 </Base>
 
@@ -271,25 +254,6 @@ const skills = [
     } catch { /* keep the images that shipped with the page */ }
   });
   wireAll();
-  // Contact form: send without leaving the page (Formspree answers JSON when asked).
-  const cf = document.getElementById('contact-form') as HTMLFormElement | null;
-  if (cf && cf.action.includes('formspree.io')) {
-    cf.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = cf.querySelector('button') as HTMLButtonElement;
-      const status = cf.querySelector('.status') as HTMLElement;
-      btn.disabled = true; btn.querySelector('span')!.textContent = 'Sending…';
-      try {
-        const r = await fetch(cf.action, { method: 'POST', body: new FormData(cf), headers: { Accept: 'application/json' } });
-        if (!r.ok) throw new Error();
-        cf.reset(); btn.querySelector('span')!.textContent = 'Sent';
-        status.textContent = 'Got it. I’ll come back to you within a few days.';
-      } catch {
-        btn.disabled = false; btn.querySelector('span')!.textContent = 'Send it into the world';
-        status.textContent = 'That didn’t go through. Try again, or DM @ashah.world on Instagram.';
-      }
-    });
-  }
 </script>
 
 <style>
@@ -505,7 +469,7 @@ const skills = [
     .scene { min-height: 340px; }
     .finale .panel { margin-top: -56px; }
   }
-  /* ─── Simple site (Nov 2026): Passage door + contact beside Letters ─── */
+  /* ─── Simple site (Nov 2026): the Passage door ─── */
   .door-sec { position: relative; overflow: hidden; }
   .glow-v { position: absolute; inset: 10% 30% 10% 0; background: radial-gradient(closest-side, rgba(140, 87, 248, .22), transparent); filter: blur(30px); pointer-events: none; }
   .door-in { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; position: relative; }
@@ -518,18 +482,9 @@ const skills = [
   .door-copy .small { color: var(--ink-3); font-size: 15px; margin: 0 0 30px; }
   .go.p-go { border-color: #8C57F8; } .go.p-go:hover { color: #C9A6FF; }
   .hello .body { margin: 0 0 18px; }
-  .c-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; position: relative; z-index: 1; align-items: start; margin-top: calc(28px - .28 * var(--sh, 420px)); }
-  .c-grid .panel { margin: 0; max-width: none; }
-  .c-title { font-size: clamp(44px, 5vw, 72px); margin-bottom: 14px; }
-  .c-grid .body { margin: 0 0 26px; }
-  #contact-form { display: grid; gap: 18px; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  #contact-form .btn { justify-self: start; }
-  .note { margin: 0; }
   @media (max-width: 760px) {
-    .door-in, .c-grid, .two { grid-template-columns: 1fr; }
+    .door-in { grid-template-columns: 1fr; }
     .door-art :global(svg) { max-width: 300px; }
-    .c-grid { margin-top: -56px; }
     .pad.door-sec, .pad.hello { padding-block: 88px; }
   }
 </style>

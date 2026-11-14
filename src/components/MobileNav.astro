@@ -7,10 +7,8 @@ const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, 
 const home = path === '/' || path === '';
 const items = [
   { key: 'home', label: 'Home', href: home ? '#top' : u('/'), icon: 'M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z' },
-  { key: 'passage', label: 'Passage', href: u('/passage/'), icon: 'M6 20V10a6 6 0 0 1 12 0v10M4 20h16M14.5 14.5h.01' },
   { key: 'work', label: 'Work', href: home ? '#work' : u('/work/'), icon: 'M4 6.5h16v12H4zM9 6.5V5h6v1.5M4 11.5h16' },
-  { key: 'about', label: 'About', href: home ? '#about' : u('/#about'), icon: 'M12 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5' },
-  { key: 'contact', label: 'Say hi', href: home ? '#contact' : u('/#contact'), icon: 'M4 6h16v11H8l-4 3.5zM8 10.5h8M8 13.5h5' },
+  { key: 'contact', label: 'Say hi', href: u('/contact/'), icon: 'M4 6h16v11H8l-4 3.5zM8 10.5h8M8 13.5h5' },
 ];
 const current = home ? 'home' : path.startsWith('/work') ? 'work' : path.startsWith('/about') ? 'about' : path.startsWith('/contact') ? 'contact' : '';
 ---
@@ -25,7 +23,7 @@ const current = home ? 'home' : path.startsWith('/work') ? 'work' : path.startsW
 <style>
   .mnav { display: none; }
   @media (max-width: 760px) {
-    .mnav { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; z-index: 60;
+    .mnav { display: grid; grid-template-columns: repeat(3, 1fr); position: fixed; z-index: 60;
       left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px));
       padding: 6px; border-radius: 22px; border: 1px solid var(--line);
       background: rgba(11, 18, 48, .72); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2);
@@ -42,7 +40,7 @@ const current = home ? 'home' : path.startsWith('/work') ? 'work' : path.startsW
   if (nav) {
     const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a'));
     const set = (key: string) => links.forEach((a) => (a.dataset.key === key ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
-    const sections = ['about', 'work', 'contact'].map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const sections = ['work'].map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     const update = () => {
       const mid = innerHeight * 0.45;
       const hit = sections.find((s) => { const r = s.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
