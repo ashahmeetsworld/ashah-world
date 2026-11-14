@@ -1,6 +1,6 @@
 ---
 // Lucid: the creative sanctuary (Ashah's personal workstation product). Coming soon.
-// Doors open Mon 4 January 2027; teasers from about 21 December 2026, handing over from Orbit.
+// Doors open Mon 4 January 2027; teasers from about 21 December 2026.
 // Look: opal (pearl, lilac, aqua, blush) in a dream where the rules bend. Never aurora (Orbit) or ember.
 // Linked from the footer only, not the header. Lucid is NOT part of Orbit.
 import Base from '../layouts/Base.astro';
@@ -117,7 +117,7 @@ const stations = [
       <h2>Five rooms. Any craft you can name.</h2>
       <p class="sub">Nothing is preset. A short chat with Lucid learns how you work in each craft and what you really need, then builds that room around you.</p>
       <div class="doors">
-        <div class="door content"><span class="lab">Optional</span><span class="nm">Content</span><span class="ln">Pairs with your Content Producer in Orbit.</span></div>
+        <div class="door content"><span class="lab">Optional</span><span class="nm">Content</span></div>
         {[1, 2, 3, 4, 5].map((i) => (
           <div class="door open-slot" style={`--i:${i}`}><span class="lab">Room {i}</span><span class="nm">Any craft</span><span class="ln">You name it.</span><span class="veil" aria-hidden="true">Soon</span></div>
         ))}
@@ -190,15 +190,6 @@ const stations = [
         <path d="M210 570 L210 10 A200 200 0 0 1 410 210 L410 570 Z" fill="url(#lopal2)"/>
         <g fill="#BFEFF7" opacity=".55"><rect x="40" y="250" width="140" height="5" rx="2"/><rect x="40" y="290" width="110" height="5" rx="2"/><rect x="40" y="330" width="80" height="5" rx="2"/><rect x="40" y="370" width="140" height="5" rx="2"/><rect x="40" y="410" width="110" height="5" rx="2"/></g>
       </svg>
-    </div>
-  </section>
-
-  <!-- Pairing: Orbit and Lucid -->
-  <section class="l-pair">
-    <div class="wrap">
-      <h2><span class="aur">Orbit</span> runs the business.<br/><span class="opal">Lucid</span> is where you make.</h2>
-      <p class="sub">Same sky, its own room. Two separate doors into one world.</p>
-      <a class="go" href={u('/orbit/')}>While you wait, meet Orbit <svg viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor"/></svg></a>
     </div>
   </section>
 
@@ -334,10 +325,6 @@ const stations = [
   .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
   .half { width: min(320px, 100%); justify-self: center; filter: drop-shadow(0 0 40px rgba(201, 188, 255, .18)); }
 
-  .l-pair { padding-block: 110px; text-align: center; }
-  .l-pair h2 { font-size: clamp(40px, 5.8vw, 84px); }
-  .l-pair .sub { margin: 0 auto 30px; }
-  .l-pair .go { justify-content: center; }
 
   .l-close { position: relative; padding-block: 120px 140px; text-align: center; overflow: hidden; }
   .l-close .glow { position: absolute; left: 50%; top: 30%; width: 520px; height: 520px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(#E9D8FF, transparent 70%); opacity: .14; filter: blur(40px); pointer-events: none; }

@@ -2,9 +2,11 @@ name: Orbit comment bot
 
 # Comment ORBIT on an Instagram post -> the Orbit link arrives by DM and the comment is hidden.
 # Script: scripts/orbit-dm/bot.py. Needs the repo secret IG_ACCESS_TOKEN.
+# Switched off 14 Nov 2026: Orbit is off every touchpoint (Ashah, 6 Nov 2026).
+# The schedule is removed so nothing runs; manual runs still work. To restore, add back:
+#   schedule:
+#     - cron: "*/20 * * * *"
 on:
-  schedule:
-    - cron: "*/20 * * * *" # GitHub often starts these late; each run then watches for ~50 min
   workflow_dispatch:
     inputs:
       dry_run:

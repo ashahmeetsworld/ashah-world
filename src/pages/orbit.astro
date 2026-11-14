@@ -1,136 +1,21 @@
 ---
-// Orbit: the free OS lead magnet (17 Oct 2026 to about 17 Jan 2027).
-// Look: aurora (never mixed with ember/firefly). One ask: sign up for Orbit.
-// Linked from the footer only, not the header.
-import Base from '../layouts/Base.astro';
-import OrbitScene from '../components/OrbitScene.astro';
-import OrbitSignup from '../components/OrbitSignup.astro';
-import AnklesScene from '../components/AnklesScene.astro';
-import sectionsA from '../orbit/sections-a.html?raw';
-import sectionsB from '../orbit/sections-b.html?raw';
-import sectionsJs from '../orbit/sections.js?raw';
-import '../styles/orbit-v04.css';
-import latest from '../../public/os/latest.json';
-
-// v0.4 sections were built as a mock-up; their images and the sample hub live in public/orbit/
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-// the version shown on the page always comes from public/os/latest.json (the same file that tells hubs an update is out)
-const VERSION = latest.version;
-const withBase = (h: string) => h.replaceAll('__BASE__', base).replaceAll('__VERSION__', VERSION);
-const hubUrl = base + 'orbit/hub-demo.html';
-
-// the hero's last word cycles through these
-const verbs = ['making', 'building', 'creating', 'living'];
+// Orbit is off every touchpoint (Ashah, 6 Nov 2026; finished 14 Nov 2026).
+// The page is kept as src/pages/_orbit.astro (the underscore stops Astro building it).
+// Old links in sent emails and posts land here and go straight home.
+import { u } from '../lib/url';
+const home = u('/');
 ---
-<Base title="Orbit" description="Orbit gives creatives a ready-made AI team that runs the business side of their brand, so there’s room to create your work. Free." bodyClass="orbit">
-  <!-- Hero: the light at the centre -->
-  <section class="o-hero">
-    <OrbitScene />
-    <div class="wrap o-copy">
-      <p class="eyebrow tag"><span class="free">Free</span><span>Orbit v{VERSION}</span></p>
-      <p class="req"><i></i>Needs a paid Claude plan and free Notion.</p>
-      <h1>Your world keeps turning. <span class="l2">You keep <span class="verb">{verbs.map((v, i) => <span class:list={['w', { on: i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'}>{v}.</span>)}</span></span></h1>
-      <p class="lede">A ready-made AI team that runs the business side of your brand, so there’s room to create your work.</p>
-      <OrbitSignup source="orbit-page-top" />
-      <p class="note"><strong>Free, for good.</strong></p>
-    </div>
-  </section>
-
-  <!-- Right now: from the booklet -->
-  <section class="o-now">
-    <div class="wrap now-copy rv">
-      <p class="eyebrow big"><i></i>Sound familiar?</p>
-      <h2>Spread thin across everything.<br /><span class="soft">Deep in nothing.</span></h2>
-      <p class="body">Posts, emails, follow-ups, pricing, the website. It all wants you, every day. Then launch week comes, and the work you love gets pushed to last.</p>
-    </div>
-    <AnklesScene />
-  </section>
-
-  <!-- v0.4: the hub, the team, the basics, staying in charge, the Council, the ask -->
-  <Fragment set:html={withBase(sectionsA)} />
-  <OrbitSignup source="orbit-page-bottom" />
-  <Fragment set:html={withBase(sectionsB)} />
-</Base>
-
-<script is:inline define:vars={{ hubUrl }}>window.ORBIT_HUB = hubUrl;</script>
-<script is:inline set:html={sectionsJs}></script>
-
-<script>
-  // the hero's last word: making, building, creating, living (all stacked in one spot, so nothing jumps)
-  const ws = [...document.querySelectorAll<HTMLElement>('.verb .w')];
-  if (ws.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let i = 0;
-    setInterval(() => {
-      ws[i].classList.remove('on'); ws[i].setAttribute('aria-hidden', 'true');
-      i = (i + 1) % ws.length;
-      ws[i].classList.add('on'); ws[i].removeAttribute('aria-hidden');
-    }, 3600);
-  }
-  // the hero scene leans gently toward the pointer
-  const scene = document.querySelector<HTMLElement>('.o-hero .os-scene');
-  if (scene && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    addEventListener('pointermove', (e) => {
-      const x = (e.clientX / innerWidth - 0.5) * 18, y = (e.clientY / innerHeight - 0.5) * 12;
-      scene.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    }, { passive: true });
-  }
-</script>
-
-<style>
-  :global(body.orbit .eyebrow) { color: var(--aqua); }
-  .eyebrow.big { font-size: clamp(14px, 1.3vw, 18px); letter-spacing: .34em; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
-  .eyebrow.big i { width: 7px; height: 7px; border-radius: 50%; background: #E9F7FF; box-shadow: 0 0 12px #7FD8F0, 0 0 24px rgba(169, 150, 255, .7); animation: o-pulse 3s ease-in-out infinite; }
-  @keyframes o-pulse { 50% { box-shadow: 0 0 18px #7FD8F0, 0 0 36px rgba(169, 150, 255, .9); } }
-
-  .tag { display: flex; align-items: center; gap: 16px; }
-  .free { position: relative; display: inline-block; padding: 8px 16px 8px 18px; border-radius: 999px; font-size: 14px; letter-spacing: .34em; color: #fff;
-    background: linear-gradient(100deg, rgba(127, 216, 240, .22), rgba(169, 150, 255, .22)); box-shadow: inset 0 0 0 1px rgba(207, 230, 255, .45), 0 0 24px rgba(127, 216, 240, .28), 0 0 50px rgba(169, 150, 255, .18);
-    text-shadow: 0 0 12px rgba(207, 230, 255, .8); animation: o-free 4s ease-in-out infinite; }
-  @keyframes o-free { 50% { box-shadow: inset 0 0 0 1px rgba(207, 230, 255, .6), 0 0 34px rgba(127, 216, 240, .45), 0 0 70px rgba(169, 150, 255, .28); } }
-  .o-copy .note strong { font-weight: 500; color: #CFE6FF; }
-  .o-hero { min-height: 100svh; display: flex; align-items: center; padding-block: 120px 70px; }
-  :global(.o-hero .os-scene) { transition: transform 1.2s var(--ease); }
-  .o-copy { display: grid; gap: 22px; justify-items: start; }
-  .o-copy h1 { font-size: clamp(46px, 6.2vw, 92px); line-height: .98; max-width: 14ch; }
-  .o-copy h1 .l2 { display: block; }
-  .o-copy h1 .l2 { white-space: nowrap; }
-  .verb { display: grid; }
-  .verb .w { grid-area: 1 / 1; justify-self: start; padding: 0 .1em .16em 0; margin-bottom: -.16em; opacity: 0; filter: blur(10px); transform: translateY(.1em);
-    background: linear-gradient(100deg, #7FD8F0, #8FB4F6 35%, #A996FF 65%, #6FE3A6 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: o-shimmer 6s ease-in-out infinite alternate; transition: opacity .9s var(--ease), filter .9s var(--ease), transform .9s var(--ease); }
-  .verb .w.on { opacity: 1; filter: none; transform: none; }
-  @keyframes o-shimmer { to { background-position: 100% 0; } }
-  .o-copy .lede { max-width: 30ch; margin: 0; }
-  .o-copy .eyebrow { margin: 0; }
-
-  .o-now { padding-top: clamp(80px, 9vw, 120px); }
-  .now-copy { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; margin-bottom: clamp(-60px, -4vw, -20px); }
-  .now-copy h2 { font-size: clamp(44px, 6vw, 80px); margin-bottom: 22px; }
-  .now-copy .soft { color: #A9B8F6; }
-  .now-copy .body { max-width: 52ch; margin: 0 0 16px; }
-  .never { margin: 0; font: italic 400 clamp(22px, 2.2vw, 28px)/1.3 var(--serif); color: #A9B8F6; }
-
-  .o-six .head { margin-bottom: clamp(30px, 4vw, 50px); }
-
-  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .trio article { padding: 32px 28px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, rgba(127, 216, 240, .05), rgba(7, 11, 24, 0) 60%), rgba(11, 18, 48, .4); transition: border-color .5s, transform .5s var(--ease); }
-  .trio article:hover { border-color: rgba(169, 150, 255, .4); transform: translateY(-3px); }
-  .trio .label { color: var(--aqua); margin: 0 0 16px; }
-  .trio h3 { margin-bottom: 14px; }
-  .trio .body { margin: 0; font-size: 16px; }
-
-  .cta-card { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; padding: clamp(36px, 6vw, 72px); border-radius: 22px; border: 1px solid rgba(169, 150, 255, .25); background: rgba(7, 11, 24, .7); }
-  .cta-glow { position: absolute; inset: -30%; z-index: -1; background: radial-gradient(40% 50% at 20% 30%, rgba(127, 216, 240, .32), transparent 70%), radial-gradient(45% 55% at 75% 60%, rgba(169, 150, 255, .3), transparent 70%), radial-gradient(30% 30% at 50% 100%, rgba(111, 227, 166, .14), transparent 70%); filter: blur(30px); animation: o-glow 16s ease-in-out infinite alternate; }
-  .cta-copy h2 { margin-bottom: 16px; }
-  @keyframes o-glow { to { transform: translate(4%, -3%) scale(1.05); } }
-
-  @media (max-width: 860px) {
-    .cta-card { grid-template-columns: 1fr; }
-    .trio { grid-template-columns: 1fr; }
-    .o-hero { align-items: flex-end; padding-top: 40svh; }
-  }
-  @media (max-width: 560px) {
-    .o-hero { padding-bottom: 56px; }
-    .now-copy { text-align: left; justify-items: start; }
-  }
-</style>
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <meta http-equiv="refresh" content={`0; url=${home}`} />
+  <link rel="canonical" href={home} />
+  <title>Ashah Meets World</title>
+</head>
+<body style="background:#070B18;color:#F6F1E7;font-family:sans-serif;">
+  <p><a href={home} style="color:#7FD8F0;">Ashah Meets World</a></p>
+  <script is:inline define:vars={{ home }}>location.replace(home);</script>
+</body>
+</html>
