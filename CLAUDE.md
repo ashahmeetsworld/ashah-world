@@ -50,7 +50,9 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Prism relay: built, currently off (`SHOW_RELAY` in index.astro). Ashah's note: the beams read as wires, not light.
 - Home hero: elevated layered scene in `HeroScene.astro` (switch `ELEVATED_HERO` in index.astro; false = the original `Sky` night scene). Details in DESIGN.md.
 
-## Orbit (live 25 Oct 2026)
+## Orbit (OFF the site since 14 Nov 2026)
+- Ashah, 6 Nov 2026: Orbit is off every touchpoint. The page is kept as `src/pages/_orbit.astro` (not built); `src/pages/orbit.astro` now just sends old /orbit/ links home. The Orbit comment bot (`orbit-dm.yml`) has no schedule. The download files in `public/os/` stay so old email buttons still work. Never add Orbit links, CTAs or promos anywhere. To restore: rename `_orbit.astro` back and add the schedule again.
+- History below is kept for reference.
 - Free lead magnet page `/orbit/` (`src/pages/orbit.astro`), linked from the footer's second row (magnets, offers, ventures) and, since 31 Oct 2026, the header nav (Passage, Orbit, then Work, About, Contact). Aurora look; never mixed with ember/firefly.
 - Sign-ups: `OrbitSignup.astro` (page, redirects home after 8 s) and `OsNudge.astro` (site pop-up, confirms in place). Both post to the Brevo form in `site.json` → `orbitFormUrl`; empty = preview mode (confirms without sending).
 - The download is `public/os/Orbit.zip` (from 2 Nov 2026): the only real zip, overwritten on every release; the file name never changes. Old addresses in emails already sent (`os/Orbit-v0.4.zip`, `os/Orbit-v0.3.3.zip`) are copies made at build by `scripts/orbit-links.mjs` (prebuild), so every button anyone ever got serves the newest Orbit. Never commit a versioned zip; add old names to that script instead.
