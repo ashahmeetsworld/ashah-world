@@ -32,6 +32,9 @@ const SHOW_PRISM = false;
 const SHOW_RELAY = false;
 // The elevated hero (HeroScene.astro, 18 Oct 2026). Set false to go back to the original night sky.
 const ELEVATED_HERO = true;
+// Passage door on Home. Off 14 Nov 2026 (Ashah: Passage is a temporary name and concept, page taken down).
+// Set true (and move archive/passage/index.html back to public/passage/) to bring it back.
+const SHOW_PASSAGE = false;
 const ubiquity = SHOW_OFFER ? await getEntry('offers', 'ubiquity') : undefined;
 const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 
@@ -115,7 +118,7 @@ const skills = [
   </section>}
 
   <!-- ─── Passage: the door (Nov 2026 simple site). Violet glow, amber title, its own look. ─── -->
-  <section class="pad door-sec">
+  {SHOW_PASSAGE && <section class="pad door-sec">
     <div class="glow-v" aria-hidden="true"></div>
     <div class="wrap door-in">
       <div class="rv door-art"><Door /></div>
@@ -127,7 +130,7 @@ const skills = [
         <a class="go p-go" href={u('/passage/')}>See how it works <Arrow /></a>
       </div>
     </div>
-  </section>
+  </section>}
 
   <!-- ─── Selected work ─── -->
   <section class="pad work" id="work">

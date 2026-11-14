@@ -61,7 +61,10 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - The version tag reads from `public/os/latest.json`. The download is `public/os/Orbit.zip` (see above).
 - Never use people's names in sample content (Ashah's standing rule).
 
-## Passage (live 31 Oct 2026)
+## Passage (taken down 14 Nov 2026, nothing deleted)
+- Ashah, 14 Nov 2026: Passage is a temporary name and concept, so the page is off the site. The page is kept at `archive/passage/index.html` (outside `public/`, so it isn't built). `/passage/` now redirects home (`src/pages/passage.astro`). The Home door is off (`SHOW_PASSAGE = false` in `src/pages/index.astro`).
+- To bring it back: move the file back to `public/passage/index.html`, delete `src/pages/passage.astro`, set `SHOW_PASSAGE = true`.
+- What it was:
 - The offer's landing page is a standalone file: `public/passage/index.html` (served at /passage/). No site header, footer or mobile nav; the A·M·W mark is the only way back. It's generated outside this repo (Business Development project, `passage/source/build_final.py`), so edit the generator, not the HTML, when you can.
 - Links: header nav (first, then Orbit, then the white links) and footer second row, left of Orbit. Look: nocturnal blue-violet text gradient (`.passage-link`), a counterpoint to Orbit's aurora.
 - Applications post to Formspree (`https://formspree.io/f/xqpeqoab`, same as the contact form; emails Ashah, subject "Passage application: <brand>") and, in parallel, to the Google Apps Script relay ("Passage relay", bound to the Sheet "Passage applications (from ashah.world)"), which appends a row. A scheduled Claude task copies new rows into the Notion board "Passage applications" in NEW Central Hub.
