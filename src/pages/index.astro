@@ -15,6 +15,7 @@ import DawnScene from '../components/DawnScene.astro';
 import Signup from '../components/Signup.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import Ambient from '../components/Ambient.astro';
+import Door from '../components/Door.astro';
 import NightPass from '../components/NightPass.astro';
 import site from '../data/site.json';
 import about from '../data/about.json';
@@ -54,7 +55,7 @@ const skills = [
       <p class="lede">{site.intro}</p>
       <div class="ctas">
         <a class="go glow" href={u('/work/')}>See the work <Arrow /></a>
-        <a class="go aurora-line" href={u('/contact/')}><span class="t">Work with me</span> <Arrow /></a>
+        <a class="go aurora-line" href="#contact"><span class="t">Say hello</span> <Arrow /></a>
       </div>
     </div>
     <div class="bars" aria-hidden="true"><span class="bar top"></span><span class="bar bot"></span></div>
@@ -62,14 +63,13 @@ const skills = [
   </section>
 
   <!-- ─── Hello: who's behind the world ─── -->
-  <section class="pad thesis hello">
+  <section class="pad thesis hello" id="about">
     <div class="ambient" aria-hidden="true"></div>
     <div class="wrap grid-2">
       <div class="rv">
         <p class="eyebrow">Hello</p>
         <h2>I'm Ashah.</h2>
-        <p class="body">{about.intro[0]}</p>
-        <a class="go" href={u('/about/')}>More about me <Arrow /></a>
+        {about.intro.map((t) => <p class="body">{t}</p>)}
       </div>
       <div class="rv mission-mini">
         <MissionSky />
@@ -114,30 +114,18 @@ const skills = [
     </div>
   </section>}
 
-  <!-- ─── Four lights, one beam ─── -->
-  <section class={`pad skills${SHOW_RELAY ? ' relay-on' : ''}`}>
-    <div class="wrap">
-      <div class="skills-top">
-      <div class="head rv">
-        <p class="eyebrow">The skill stack</p>
-        <h2>Four lights, one beam.</h2>
-        <p class="body">Shine four coloured lights through a prism the right way and they don’t turn to mud. They become one brilliant beam: a world people can step into.</p>
+  <!-- ─── Passage: the door (Nov 2026 simple site). Violet glow, amber title, its own look. ─── -->
+  <section class="pad door-sec">
+    <div class="glow-v" aria-hidden="true"></div>
+    <div class="wrap door-in">
+      <div class="rv door-art"><Door /></div>
+      <div class="rv door-copy">
+        <p class="eyebrow v">Passage · an offer by A·M·W</p>
+        <h2 class="p-title">Step inside.</h2>
+        <p class="lede">Three months to make your next drop the one you always thought it would be.</p>
+        <p class="small">For creative, culture-led founders and brands.</p>
+        <a class="go p-go" href={u('/passage/')}>See how it works <Arrow /></a>
       </div>
-      {SHOW_PRISM && <div class="prism-wrap rv"><Prism /></div>}
-      </div>
-      <div class="cards swipe" id="skill-row" aria-label="The four skills">
-        {skills.map((s, i) => (
-          <article class="card rv" style={`--a:var(${s.key});transition-delay:${i * 90}ms`}>
-            <div class="icon"><SkillIcon skill={s.name} /></div>
-            <p class="label"><i></i>{s.role}</p>
-            <h3>{s.name}</h3>
-            <p class="metaphor">{s.metaphor}</p>
-            <p class="txt">{s.text}</p>
-          </article>
-        ))}
-      </div>
-      <div class="dots" data-for="skill-row" aria-hidden="true"></div>
-    {SHOW_RELAY && <Relay />}
     </div>
   </section>
 
@@ -148,7 +136,7 @@ const skills = [
       <div class="row-head rv">
         <div>
           <p class="eyebrow">Selected work</p>
-          <h2>Proof of work.</h2>
+          <h2>Worlds I've built.</h2>
         </div>
         <a class="go" href={u('/work/')}>All work <Arrow /></a>
       </div>
@@ -209,24 +197,27 @@ const skills = [
     </section>
   )}
 
-  <!-- ─── From the feed (live Instagram) ─── -->
-  <section class="pad notes" id="feed">
-    <Ambient mood="feed" />
-    <div class="wrap row-head rv">
-      <div>
-        <p class="eyebrow">From the feed</p>
-        <h2>Fresh from the world.</h2>
-        <p class="body">What I'm making, noticing and building right now, straight from Instagram.</p>
-      </div>
-      {ig && <a class="go" href={ig} rel="noopener">Follow on Instagram <Arrow /></a>}
-    </div>
-    <InstagramFeed />
-  </section>
-
   <!-- ─── First light: the sunset, then the newsletter ─── -->
   <section class="finale">
     <div class="scene"><DawnScene /></div>
-    <div class="wrap" id="letters"><div class="rv panel"><Signup /></div></div>
+    <div class="wrap c-grid" id="contact">
+      <div class="rv panel">
+        <p class="eyebrow">Say hello</p>
+        <h2 class="c-title">Open the door.</h2>
+        <p class="body">Collabs, freelance projects, a question, or just hello. Tell me what you’re building and I’ll come back within a few days.</p>
+        <form id="contact-form" action={site.contactFormUrl} method="post">
+          <input type="hidden" name="_subject" value="New enquiry · Ashah Meets World" />
+          <div class="two">
+            <label class="field"><span>Name</span><input name="name" autocomplete="name" required /></label>
+            <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
+          </div>
+          <label class="field"><span>What are you working on?</span><textarea name="message" placeholder="The drop, the vision, the timeline…"></textarea></label>
+          <button class="btn aurora" type="submit"><span>Send it into the world</span></button>
+          <p class="note status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="rv panel" id="letters"><Signup /></div>
+    </div>
   </section>
 </Base>
 
@@ -280,6 +271,25 @@ const skills = [
     } catch { /* keep the images that shipped with the page */ }
   });
   wireAll();
+  // Contact form: send without leaving the page (Formspree answers JSON when asked).
+  const cf = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (cf && cf.action.includes('formspree.io')) {
+    cf.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = cf.querySelector('button') as HTMLButtonElement;
+      const status = cf.querySelector('.status') as HTMLElement;
+      btn.disabled = true; btn.querySelector('span')!.textContent = 'Sending…';
+      try {
+        const r = await fetch(cf.action, { method: 'POST', body: new FormData(cf), headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error();
+        cf.reset(); btn.querySelector('span')!.textContent = 'Sent';
+        status.textContent = 'Got it. I’ll come back to you within a few days.';
+      } catch {
+        btn.disabled = false; btn.querySelector('span')!.textContent = 'Send it into the world';
+        status.textContent = 'That didn’t go through. Try again, or DM @ashah.world on Instagram.';
+      }
+    });
+  }
 </script>
 
 <style>
@@ -494,5 +504,32 @@ const skills = [
     .panel { padding: 24px; }
     .scene { min-height: 340px; }
     .finale .panel { margin-top: -56px; }
+  }
+  /* ─── Simple site (Nov 2026): Passage door + contact beside Letters ─── */
+  .door-sec { position: relative; overflow: hidden; }
+  .glow-v { position: absolute; inset: 10% 30% 10% 0; background: radial-gradient(closest-side, rgba(140, 87, 248, .22), transparent); filter: blur(30px); pointer-events: none; }
+  .door-in { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; position: relative; }
+  .door-art :global(svg) { width: 100%; max-width: 440px; display: block; margin-inline: auto; }
+  .eyebrow.v { color: #B9A2FF; }
+  .p-title { font-size: clamp(52px, 6vw, 88px); line-height: 1; width: fit-content; padding-right: .08em; margin-bottom: 22px;
+    background: linear-gradient(100deg, #FFE7C4, #F7CBA8 45%, #F2B48C 70%, #C9A6FF); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 28px rgba(140, 87, 248, .45)); }
+  .door-copy .lede { max-width: 26ch; margin: 0 0 14px; }
+  .door-copy .small { color: var(--ink-3); font-size: 15px; margin: 0 0 30px; }
+  .go.p-go { border-color: #8C57F8; } .go.p-go:hover { color: #C9A6FF; }
+  .hello .body { margin: 0 0 18px; }
+  .c-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; position: relative; z-index: 1; align-items: start; margin-top: calc(28px - .28 * var(--sh, 420px)); }
+  .c-grid .panel { margin: 0; max-width: none; }
+  .c-title { font-size: clamp(44px, 5vw, 72px); margin-bottom: 14px; }
+  .c-grid .body { margin: 0 0 26px; }
+  #contact-form { display: grid; gap: 18px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  #contact-form .btn { justify-self: start; }
+  .note { margin: 0; }
+  @media (max-width: 760px) {
+    .door-in, .c-grid, .two { grid-template-columns: 1fr; }
+    .door-art :global(svg) { max-width: 300px; }
+    .c-grid { margin-top: -56px; }
+    .pad.door-sec, .pad.hello { padding-block: 88px; }
   }
 </style>
