@@ -100,3 +100,4 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Not wired yet (dead on purpose, Ashah's call): the email boxes (Brevo is being rebuilt), the six tool cards, `/session/` (Session page + screening form still to build).
 - Letters pop-up rules (`amw-letters` in localStorage): never after sign-up; once a visit at most, about halfway down; after a close it waits 3 visits; after 2 closes it stops.
 - Button gradient (Ashah's): #8FB3F6 > #9EA1FB > #A498FE > #B49AE9, static, never cycling through peach. No small spaced-caps eyebrow labels.
+- Session "Free" bubble above the Lighthouse headline: Ashah's one exception to the no-eyebrow rule, styled like the Orbit page's `.free` pill.
