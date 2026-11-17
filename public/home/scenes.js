@@ -95,10 +95,17 @@ return `<svg viewBox="0 0 ${W2} ${H2}" preserveAspectRatio="xMidYMid slice"><def
 <linearGradient id="ps-b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A996FF" stop-opacity="0"/><stop offset=".45" stop-color="#A996FF" stop-opacity=".55"/><stop offset=".8" stop-color="#7C5CFF" stop-opacity=".35"/><stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/></linearGradient>
 <filter id="ps-f" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="16"/></filter></defs>
 <rect width="${W2}" height="${H2}" fill="url(#ps-sky)"/>
-<g class="aur" filter="url(#ps-f)"><path d="M180 300 C 260 200, 380 120, 520 70 S 720 20, 820 30 L 840 90 C 720 90, 600 140, 500 190 S 330 300, 300 330 Z" fill="url(#ps-a)"/></g>
-<g class="aur2" filter="url(#ps-f)"><path d="M320 320 C 420 230, 520 170, 640 140 S 800 120, 860 130 L 860 200 C 760 200, 640 240, 560 300 Z" fill="url(#ps-b)"/></g>
 ${(()=>{let o='';for(let i=0;i<90;i++)o+=`<circle class="tw" style="animation-delay:-${f(r()*5)}s" cx="${f(r()*W2)}" cy="${f(r()*H2)}" r="${r()<.12?1.3:.7}" fill="#fff" opacity="${f(.35+r()*.6)}"/>`;return o})()}
 </svg>`}
-const scenes={lighthouse,window:windowCity,pier,popsky};
+// 5 · HERO FX: aurora, stars, a shooting star and light on the water, laid over the hero picture
+function herofx(){seed=41;const W2=1440,H2=900;
+let st='';for(let i=0;i<60;i++)st+=`<circle class="tw" style="animation-delay:-${f(r()*5)}s" cx="${f(r()*W2)}" cy="${f(r()*520)}" r="${r()<.15?1.4:.8}" fill="#fff" opacity="${f(.4+r()*.5)}"/>`;
+let sh='';for(let y=612;y<760;y+=5+r()*6){const t2=(y-612)/148;const x=1160+r()*240;const w=(20+r()*50)*(1-t2*.4);sh+=`<line x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${r()<.5?'#F2DDB4':'#9EDCF2'}" stroke-opacity="${f(.45-t2*.3)}" stroke-width="1.2" stroke-linecap="round"/>`}
+return `<svg viewBox="0 0 ${W2} ${H2}" preserveAspectRatio="xMidYMid slice">${defs}
+${st}
+<line class="shoot" x1="420" y1="70" x2="980" y2="250" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+<g class="shim">${sh}</g>
+</svg>`}
+const scenes={lighthouse,window:windowCity,pier,popsky,herofx};
 document.querySelectorAll('[data-scene]').forEach(e=>{e.innerHTML=scenes[e.dataset.scene]()});
 })();
