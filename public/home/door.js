@@ -24,24 +24,24 @@ const svg=`<svg class="door" viewBox="0 0 520 520" role="img" aria-label="An arc
 <g clip-path="url(#dr-in)">
 <rect x="${L}" y="${TOP}" width="${R-L}" height="${HZN-TOP}" fill="url(#dr-sky)"/>
 ${stars.map(s=>`<circle class="tw" style="animation-delay:-${s.d}s" cx="${f(s.x)}" cy="${f(s.y)}" r="${s.s}" fill="#fff"/>`).join('')}
-<circle class="halo" cx="318" cy="132" r="64" fill="url(#dr-halo)"/><circle cx="318" cy="132" r="17" fill="url(#dr-moon)"/>
+<line class="shoot" x1="180" y1="100" x2="330" y2="170" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><circle class="halo" cx="318" cy="132" r="64" fill="url(#dr-halo)"/><circle cx="318" cy="132" r="17" fill="url(#dr-moon)"/>
 <ellipse cx="${(L+R)/2}" cy="${HZN-6}" rx="150" ry="46" fill="url(#dr-haze)"/>
 <g fill="#0B0E2C">${towers.map(t=>`<rect x="${f(t.x)}" y="${f(HZN-t.h)}" width="${f(t.w)}" height="${f(t.h)}"/>`).join('')}</g>
-<g fill="#F2DDB4" opacity=".85">${towers.filter((_,i)=>i%2===0).map(t=>`<rect x="${f(t.x+2)}" y="${f(HZN-t.h+4)}" width="2" height="2"/>`).join('')}</g>
+<g class="win" fill="#F2DDB4" opacity=".85">${towers.filter((_,i)=>i%2===0).map((t,k)=>`<rect style="animation-delay:-${(k*1.7)%6}s" x="${f(t.x+2)}" y="${f(HZN-t.h+4)}" width="2" height="2"/>`).join('')}</g>
 <rect x="${L}" y="${HZN}" width="${R-L}" height="20" fill="url(#dr-sea)"/>
-<g stroke="#DCEBFF" stroke-opacity=".6" stroke-linecap="round"><line x1="282" y1="${HZN+6}" x2="318" y2="${HZN+6}"/><line x1="290" y1="${HZN+12}" x2="330" y2="${HZN+12}"/></g>
+<g class="rf" stroke="#DCEBFF" stroke-opacity=".6" stroke-linecap="round"><line x1="282" y1="${HZN+6}" x2="318" y2="${HZN+6}"/><line x1="290" y1="${HZN+12}" x2="330" y2="${HZN+12}"/></g>
 <rect x="${L}" y="${HZN+20}" width="${R-L}" height="110" fill="url(#dr-pool)"/>
 <ellipse class="mist" cx="${(L+R)/2}" cy="${HZN+22}" rx="140" ry="12" fill="#BFD9FF" opacity=".28" filter="url(#dr-mist)"/>
-<ellipse cx="318" cy="${HZN+70}" rx="30" ry="44" fill="url(#dr-shim)" opacity=".6"/>
+<ellipse class="shim2" cx="318" cy="${HZN+70}" rx="30" ry="44" fill="url(#dr-shim)" opacity=".6"/>
 <ellipse cx="${(L+R)/2}" cy="${HZN+125}" rx="150" ry="22" fill="#8A4C8E" opacity=".35" filter="url(#dr-mist)"/>
-<g stroke="#E6F7FF" stroke-opacity=".16"><line x1="${L}" y1="${HZN+52}" x2="${R}" y2="${HZN+52}"/><line x1="${L}" y1="${HZN+78}" x2="${R}" y2="${HZN+78}"/><line x1="${L}" y1="${HZN+104}" x2="${R}" y2="${HZN+104}"/></g>
+<g stroke="#E6F7FF" stroke-opacity=".16"><line class="wl" x1="${L}" y1="${HZN+52}" x2="${R}" y2="${HZN+52}"/><line class="wl" x1="${L}" y1="${HZN+78}" x2="${R}" y2="${HZN+78}"/><line class="wl" x1="${L}" y1="${HZN+104}" x2="${R}" y2="${HZN+104}"/></g>
 <rect x="${L}" y="${HZN+130}" width="${R-L}" height="${BOT-HZN-130}" fill="url(#dr-floor)"/>
 <g fill="#060B22"><path d="M182 ${BOT-26} L232 ${BOT-26} L244 ${BOT-44} L248 ${BOT-42} L238 ${BOT-22} L182 ${BOT-22} Z"/><rect x="186" y="${BOT-22}" width="3" height="14"/><rect x="228" y="${BOT-22}" width="3" height="14"/>
 <path d="M262 ${BOT-26} L312 ${BOT-26} L324 ${BOT-44} L328 ${BOT-42} L318 ${BOT-22} L262 ${BOT-22} Z"/><rect x="266" y="${BOT-22}" width="3" height="14"/><rect x="308" y="${BOT-22}" width="3" height="14"/></g>
 <circle class="lamp" cx="348" cy="${BOT-92}" r="36" fill="url(#dr-lamp)"/><path d="M340 ${BOT-98} L356 ${BOT-98} L352 ${BOT-88} L344 ${BOT-88} Z" fill="#E8B48A"/><rect x="347" y="${BOT-88}" width="2" height="82" fill="#060B22"/>
 </g>
 <path d="${arch}" fill="none" stroke="url(#dr-frame)" stroke-width="5" stroke-opacity=".9"/>
-<path d="M${R} ${TOP+80} L ${R+44} ${TOP+108} L ${R+44} ${BOT-8} L ${R} ${BOT}" fill="#0E0C2C" stroke="#A9B4E8" stroke-opacity=".55" stroke-width="2"/>
+<path class="leaf" d="M${R} ${TOP+80} L ${R+44} ${TOP+108} L ${R+44} ${BOT-8} L ${R} ${BOT}" fill="#0E0C2C" stroke="#A9B4E8" stroke-opacity=".55" stroke-width="2"/>
 <line x1="40" y1="${BOT}" x2="480" y2="${BOT}" stroke="#9FC4F2" stroke-opacity=".1"/>
-<g fill="#050816"><circle cx="178" cy="${BOT-46}" r="8.5"/><path d="M168 ${BOT-36} L188 ${BOT-36} L192 ${BOT+8} L164 ${BOT+8} Z"/></g></svg>`;
+<g class="fig" fill="#050816"><circle cx="178" cy="${BOT-46}" r="8.5"/><path d="M168 ${BOT-36} L188 ${BOT-36} L192 ${BOT+8} L164 ${BOT+8} Z"/></g></svg>`;
 document.querySelectorAll('[data-door]').forEach(e=>e.innerHTML=svg)})();

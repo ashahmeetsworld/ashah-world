@@ -177,14 +177,54 @@ nav{padding-left:96px!important;padding-right:96px!important}
 .init .door-art .door{width:min(100%,82vh)!important;max-width:none!important}
 .shelf{padding-top:40px!important}
 }
+
+/* motion (17 Nov 11:49pm): hero + door brought up to the Lighthouse's level */
+.hero .fx,.hero .fx svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .t{z-index:2}
+.hero .fx .aur{animation:drift 13s ease-in-out infinite alternate}.hero .fx .aur2{animation:drift 17s ease-in-out infinite alternate-reverse}
+.hero .fx .tw{animation:tw 4s ease-in-out infinite}.hero .fx .shim{animation:spill 4.5s ease-in-out infinite}
+.shoot{stroke-dasharray:0 1000;animation:shoot 11s linear infinite}
+@keyframes shoot{0%,86%{stroke-dasharray:0 1000;stroke-dashoffset:0;opacity:0}88%{opacity:1}96%{stroke-dasharray:160 1000;stroke-dashoffset:-420;opacity:.9}100%{stroke-dasharray:0 1000;stroke-dashoffset:-620;opacity:0}}
+.iaur{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.iaur i{position:absolute;left:30%;right:-10%;top:4%;height:46%;border-radius:50%;background:linear-gradient(100deg,transparent 5%,rgba(127,216,240,.16) 35%,rgba(143,180,246,.14) 55%,rgba(169,150,255,.16) 75%,transparent 95%);filter:blur(40px);transform:rotate(-8deg);animation:adrift 14s ease-in-out infinite alternate}
+.iaur i+i{left:45%;top:20%;height:34%;background:linear-gradient(100deg,transparent,rgba(169,150,255,.14) 40%,rgba(127,216,240,.1) 70%,transparent);animation-duration:19s;animation-direction:alternate-reverse}
+@keyframes adrift{to{transform:rotate(-3deg) translateX(-60px) scaleY(1.2);opacity:.7}}
+.door .wl{animation:wl 6s ease-in-out infinite}.door .wl:nth-child(2){animation-delay:-2s}.door .wl:nth-child(3){animation-delay:-4s}
+@keyframes wl{50%{transform:translateX(10px);stroke-opacity:.32}}
+.door .rf{animation:spill 3.2s ease-in-out infinite}.door .shim2{animation:spill 4s ease-in-out infinite}
+.door .win rect{animation:winf 6s steps(1) infinite}
+@keyframes winf{0%,100%{opacity:1}47%{opacity:.25}53%{opacity:1}}
+.door .leaf{transform-box:fill-box;transform-origin:left center;animation:leaf 8s ease-in-out infinite}
+@keyframes leaf{50%{transform:scaleX(1.12)}}
+.door .fig{animation:figb 6s ease-in-out infinite}@keyframes figb{50%{transform:translateY(-1px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* aurora as CSS layers (steady on every browser; the SVG blur flickered) */
+.haur,.paur{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.haur i,.paur i{position:absolute;border-radius:50%;will-change:transform;filter:blur(38px);animation:adrift 14s ease-in-out infinite alternate}
+.haur i{left:-10%;right:-10%;top:4%;height:30%;background:linear-gradient(100deg,transparent 5%,rgba(127,216,240,.30) 30%,rgba(143,180,246,.24) 55%,rgba(169,150,255,.28) 80%,transparent);transform:rotate(-4deg)}
+.haur i+i{top:20%;height:20%;left:10%;background:linear-gradient(100deg,transparent,rgba(169,150,255,.22) 40%,rgba(127,216,240,.16) 70%,transparent);animation-duration:19s;animation-direction:alternate-reverse}
+.paur i{left:25%;right:-20%;top:10%;height:70%;background:linear-gradient(115deg,transparent 10%,rgba(127,216,240,.45) 35%,rgba(143,180,246,.35) 55%,rgba(169,150,255,.45) 75%,transparent);transform:rotate(-24deg);filter:blur(26px)}
+.paur i+i{left:45%;top:40%;height:60%;background:linear-gradient(115deg,transparent,rgba(169,150,255,.4) 45%,rgba(124,92,255,.25) 75%,transparent);animation-duration:18s;animation-direction:alternate-reverse}
+.pa .pop .body{position:relative;z-index:2}.pa .pop .xx{z-index:3}
+.pa .pop .em{backdrop-filter:none!important;background:rgba(5,7,24,.6)!important}
+/* breathing buttons + shifting gradient words (Ashah 11:49pm) */
+.rimb,.aurb,.pop .aur{animation:breathe 4.5s ease-in-out infinite!important}
+@keyframes breathe{0%,100%{box-shadow:0 0 18px rgba(159,182,236,.45),0 0 50px rgba(180,154,216,.25)}50%{box-shadow:0 0 30px rgba(159,182,236,.75),0 0 90px rgba(180,154,216,.45)}}
+.rim,.scn h2 em,.pop .k b,.hero .sub{background-size:220% 100%!important;animation:gshift 9s ease-in-out infinite alternate}
+.rim{background-image:linear-gradient(90deg,#C9DCF7,#9FB6EC,#B49AD8,#9FB6EC,#C9DCF7)!important}
+.scn h2 em{background-image:linear-gradient(90deg,#A8ECFF,#B9CEFF,#CBBEFF,#B9CEFF,#A8ECFF)!important}
+.pop .k b{background-image:linear-gradient(90deg,#7FD8F0,#8FB4F6,#A996FF,#8FB4F6,#7FD8F0)!important}
+.hero .sub{background-image:linear-gradient(90deg,#C9DCF7,#9FB6EC,#B49AD8,#9FB6EC,#C9DCF7)!important}
+@keyframes gshift{from{background-position:0% 50%}to{background-position:100% 50%}}
 </style></head><body><nav><div class="logo">A·M·W</div></nav>
-<section class="hero"><div class="t"><div><h1 class="ser">Ashah<br>Meets World</h1><p class="sub ser">Creative direction and worldbuilding for culture-driven brands.</p></div></div></section>
-<section class="init" id="door"><div class="ist"></div><div class="il"><h2 class="ser">Step into the <span class="rim">world.</span></h2><p>Leave your email and you're in: a letter every Thursday, every free tool in the library, and first word when Session spots open.</p><div class="email"><span>your@email.com</span><a class="pill rimb">Enter</a></div></div><div class="door-art" data-door></div><div class="floor"></div></section>
+<section class="hero"><div class="haur"><i></i><i></i></div><div class="fx" data-scene="herofx"></div><div class="t"><div><h1 class="ser">Ashah<br>Meets World</h1><p class="sub ser">Creative direction and worldbuilding for culture-driven brands.</p></div></div></section>
+<section class="init" id="door"><div class="ist"></div><div class="iaur"><i></i><i></i></div><div class="il"><h2 class="ser">Step into the <span class="rim">world.</span></h2><p>Leave your email and you're in: a letter every Thursday, every free tool in the library, and first word when Session spots open.</p><div class="email"><span>your@email.com</span><a class="pill rimb">Enter</a></div></div><div class="door-art" data-door></div></section>
 <section class="shelf"><h2 class="ser">Tools for building a brand people step into.</h2><div class="tools"><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 1]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 2]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 3]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 4]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 5]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div><div class="tool"><div class="img"></div><div class="in"><h3 class="ph">[Tool 6]</h3><p>One line on what it helps you do.</p><div class="go">Get it free →</div></div></div></div></section><section class="work"><div class="whead"><div><h2 class="ser">The work</h2></div></div>
 <div class="wgrid"><a class="wk" href="__BASE__/work/the-world-deck/" style="display:block"><div class="wi" style="background-image:url(__BASE__/home/w-deck.webp)"></div><h3>The World Deck</h3><p>The founding document for A·M·W, told through illustrated metaphors.</p></a>
 <a class="wk" href="__BASE__/work/the-codes/" style="display:block"><div class="wi" style="background-image:url(__BASE__/home/w-codes.webp)"></div><h3>The Codes</h3><p>How the world looks, sounds and feels, as do / don't pairs anyone can direct from.</p></a>
 <a class="wk" href="__BASE__/work/field-notes/" style="display:block"><div class="wi" style="background-image:url(__BASE__/home/w-notes.webp)"></div><h3>Field Notes</h3><p>A carousel series that decodes brands and culture, built to batch.</p></a></div>
-<a class="go" href="__BASE__/work/" style="display:inline-block">All work →</a></section><section class="scn t1" id="session"><div class="bg" data-scene="lighthouse"></div><div class="fade"></div><div class="txt"><h2 class="ser">Bring me your brand.<br><em>I'll show you its world.</em></h2><p>One free call. We diagnose what's holding your brand back, using the first tool from my method. No pitch. You leave with a one-page plan that's yours, whether we work together or not.</p><div class="beats"><div><i></i><span>A short form</span></div><div><i></i><span>45 minutes together</span></div><div><i></i><span>Your one-page plan</span></div></div><div class="ctas"><a class="aurb" href="__BASE__/session/">See how the Session works →</a></div></div></section><div class="pop"><div class="v va"><div class="psc" data-scene="popsky"></div><div class="pshade"></div><span class="xx" role="button" aria-label="Close" style="cursor:pointer">×</span><div class="body"><div class="k">Before you go <b>further.</b></div><p class="sub">One letter a week: what I'm building, and what it's teaching me. Notes on taste, culture and the creative life.</p><div class="em"><span>your@email.com</span><a class="aur">Join</a></div></div></div></div><script>
+<a class="go" href="__BASE__/work/" style="display:inline-block">All work →</a></section><section class="scn t1" id="session"><div class="bg" data-scene="lighthouse"></div><div class="fade"></div><div class="txt"><h2 class="ser">Bring me your brand.<br><em>I'll show you its world.</em></h2><p>One free call. We diagnose what's holding your brand back, using the first tool from my method. No pitch. You leave with a one-page plan that's yours, whether we work together or not.</p><div class="beats"><div><i></i><span>A short form</span></div><div><i></i><span>45 minutes together</span></div><div><i></i><span>Your one-page plan</span></div></div><div class="ctas"><a class="aurb" href="__BASE__/session/">See how the Session works →</a></div></div></section><div class="pop"><div class="v va"><div class="psc" data-scene="popsky"></div><div class="paur"><i></i><i></i></div><div class="pshade"></div><span class="xx" role="button" aria-label="Close" style="cursor:pointer">×</span><div class="body"><div class="k">Before you go <b>further.</b></div><p class="sub">One letter a week: what I'm building, and what it's teaching me. Notes on taste, culture and the creative life.</p><div class="em"><span>your@email.com</span><a class="aur">Join</a></div></div></div></div><script>
 /* Letters pop-up rules (Ashah, 17 Nov 2026): never after sign-up; shows once a visit at most, about halfway down;
    after a close it waits 3 visits before asking again; after 2 closes it stops for good. */
 (function(){var K='amw-letters',st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
@@ -196,7 +236,4 @@ function show(){if(shown)return;shown=true;document.body.classList.add('show','p
 addEventListener('scroll',function(){var h=document.documentElement;if(h.scrollTop/(h.scrollHeight-innerHeight)>.45)show()},{passive:true});
 pop.querySelector('.xx').addEventListener('click',function(){document.body.classList.remove('show');st.closes=(st.closes||0)+1;st.closedAt=st.visits;save()});
 pop.querySelector('.aur').addEventListener('click',function(e){e.preventDefault()}); // sign-up not wired yet (Brevo rebuild pending)
-})();</script><script src="__BASE__/home/door.js"></script><script>
-(function(){function pin(){var sec=document.querySelector('.init'),svg=sec&&sec.querySelector('.door'),f=sec&&sec.querySelector('.floor');if(!svg||!f)return;
-var r=svg.getBoundingClientRect(),t=sec.getBoundingClientRect();f.style.setProperty('--floor',(r.top-t.top+r.height*440/520)+'px')}
-addEventListener('load',pin);addEventListener('resize',pin);pin()})();</script><script src="__BASE__/home/scenes.js"></script><script>if(innerWidth<600)document.querySelectorAll('[data-scene="lighthouse"] svg').forEach(v=>{v.setAttribute("viewBox","900 90 540 860");v.setAttribute("preserveAspectRatio","xMidYMin slice")})</script><script>document.querySelectorAll('.tools,.wgrid').forEach(t=>{const d=document.createElement('div');d.className='dots';const n=t.children.length;for(let i=0;i<n;i++){const e=document.createElement('i');if(!i)e.className='on';d.appendChild(e)}t.after(d);t.addEventListener('scroll',()=>{const k=Math.round(t.scrollLeft/(t.children[0].offsetWidth+14));[...d.children].forEach((e,j)=>e.classList.toggle('on',j===k))})})</script></body></html>
+})();</script><script src="__BASE__/home/door.js"></script><script src="__BASE__/home/scenes.js"></script><script>if(innerWidth<600)document.querySelectorAll('[data-scene="lighthouse"] svg').forEach(v=>{v.setAttribute("viewBox","900 90 540 860");v.setAttribute("preserveAspectRatio","xMidYMin slice")})</script><script>document.querySelectorAll('.tools,.wgrid').forEach(t=>{const d=document.createElement('div');d.className='dots';const n=t.children.length;for(let i=0;i<n;i++){const e=document.createElement('i');if(!i)e.className='on';d.appendChild(e)}t.after(d);t.addEventListener('scroll',()=>{const k=Math.round(t.scrollLeft/(t.children[0].offsetWidth+14));[...d.children].forEach((e,j)=>e.classList.toggle('on',j===k))})})</script></body></html>
