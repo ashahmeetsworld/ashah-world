@@ -1,0 +1,23 @@
+nav{position:absolute;top:0;left:0;right:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:28px 56px}
+.logo{font-size:13px;letter-spacing:.42em;font-weight:600}
+.r{display:flex;align-items:center;gap:34px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#D9DDF0}
+.hero{height:900px;position:relative;background:linear-gradient(180deg,rgba(7,10,28,.1),rgba(7,10,28,.05) 55%,rgba(7,10,28,1)),url(asset-night.jpg) center 30%/cover}
+.hero h1{font-size:150px;line-height:.9}
+.pass{width:400px;height:246px;border-radius:14px;padding:24px 28px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1B1F4E,#2A1D5E 55%,#5A3778);border:1px solid rgba(255,243,224,.35);box-shadow:0 30px 90px rgba(169,150,255,.35),inset 0 0 60px rgba(242,180,140,.15);transform:rotate(-4deg)}
+.pass .glow{position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FFF3E0,rgba(242,180,140,.5) 30%,transparent 65%)}
+.pass .top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.3em}
+.pass .nm{font-family:'Cormorant Garamond';font-style:italic;font-size:38px;margin-top:50px}
+.pass .role{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-top:6px}
+.pass .bot{position:absolute;left:28px;right:28px;bottom:22px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.24em;color:#C9CFEA}
+.shelf{padding:100px 56px}
+.shelf h2{font-size:54px;margin:14px 0 40px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tool{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#0C1030}
+.tool .img{height:170px;background:url(asset-night.jpg) center/cover;opacity:.75}
+.tool:nth-child(2) .img{background-position:80% 40%}.tool:nth-child(3) .img{background:url(asset-sunrise.jpg) center/cover}
+.tool:nth-child(4) .img{background-position:20% 60%}.tool:nth-child(5) .img{background:url(asset-sunrise.jpg) 30% 60%/cover}.tool:nth-child(6) .img{background-position:50% 80%}
+.tool .in{padding:22px 24px}.tool h3{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:30px;margin:8px 0 6px}.tool p{color:#C9CFEA;font-size:14px;line-height:1.5}
+.tool .go{font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-top:16px;color:var(--cream)}
+.sess{margin:0 56px 90px;padding:60px 64px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,rgba(242,180,140,.14),rgba(169,150,255,.08)),url(asset-sunrise.jpg) right center/45% auto no-repeat;border:1px solid rgba(242,180,140,.4)}
+.sess h2{font-size:48px}
+@media (max-width:600px){nav{padding:18px}.r a.w{display:none}.hero h1{font-size:62px}.pill{padding:11px 15px;font-size:10px}.pass{width:290px;height:178px;padding:16px 18px}.pass .nm{font-size:26px;margin-top:26px}.shelf{padding:60px 18px}.tools{grid-template-columns:1fr}.sess{margin:0 18px 60px;padding:30px;flex-direction:column;align-items:flex-start;gap:20px}}
