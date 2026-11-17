@@ -24,10 +24,10 @@ const svg=`<svg class="door" viewBox="0 0 520 520" role="img" aria-label="An arc
 <g clip-path="url(#dr-in)">
 <rect x="${L}" y="${TOP}" width="${R-L}" height="${HZN-TOP}" fill="url(#dr-sky)"/>
 ${stars.map(s=>`<circle class="tw" style="animation-delay:-${s.d}s" cx="${f(s.x)}" cy="${f(s.y)}" r="${s.s}" fill="#fff"/>`).join('')}
-<line class="shoot" x1="180" y1="100" x2="330" y2="170" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><circle class="halo" cx="318" cy="132" r="64" fill="url(#dr-halo)"/><circle cx="318" cy="132" r="17" fill="url(#dr-moon)"/>
+<circle class="halo" cx="318" cy="132" r="64" fill="url(#dr-halo)"/><circle cx="318" cy="132" r="17" fill="url(#dr-moon)"/>
 <ellipse cx="${(L+R)/2}" cy="${HZN-6}" rx="150" ry="46" fill="url(#dr-haze)"/>
 <g fill="#0B0E2C">${towers.map(t=>`<rect x="${f(t.x)}" y="${f(HZN-t.h)}" width="${f(t.w)}" height="${f(t.h)}"/>`).join('')}</g>
-<g class="win" fill="#F2DDB4" opacity=".85">${towers.filter((_,i)=>i%2===0).map((t,k)=>`<rect style="animation-delay:-${(k*1.7)%6}s" x="${f(t.x+2)}" y="${f(HZN-t.h+4)}" width="2" height="2"/>`).join('')}</g>
+<g class="win" fill="#F2DDB4" opacity=".85">${towers.flatMap((t,k)=>[0,1].filter(j=>t.h>14||!j).map(j=>`<rect style="animation-duration:${(5+((k*7+j*3)%9)).toFixed(1)}s;animation-delay:-${((k*2.3+j*4.1)%9).toFixed(1)}s" x="${f(t.x+2+j*(t.w>10?4:0))}" y="${f(HZN-t.h+4+j*7)}" width="2" height="2"/>`)).join('')}</g>
 <rect x="${L}" y="${HZN}" width="${R-L}" height="20" fill="url(#dr-sea)"/>
 <g class="rf" stroke="#DCEBFF" stroke-opacity=".6" stroke-linecap="round"><line x1="282" y1="${HZN+6}" x2="318" y2="${HZN+6}"/><line x1="290" y1="${HZN+12}" x2="330" y2="${HZN+12}"/></g>
 <rect x="${L}" y="${HZN+20}" width="${R-L}" height="110" fill="url(#dr-pool)"/>
@@ -35,6 +35,7 @@ ${stars.map(s=>`<circle class="tw" style="animation-delay:-${s.d}s" cx="${f(s.x)
 <ellipse class="shim2" cx="318" cy="${HZN+70}" rx="30" ry="44" fill="url(#dr-shim)" opacity=".6"/>
 <ellipse cx="${(L+R)/2}" cy="${HZN+125}" rx="150" ry="22" fill="#8A4C8E" opacity=".35" filter="url(#dr-mist)"/>
 <g stroke="#E6F7FF" stroke-opacity=".16"><line class="wl" x1="${L}" y1="${HZN+52}" x2="${R}" y2="${HZN+52}"/><line class="wl" x1="${L}" y1="${HZN+78}" x2="${R}" y2="${HZN+78}"/><line class="wl" x1="${L}" y1="${HZN+104}" x2="${R}" y2="${HZN+104}"/></g>
+${Array.from({length:22},(_,i)=>{const y=HZN+24+r()*100,x=L+r()*(R-L-40),w=10+r()*34;return `<line class="drip" style="--dx:${(r()*16-8).toFixed(1)}px;animation-duration:${(2.5+r()*3).toFixed(1)}s;animation-delay:-${(r()*5).toFixed(1)}s" x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${r()<.5?'#E6F7FF':'#F2DDB4'}" stroke-width="1.2" stroke-linecap="round"/>`}).join('')}
 <rect x="${L}" y="${HZN+130}" width="${R-L}" height="${BOT-HZN-130}" fill="url(#dr-floor)"/>
 <g fill="#060B22"><path d="M182 ${BOT-26} L232 ${BOT-26} L244 ${BOT-44} L248 ${BOT-42} L238 ${BOT-22} L182 ${BOT-22} Z"/><rect x="186" y="${BOT-22}" width="3" height="14"/><rect x="228" y="${BOT-22}" width="3" height="14"/>
 <path d="M262 ${BOT-26} L312 ${BOT-26} L324 ${BOT-44} L328 ${BOT-42} L318 ${BOT-22} L262 ${BOT-22} Z"/><rect x="266" y="${BOT-22}" width="3" height="14"/><rect x="308" y="${BOT-22}" width="3" height="14"/></g>
