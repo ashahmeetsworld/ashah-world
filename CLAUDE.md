@@ -92,3 +92,11 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - `public/os/hub.html` Home is Ashah's own Personal Assistant home (last script block, "Orbit v0.5"): ranked stack left (Today, This week, Running), wheel centred, tabs Work / Money / Health / People, a clear Recos link bottom left, no scroll. Nav: Home, Council, Foundations (Foundations is Orbit-only).
 - Money lives in `world.money`, seasons in `world.seasons` (off until the user turns them on from the Seasons button), Health reads the Coach (`window.ORBIT_COACH`, `world.coach` / `world.coachLog`). Orbit never has Gigs and Jobs, Studio or Ventures.
 - The zip's `04 Hub demo.html` is a copy of `hub.html`: refresh it on every hub release.
+
+## New home page (17 Nov 2026)
+- Home is now one long page with no header, footer or nav (Ashah: people scroll the page and click through from each section). Order: hero > "Step into the world." door sign-up > free tools library > Worlds I've built > the Session (lighthouse scene).
+- Source: `src/home/home.html` (standalone page; `__BASE__` = base path, `__SITE__` = site origin), rendered by `src/pages/index.astro`. Assets in `public/home/` (`door.js` is a port of `Door.astro`; `scenes.js` draws the lighthouse and the pop-up sky). Mock-up source and renders: Claude project files `website-v2/mockups-v1.1/`.
+- Old home kept as `src/pages/_home-v1.astro`. To restore: delete `index.astro`, rename `_home-v1.astro` back.
+- Not wired yet (dead on purpose, Ashah's call): the email boxes (Brevo is being rebuilt), the six tool cards, `/session/` (Session page + screening form still to build).
+- Letters pop-up rules (`amw-letters` in localStorage): never after sign-up; once a visit at most, about halfway down; after a close it waits 3 visits; after 2 closes it stops.
+- Button gradient (Ashah's): #8FB3F6 > #9EA1FB > #A498FE > #B49AE9, static, never cycling through peach. No small spaced-caps eyebrow labels.
