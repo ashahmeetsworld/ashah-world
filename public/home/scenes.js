@@ -98,13 +98,13 @@ return `<svg viewBox="0 0 ${W2} ${H2}" preserveAspectRatio="xMidYMid slice"><def
 ${(()=>{let o='';for(let i=0;i<90;i++)o+=`<circle class="tw" style="animation-delay:-${f(r()*5)}s" cx="${f(r()*W2)}" cy="${f(r()*H2)}" r="${r()<.12?1.3:.7}" fill="#fff" opacity="${f(.35+r()*.6)}"/>`;return o})()}
 </svg>`}
 // 5 · HERO FX: aurora, stars, a shooting star and light on the water, laid over the hero picture
-function herofx(){seed=41;const W2=1440,H2=900;
-let st='';for(let i=0;i<60;i++)st+=`<circle class="tw" style="animation-delay:-${f(r()*5)}s" cx="${f(r()*W2)}" cy="${f(r()*520)}" r="${r()<.15?1.4:.8}" fill="#fff" opacity="${f(.4+r()*.5)}"/>`;
-let sh='';for(let y=612;y<760;y+=5+r()*6){const t2=(y-612)/148;const x=1160+r()*240;const w=(20+r()*50)*(1-t2*.4);sh+=`<line x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${r()<.5?'#F2DDB4':'#9EDCF2'}" stroke-opacity="${f(.45-t2*.3)}" stroke-width="1.2" stroke-linecap="round"/>`}
+function herofx(){seed=41;const W2=1440,H2=900,HZ=646;
+let st='';for(let i=0;i<110;i++){const big=r()<.14;st+=`<circle class="tw3" style="animation-duration:${f(2+r()*4)}s;animation-delay:-${f(r()*6)}s" cx="${f(r()*W2)}" cy="${f(r()*(HZ-60))}" r="${big?1.6:.9}" fill="#fff"/>`}
+let sh='';for(let i=0;i<70;i++){const y=HZ+6+Math.pow(r(),1.4)*230;const t2=(y-HZ)/236;const city=r()<.55;const x=city?1120+r()*300:r()*1100;const w=(18+r()*70)*(.6+t2);const c=city?(r()<.6?'#F2DDB4':'#9EDCF2'):(r()<.5?'#9EDCF2':'#B9A8F0');sh+=`<line class="rip" style="--dx:${f(r()*40-20)}px;animation-duration:${f(3+r()*4)}s;animation-delay:-${f(r()*6)}s" x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${c}" stroke-opacity="${f((city?.55:.3)-t2*.15)}" stroke-width="${f(1+t2*1.2)}" stroke-linecap="round"/>`}
 return `<svg viewBox="0 0 ${W2} ${H2}" preserveAspectRatio="xMidYMid slice">${defs}
 ${st}
 <line class="shoot" x1="420" y1="70" x2="980" y2="250" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-<g class="shim">${sh}</g>
+<g>${sh}</g>
 </svg>`}
 const scenes={lighthouse,window:windowCity,pier,popsky,herofx};
 document.querySelectorAll('[data-scene]').forEach(e=>{e.innerHTML=scenes[e.dataset.scene]()});
