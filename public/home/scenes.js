@@ -27,13 +27,17 @@ const fig=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})" fill="#040
 const city=(x0,x1,base,hmax,dim)=>{let o='',w2='';let x=x0;while(x<x1){const w=18+r()*34,h=30+r()*hmax;o+=`<rect x="${f(x)}" y="${f(base-h)}" width="${f(w)}" height="${f(h)}"/>`;for(let wy=base-h+8;wy<base-6;wy+=9)for(let wx=x+4;wx<x+w-4;wx+=7)if(r()<dim)w2+=`<rect x="${f(wx)}" y="${f(wy)}" width="2.4" height="3" />`;x+=w+1+r()*3}return `<g fill="#0A0D2A">${o}</g><g fill="#F2DDB4" opacity=".75">${w2}</g>`};
 
 // 1 · THE LIGHTHOUSE: a beam sweeping the sky, a lit path along the coast to the door at its foot
+
+// Reflections only where a light is (Ashah 18 Nov): aurora = broad soft sheen; a point light = a column under it, narrow near the light, wider toward you
+const aurRefl=(y0,h)=>{let o=`<g class="aref"><rect x="-100" y="${y0}" width="1640" height="${h}" fill="url(#au1)" opacity=".22" filter="url(#b18)"/></g>`;for(let i=0;i<16;i++){const y=y0+6+Math.pow(r(),1.3)*h,x=r()*1300,w=60+r()*220;o+=`<line class="rip" style="--dx:${f(r()*40-20)}px;animation-duration:${f(4+r()*4)}s;animation-delay:-${f(r()*6)}s" x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${r()<.5?'#7FD8F0':'#A996FF'}" stroke-opacity=".14" stroke-width="3" stroke-linecap="round"/>`}return o};
+const colRefl=(cx,y0,y1,w,col,op)=>{let o='';for(let y=y0;y<y1;y+=5+r()*5){const t=(y-y0)/(y1-y0);const ww=w*(.25+t*1.2)*(.5+r()*.7);const x=cx-ww/2+(r()-.5)*w*.3*(t+.2);o+=`<line class="rip" style="--dx:${f((r()-.5)*8*(t+.3))}px;animation-duration:${f(2.5+r()*3)}s;animation-delay:-${f(r()*5)}s" x1="${f(x)}" y1="${f(y)}" x2="${f(x+ww)}" y2="${f(y)}" stroke="${col}" stroke-opacity="${f(op*(1-t*.6))}" stroke-width="${f(1.1+t*1.4)}" stroke-linecap="round"/>`}return o};
 function lighthouse(){seed=11;const lx=1150,ly=372;
 return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">${defs}
 <rect width="${W}" height="620" fill="url(#skn)"/>${stars(140,520)}${aurora(150,70)}
 <ellipse cx="760" cy="616" rx="760" ry="40" fill="#3A3A8A" opacity=".35" filter="url(#b18)"/>
 <g class="sweep" style="transform-origin:${lx}px ${ly}px"><path d="M${lx} ${ly-6} L-200 ${ly-170} L-200 ${ly+90} L${lx} ${ly+6} Z" fill="url(#beam)" filter="url(#b6)"/></g>
 <rect y="618" width="${W}" height="${H-618}" fill="url(#sea)"/>
-${reflect(lx,632,900,60,'#FFE2C2')}${reflect(420,632,760,40,'#BFD9FF')}
+${aurRefl(624,150)}
 <path d="M860 640 C 940 560, 1010 520, 1080 510 C 1140 500, 1210 492, 1290 470 C 1360 452, 1420 440, 1500 436 L1500 ${H} L700 ${H} C 760 820, 800 720, 860 640 Z" fill="#05071C"/>
 <rect x="${lx-14}" y="${ly}" width="28" height="140" fill="#0D1035"/><path d="M${lx-14} ${ly} L${lx+14} ${ly} L${lx+20} ${ly+142} L${lx-20} ${ly+142} Z" fill="#0D1035"/>
 <g fill="#E9E6F5" opacity=".14"><rect x="${lx-16}" y="${ly+40}" width="32" height="10"/><rect x="${lx-18}" y="${ly+90}" width="36" height="10"/></g>
@@ -41,7 +45,7 @@ ${reflect(lx,632,900,60,'#FFE2C2')}${reflect(420,632,760,40,'#BFD9FF')}
 <circle class="br" cx="${lx}" cy="${ly-13}" r="70" fill="url(#warm)"/>
 <path d="M${lx-11} ${ly+142} L${lx-11} ${ly+118} Q${lx} ${ly+106} ${lx+11} ${ly+118} L${lx+11} ${ly+142} Z" fill="#FFE2C2"/><ellipse class="br" cx="${lx}" cy="${ly+148}" rx="60" ry="14" fill="url(#warm)"/>
 <path class="trail" d="M120 ${H} C 380 900, 560 860, 720 800 S 960 640, ${lx-6} ${ly+144}" fill="none" stroke="#FFE2C2" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="2 12" opacity=".9"/>
-${[[470,872],[760,782],[1000,610]].map(([x,y],i)=>`<g class="lan" style="animation-delay:-${i*1.3}s"><circle cx="${x}" cy="${y}" r="34" fill="url(#warm)"/><circle cx="${x}" cy="${y}" r="3.5" fill="#FFF3E0"/></g>`).join('')}
+${[[470,872],[760,782]].map(([x,y])=>colRefl(x,y+10,y+70,26,'#FFE2C2',.7)).join('')}${[[470,872],[760,782],[1000,610]].map(([x,y],i)=>`<g class="lan" style="animation-delay:-${i*1.3}s"><circle cx="${x}" cy="${y}" r="34" fill="url(#warm)"/><circle cx="${x}" cy="${y}" r="3.5" fill="#FFF3E0"/></g>`).join('')}
 ${fig(1060,580,.9)}
 </svg>`}
 
@@ -100,11 +104,11 @@ ${(()=>{let o='';for(let i=0;i<90;i++)o+=`<circle class="tw" style="animation-de
 // 5 · HERO FX: aurora, stars, a shooting star and light on the water, laid over the hero picture
 function herofx(){seed=41;const W2=1440,H2=900,HZ=646;
 let st='';for(let i=0;i<110;i++){const big=r()<.14;st+=`<circle class="tw3" style="animation-duration:${f(2+r()*4)}s;animation-delay:-${f(r()*6)}s" cx="${f(r()*W2)}" cy="${f(r()*(HZ-60))}" r="${big?1.6:.9}" fill="#fff"/>`}
-let sh='';for(let i=0;i<70;i++){const y=HZ+6+Math.pow(r(),1.4)*230;const t2=(y-HZ)/236;const city=r()<.55;const x=city?1120+r()*300:r()*1100;const w=(18+r()*70)*(.6+t2);const c=city?(r()<.6?'#F2DDB4':'#9EDCF2'):(r()<.5?'#9EDCF2':'#B9A8F0');sh+=`<line class="rip" style="--dx:${f(r()*40-20)}px;animation-duration:${f(3+r()*4)}s;animation-delay:-${f(r()*6)}s" x1="${f(x)}" y1="${f(y)}" x2="${f(x+w)}" y2="${f(y)}" stroke="${c}" stroke-opacity="${f((city?.55:.3)-t2*.15)}" stroke-width="${f(1+t2*1.2)}" stroke-linecap="round"/>`}
+let sh='';for(const x of [1150,1200,1245,1290,1335,1380,1420])sh+=colRefl(x+r()*14,HZ+6,HZ+150+r()*60,22,r()<.65?'#F2DDB4':'#9EDCF2',.6);
 return `<svg viewBox="0 0 ${W2} ${H2}" preserveAspectRatio="xMidYMid slice">${defs}
 ${st}
 <line class="shoot" x1="420" y1="70" x2="980" y2="250" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-<g>${sh}</g>
+<g>${aurRefl(HZ+4,140)}${sh}</g>
 </svg>`}
 const scenes={lighthouse,window:windowCity,pier,popsky,herofx};
 document.querySelectorAll('[data-scene]').forEach(e=>{e.innerHTML=scenes[e.dataset.scene]()});
