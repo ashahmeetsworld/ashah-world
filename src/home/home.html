@@ -169,6 +169,14 @@ nav{padding-left:96px!important;padding-right:96px!important}
 .init{margin-top:-70px!important;padding-bottom:0!important}
 .shelf{padding-top:30px!important}
 }
+
+/* door fits the screen (17 Nov 11:48pm): hero fills the first screen, nothing peeks in; the door section is one screen tall and the door scales with screen height */
+@media (min-width:601px){
+.hero{height:100vh!important;min-height:620px!important;max-height:none!important}
+.init{margin-top:0!important;min-height:100vh;padding-top:0!important;padding-bottom:0!important}
+.init .door-art .door{width:min(100%,82vh)!important;max-width:none!important}
+.shelf{padding-top:40px!important}
+}
 </style></head><body><nav><div class="logo">A·M·W</div></nav>
 <section class="hero"><div class="t"><div><h1 class="ser">Ashah<br>Meets World</h1><p class="sub ser">Creative direction and worldbuilding for culture-driven brands.</p></div></div></section>
 <section class="init" id="door"><div class="ist"></div><div class="il"><h2 class="ser">Step into the <span class="rim">world.</span></h2><p>Leave your email and you're in: a letter every Thursday, every free tool in the library, and first word when Session spots open.</p><div class="email"><span>your@email.com</span><a class="pill rimb">Enter</a></div></div><div class="door-art" data-door></div><div class="floor"></div></section>
