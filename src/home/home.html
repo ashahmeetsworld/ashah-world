@@ -158,6 +158,17 @@ nav{padding-left:96px!important;padding-right:96px!important}
 .work{padding-left:96px!important;padding-right:96px!important}
 .scn .txt{left:96px!important}
 }
+
+/* tighten (17 Nov 11:45pm): less dead space between hero and door, door sized to the column, floor line pinned to the door's ground */
+@media (min-width:601px){
+.hero{height:min(900px,90vh)!important;min-height:640px}
+.init{padding-top:10px!important;padding-bottom:60px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:center!important;column-gap:40px!important}
+.init .door-art{justify-content:center}
+.init .door-art .door{width:100%!important;max-width:720px!important;margin:0!important}
+.floor{bottom:auto!important;top:var(--floor,70%)}
+.init{margin-top:-70px!important;padding-bottom:0!important}
+.shelf{padding-top:30px!important}
+}
 </style></head><body><nav><div class="logo">A·M·W</div></nav>
 <section class="hero"><div class="t"><div><h1 class="ser">Ashah<br>Meets World</h1><p class="sub ser">Creative direction and worldbuilding for culture-driven brands.</p></div></div></section>
 <section class="init" id="door"><div class="ist"></div><div class="il"><h2 class="ser">Step into the <span class="rim">world.</span></h2><p>Leave your email and you're in: a letter every Thursday, every free tool in the library, and first word when Session spots open.</p><div class="email"><span>your@email.com</span><a class="pill rimb">Enter</a></div></div><div class="door-art" data-door></div><div class="floor"></div></section>
@@ -177,4 +188,7 @@ function show(){if(shown)return;shown=true;document.body.classList.add('show','p
 addEventListener('scroll',function(){var h=document.documentElement;if(h.scrollTop/(h.scrollHeight-innerHeight)>.45)show()},{passive:true});
 pop.querySelector('.xx').addEventListener('click',function(){document.body.classList.remove('show');st.closes=(st.closes||0)+1;st.closedAt=st.visits;save()});
 pop.querySelector('.aur').addEventListener('click',function(e){e.preventDefault()}); // sign-up not wired yet (Brevo rebuild pending)
-})();</script><script src="__BASE__/home/door.js"></script><script src="__BASE__/home/scenes.js"></script><script>if(innerWidth<600)document.querySelectorAll('[data-scene="lighthouse"] svg').forEach(v=>{v.setAttribute("viewBox","900 90 540 860");v.setAttribute("preserveAspectRatio","xMidYMin slice")})</script><script>document.querySelectorAll('.tools,.wgrid').forEach(t=>{const d=document.createElement('div');d.className='dots';const n=t.children.length;for(let i=0;i<n;i++){const e=document.createElement('i');if(!i)e.className='on';d.appendChild(e)}t.after(d);t.addEventListener('scroll',()=>{const k=Math.round(t.scrollLeft/(t.children[0].offsetWidth+14));[...d.children].forEach((e,j)=>e.classList.toggle('on',j===k))})})</script></body></html>
+})();</script><script src="__BASE__/home/door.js"></script><script>
+(function(){function pin(){var sec=document.querySelector('.init'),svg=sec&&sec.querySelector('.door'),f=sec&&sec.querySelector('.floor');if(!svg||!f)return;
+var r=svg.getBoundingClientRect(),t=sec.getBoundingClientRect();f.style.setProperty('--floor',(r.top-t.top+r.height*440/520)+'px')}
+addEventListener('load',pin);addEventListener('resize',pin);pin()})();</script><script src="__BASE__/home/scenes.js"></script><script>if(innerWidth<600)document.querySelectorAll('[data-scene="lighthouse"] svg').forEach(v=>{v.setAttribute("viewBox","900 90 540 860");v.setAttribute("preserveAspectRatio","xMidYMin slice")})</script><script>document.querySelectorAll('.tools,.wgrid').forEach(t=>{const d=document.createElement('div');d.className='dots';const n=t.children.length;for(let i=0;i<n;i++){const e=document.createElement('i');if(!i)e.className='on';d.appendChild(e)}t.after(d);t.addEventListener('scroll',()=>{const k=Math.round(t.scrollLeft/(t.children[0].offsetWidth+14));[...d.children].forEach((e,j)=>e.classList.toggle('on',j===k))})})</script></body></html>
