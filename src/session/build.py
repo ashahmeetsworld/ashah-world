@@ -123,7 +123,7 @@ def C():
   s+=sc('window','Who it’s for.',f'<p>{WHO}</p>')
   s+=sc('popsky','45 minutes.<br><em>Three turns of the beam.</em>','<div class="beam3">'+''.join(f'<div><i></i><b>{a}</b><span>{b}</span></div>' for a,b in THREE)+'</div>')
   s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="ring">'+''.join(f'<span>{p}</span>' for p in PILLARS)+'</div>')
-  s+=sc('pier','What you leave with.',f'<p>{LEAVE}</p><p style="margin-top:16px">{AFTER}</p>')
+  s+=sc('','What you leave with.',f'<p>{LEAVE}</p><p style="margin-top:16px">{AFTER}</p>')
   s+=sc('','How you get in.','<div class="beam3" style="gap:24px">'+''.join(f'<div style="width:200px"><i></i><b>{a}</b><span>{b}</span></div>' for a,b in STEPS)+'</div>')
   s+=END+TAIL
   return HEAD('The Session · Ashah Meets World',C_CSS)+s
