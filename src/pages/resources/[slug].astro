@@ -70,6 +70,7 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
   .done h2 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 36px; margin-bottom: 10px; color: #F7F5F0; }
   .done p { color: #D9DDF0; font-size: 16px; line-height: 1.6; }
   .done .n { color: var(--acc); font-weight: 500; }
+  .done .dl { margin-top: 14px; } .done .dl a { color: #F7F5F0; border-bottom: 1px solid rgba(var(--glow), .6); }
   .sent form { display: none; } .sent .done { display: block; }
   .book { position: relative; aspect-ratio: 16 / 10.4; perspective: 1800px; top: -26px; } /* centres the cover on the copy column (measured) */
   .book img { position: absolute; left: 0; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .14); transform: rotateY(-12deg) rotateX(3deg); transform-origin: 100% 50%; }
@@ -114,6 +115,7 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
     <div class="done" role="status" aria-live="polite">
       <h2>It's on its way.</h2>
       <p>Check your inbox for the {w.name} Workbook. Next, see how the Session works in <span class="n">5</span>…</p>
+      {!form && <p class="dl"><a href={`${base}/resources/${w.slug}-workbook.pdf`} target="_blank" rel="noopener">Download it right now</a></p>}
     </div>
   </div>
   <div class="book" aria-hidden="true">
