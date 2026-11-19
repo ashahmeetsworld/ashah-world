@@ -166,10 +166,17 @@ def F():
   return HEAD('Apply for a Session · Ashah Meets World',F_CSS)+s
 # ---------- v1.1 LIVE: C on desktop, A on phone, same words ----------
 D_CSS=A_CSS+C_CSS+'.mob{display:none}@media (max-width:600px){.dsk{display:none}.mob{display:block}}'
+LEAVE_CSS='.scene.leave{min-height:980px;align-items:flex-start;padding-top:120px}.scene.leave .in{max-width:780px}.scene.leave:before{background:linear-gradient(180deg,var(--bg) 0,rgba(7,10,28,.75) 14%,rgba(7,10,28,.55) 32%,rgba(7,10,28,0) 52%,rgba(7,10,28,0) 80%,var(--bg) 100%)}'
+END_CSS='.end .amb{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}.end .amb .ff{position:absolute;border-radius:50%;animation:ffly var(--d) ease-in-out infinite alternate,ffb var(--b) ease-in-out infinite;animation-delay:var(--dl)}@keyframes ffly{to{transform:translate(var(--x),var(--y))}}@keyframes ffb{0%,100%{opacity:.15}50%{opacity:1}}.end h2,.end p,.end .aurb{z-index:2}'
+END_JS='(function(){var sec=document.querySelector(\'.end\');if(!sec)return;var a=document.createElement(\'div\');a.className=\'amb\';sec.prepend(a);var R=Math.random,ph=innerWidth<600,h=\'\',cols=[\'#F2B48C\',\'#FFD9B0\',\'#7FD8F0\',\'#C9DCF7\'];for(var i=0;i<(ph?16:30);i++){var s=(3+R()*4).toFixed(1),c=cols[i%cols.length];h+=\'<i class="ff" style="left:\'+(R()*100)+\'%;top:\'+(15+R()*80)+\'%;width:\'+s+\'px;height:\'+s+\'px;background:\'+c+\';box-shadow:0 0 8px 2px \'+c+\'88,0 0 22px 6px \'+c+\'33;--d:\'+(10+R()*12)+\'s;--b:\'+(3+R()*4)+\'s;--dl:-\'+(R()*10)+\'s;--x:\'+(R()*80-40)+\'px;--y:\'+(-30-R()*70)+\'px"></i>\'}a.innerHTML=h})();'
+LEAVE_JS='(function(){var sec=document.querySelector(\'.scene.leave\');if(!sec)return;var s=sec.querySelector(\'.sb svg\');if(!s)return;var v=sec.dataset.v||\'a\';var h=s.innerHTML;var night=\'<linearGradient id="skN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070A22"/><stop offset=".4" stop-color="#121A55"/><stop offset=".7" stop-color="#1E2466"/><stop offset=".88" stop-color="#2E2C7A"/><stop offset="1" stop-color="#46489C"/></linearGradient><radialGradient id="hzN" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8FB4F6" stop-opacity=".4"/><stop offset=".5" stop-color="#A996FF" stop-opacity=".15"/><stop offset="1" stop-color="#A996FF" stop-opacity="0"/></radialGradient>\';if(v!==\'b\'){h=night+h.replace(/url\\(#sk\\)/g,\'url(#skN)\').replace(/url\\(#hz\\)/g,\'url(#hzN)\')}s.innerHTML=h;var br=s.querySelector(\'circle.br\');if(v===\'a\'&&br)br.setAttribute(\'opacity\',\'.35\');if(v===\'b\'&&br)br.setAttribute(\'opacity\',\'.3\');if(v===\'c\'){if(br)br.setAttribute(\'opacity\',\'.5\');s.setAttribute(\'preserveAspectRatio\',\'xMidYMax slice\')}})();'
 def D():
   a=A(); c=C()
   mid=lambda h:h.split(HERO,1)[1].split(END,1)[0]
-  return HEAD('The Session · Ashah Meets World',D_CSS)+HERO+'<div class="dsk">'+mid(c)+'</div><div class="mob">'+mid(a)+'</div>'+END+TAIL
+  m=mid(c); i=m.index('<h2 class="ser">What you leave with.</h2>'); j=m.rindex('<section class="scene"><div class="glow"></div>',0,i)
+  # v1.3 (Ashah 19 Nov, picked C): the pier at night, words up in the clear sky, the lit door below them
+  m=m[:j]+'<section class="scene leave" data-v="c"><div class="sb" data-scene="pier"></div>'+m[j+len('<section class="scene"><div class="glow"></div>'):]
+  return HEAD('The Session · Ashah Meets World',D_CSS+LEAVE_CSS+END_CSS)+HERO+'<div class="dsk">'+m+'</div><div class="mob">'+mid(a)+'</div>'+END+TAIL.replace('</body>','<script>'+LEAVE_JS+END_JS+'</script></body>')
 os.makedirs(OUT,exist_ok=True)
 open(f'{OUT}/session.html','w').write(D())
 open(f'{OUT}/apply.html','w').write(F())
