@@ -8,7 +8,8 @@ import site from '../../data/site.json';
 
 export async function getStaticPaths() {
   const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
-  return work.map((entry, i) => ({ params: { slug: entry.id }, props: { entry, next: work[(i + 1) % work.length] } }));
+  // Standalone case studies (Brand Packages) have their own page files; the Next link still cycles through every piece.
+  return work.map((entry, i) => ({ entry, next: work[(i + 1) % work.length] })).filter(({ entry }) => !entry.data.standalone).map(({ entry, next }) => ({ params: { slug: entry.id }, props: { entry, next } }));
 }
 const { entry, next } = Astro.props;
 const d = entry.data;

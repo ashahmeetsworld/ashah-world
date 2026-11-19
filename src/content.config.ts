@@ -18,6 +18,8 @@ const work = defineCollection({
     featured: z.boolean().default(true),
     order: z.number().default(100),
     draft: z.boolean().default(false),
+    // true = the case study is its own page in src/pages/work/<file-name>.astro (a house's Brand Package), so [slug].astro skips it
+    standalone: z.boolean().default(false),
   }),
 });
 
