@@ -39,6 +39,8 @@ HERO=f'''<a class="mk" href="{BASE}/">A·M·W</a><section class="hero"><div clas
 END=f'''<section class="end"><h2 class="ser">The light's on.<br><em>Come up to the door.</em></h2><p>I open the door five times a month. One Session per brand.</p><a class="aurb" href="{APPLY}">Apply now</a></section>'''+FOOT
 TAIL=f'''<a class="aurb fab" href="{APPLY}">Apply now</a><script src="{BASE}/home/scenes.js"></script><script>if(innerWidth<600)document.querySelectorAll('[data-scene="lighthouse"] svg').forEach(v=>{{v.setAttribute("viewBox","880 150 540 940");v.setAttribute("preserveAspectRatio","xMidYMin slice")}})</script>{FAB_JS}</body></html>'''
 PILLARS=['Identity','Storytelling','Product','Ecosystem','Continuity','Campaigns']
+PCOL={'Identity':'#F2CF9A','Storytelling':'#B9A4FF','Product':'#F2A47A','Ecosystem':'#5FE3D0','Continuity':'#E88C96','Campaigns':'#5BE38E'} # each workbook's own colour (Ashah 19 Nov)
+PC=lambda p:f' style="color:{PCOL[p]};text-shadow:0 0 18px {PCOL[p]}66"><i class="orb" style="background:{PCOL[p]};box-shadow:0 0 10px 2px {PCOL[p]}99,0 0 26px 6px {PCOL[p]}44"></i'
 WB={'Identity':'identity','Storytelling':'storytelling','Product':'product','Ecosystem':'ecosystem','Continuity':'continuity','Campaigns':'campaigns'}
 THREE=[('Where you are','We read your brand across six pillars, and find what’s carrying it and what’s holding it back.'),('Where it’s going','The world your brand could be. What people would step into, and the gap between here and there.'),('The one move','The single change that closes the gap first, and exactly how to make it.')]
 STEPS=[('Apply','A full form, about ten minutes. Tell me about your brand and where it’s stuck.'),('I read it','I read every application myself. You hear back within three days.'),('Pick a time','Your acceptance email holds the link to book your 45 minutes.'),('The Session','One on one, on a recorded video call. Bring the thing you’re stuck on. That’s where we start.'),('Your pack','The next day, your Session Pack lands in your inbox.')]
@@ -57,16 +59,16 @@ A_CSS='''
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px;max-width:1000px}
 .trio b{display:block;font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:30px;margin-bottom:10px;color:#F7F5F0}
 .trio p{font-size:16px!important;color:#C9CFEA!important}
-.pills{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.pills span{padding:10px 20px;border-radius:999px;border:1px solid rgba(207,230,255,.3);font-family:'Cormorant Garamond';font-style:italic;font-size:22px;color:#E6E9F7}
+.pills{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px 34px;margin-top:30px}.pills span{font-family:'Cormorant Garamond';font-style:italic;font-size:22px;color:#E6E9F7}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:30px;margin-top:40px;max-width:1100px}
 .steps b{display:block;font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:28px;margin-bottom:8px}.steps p{font-size:15px!important;color:#C9CFEA!important}
-@media (max-width:600px){.path{padding:40px 18px}.path:before{left:29px}.stop{padding:0 0 80px 46px}.stop:before{left:0}.stop h2{font-size:38px}.trio,.steps{grid-template-columns:1fr;gap:22px}}
+@media (max-width:600px){.pills{grid-template-columns:repeat(2,150px)}.path{padding:40px 18px}.path:before{left:29px}.stop{padding:0 0 80px 46px}.stop:before{left:0}.stop h2{font-size:38px}.trio,.steps{grid-template-columns:1fr;gap:22px}}
 '''
 def A():
   s=HERO+'<div class="path">'
   s+=f'<div class="stop"><h2 class="ser">Who it’s for.</h2><p>{WHO}</p></div>'
   s+='<div class="stop"><h2 class="ser">45 minutes, three turns of the beam.</h2><div class="trio">'+''.join(f'<div><b>{a}</b><p>{b}</p></div>' for a,b in THREE)+'</div></div>'
-  s+='<div class="stop"><h2 class="ser">Six pillars, one read.</h2><p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="pills">'+''.join(f'<span>{p}</span>' for p in PILLARS)+'</div></div>'
+  s+='<div class="stop"><h2 class="ser">Six pillars, one read.</h2><p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="pills">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div></div>'
   s+=f'<div class="stop"><h2 class="ser">What you leave with.</h2><p>{LEAVE}</p><p style="margin-top:18px">{AFTER}</p></div>'
   s+='<div class="stop" style="padding-bottom:40px"><h2 class="ser">How you get in.</h2><div class="steps">'+''.join(f'<div><b>{a}</b><p>{b}</p></div>' for a,b in STEPS)+'</div></div>'
   s+='</div>'+END+TAIL
@@ -104,6 +106,7 @@ def B():
 
 # ---------- C: Night scenes ----------
 C_CSS='''
+.orb{display:inline-block;flex:none;width:11px;height:11px;border-radius:50%;margin-right:16px}.ring span,.pills span{display:inline-flex;align-items:center}
 .scene{position:relative;min-height:760px;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px;overflow:hidden}.scene .sb,.scene .sb svg{position:absolute;inset:0;width:100%;height:100%}.scene .glow{position:absolute;left:50%;top:50%;width:1000px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(127,216,240,.12),rgba(169,150,255,.08) 40%,transparent 70%)}
 .scene:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0,rgba(7,10,28,.55) 22%,rgba(7,10,28,.55) 78%,var(--bg) 100%)}
 .scene .in{position:relative;z-index:2;max-width:900px}
@@ -113,7 +116,7 @@ C_CSS='''
 .beam3:before{content:'';position:absolute;left:12%;right:12%;top:7px;height:1px;background:linear-gradient(90deg,#FFE2C2,#7FD8F0,#A996FF);box-shadow:0 0 10px #7FD8F0}
 .beam3 div{position:relative;padding-top:30px;width:200px}.beam3 i{position:absolute;left:50%;top:0;width:15px;height:15px;margin-left:-7px;border-radius:50%;background:#FFF3E0;box-shadow:0 0 12px 3px rgba(255,226,194,.8),0 0 40px 10px rgba(242,180,140,.45)}
 .beam3 b{display:block;font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:26px;margin-bottom:8px}.beam3 span{font-size:14px;color:#C9CFEA;line-height:1.55;display:block}
-.ring{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:14px 40px;margin-top:34px;font-family:'Cormorant Garamond';font-style:italic;font-size:30px;color:#F7F5F0}
+.ring{display:grid;grid-template-columns:repeat(3,max-content);justify-content:center;justify-items:start;gap:18px 72px;margin-top:34px;font-family:'Cormorant Garamond';font-style:italic;font-size:30px;color:#F7F5F0}
 
 @media (max-width:600px){.scene{min-height:640px;padding:90px 18px}.scene h2{font-size:42px}.beam3{flex-direction:column;gap:26px;align-items:center}.beam3:before{display:none}.ring{font-size:24px}}
 '''
@@ -122,7 +125,7 @@ def C():
   s=HERO
   s+=sc('window','Who it’s for.',f'<p>{WHO}</p>')
   s+=sc('popsky','45 minutes.<br><em>Three turns of the beam.</em>','<div class="beam3">'+''.join(f'<div><i></i><b>{a}</b><span>{b}</span></div>' for a,b in THREE)+'</div>')
-  s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="ring">'+''.join(f'<span>{p}</span>' for p in PILLARS)+'</div>')
+  s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="ring">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div>')
   s+=sc('','What you leave with.',f'<p>{LEAVE}</p><p style="margin-top:16px">{AFTER}</p>')
   s+=sc('','How you get in.','<div class="beam3" style="gap:24px">'+''.join(f'<div style="width:200px"><i></i><b>{a}</b><span>{b}</span></div>' for a,b in STEPS)+'</div>')
   s+=END+TAIL
