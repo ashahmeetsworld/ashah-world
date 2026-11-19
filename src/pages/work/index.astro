@@ -23,10 +23,8 @@ const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => 
   .lede { position: relative; }
   .list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 72px 48px; padding-bottom: 60px; }
   .item[hidden] { display: none; }
-  /* A portrait card (Field Notes) takes two rows beside two landscape cards, so no row is left with a gap under its short card. */
-  .list { grid-auto-flow: row dense; }
-  .item.tall { grid-row: span 2; display: flex; }
-  .list .item.tall :global(.wc.portrait) { grid-template-rows: 1fr auto; width: 100%; }
-  .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: auto; min-height: 0; }
-  @media (max-width: 760px) { .list { grid-template-columns: 1fr; gap: 56px; } .item.tall { grid-row: auto; } .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: 4 / 5; } }
+  /* A portrait card (Field Notes) sits in the same 16:9 frame as the rest, its whole cover shown on the dark ground, so every row lines up with no gap. */
+  .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: 16 / 9; }
+  .list .item.tall :global(.wc.portrait .frame img) { object-fit: contain; }
+  @media (max-width: 760px) { .list { grid-template-columns: 1fr; gap: 56px; } .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: 4 / 5; } .list .item.tall :global(.wc.portrait .frame img) { object-fit: cover; } }
 </style>
