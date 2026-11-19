@@ -1,0 +1,150 @@
+---
+// Workbook landing pages (19 Nov 2026), one per pillar, each in its own workbook's colour world.
+// Layout follows Ashah's reference (a Founder OS resource page): headline + sign-up on the left, the workbook on the right.
+// Sign-up: shows "on its way", counts down 5 seconds, then goes to /session/.
+// Until FORMS[slug] holds a Brevo form URL the page runs in preview mode (confirms without sending).
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+export function getStaticPaths() {
+  const W = [
+    { slug: 'identity', name: 'Identity', a: 'Everyone sells something.', b: 'Few know who they are.', top: 'Find where your brand stands.',
+      ch: ['The scene', 'Your person', 'Your roots', 'Your belief', 'Who they become', "How you're seen"],
+      bg1: '#08102A', bg2: '#1C2C68', acc: '#F2CF9A', glow: '242,207,154' },
+    { slug: 'storytelling', name: 'Storytelling', a: 'The craft is there.', b: 'Now let the story show it.', top: 'Four lights. One beam.',
+      ch: ['Your story spine', 'Your voice', 'Your look', 'Your codes', 'Your direction', 'The taste test'],
+      bg1: '#0E0830', bg2: '#2C1B6E', acc: '#B9A4FF', glow: '185,164,255' },
+    { slug: 'product', name: 'Product', a: 'People buy the feeling.', b: 'Make the product the door.', top: 'One spark becomes a whole line.',
+      ch: ['The feeling', 'The idea', 'The hero piece', 'The line', 'The names', 'The first minute'],
+      bg1: '#120505', bg2: '#3A1410', acc: '#F2A47A', glow: '242,164,122' },
+    { slug: 'ecosystem', name: 'Ecosystem', a: 'Every place they meet you', b: 'should feel like one world.', top: 'One world, everywhere they meet you.',
+      ch: ['Your places', 'Their path', 'Your funnel', 'One message', 'Off screen', 'The loop'],
+      bg1: '#04181B', bg2: '#0B3A3E', acc: '#5FE3D0', glow: '95,227,208' },
+    { slug: 'continuity', name: 'Continuity', a: 'Hype lasts a week.', b: 'A world lasts for years.', top: 'Stay with them all year.',
+      ch: ['What stays', 'Every week', 'Your year', 'After the drop', 'Your show', 'Your circle'],
+      bg1: '#140A26', bg2: '#4A2052', acc: '#F2B48C', glow: '232,140,150' },
+    { slug: 'campaigns', name: 'Campaigns', a: 'Build the wait.', b: 'Make the drop a moment.', top: 'Count down to one unforgettable drop.',
+      ch: ['The idea', 'Three ways in', 'The countdown', 'The list', 'The batch', 'The drop moment'],
+      bg1: '#04120A', bg2: '#0F2A18', acc: '#5BE38E', glow: '91,227,142' },
+  ];
+  return W.map((w) => ({ params: { slug: w.slug }, props: w }));
+}
+const w = Astro.props;
+const FORMS: Record<string, string> = {}; // slug -> Brevo form serve URL (set once each form exists)
+const form = FORMS[w.slug] ?? '';
+const img = (f: string) => `${base}/resources/${w.slug}/${f}`;
+const soc = [
+  ['Instagram', 'https://www.instagram.com/ashah.world/', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>'],
+  ['LinkedIn', 'https://www.linkedin.com/in/ashahpeters/', '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M11.5 17v-6.5M11.5 13.2c0-1.6 1.2-2.7 2.6-2.7s2.4 1 2.4 2.7V17"/>'],
+  ['X', 'https://x.com/ashahmeetsworld', '<path d="M4.5 4h4.2l10.8 16h-4.2L4.5 4ZM19 4l-5.9 6.7M10.9 13.3 5 20"/>'],
+];
+const title = `${w.name} Workbook · Ashah Meets World`;
+const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an hour.`;
+---
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title><meta name="description" content={desc}>
+<meta property="og:title" content={`${w.name} Workbook`}><meta property="og:description" content={desc}>
+<meta property="og:image" content={`${Astro.site ? Astro.site.origin : ''}${img('cover.webp')}`}>
+<meta name="theme-color" content={w.bg1}><link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml">
+<link rel="stylesheet" href={`${base}/home/base.css`}>
+<style define:vars={{ bg1: w.bg1, bg2: w.bg2, acc: w.acc, glow: w.glow }}>
+  html { background: var(--bg2); }
+  body { min-height: 100vh; background: radial-gradient(ellipse 60% 50% at 72% 30%, rgba(var(--glow), .16), transparent 70%), linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%); }
+  .stars { position: fixed; inset: 0; pointer-events: none; background-image: radial-gradient(1px 1px at 12% 18%, #fff8, transparent), radial-gradient(1px 1px at 33% 72%, #fff6, transparent), radial-gradient(1.5px 1.5px at 58% 12%, #fff9, transparent), radial-gradient(1px 1px at 81% 64%, #fff6, transparent), radial-gradient(1px 1px at 91% 22%, #fff7, transparent), radial-gradient(1px 1px at 47% 44%, #fff5, transparent), radial-gradient(1.5px 1.5px at 6% 58%, #fff7, transparent), radial-gradient(1px 1px at 70% 88%, #fff5, transparent); }
+  .mk { display: block; text-align: center; padding: 30px 0 0; font-size: 12px; letter-spacing: .3em; color: #DDE1F2; position: relative; }
+  .hero { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; max-width: 1248px; margin: 0 auto; padding: 72px 0 96px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 62px; line-height: 1.04; color: #F7F5F0; margin-bottom: 24px; }
+  h1 em { color: var(--acc); font-style: italic; }
+  .lede { font-size: 19px; line-height: 1.6; color: #D9DDF0; margin-bottom: 36px; max-width: 520px; }
+  .lede b { font-weight: 500; color: #F7F5F0; }
+  form { max-width: 520px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  input { width: 100%; background: rgba(246, 241, 231, .06); border: 1px solid rgba(246, 241, 231, .24); border-radius: 8px; padding: 16px 16px; color: var(--ink); font: 16px 'DM Sans', sans-serif; outline: none; transition: border-color .3s, box-shadow .3s; }
+  input::placeholder { color: #8F97BC; }
+  input:focus { border-color: var(--acc); box-shadow: 0 0 0 3px rgba(var(--glow), .18); }
+  .fine { font-size: 13px; line-height: 1.55; color: #9AA2C6; margin-bottom: 26px; }
+  button { border: 0; cursor: pointer; border-radius: 999px; padding: 18px 34px; font: 600 13px 'DM Sans', sans-serif; letter-spacing: .24em; text-transform: uppercase; color: #06081A; background: var(--acc); box-shadow: 0 0 30px rgba(var(--glow), .55), 0 0 80px rgba(var(--glow), .3); animation: br 4.5s ease-in-out infinite; }
+  @keyframes br { 50% { box-shadow: 0 0 40px rgba(var(--glow), .7), 0 0 110px rgba(var(--glow), .4); } }
+  .done { display: none; max-width: 520px; padding: 30px 32px; border-radius: 10px; border: 1px solid rgba(var(--glow), .45); background: rgba(7, 10, 28, .35); box-shadow: 0 0 60px rgba(var(--glow), .15); }
+  .done h2 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 36px; margin-bottom: 10px; color: #F7F5F0; }
+  .done p { color: #D9DDF0; font-size: 16px; line-height: 1.6; }
+  .done .n { color: var(--acc); font-weight: 500; }
+  .done .dl { margin-top: 14px; } .done .dl a { color: #F7F5F0; border-bottom: 1px solid rgba(var(--glow), .6); }
+  .sent form { display: none; } .sent .done { display: block; }
+  .book { position: relative; aspect-ratio: 16 / 10.4; perspective: 1800px; top: -26px; } /* centres the cover on the copy column (measured) */
+  .book img { position: absolute; left: 0; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .14); transform: rotateY(-12deg) rotateX(3deg); transform-origin: 100% 50%; }
+  .book .p2 { top: 0; opacity: .5; }
+  .book .p1 { top: 7%; opacity: .75; }
+  .book .p0 { top: 14%; box-shadow: 0 40px 90px rgba(0, 0, 0, .55), 0 0 90px rgba(var(--glow), .35); }
+  .inside { position: relative; max-width: 1248px; margin: 0 auto; padding: 0 0 110px; }
+  .inside h2 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 54px; color: #F7F5F0; margin-bottom: 36px; text-align: center; }
+  .ch { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; counter-reset: c; }
+  .ch li { list-style: none; counter-increment: c; text-align: center; padding: 28px 12px 26px; border-radius: 8px; border: 1px solid rgba(var(--glow), .28); background: rgba(7, 10, 28, .28); }
+  .ch li:before { content: counter(c); display: block; width: 34px; height: 34px; line-height: 34px; margin: 0 auto 16px; border-radius: 50%; font-size: 14px; color: #06081A; background: var(--acc); box-shadow: 0 0 18px rgba(var(--glow), .6); }
+  .ch span { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 23px; color: #F1EFF7; }
+  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .ways div { padding: 26px 28px; border-radius: 8px; border: 1px solid rgba(246, 241, 231, .14); background: rgba(7, 10, 28, .28); }
+  .ways b { display: block; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 26px; color: var(--acc); margin-bottom: 8px; }
+  .ways p { color: #C9CFEA; font-size: 15px; line-height: 1.55; }
+  .ways a { color: #F7F5F0; border-bottom: 1px solid rgba(var(--glow), .6); }
+  .foot { position: relative; display: flex; justify-content: center; gap: 22px; padding: 0 0 56px; }
+  .foot a { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: #C9CFEA; border: 1px solid rgba(246, 241, 231, .16); transition: color .3s, border-color .3s, box-shadow .4s; }
+  .foot a:hover { color: var(--acc); border-color: var(--acc); box-shadow: 0 0 22px rgba(var(--glow), .35); }
+  .foot svg { width: 19px; height: 19px; }
+  @media (max-width: 1320px) { .hero, .inside { margin: 0 48px; } }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; padding: 40px 0 70px; } .book { order: -1; max-width: 560px; top: 0; } .ch { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .hero, .inside { margin: 0 18px; } h1 { font-size: 40px; } .lede { font-size: 17px; } .row { grid-template-columns: 1fr; gap: 12px; } button { width: 100%; } .inside h2 { font-size: 38px; } .ch { grid-template-columns: repeat(2, 1fr); gap: 10px; } .ways { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<a class="mk" href={`${base}/`}>A·M·W</a>
+<main class="hero">
+  <div class="copy">
+    <h1>{w.a}<br><em>{w.b}</em></h1>
+    <p class="lede">The free <b>{w.name} Workbook</b>. {w.top} Six chapters, about an hour.</p>
+    <form data-form={form} data-next={`${base}/session/`}>
+      <div class="row">
+        <input type="text" name="FIRSTNAME" placeholder="First name" autocomplete="given-name" required aria-label="First name">
+        <input type="email" name="EMAIL" placeholder="Email" autocomplete="email" required aria-label="Email">
+      </div>
+      <p class="fine">I'll email you the workbook straight away, plus one note inviting you to my weekly letters. Unsubscribe any time.</p>
+      <button type="submit">Send me the workbook</button>
+    </form>
+    <div class="done" role="status" aria-live="polite">
+      <h2>It's on its way.</h2>
+      <p>Check your inbox for the {w.name} Workbook. Next, see how the Session works in <span class="n">5</span>…</p>
+      {!form && <p class="dl"><a href={`${base}/resources/${w.slug}-workbook.pdf`} target="_blank" rel="noopener">Download it right now</a></p>}
+    </div>
+  </div>
+  <div class="book" aria-hidden="true">
+    <img class="p2" src={img('inside-2.webp')} alt="" loading="lazy">
+    <img class="p1" src={img('inside-1.webp')} alt="" loading="lazy">
+    <img class="p0" src={img('cover.webp')} alt="">
+  </div>
+</main>
+<section class="inside">
+  <h2>Inside, six chapters.</h2>
+  <ol class="ch">{w.ch.map((c) => <li><span>{c}</span></li>)}</ol>
+  <div class="ways">
+    <div><b>Print it</b><p>Any black, blue or red pen. Write in the white spaces.</p></div>
+    <div><b>Fill it with AI</b><p>Drop the file into Claude or ChatGPT and let it walk you through, one page at a time.</p></div>
+    <div><b>Bring it to a Session</b><p>45 minutes, free. We go through it together. <a href={`${base}/session/`}>See the Session</a></p></div>
+  </div>
+</section>
+<div class="foot">{soc.map(([k, u, s]) => <a href={u} target="_blank" rel="noopener" aria-label={k}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={s} /></a>)}</div>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-next]').forEach((f) => {
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const url = f.dataset.form;
+      if (url) { try { await fetch(url, { method: 'POST', body: new FormData(f), mode: 'no-cors' }); } catch {} }
+      document.body.classList.add('sent');
+      const n = document.querySelector('.done .n'); let t = 5;
+      const tick = setInterval(() => { t -= 1; if (n) n.textContent = String(t); if (t <= 0) { clearInterval(tick); location.href = f.dataset.next as string; } }, 1000);
+    });
+  });
+</script>
+</body>
+</html>
