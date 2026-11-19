@@ -71,8 +71,8 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
   .done p { color: #D9DDF0; font-size: 16px; line-height: 1.6; }
   .done .n { color: var(--acc); font-weight: 500; }
   .sent form { display: none; } .sent .done { display: block; }
-  .book { position: relative; aspect-ratio: 16 / 10.4; perspective: 1800px; }
-  .book img { position: absolute; left: 6%; width: 88%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .14); transform: rotateY(-12deg) rotateX(3deg); transform-origin: 50% 50%; }
+  .book { position: relative; aspect-ratio: 16 / 10.4; perspective: 1800px; top: -26px; } /* centres the cover on the copy column (measured) */
+  .book img { position: absolute; left: 0; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .14); transform: rotateY(-12deg) rotateX(3deg); transform-origin: 100% 50%; }
   .book .p2 { top: 0; opacity: .5; }
   .book .p1 { top: 7%; opacity: .75; }
   .book .p0 { top: 14%; box-shadow: 0 40px 90px rgba(0, 0, 0, .55), 0 0 90px rgba(var(--glow), .35); }
@@ -92,7 +92,7 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
   .foot a:hover { color: var(--acc); border-color: var(--acc); box-shadow: 0 0 22px rgba(var(--glow), .35); }
   .foot svg { width: 19px; height: 19px; }
   @media (max-width: 1320px) { .hero, .inside { margin: 0 48px; } }
-  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; padding: 40px 0 70px; } .book { order: -1; max-width: 560px; } .ch { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; padding: 40px 0 70px; } .book { order: -1; max-width: 560px; top: 0; } .ch { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 600px) { .hero, .inside { margin: 0 18px; } h1 { font-size: 40px; } .lede { font-size: 17px; } .row { grid-template-columns: 1fr; gap: 12px; } button { width: 100%; } .inside h2 { font-size: 38px; } .ch { grid-template-columns: repeat(2, 1fr); gap: 10px; } .ways { grid-template-columns: 1fr; } }
 </style>
 </head>
