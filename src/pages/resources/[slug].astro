@@ -28,7 +28,14 @@ export function getStaticPaths() {
   return W.map((w) => ({ params: { slug: w.slug }, props: w }));
 }
 const w = Astro.props;
-const FORMS: Record<string, string> = {}; // slug -> Brevo form serve URL (set once each form exists)
+const FORMS: Record<string, string> = { // slug -> Brevo form serve URL (each adds to its own list)
+  identity: 'https://9be08282.sibforms.com/serve/MUIFAISUxWiNXKkILIc2UzR8wBfeXaZE9X322MYOVCEsAaeW8p05fjELUIeP4MHxPEBqwio7_7MODeelk86YG_EzQIYU3uo4PvKQilGyDllLEM1P78OUPEhX1USqFQnRKOb79L697c0WOlOWm_gU2dsq0lwlWY1wpF30hf5UXLcJmK9Kvtl4Ce7S1kpo3y5X5O6MpVRkrwks5Iua',
+  storytelling: 'https://9be08282.sibforms.com/serve/MUIFALCa__KoAoSlR81JblkMNZSddsaOGpmVxSiXg53l7cAYyPGbY4XX1qgBm7ydRCEtu236pDsBJa-JLLWh6bAgSsMEXxolS8yoB0yZsQMSHr2TqWMiU1yp_NrPRX_mGxUAv4oWxfOyQK1b1fHrv8Y6Dwh65bk_0qOk8RlkybyEUYurboTZVVHjniR4mYsUlLRJeZrlL16FLWDo',
+  product: 'https://9be08282.sibforms.com/serve/MUIFAEU1VnyRx2qjzl4SnqYjaDKwlul_33VGcZzNGNabMwBihDGwIufCMAnSqC_cFkvLEZpYqKw6myaCPrVMEvr2h2S5JTVCUccbhyDDWldVSAhUWFlJfNGwvud_8AWgYDwmPC_lw_YjjRzFcfGDmGytz8lbphFm0Sco4vcZAk2xm-Zf_NTsMnZEEWPTLcHPjC7eLiNF5uAq4rAm',
+  ecosystem: 'https://9be08282.sibforms.com/serve/MUIFAFmt4LowcJsf2z2LJxP4O3S_qyIFFbDosNxb2lnEYSGhVFyZSkHthBbYYujyLrhAAQdAIThfwNys4PeFjCU6nE1qst5jGaiEvXhbs5aakC8bTL3Q1oyDom1_Thdp2Jd6UTvzHIIuYBl7A_YqcjfyBpL6jPKNOCl6_DtSWciZHjvnzyvz9-iyi436WRe9bq0yWWH6D_WCgD45',
+  continuity: 'https://9be08282.sibforms.com/serve/MUIFAO0aPL76XI25pEQj27wPemYM9FVQfxo8jP5-7F67jHA111aUTzYQJ70Hbal27_osOSou-YC8-qE-Z71avICqaqCKZUxsH0ZXct5F1JLDqaEGJ2lZg6yiu20MOikU-PXoAP2Xro0o4sT7NOCX1ufL6xL6Up-q5gwO4LYpYaN5XdoX83rjtjQUlsvKPp-gGfRohJEcEzIUK0AE',
+  campaigns: 'https://9be08282.sibforms.com/serve/MUIFAInfjcALApabspxqtVDMyA0a3VctpdTd5ukvDaYAkTGKkP7ZEpKtna_PaV6aybPYo1JIHWmqog1KIfPlu8UM-g9o_boaZ9cbeilJBpg7bSSD_S-5Nh2d9jBK2fR15GS3JIbJS4LWki2se7_-HPjn3bijFbDZFvdnrmACehoZ_eNx0bEefxRurivSf2fCeXGzIvto3fH31SCu',
+};
 const form = FORMS[w.slug] ?? '';
 const img = (f: string) => `${base}/resources/${w.slug}/${f}`;
 const soc = [
@@ -115,7 +122,7 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
     <div class="done" role="status" aria-live="polite">
       <h2>It's on its way.</h2>
       <p>Check your inbox for the {w.name} Workbook. Next, see how the Session works in <span class="n">5</span>…</p>
-      {!form && <p class="dl"><a href={`${base}/resources/${w.slug}-workbook.pdf`} target="_blank" rel="noopener">Download it right now</a></p>}
+      <p class="dl"><a href={`${base}/resources/${w.slug}-workbook.pdf`} target="_blank" rel="noopener">Download it right now</a></p>
     </div>
   </div>
   <div class="book" aria-hidden="true">
@@ -139,7 +146,7 @@ const desc = `${w.a} ${w.b} The free ${w.name} Workbook: six chapters, about an 
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
       const url = f.dataset.form;
-      if (url) { try { await fetch(url, { method: 'POST', body: new FormData(f), mode: 'no-cors' }); } catch {} }
+      if (url) { const d = new FormData(f); d.append('email_address_check', ''); d.append('locale', 'en'); try { await fetch(url, { method: 'POST', body: d, mode: 'no-cors' }); } catch {} }
       document.body.classList.add('sent');
       const n = document.querySelector('.done .n'); let t = 5;
       const tick = setInterval(() => { t -= 1; if (n) n.textContent = String(t); if (t <= 0) { clearInterval(tick); location.href = f.dataset.next as string; } }, 1000);
