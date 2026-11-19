@@ -14,7 +14,7 @@ const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => 
     </div>
   </section>
   <section class="wrap list">
-    {work.map((w) => <div class="item" data-skill={w.data.skill}><WorkCard entry={w} /></div>)}
+    {work.map((w) => <div class={`item${w.data.coverRatio === 'portrait' ? ' tall' : ''}`} data-skill={w.data.skill}><WorkCard entry={w} /></div>)}
   </section>
 </Base>
 <style>
@@ -23,5 +23,10 @@ const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => 
   .lede { position: relative; }
   .list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 72px 48px; padding-bottom: 60px; }
   .item[hidden] { display: none; }
-  @media (max-width: 760px) { .list { grid-template-columns: 1fr; gap: 56px; } }
+  /* A portrait card (Field Notes) takes two rows beside two landscape cards, so no row is left with a gap under its short card. */
+  .list { grid-auto-flow: row dense; }
+  .item.tall { grid-row: span 2; display: flex; }
+  .list .item.tall :global(.wc.portrait) { grid-template-rows: 1fr auto; width: 100%; }
+  .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: auto; min-height: 0; }
+  @media (max-width: 760px) { .list { grid-template-columns: 1fr; gap: 56px; } .item.tall { grid-row: auto; } .list .item.tall :global(.wc.portrait .frame) { aspect-ratio: 4 / 5; } }
 </style>
