@@ -44,6 +44,7 @@ content:
       - { name: featured, label: Show on home page, type: boolean, default: true }
       - { name: order, label: Order (lower shows first), type: number, default: 100 }
       - { name: draft, label: Hide (draft), type: boolean, default: false }
+      - { name: standalone, label: Has its own page (Brand Package), type: boolean, default: false }
       - { name: body, label: Case study, type: rich-text }
 
   - name: notes
