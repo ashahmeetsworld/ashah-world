@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import WorkCard from '../../components/WorkCard.astro';
-import SkillStack from '../../components/SkillStack.astro';
 const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base title="Work" description="Selected work by Ashah Meets World: creative direction, worldbuilding and content systems.">
@@ -17,7 +16,6 @@ const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => 
   <section class="wrap list">
     {work.map((w) => <div class="item" data-skill={w.data.skill}><WorkCard entry={w} /></div>)}
   </section>
-  <SkillStack />
 </Base>
 <style>
   .page-head { position: relative; padding: 180px 0 70px; overflow: hidden; }
