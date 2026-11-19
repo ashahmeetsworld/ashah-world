@@ -110,6 +110,52 @@ ${st}
 <line class="shoot" x1="420" y1="70" x2="980" y2="250" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
 <g>${aurRefl(HZ+4,140)}${sh}</g>
 </svg>`}
-const scenes={lighthouse,window:windowCity,pier,popsky,herofx};
+// 6 · THE NEXT MORNING (Session page, "What you leave with"): night lifting off the sea, first light on the horizon, the lighthouse still lit
+function dawn(){seed=61;const lx=250,ly=560,hz=640;
+return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">${defs}<defs>
+<linearGradient id="dw-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070A22"/><stop offset=".45" stop-color="#121A55"/><stop offset=".72" stop-color="#2C2A78"/><stop offset=".86" stop-color="#5A4A9A"/><stop offset=".95" stop-color="#C79AB4"/><stop offset="1" stop-color="#FFD9B0"/></linearGradient>
+<radialGradient id="dw-sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3E0" stop-opacity=".95"/><stop offset=".25" stop-color="#FFD9B0" stop-opacity=".55"/><stop offset=".6" stop-color="#F2B48C" stop-opacity=".18"/><stop offset="1" stop-color="#F2B48C" stop-opacity="0"/></radialGradient>
+<linearGradient id="dw-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A5A9E"/><stop offset=".2" stop-color="#2A2A72"/><stop offset="1" stop-color="#070A1C"/></linearGradient></defs>
+<rect width="${W}" height="${hz}" fill="url(#dw-sky)"/>${stars(150,380)}
+<ellipse cx="900" cy="${hz}" rx="520" ry="210" fill="url(#dw-sun)"/>
+<rect y="${hz}" width="${W}" height="${H-hz}" fill="url(#dw-sea)"/>
+${colRefl(900,hz+4,H,170,'#FFE2C2',.8)}
+<path d="M-20 ${hz+4} L-20 ${ly+40} C 80 ${ly+20}, 180 ${ly+6}, 300 ${ly+10} C 360 ${ly+12}, 400 ${ly+40}, 470 ${hz+4} Z" fill="#05071C"/>
+<path d="M${lx-11} ${ly} L${lx+11} ${ly} L${lx+15} ${ly+70} L${lx-15} ${ly+70} Z" fill="#0D1035"/>
+<rect x="${lx-7}" y="${ly-18}" width="14" height="18" fill="#FFF3E0"/><path d="M${lx-12} ${ly-18} L${lx} ${ly-31} L${lx+12} ${ly-18} Z" fill="#0D1035"/>
+<circle cx="${lx}" cy="${ly-9}" r="46" fill="url(#warm)"/>
+${colRefl(lx,hz+6,hz+120,22,'#FFE2C2',.55)}
+<g stroke="#FFE2C2" stroke-opacity=".18">${[hz+30,hz+70,hz+130,hz+210].map(y=>`<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`).join('')}</g>
+</svg>`}
+// 7 · IT ARRIVES (Session page): a glowing parcel washed up on the shore under the stars, the lighthouse beam passing overhead
+function parcel(){seed=71;const px=720,py=760,hz=600;
+return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">${defs}<defs>
+<linearGradient id="pc-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A1A4A"/><stop offset="1" stop-color="#07081C"/></linearGradient></defs>
+<rect width="${W}" height="${hz}" fill="url(#skn)"/>${stars(170,520)}${aurora(120,60)}
+<g transform="translate(1300 ${hz-30})"><path d="M-8 0 L8 0 L10 30 L-10 30 Z" fill="#0D1035"/><rect x="-5" y="-12" width="10" height="12" fill="#FFF3E0"/><circle cx="0" cy="-6" r="30" fill="url(#warm)"/></g>
+<path d="M1300 ${hz-36} L-200 ${hz-250} L-200 ${hz-150} Z" fill="url(#beam)" filter="url(#b6)" opacity=".7"/>
+<rect y="${hz}" width="${W}" height="140" fill="url(#sea)"/>${aurRefl(hz+4,90)}
+<path d="M0 ${hz+120} C 300 ${hz+100}, 600 ${hz+140}, 900 ${hz+118} S 1300 ${hz+110}, 1440 ${hz+124} L1440 ${H} L0 ${H} Z" fill="url(#pc-sand)"/>
+<path d="M0 ${hz+122} C 300 ${hz+102}, 600 ${hz+142}, 900 ${hz+120} S 1300 ${hz+112}, 1440 ${hz+126}" fill="none" stroke="#C9DCF7" stroke-opacity=".35" stroke-width="2"/>
+<circle cx="${px}" cy="${py}" r="210" fill="url(#warm)" opacity=".55"/>
+<ellipse cx="${px}" cy="${py+34}" rx="120" ry="16" fill="#FFE2C2" opacity=".25" filter="url(#b6)"/>
+<g transform="translate(${px} ${py}) rotate(-6)"><rect x="-62" y="-38" width="124" height="76" rx="6" fill="#FFF3E0"/><path d="M-62 -38 L0 6 L62 -38" fill="none" stroke="#E0B48C" stroke-width="3"/><rect x="-62" y="-38" width="124" height="76" rx="6" fill="none" stroke="#C9DCF7" stroke-width="2"/><circle cx="0" cy="6" r="7" fill="#F2B48C"/></g>
+${[[420,820],[1010,800],[250,900],[1210,890]].map(([x,y],i)=>`<g class="lan" style="animation-delay:-${i*1.1}s"><circle cx="${x}" cy="${y}" r="18" fill="url(#warm)" opacity=".6"/><circle cx="${x}" cy="${y}" r="2" fill="#FFF3E0"/></g>`).join('')}
+</svg>`}
+// 8 · THE BEAM REACHES YOU (Session page): across the bay one small house, one lit window, and the lighthouse beam resting on it
+function beamhome(){seed=81;const lx=180,ly=470,hx=1080,hy=640,hz=600;
+return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">${defs}
+<rect width="${W}" height="${hz}" fill="url(#skn)"/>${stars(170,520)}${aurora(110,60)}
+<path d="M${lx} ${ly-12} L${hx+60} ${hy-70} L${hx+60} ${hy+10} Z" fill="url(#beam)" filter="url(#b6)" opacity=".85"/>
+<rect y="${hz}" width="${W}" height="${H-hz}" fill="url(#sea)"/>${aurRefl(hz+4,140)}
+<path d="M-20 ${hz+10} L-20 ${ly+40} C 60 ${ly+20}, 160 ${ly+6}, 260 ${ly+30} C 320 ${ly+50}, 360 ${hz-10}, 420 ${hz+10} Z" fill="#05071C"/>
+<path d="M${lx-12} ${ly} L${lx+12} ${ly} L${lx+16} ${ly+90} L${lx-16} ${ly+90} Z" fill="#0D1035"/>
+<rect x="${lx-8}" y="${ly-20}" width="16" height="20" fill="#FFF3E0"/><path d="M${lx-13} ${ly-20} L${lx} ${ly-34} L${lx+13} ${ly-20} Z" fill="#0D1035"/><circle cx="${lx}" cy="${ly-10}" r="54" fill="url(#warm)"/>
+<path d="M860 ${hz+10} C 920 ${hy-10}, 1000 ${hy-30}, 1100 ${hy-26} C 1220 ${hy-22}, 1340 ${hy-6}, 1480 ${hy} L1480 ${H} L760 ${H} C 800 ${hz+120}, 830 ${hz+40}, 860 ${hz+10} Z" fill="#05071C"/>
+<g transform="translate(${hx} ${hy-26})"><rect x="-46" y="-60" width="92" height="60" fill="#0D1035"/><path d="M-56 -60 L0 -100 L56 -60 Z" fill="#0D1035"/><rect x="-14" y="-44" width="28" height="24" fill="#FFF3E0"/><rect x="-1" y="-44" width="2" height="24" fill="#E0B48C"/></g>
+<circle class="br" cx="${hx}" cy="${hy-58}" r="120" fill="url(#warm)" opacity=".8"/>
+${colRefl(lx,hz+6,hz+150,24,'#FFE2C2',.55)}
+</svg>`}
+const scenes={lighthouse,window:windowCity,pier,popsky,herofx,dawn,parcel,beamhome};
 document.querySelectorAll('[data-scene]').forEach(e=>{e.innerHTML=scenes[e.dataset.scene]()});
 })();

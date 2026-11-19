@@ -177,8 +177,8 @@ def D():
   a=A(); c=C()
   mid=lambda h:h.split(HERO,1)[1].split(END,1)[0]
   m=mid(c); i=m.index('<h2 class="ser">What you leave with.</h2>'); j=m.rindex('<section class="scene"><div class="glow"></div>',0,i)
-  # v1.3 (Ashah 19 Nov, picked C): the pier at night, words up in the clear sky, the lit door below them
-  m=m[:j]+'<section class="scene leave" data-v="c"><div class="sb" data-scene="pier"></div>'+m[j+len('<section class="scene"><div class="glow"></div>'):]
+  # v1.4 (Ashah 19 Nov 11:13pm, picked A of three new scenes): the next morning, first light on the sea, words in the clear sky
+  m=m[:j]+'<section class="scene leave" data-v="n"><div class="sb" data-scene="dawn"></div>'+m[j+len('<section class="scene"><div class="glow"></div>'):]
   return HEAD('The Session · Ashah Meets World',D_CSS+LEAVE_CSS+END_CSS)+HERO+'<div class="dsk">'+m+'</div><div class="mob">'+mid(a)+'</div>'+END+TAIL.replace('</body>','<script>'+LEAVE_JS+END_JS+'</script></body>')
 os.makedirs(OUT,exist_ok=True)
 open(f'{OUT}/session.html','w').write(D())
