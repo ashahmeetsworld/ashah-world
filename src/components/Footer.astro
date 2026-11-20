@@ -2,6 +2,7 @@
 import site from '../data/site.json';
 import { u } from '../lib/url';
 import SocialIcons from './SocialIcons.astro';
+const { bare = false } = Astro.props as { bare?: boolean };
 const year = new Date().getFullYear();
 ---
 <footer>
@@ -13,12 +14,20 @@ const year = new Date().getFullYear();
       <div class="icons"><SocialIcons /></div>
     </div>
     <div class="nav-col">
+    {bare ? (
+    <div class="links bare">
+      <a href={u('/#tools')}>Resources</a>
+      <a href={u('/session/')}>Book A Session</a>
+      <a href={u('/work/')}>The Work</a>
+    </div>
+    ) : (
     <div class="links">
       <a href={u('/work/')}>Work</a>
       {/* <a href={u('/ubiquity/')}>Ubiquity</a>  archived 15 Oct 2026 */}
       <a href={u('/contact/')}>Contact</a>
       {/* <a href={u('/community/')}>Community</a>  hidden 17 Oct 2026; page kept as src/pages/_community.astro */}
     </div>
+    )}
     {/* Nov 2026 (Ashah): Passage, Orbit and Lucid are off the navs. Passage page taken down 14 Nov 2026 (kept in archive/passage/). */}
     </div>
     </div>
@@ -38,6 +47,8 @@ const year = new Date().getFullYear();
     /* phone: the footer stacks, so both rows sit on the left margin */
     .nav-col { align-items: flex-start; }
     .links { justify-content: flex-start; }
+    /* the work pages' three links stack in one column on phones, so none wraps on its own */
+    .links.bare { flex-direction: column; gap: 6px; }
   }
   .ventures { margin-top: 12px; }
   .links a { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); padding: 6px 0; }

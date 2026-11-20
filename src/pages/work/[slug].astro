@@ -17,7 +17,7 @@ const { Content } = await render(entry);
 const live = LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
 const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 ---
-<Base title={d.title} description={d.summary} image={d.cover}>
+<Base bare title={d.title} description={d.summary} image={d.cover}>
   <article style={`--accent:${skillColour[d.skill]}`}>
     <header class="cs-head">
       <div class="halo" style="width:680px;height:420px;right:-160px;top:-60px;background:var(--accent);opacity:.28"></div>
