@@ -1,23 +1,35 @@
 ---
 title: The ‘A·M·W’ Codes
-summary: An art-direction guide — the single source of truth for how the world looks, sounds and feels, written as do / don't pairs anyone can direct from.
+summary: An art-direction guide. One idea per page, each in its own corner of one night world, so anyone can direct from it.
 client: Ashah Meets World
 year: 2026
 skill: Creative Direction
 role: Art direction, brand guidelines, illustration
-cover: /images/work/the-codes/01.webp
+cover: /images/work/the-codes-v2/01.webp
 coverRatio: landscape
 featured: true
 category: Art Direction
 glow: "#8FB4F6"
 order: 3
 gallery:
-  - image: /images/work/the-codes/02.webp
-  - image: /images/work/the-codes/03.webp
-  - image: /images/work/the-codes/04.webp
-  - image: /images/work/the-codes/05.webp
-  - image: /images/work/the-codes/06.webp
-  - image: /images/work/the-codes/07.webp
+  - image: /images/work/the-codes-v2/02.webp
+  - image: /images/work/the-codes-v2/03.webp
+  - image: /images/work/the-codes-v2/04.webp
+  - image: /images/work/the-codes-v2/05.webp
+  - image: /images/work/the-codes-v2/06.webp
+  - image: /images/work/the-codes-v2/07.webp
+  - image: /images/work/the-codes-v2/08.webp
+  - image: /images/work/the-codes-v2/09.webp
+  - image: /images/work/the-codes-v2/10.webp
+  - image: /images/work/the-codes-v2/11.webp
+  - image: /images/work/the-codes-v2/12.webp
+  - image: /images/work/the-codes-v2/13.webp
+  - image: /images/work/the-codes-v2/14.webp
+  - image: /images/work/the-codes-v2/15.webp
+  - image: /images/work/the-codes-v2/16.webp
+  - image: /images/work/the-codes-v2/17.webp
+  - image: /images/work/the-codes-v2/18.webp
+  - image: /images/work/the-codes-v2/19.webp
 ---
 
 ## The rule above every rule
@@ -26,8 +38,8 @@ Every frame is a place you could step into.
 
 ## How it works
 
-Colour, light, composition, texture, casting, symbols, setting, mood, motion, type and voice — each one a single principle with a "do" and a "don't" drawn side by side, so a photographer, editor or designer can pick it up and make something that belongs.
+One idea per page: one line, one picture. Every page visits another corner of the same night world, each in its own light: the harbour, the headland lighthouse, the aurora hill, the coast road, the rooftops, the clearing. By the last page, the whole world is the set of codes.
 
 ## The final check
 
-Before anything meets the world: is it more distinct? What will they feel? Does it compound?
+Before anything meets the world: is it more distinct? What will they feel? Does it compound? Does it lift and ground?
