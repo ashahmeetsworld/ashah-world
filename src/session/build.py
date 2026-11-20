@@ -169,6 +169,7 @@ def F():
   return HEAD('Apply for a Session · Ashah Meets World',F_CSS)+s
 # ---------- v1.1 LIVE: C on desktop, A on phone, same words ----------
 D_CSS=A_CSS+C_CSS+'.mob{display:none}@media (max-width:600px){.dsk{display:none}.mob{display:block}}'
+SEAM_CSS='@media (min-width:601px){.hero{height:100vh;height:100svh;min-height:680px}.hero .fade{background:linear-gradient(180deg,rgba(7,10,28,.3) 0,rgba(7,10,28,0) 20%,rgba(7,10,28,0) 66%,rgba(34,40,104,.55) 86%,rgb(34,40,104) 100%)}.dsk>.scene:first-child:before{background:linear-gradient(180deg,rgb(34,40,104) 0,rgba(34,40,104,.5) 10%,rgba(34,40,104,0) 28%,rgba(7,10,28,.55) 40%,rgba(7,10,28,.55) 78%,var(--bg) 100%)}}' # Ashah 20 Nov: hero fills the screen on desktop; ocean runs straight into the next sky, no dark band
 LEAVE_CSS='.scene.leave{min-height:980px;align-items:flex-start;padding-top:120px}.scene.leave .in{max-width:780px}.scene.leave:before{background:linear-gradient(180deg,var(--bg) 0,rgba(7,10,28,.75) 14%,rgba(7,10,28,.55) 32%,rgba(7,10,28,0) 52%,rgba(7,10,28,0) 80%,var(--bg) 100%)}'
 END_CSS='.end .amb{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}.end .amb .ff{position:absolute;border-radius:50%;animation:ffly var(--d) ease-in-out infinite alternate,ffb var(--b) ease-in-out infinite;animation-delay:var(--dl)}@keyframes ffly{to{transform:translate(var(--x),var(--y))}}@keyframes ffb{0%,100%{opacity:.15}50%{opacity:1}}.end h2,.end p,.end .aurb{z-index:2}'
 END_JS='(function(){var sec=document.querySelector(\'.end\');if(!sec)return;var a=document.createElement(\'div\');a.className=\'amb\';sec.prepend(a);var R=Math.random,ph=innerWidth<600,h=\'\',cols=[\'#F2B48C\',\'#FFD9B0\',\'#7FD8F0\',\'#C9DCF7\'];for(var i=0;i<(ph?16:30);i++){var s=(3+R()*4).toFixed(1),c=cols[i%cols.length];h+=\'<i class="ff" style="left:\'+(R()*100)+\'%;top:\'+(15+R()*80)+\'%;width:\'+s+\'px;height:\'+s+\'px;background:\'+c+\';box-shadow:0 0 8px 2px \'+c+\'88,0 0 22px 6px \'+c+\'33;--d:\'+(10+R()*12)+\'s;--b:\'+(3+R()*4)+\'s;--dl:-\'+(R()*10)+\'s;--x:\'+(R()*80-40)+\'px;--y:\'+(-30-R()*70)+\'px"></i>\'}a.innerHTML=h})();'
@@ -179,7 +180,7 @@ def D():
   m=mid(c); i=m.index('<h2 class="ser">What you leave with.</h2>'); j=m.rindex('<section class="scene"><div class="glow"></div>',0,i)
   # v1.4 (Ashah 19 Nov 11:13pm, picked A of three new scenes): the next morning, first light on the sea, words in the clear sky
   m=m[:j]+'<section class="scene leave" data-v="n"><div class="sb" data-scene="dawn"></div>'+m[j+len('<section class="scene"><div class="glow"></div>'):]
-  return HEAD('The Session · Ashah Meets World',D_CSS+LEAVE_CSS+END_CSS)+HERO+'<div class="dsk">'+m+'</div><div class="mob">'+mid(a)+'</div>'+END+TAIL.replace('</body>','<script>'+LEAVE_JS+END_JS+'</script></body>')
+  return HEAD('The Session · Ashah Meets World',D_CSS+LEAVE_CSS+END_CSS+SEAM_CSS)+HERO+'<div class="dsk">'+m+'</div><div class="mob">'+mid(a)+'</div>'+END+TAIL.replace('</body>','<script>'+LEAVE_JS+END_JS+'</script></body>')
 os.makedirs(OUT,exist_ok=True)
 open(f'{OUT}/session.html','w').write(D())
 open(f'{OUT}/apply.html','w').write(F())
