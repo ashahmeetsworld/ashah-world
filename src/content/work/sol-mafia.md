@@ -9,6 +9,7 @@ coverRatio: landscape
 featured: false
 category: Brand Identity
 glow: "#E5484D"
+wip: true
 order: -1
 link: https://ashahmeetsworld.github.io/sol-mafia/
 standalone: true

@@ -38,6 +38,7 @@ content:
         type: select
         options:
           values: [Brand Identity, Art Direction, Creative Strategy]
+      - { name: wip, label: Work in progress (shows the pill), type: boolean, default: false }
       - { name: glow, label: 'Card glow colour, e.g. #7C5CFF', type: string }
       - name: gallery
         label: Gallery

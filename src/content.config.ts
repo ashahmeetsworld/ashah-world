@@ -24,6 +24,8 @@ const work = defineCollection({
     category: z.enum(['Brand Identity', 'Art Direction', 'Creative Strategy']).optional(),
     // the colour its card glows in (any CSS colour); empty = its skill colour
     glow: z.string().optional(),
+    // true = a 'Work in Progress' pill (WIP where space is tight) on its cards and page (20 Nov 2026)
+    wip: z.boolean().default(false),
   }),
 });
 
