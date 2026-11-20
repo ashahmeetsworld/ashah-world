@@ -8,6 +8,7 @@ role: Strategy, worldbuilding, art direction, illustration
 cover: /images/work/brand-deck/01.webp
 coverRatio: landscape
 featured: true
+draft: true
 order: 2
 gallery:
   - image: /images/work/brand-deck/03.webp
