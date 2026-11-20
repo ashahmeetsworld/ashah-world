@@ -17,8 +17,8 @@ const year = new Date().getFullYear();
     {bare ? (
     <div class="links bare">
       <a href={u('/#tools')}>Resources</a>
-      <a href={u('/session/')}>Book A Session</a>
       <a href={u('/work/')}>The Work</a>
+      <a class="sbtn" href={u('/session/')}>Book A Session</a>
     </div>
     ) : (
     <div class="links">
@@ -48,11 +48,18 @@ const year = new Date().getFullYear();
     .nav-col { align-items: flex-start; }
     .links { justify-content: flex-start; }
     /* the work pages' three links stack in one column on phones, so none wraps on its own */
-    .links.bare { flex-direction: column; gap: 6px; }
+    .links.bare { gap: 14px 30px; }
+    .links.bare .sbtn { flex-basis: 100%; max-width: max-content; margin: 10px 0 0; }
   }
   .ventures { margin-top: 12px; }
   .links a { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); padding: 6px 0; }
   .links a:hover { color: var(--peach); }
+  /* work pages (20 Nov 2026, Ashah): Book A Session is a button, in his static button gradient */
+  .links.bare { align-items: center; }
+  .links a.sbtn { margin-left: 6px; padding: 15px 26px; border-radius: 999px; font-weight: 600; letter-spacing: .22em; color: #06081A;
+    background: linear-gradient(90deg, #8FB3F6, #9EA1FB 50%, #A498FE 75%, #B49AE9);
+    box-shadow: 0 0 22px rgba(127, 216, 240, .45), 0 0 50px rgba(169, 150, 255, .28); transition: box-shadow .4s, filter .4s; }
+  .links a.sbtn:hover { color: #06081A; filter: brightness(1.06); box-shadow: 0 0 28px rgba(127, 216, 240, .6), 0 0 70px rgba(169, 150, 255, .4); }
   /* Orbit (the free OS): aurora colours, still */
   .links a.orbit-link { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase;
     background: linear-gradient(100deg, #5CFFB0, #2EE6C8 35%, #4FB8FF 70%, #A98CFF); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter .3s; }
