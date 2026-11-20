@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
+import FieldNotesWall from '../../components/FieldNotesWall.astro';
 import { u, skillColour } from '../../lib/url';
 import { LIVE_FROM_INSTAGRAM } from '../../lib/live';
 import site from '../../data/site.json';
@@ -14,11 +15,16 @@ export async function getStaticPaths() {
 const { entry, next } = Astro.props;
 const d = entry.data;
 const { Content } = await render(entry);
-const live = LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
+// Field Notes has its own layout (20 Nov 2026): every post as a sneak peek, linking out to Instagram and LinkedIn
+const wall = entry.id === 'field-notes';
+const live = !wall && LIVE_FROM_INSTAGRAM.includes(entry.id) && site.instagramFeedUrl;
 const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
 ---
 <Base bare title={d.title} description={d.summary} image={d.cover}>
   <article style={`--accent:${skillColour[d.skill]}`}>
+    {wall ? (
+      <FieldNotesWall title={d.title} summary={d.summary}><Content /></FieldNotesWall>
+    ) : (<>
     <header class="cs-head">
       <div class="halo" style="width:680px;height:420px;right:-160px;top:-60px;background:var(--accent);opacity:.28"></div>
       <div class="wrap">
@@ -54,6 +60,7 @@ const ig = site.socials.find((s) => s.label === 'Instagram')?.url;
         ))}
       </div>
     )}
+    </>)}
     <nav class="wrap next">
       <p class="label">Next</p>
       <a href={u(`/work/${next.id}/`)}><span class="serif">{next.data.title}</span> <Arrow /></a>
