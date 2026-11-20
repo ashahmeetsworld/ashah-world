@@ -9,6 +9,7 @@ coverRatio: landscape
 featured: false
 category: Brand Identity
 glow: "#E04BAE"
+wip: true
 order: -2
 link: https://ashahmeetsworld.github.io/lucid/
 standalone: true

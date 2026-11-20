@@ -18,8 +18,9 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
     if (tall || one) return `<div class="fr${tall ? ' tall' : ''}"><span class="bl" style="background-image:url('${img}')"></span><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
     return `<div class="fr"><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
   };
+  const wip = (e: Entry) => (e.data.wip ? '<span class="wip"><span class="wl">Work in Progress</span><span class="ws">WIP</span></span>' : '');
   const card = (e: Entry, cls: string) =>
-    `<a class="cd ${cls}" href="${u(`/work/${e.id}/`)}" style="--c:${glow(e)}">${frame(e, cls === 'one')}<div class="in"><h3>${esc(e.data.title)}</h3><p>${esc(e.data.summary)}</p></div></a>`;
+    `<a class="cd ${cls}" href="${u(`/work/${e.id}/`)}" style="--c:${glow(e)}">${frame(e, cls === 'one').replace('<div class="fr', `${wip(e)}<div class="fr`)}<div class="in"><h3>${esc(e.data.title)}</h3><p>${esc(e.data.summary)}</p></div></a>`;
   const panel = (list: Entry[]) =>
     list.length >= 3 ? card(list[0], 'big') + card(list[1], 'sm') + card(list[2], 'sm')
     : list.length === 2 ? card(list[0], 'half') + card(list[1], 'half')
@@ -66,6 +67,8 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
 .hwk .more{display:flex;justify-content:flex-end;margin-top:30px}
 .hwk .fl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#F6F1E7;white-space:nowrap}.hwk .fl:hover{color:var(--peach,#F2B48C)}
 .hwk .wdots{display:none}
+.hwk .wip{position:absolute;top:16px;left:16px;z-index:3;font-size:12px;padding:7px 13px 7px 15px;display:inline-flex;align-items:center;padding:8px 16px 8px 18px;border-radius:999px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;line-height:1.2;letter-spacing:.34em;text-transform:uppercase;white-space:nowrap;color:#fff;background:linear-gradient(100deg,rgba(127,216,240,.22),rgba(169,150,255,.22)),rgba(7,10,28,.55);box-shadow:inset 0 0 0 1px rgba(207,230,255,.45),0 0 24px rgba(127,216,240,.28),0 0 50px rgba(169,150,255,.18);text-shadow:0 0 12px rgba(207,230,255,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:wipGlow 4s ease-in-out infinite}@keyframes wipGlow{50%{box-shadow:inset 0 0 0 1px rgba(207,230,255,.6),0 0 34px rgba(127,216,240,.45),0 0 70px rgba(169,150,255,.28)}}
+.hwk .cd{position:relative}.hwk .wip .ws{display:none}.hwk .sm .wip .wl{display:none}.hwk .sm .wip .ws{display:inline}
 @media (max-width:600px){.hwk{padding:30px 18px 70px}.hwk h2{font-size:38px!important}
 .hwk .ih{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:24px}
 .hwk .wtabs{display:grid;grid-template-columns:1fr 1fr;border-radius:22px;width:100%}.hwk .wtabs button{padding:12px 0;font-size:10px;letter-spacing:.18em}
@@ -78,7 +81,8 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
 .hwk .one .in{flex:1;justify-content:flex-start;border:0;border-radius:0;padding:22px 24px}
 .hwk .big h3,.hwk .one h3{font-size:30px;line-height:1.2}.hwk .big p,.hwk .one p{font-size:14px;line-height:21px}
 .hwk .wdots{display:flex;justify-content:center;gap:8px;margin-top:22px}.hwk .wdots i{width:6px;height:6px;border-radius:9px;background:rgba(246,241,231,.3);transition:width .3s}.hwk .wdots i.on{width:22px;background:#C9DCF7}.hwk .wdots.hide{visibility:hidden}
-.hwk .more{justify-content:center;margin-top:22px}}
+.hwk .more{justify-content:center;margin-top:22px}
+.hwk .sm .wip .wl{display:inline}.hwk .sm .wip .ws{display:none}}
 </style>
 <section class="hwk" id="work"><div class="ih"><h2 class="ser">The work.</h2><div class="wtabs" role="tablist" aria-label="The work">${buttons}</div></div><div class="pn">${panels}</div><div class="wdots">${dots}</div><div class="more"><a class="fl" href="${u('/work/')}">All work →</a></div></section>
 <script>(function(){var s=document.getElementById('work');if(!s)return;var bs=s.querySelectorAll('.wtabs button'),gs=s.querySelectorAll('.pn .g'),pn=s.querySelector('.pn'),d=s.querySelector('.wdots'),dd=d.children;
