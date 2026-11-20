@@ -3,6 +3,7 @@
 // 3+ pieces = Spotlight (one big, two beside); 1 piece = its cover whole on the left, its words on the right.
 // The panel keeps one height on every tab so the page never jumps.
 import { skillColour } from './url';
+import { CARD_COVER } from './cards';
 
 type Entry = { id: string; data: any };
 const TABS = ['Brand Identity', 'Art Direction', 'Creative Strategy'] as const;
@@ -11,10 +12,11 @@ const esc = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 export function workFeature(work: Entry[], base: string, feedUrl: string): string {
   const u = (p: string) => (/^https?:/.test(p) ? p : base + p);
   const glow = (e: Entry) => e.data.glow || skillColour[e.data.skill] || '#8FB4F6';
-  const live = (e: Entry) => (e.id === 'field-notes' && feedUrl ? ' data-live-cover' : '');
+  const live = (e: Entry) => (e.id === 'field-notes' && feedUrl && !CARD_COVER[e.id] ? ' data-live-cover' : '');
   const frame = (e: Entry, one: boolean) => {
-    const img = esc(u(e.data.cover));
-    const tall = e.data.coverRatio === 'portrait';
+    const img = esc(u(CARD_COVER[e.id] ?? e.data.cover));
+    const tall = e.data.coverRatio === 'portrait' && !CARD_COVER[e.id];
+    if (CARD_COVER[e.id] && one) return `<div class="fr cc"><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"></div>`;
     if (tall || one) return `<div class="fr${tall ? ' tall' : ''}"><span class="bl" style="background-image:url('${img}')"></span><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
     return `<div class="fr"><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
   };
@@ -52,7 +54,7 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
 .hwk .cd:hover .fr img{transform:scale(1.03)}
 .hwk .fr:after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);z-index:2}
 .hwk .fr.tall img,.hwk .one .fr img{position:relative;z-index:1;object-fit:contain}
-.hwk .fr .bl{position:absolute;inset:-30px;background:center/cover;filter:blur(30px) saturate(1.3) brightness(.5)}
+.hwk .fr.cc{background:#070B18}.hwk .one .fr.cc img{object-fit:contain}.hwk .fr .bl{position:absolute;inset:-30px;background:center/cover;filter:blur(30px) saturate(1.3) brightness(.5)}
 .hwk .big{grid-row:1/3}.hwk .big .fr{flex:1;min-height:0}
 .hwk .sm .fr,.hwk .half .fr{aspect-ratio:16/9}
 .hwk .half{grid-row:1/3}.hwk .g[data-n="2"]{grid-template-columns:1fr 1fr}
@@ -90,7 +92,14 @@ function ph(){return window.innerWidth<=600}
 function fit(){pn.style.height='auto';var h=0;gs.forEach(function(g,i){if(!ph()&&i)return;g.style.display=ph()?'flex':'grid';h=Math.max(h,g.offsetHeight);g.style.display='';});pn.style.height=h+'px';}
 function dots(){var g=s.querySelector('.pn .g.on'),n=g.children.length;d.classList.toggle('hide',n<2);for(var i=0;i<dd.length;i++)dd[i].style.display=i<n?'':'none';var k=Math.round(g.scrollLeft/((g.children[0]||g).offsetWidth+14));for(var j=0;j<dd.length;j++)dd[j].classList.toggle('on',j===Math.min(k,n-1));}
 gs.forEach(function(g){g.addEventListener('scroll',dots,{passive:true})});
-bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on)});gs.forEach(function(g){var on=g.dataset.t===b.dataset.t;g.classList.toggle('on',on);if(on)g.scrollLeft=0});dots();});});
+function sel(b){bs.forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on)});gs.forEach(function(g){var on=g.dataset.t===b.dataset.t;g.classList.toggle('on',on);if(on)g.scrollLeft=0});dots();}
+bs.forEach(function(b){b.addEventListener('click',function(){stop();sel(b);});});
+// Tabs turn on their own every 3 s while the section is on screen (Ashah, 20 Nov 2026). A tap, click, key or sideways swipe stops it for good.
+var ti=null,done=false,seen=false;
+function tick(){if(done||!seen)return;var k=0;bs.forEach(function(x,i){if(x.classList.contains('on'))k=i});sel(bs[(k+1)%bs.length]);}
+function stop(){done=true;if(ti){clearInterval(ti);ti=null}}
+['pointerdown','touchstart','keydown','wheel'].forEach(function(e){s.addEventListener(e,function(ev){if(e!=='wheel'||s.querySelector('.pn').contains(ev.target)&&Math.abs(ev.deltaX)>Math.abs(ev.deltaY))stop()},{passive:true})});
+if(bs.length>1&&'IntersectionObserver' in window){new IntersectionObserver(function(es){seen=es[0].isIntersecting;if(seen&&!ti&&!done)ti=setInterval(tick,3000);if(!seen&&ti){clearInterval(ti);ti=null}},{threshold:.3}).observe(pn);}
 fit();dots();window.addEventListener('resize',fit);window.addEventListener('load',fit);s.querySelectorAll('img').forEach(function(i){if(!i.complete)i.addEventListener('load',fit,{once:true})});
 // Field Notes: the first slide of the latest Field Notes carousel, live from Instagram (same rule as /work/)
 var lv=s.querySelectorAll('img[data-live-cover]');if(lv.length&&${JSON.stringify(feedUrl)}){fetch(${JSON.stringify(feedUrl)}).then(function(r){return r.json()}).then(function(dt){var ps=Array.isArray(dt)?dt:(dt.posts||[]);var end=Date.parse('2026-11-09T00:00:00+11:00');var c=ps.filter(function(p){return p.mediaType==='CAROUSEL_ALBUM'&&!(p.timestamp&&Date.parse(p.timestamp)>=end)})[0];if(!c)return;var k=(c.children&&c.children[0])||c;var src=(k.sizes&&k.sizes.large&&k.sizes.large.mediaUrl)||k.mediaUrl||k.thumbnailUrl;if(!src)return;lv.forEach(function(i){i.src=src;var b=i.parentNode.querySelector('.bl');if(b)b.style.backgroundImage="url('"+src+"')"})}).catch(function(){})}

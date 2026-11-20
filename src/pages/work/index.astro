@@ -6,6 +6,7 @@ import Base from '../../layouts/Base.astro';
 import site from '../../data/site.json';
 import { u, skillColour } from '../../lib/url';
 import { LIVE_FROM_INSTAGRAM } from '../../lib/live';
+import { CARD_COVER } from '../../lib/cards';
 const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
 const CATS = ['Brand Identity', 'Art Direction', 'Creative Strategy'].filter((c) => work.some((w) => w.data.category === c));
 const tabs = ['All', ...CATS];
@@ -24,14 +25,15 @@ const tabs = ['All', ...CATS];
   <section class="wrap reel">
     {work.map((w, i) => {
       const d = w.data;
-      const tall = d.coverRatio === 'portrait';
-      const live = LIVE_FROM_INSTAGRAM.includes(w.id) && site.instagramFeedUrl;
+      const cover = CARD_COVER[w.id] ?? d.cover;
+      const tall = d.coverRatio === 'portrait' && !CARD_COVER[w.id];
+      const live = LIVE_FROM_INSTAGRAM.includes(w.id) && !CARD_COVER[w.id] && site.instagramFeedUrl;
       return (
         <a class={`r${i % 2 ? ' flip' : ''}${i === work.length - 1 ? ' last' : ''}`} href={u(`/work/${w.id}/`)} data-cat={d.category ?? ''} style={`--c:${d.glow || skillColour[d.skill]}`}>
           <div class={`fr${tall ? ' tall' : ''}`}>
             {d.wip && <span class="wip">Work in Progress</span>}
-            {tall && <span class="bl" style={`background-image:url('${u(d.cover)}')`}></span>}
-            <img src={u(d.cover)} alt={d.title} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" data-live-cover={live || undefined} />
+            {tall && <span class="bl" style={`background-image:url('${u(cover)}')`}></span>}
+            <img src={u(cover)} alt={d.title} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" data-live-cover={live || undefined} />
           </div>
           <div class="tx">
             {d.category && <div class="lb"><i></i>{d.category}</div>}
