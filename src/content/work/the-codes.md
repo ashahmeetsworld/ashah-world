@@ -1,6 +1,6 @@
 ---
 title: The ‘A·M·W’ Codes
-summary: An art-direction guide. One idea per page, each in its own corner of one night world, so anyone can direct from it.
+summary: How the A·M·W world looks, moves and speaks. One idea per page.
 client: Ashah Meets World
 year: 2026
 skill: Creative Direction
@@ -11,6 +11,7 @@ featured: true
 category: Art Direction
 glow: "#8FB4F6"
 order: 3
+standalone: true
 gallery:
   - image: /images/work/the-codes-v2/02.webp
   - image: /images/work/the-codes-v2/03.webp
