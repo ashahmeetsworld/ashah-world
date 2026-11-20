@@ -1,0 +1,121 @@
+---
+// Field Notes page (20 Nov 2026, mock-up A "The wall", Ashah's pick): the same header as /work/ (stars, big title, tabs, horizon line),
+// then every Field Notes post as a sneak peek (cover + first slides on hover), each linking out to the full post on Instagram and/or LinkedIn.
+// Posts live in src/data/field-notes.json (newest first). Images are saved copies in public/images/field-notes/posts/ (Instagram links expire).
+import { u } from '../lib/url';
+import posts from '../data/field-notes.json';
+const { title, summary } = Astro.props;
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+type P = (typeof posts)[number] & { instagram?: string; linkedin?: string };
+const list = posts as P[];
+const tabs = ['All', ...(list.some((p) => p.instagram) ? ['Instagram'] : []), ...(list.some((p) => p.linkedin) ? ['LinkedIn'] : [])];
+---
+<section class="ph">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap row">
+    <div>
+      <a class="back" href={u('/work/')}>← All work</a>
+      <h1>{title}.</h1>
+      <p class="lede">{summary}</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Filter the posts">
+      {tabs.map((t, i) => <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} class={i === 0 ? 'on' : ''} data-p={t}>{t}</button>)}
+    </div>
+  </div>
+  <div class="hz" aria-hidden="true"></div>
+</section>
+<section class="wrap wall">
+  {list.map((p, i) => (
+    <div class="cd" data-p={[p.instagram && 'Instagram', p.linkedin && 'LinkedIn'].filter(Boolean).join(' ')} style={`--c:${p.glow}`}>
+      <a class="fr" href={p.instagram || p.linkedin} target="_blank" rel="noopener" aria-label={p.caption}>
+        {p.images.map((src, k) => <img src={u(src)} alt="" class={k === 0 ? 'on' : ''} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />)}
+        <span class="pips" aria-hidden="true">{Array.from({ length: Math.min(p.slides, 7) }).map((_, k) => <i class={k === 0 ? 'on' : ''}></i>)}</span>
+      </a>
+      <p class="cap">{p.caption}</p>
+      <div class="meta">
+        <span class="dt">{fmt(p.date)}</span>
+        <span class="lk">
+          {p.instagram && <a href={p.instagram} target="_blank" rel="noopener">On Instagram ↗</a>}
+          {p.linkedin && <a href={p.linkedin} target="_blank" rel="noopener">On LinkedIn ↗</a>}
+        </span>
+      </div>
+    </div>
+  ))}
+</section>
+<section class="wrap band"><slot /></section>
+<script>
+  // tabs: show one platform's posts
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.ph .tabs button');
+  const cards = [...document.querySelectorAll<HTMLElement>('.wall .cd')];
+  tabs.forEach((b) => b.addEventListener('click', () => {
+    tabs.forEach((x) => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); });
+    cards.forEach((c) => {
+      const show = b.dataset.p === 'All' || (c.dataset.p || '').split(' ').includes(b.dataset.p!);
+      c.hidden = !show;
+      if (show) { c.classList.remove('in'); void c.offsetWidth; c.classList.add('in'); }
+    });
+  }));
+  // sneak peek: hovering a cover fades through its first slides; leaving goes back to the cover
+  cards.forEach((c) => {
+    const fr = c.querySelector<HTMLElement>('.fr')!;
+    const imgs = [...fr.querySelectorAll('img')];
+    const pips = [...fr.querySelectorAll('.pips i')];
+    let k = 0, t: number | undefined;
+    const show = (n: number) => { k = n; imgs.forEach((im, j) => im.classList.toggle('on', j === n)); pips.forEach((p, j) => p.classList.toggle('on', j === n)); };
+    fr.addEventListener('mouseenter', () => { if (imgs.length < 2) return; show(1); t = window.setInterval(() => show((k + 1) % imgs.length), 1300); });
+    fr.addEventListener('mouseleave', () => { window.clearInterval(t); show(0); });
+  });
+</script>
+<style>
+  .ph { position: relative; padding: 190px 0 64px; overflow: hidden; }
+  .stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(1.2px 1.2px at 8% 22%, #fffa, transparent), radial-gradient(1px 1px at 18% 64%, #fff8, transparent), radial-gradient(1px 1px at 27% 14%, #fff9, transparent), radial-gradient(1.4px 1.4px at 39% 48%, #fff7, transparent), radial-gradient(1px 1px at 52% 26%, #fff6, transparent), radial-gradient(1px 1px at 63% 58%, #fff7, transparent), radial-gradient(1.2px 1.2px at 74% 18%, #fff8, transparent), radial-gradient(1px 1px at 86% 40%, #fff6, transparent), radial-gradient(1px 1px at 93% 70%, #fff7, transparent); }
+  .row { position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+  .back { display: inline-block; margin-bottom: 34px; font: 500 11px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-3); }
+  .back:hover { color: var(--peach); }
+  h1 { font-size: 104px; line-height: .95; margin: 0; }
+  .lede { font: italic 22px/1.4 var(--serif); color: var(--ink-2); max-width: 44ch; margin: 26px 0 0; }
+  .tabs { display: flex; flex: none; padding: 5px; border-radius: 999px; background: rgba(12, 16, 48, .7); border: 1px solid rgba(159, 182, 236, .28); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05); margin-bottom: 12px; }
+  .tabs button { font: inherit; border: 0; background: none; cursor: pointer; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #C9CFEA; padding: 13px 22px; border-radius: 999px; transition: color .4s, background .4s, box-shadow .4s; white-space: nowrap; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button.on { color: #06081A; font-weight: 600; background: linear-gradient(90deg, #8FB3F6, #9EA1FB 50%, #A498FE 75%, #B49AE9); box-shadow: 0 0 22px rgba(127, 216, 240, .5), 0 0 50px rgba(169, 150, 255, .3); }
+  .hz { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(127, 216, 240, .55) 30%, rgba(255, 243, 224, .95) 50%, rgba(169, 150, 255, .55) 70%, transparent); }
+  .hz::before { content: ''; position: absolute; left: 50%; top: -110px; width: 900px; height: 220px; margin-left: -450px; background: radial-gradient(ellipse at 50% 50%, rgba(169, 150, 255, .28), rgba(127, 216, 240, .10) 40%, transparent 70%); animation: hzb 8s ease-in-out infinite; opacity: .85; }
+  @keyframes hzb { 50% { opacity: 1; transform: scale(1.06); } }
+  .wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 56px 32px; padding-block: 80px 110px; }
+  .cd[hidden] { display: none; }
+  .cd.in { animation: cin .7s ease-out; }
+  @keyframes cin { from { opacity: 0; transform: translateY(12px); } }
+  .fr { display: block; position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: #05071A; box-shadow: 0 34px 80px -40px var(--c); transition: box-shadow .6s; }
+  .fr img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s; }
+  .fr img.on { opacity: 1; }
+  .cd:hover .fr { box-shadow: 0 44px 100px -34px var(--c); }
+  .pips { position: absolute; left: 0; right: 0; bottom: 12px; z-index: 2; display: flex; justify-content: center; gap: 6px; }
+  .pips i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255, 255, 255, .35); transition: background .4s, box-shadow .4s; }
+  .pips i.on { background: #fff; box-shadow: 0 0 8px var(--c); }
+  .cap { font: italic 21px/1.3 var(--serif); margin: 20px 0 14px; min-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .meta { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .dt { font: 500 11px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
+  .lk { display: flex; gap: 18px; flex-wrap: wrap; }
+  .lk a { font: 500 11px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--peach); transition: color .3s; }
+  .lk a:hover { color: var(--ink); }
+  .band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; grid-auto-flow: column; column-gap: 56px; padding-block: 90px 110px; border-top: 1px solid var(--line); }
+  .band :global(h2) { font-size: 34px; margin: 0 0 14px; }
+  .band :global(p) { color: var(--ink-2); font-size: 15px; line-height: 1.65; margin: 0; }
+  .band :global(strong) { color: var(--ink); font-weight: 500; }
+  @media (max-width: 1100px) { .row { flex-direction: column; align-items: flex-start; gap: 30px; } .tabs { margin: 0; } }
+  @media (max-width: 760px) {
+    .ph { padding: 130px 0 40px; }
+    h1 { font-size: 64px; }
+    .lede { font-size: 19px; }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 22px; width: 100%; }
+    .tabs button { text-align: center; padding: 12px 0; font-size: 10px; letter-spacing: .18em; }
+    .wall { grid-template-columns: 1fr 1fr; gap: 40px 14px; padding-block: 44px 70px; }
+    .cap { font-size: 17px; margin: 14px 0 10px; }
+    .dt { display: none; }
+    .lk { gap: 12px; }
+    .lk a { font-size: 10px; letter-spacing: .14em; }
+    .band { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; padding-block: 60px 80px; }
+    .band :global(h2) { margin-top: 40px; }
+    .band :global(h2:first-child) { margin-top: 0; }
+  }
+</style>
