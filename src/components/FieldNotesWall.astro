@@ -6,9 +6,17 @@ import { u } from '../lib/url';
 import posts from '../data/field-notes.json';
 const { title, summary } = Astro.props;
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
-type P = (typeof posts)[number] & { instagram?: string; linkedin?: string };
-const list = posts as P[];
-const tabs = ['All', ...(list.some((p) => p.instagram) ? ['Instagram'] : []), ...(list.some((p) => p.linkedin) ? ['LinkedIn'] : [])];
+type V = { date: string; caption: string; slides: number; glow: string; images: string[] };
+type P = V & { instagram?: string; linkedin?: string; linkedinVersion?: V };
+// One card per platform version (Ashah, 20 Nov 2026): the Instagram tab shows only Instagram posts, the LinkedIn tab only LinkedIn posts,
+// each with its own cover and link. A post that went out on both shows once under All (Instagram version, both links)
+// and its LinkedIn version (own cover) shows only under LinkedIn.
+type Card = V & { tabs: string[]; ig?: string; li?: string };
+const cards: Card[] = (posts as P[]).flatMap((p): Card[] => {
+  const main: Card = { ...p, ig: p.instagram, li: p.linkedin, tabs: ['All', ...(p.instagram ? ['Instagram'] : []), ...(p.linkedin && !p.linkedinVersion ? ['LinkedIn'] : [])] };
+  return p.linkedinVersion ? [main, { ...p.linkedinVersion, li: p.linkedin, tabs: ['LinkedIn'] }] : [main];
+}).sort((a, b) => b.date.localeCompare(a.date));
+const tabs = ['All', ...(cards.some((c) => c.ig) ? ['Instagram'] : []), ...(cards.some((c) => c.li) ? ['LinkedIn'] : [])];
 ---
 <section class="ph">
   <div class="stars" aria-hidden="true"></div>
@@ -24,19 +32,19 @@ const tabs = ['All', ...(list.some((p) => p.instagram) ? ['Instagram'] : []), ..
   </div>
   <div class="hz" aria-hidden="true"></div>
 </section>
-<section class="wrap wall">
-  {list.map((p, i) => (
-    <div class="cd" data-p={[p.instagram && 'Instagram', p.linkedin && 'LinkedIn'].filter(Boolean).join(' ')} style={`--c:${p.glow}`}>
-      <a class="fr" href={p.instagram || p.linkedin} target="_blank" rel="noopener" aria-label={p.caption}>
-        {p.images.map((src, k) => <img src={u(src)} alt="" class={k === 0 ? 'on' : ''} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />)}
+<section class="wrap wall" data-tab="All">
+  {cards.map((p, i) => (
+    <div class="cd" data-p={p.tabs.join(' ')} hidden={!p.tabs.includes('All')} style={`--c:${p.glow}`}>
+      <a class="fr" href={p.ig || p.li} target="_blank" rel="noopener" aria-label={p.caption}>
+        {p.images.map((src, k) => <img src={u(src)} alt="" class={k === 0 ? 'on' : ''} loading={i < 8 && p.tabs.includes('All') ? 'eager' : 'lazy'} decoding="async" />)}
         <span class="pips" aria-hidden="true">{Array.from({ length: Math.min(p.slides, 7) }).map((_, k) => <i class={k === 0 ? 'on' : ''}></i>)}</span>
       </a>
       <p class="cap">{p.caption}</p>
       <div class="meta">
         <span class="dt">{fmt(p.date)}</span>
         <span class="lk">
-          {p.instagram && <a href={p.instagram} target="_blank" rel="noopener">On Instagram ↗</a>}
-          {p.linkedin && <a href={p.linkedin} target="_blank" rel="noopener">On LinkedIn ↗</a>}
+          {p.ig && <a class="ig" href={p.ig} target="_blank" rel="noopener">On Instagram ↗</a>}
+          {p.li && <a class="li" href={p.li} target="_blank" rel="noopener">On LinkedIn ↗</a>}
         </span>
       </div>
     </div>
@@ -46,11 +54,13 @@ const tabs = ['All', ...(list.some((p) => p.instagram) ? ['Instagram'] : []), ..
 <script>
   // tabs: show one platform's posts
   const tabs = document.querySelectorAll<HTMLButtonElement>('.ph .tabs button');
+  const wall = document.querySelector<HTMLElement>('.wall')!;
   const cards = [...document.querySelectorAll<HTMLElement>('.wall .cd')];
   tabs.forEach((b) => b.addEventListener('click', () => {
     tabs.forEach((x) => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); });
+    wall.dataset.tab = b.dataset.p;
     cards.forEach((c) => {
-      const show = b.dataset.p === 'All' || (c.dataset.p || '').split(' ').includes(b.dataset.p!);
+      const show = (c.dataset.p || '').split(' ').includes(b.dataset.p!);
       c.hidden = !show;
       if (show) { c.classList.remove('in'); void c.offsetWidth; c.classList.add('in'); }
     });
@@ -98,6 +108,7 @@ const tabs = ['All', ...(list.some((p) => p.instagram) ? ['Instagram'] : []), ..
   .lk { display: flex; gap: 18px; flex-wrap: wrap; }
   .lk a { font: 500 11px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--peach); transition: color .3s; }
   .lk a:hover { color: var(--ink); }
+  .wall[data-tab='Instagram'] .lk .li, .wall[data-tab='LinkedIn'] .lk .ig { display: none; }
   .band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; grid-auto-flow: column; column-gap: 56px; padding-block: 90px 110px; border-top: 1px solid var(--line); }
   .band :global(h2) { font-size: 34px; margin: 0 0 14px; }
   .band :global(p) { color: var(--ink-2); font-size: 15px; line-height: 1.65; margin: 0; }
