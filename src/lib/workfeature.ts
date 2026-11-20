@@ -82,7 +82,7 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
 .hwk .big h3,.hwk .one h3{font-size:30px;line-height:1.2}.hwk .big p,.hwk .one p{font-size:14px;line-height:21px}
 .hwk .wdots{display:flex;justify-content:center;gap:8px;margin-top:22px}.hwk .wdots i{width:6px;height:6px;border-radius:9px;background:rgba(246,241,231,.3);transition:width .3s}.hwk .wdots i.on{width:22px;background:#C9DCF7}.hwk .wdots.hide{visibility:hidden}
 .hwk .more{justify-content:center;margin-top:22px}
-.hwk .sm .wip .wl{display:inline}.hwk .sm .wip .ws{display:none}}
+.hwk .wip .wl{display:none}.hwk .wip .ws{display:inline}}
 </style>
 <section class="hwk" id="work"><div class="ih"><h2 class="ser">The work.</h2><div class="wtabs" role="tablist" aria-label="The work">${buttons}</div></div><div class="pn">${panels}</div><div class="wdots">${dots}</div><div class="more"><a class="fl" href="${u('/work/')}">All work →</a></div></section>
 <script>(function(){var s=document.getElementById('work');if(!s)return;var bs=s.querySelectorAll('.wtabs button'),gs=s.querySelectorAll('.pn .g'),pn=s.querySelector('.pn'),d=s.querySelector('.wdots'),dd=d.children;
