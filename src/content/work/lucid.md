@@ -1,5 +1,5 @@
 ---
-title: Lucid Brand Package
+title: ‘Lucid’ Brand Package
 summary: How Lucid looks, moves and plays.
 client: Lucid
 year: 2026
