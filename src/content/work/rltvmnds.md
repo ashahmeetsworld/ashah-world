@@ -7,6 +7,8 @@ skill: Creative Direction
 cover: /images/work/rltvmnds-brand-package/cover.jpg
 coverRatio: landscape
 featured: false
+category: Brand Identity
+glow: "#7C5CFF"
 order: -3
 link: https://ashahmeetsworld.github.io/rltvmnds/
 standalone: true

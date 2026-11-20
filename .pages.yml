@@ -33,6 +33,12 @@ content:
         default: landscape
         options:
           values: [landscape, portrait]
+      - name: category
+        label: Tab (on /work/ and the home page)
+        type: select
+        options:
+          values: [Brand Identity, Art Direction, Creative Strategy]
+      - { name: glow, label: 'Card glow colour, e.g. #7C5CFF', type: string }
       - name: gallery
         label: Gallery
         type: object

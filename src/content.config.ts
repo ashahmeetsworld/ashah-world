@@ -20,6 +20,10 @@ const work = defineCollection({
     draft: z.boolean().default(false),
     // true = the case study is its own page in src/pages/work/<file-name>.astro (a house's Brand Package), so [slug].astro skips it
     standalone: z.boolean().default(false),
+    // the tab it sits under on /work/ and the home page's The work. section (20 Nov 2026)
+    category: z.enum(['Brand Identity', 'Art Direction', 'Creative Strategy']).optional(),
+    // the colour its card glows in (any CSS colour); empty = its skill colour
+    glow: z.string().optional(),
   }),
 });
 

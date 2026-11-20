@@ -9,6 +9,8 @@ cover: /images/work/brand-deck/01.webp
 coverRatio: landscape
 featured: true
 draft: true
+category: Art Direction
+glow: "#8FB4F6"
 order: 2
 gallery:
   - image: /images/work/brand-deck/03.webp

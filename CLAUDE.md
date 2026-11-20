@@ -102,3 +102,8 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - Letters pop-up rules (`amw-letters` in localStorage): never after sign-up; once a visit at most, about halfway down; after a close it waits 3 visits; after 2 closes it stops.
 - Button gradient (Ashah's): #8FB3F6 > #9EA1FB > #A498FE > #B49AE9, static, never cycling through peach. No small spaced-caps eyebrow labels.
 - Session "Free" bubble above the Lighthouse headline: Ashah's one exception to the no-eyebrow rule, styled like the Orbit page's `.free` pill.
+
+## The work (20 Nov 2026)
+- Home "The work." sits between "Fresh from the world." and the Session. It's built from the work collection by `src/lib/workfeature.ts` and dropped in by `src/pages/index.astro` (no edit to `home.html`). Tabs: New (the first three by `order`, so the lowest `order` = newest), then Brand Identity, Art Direction, Creative Strategy. 3+ pieces = one big + two beside; 1 piece = cover whole on the left, words on the right. The panel keeps one height on every tab so the page never jumps.
+- `/work/` (`src/pages/work/index.astro`): Ashah's pick "The reel": no subtitle (his rule), tabs All + the three categories, one piece per row, sides swap.
+- Each work entry has `category` (its tab) and `glow` (its card's glow colour; empty = skill colour), also in `.pages.yml`.
