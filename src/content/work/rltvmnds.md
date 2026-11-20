@@ -1,5 +1,5 @@
 ---
-title: RLTVMNDS Brand Package
+title: Relative Minds Brand Package
 summary: How RLTVMNDS looks, moves and speaks.
 client: Relative Minds
 year: 2026
