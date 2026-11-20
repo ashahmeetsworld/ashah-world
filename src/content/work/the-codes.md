@@ -8,6 +8,8 @@ role: Art direction, brand guidelines, illustration
 cover: /images/work/the-codes/01.webp
 coverRatio: landscape
 featured: true
+category: Art Direction
+glow: "#8FB4F6"
 order: 3
 gallery:
   - image: /images/work/the-codes/02.webp

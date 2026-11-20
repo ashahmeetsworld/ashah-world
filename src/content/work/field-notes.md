@@ -8,6 +8,8 @@ role: Concept, art direction, copy, illustration, content system
 cover: /images/work/field-notes/18-01.webp
 coverRatio: portrait
 featured: true
+category: Creative Strategy
+glow: "#03A2FF"
 order: 1
 gallery:
   - image: /images/work/field-notes/01-01.webp
