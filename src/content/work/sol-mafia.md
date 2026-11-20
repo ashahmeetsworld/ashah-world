@@ -1,5 +1,5 @@
 ---
-title: Sol Mafia Brand Package
+title: ‘Sol Mafia’ Brand Package
 summary: The life Sol Mafia paints, and how it looks.
 client: Sol Mafia
 year: 2026

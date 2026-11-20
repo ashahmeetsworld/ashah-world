@@ -1,5 +1,5 @@
 ---
-title: The A·M·W Codes
+title: The ‘A·M·W’ Codes
 summary: An art-direction guide — the single source of truth for how the world looks, sounds and feels, written as do / don't pairs anyone can direct from.
 client: Ashah Meets World
 year: 2026
