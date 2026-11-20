@@ -3,7 +3,7 @@
 // 3+ pieces = Spotlight (one big, two beside); 1 piece = its cover whole on the left, its words on the right.
 // The panel keeps one height on every tab so the page never jumps.
 import { skillColour } from './url';
-import { CARD_COVER } from './cards';
+import { CARD_COVER, CARD_PANEL } from './cards';
 
 type Entry = { id: string; data: any };
 const TABS = ['Brand Identity', 'Art Direction', 'Creative Strategy'] as const;
@@ -16,7 +16,7 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
   const frame = (e: Entry, one: boolean) => {
     const img = esc(u(CARD_COVER[e.id] ?? e.data.cover));
     const tall = e.data.coverRatio === 'portrait' && !CARD_COVER[e.id];
-    if (CARD_COVER[e.id] && one) return `<div class="fr cc"><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"></div>`;
+    if (CARD_COVER[e.id] && one) return `<div class="fr cc"><img src="${esc(u(CARD_PANEL[e.id] ?? CARD_COVER[e.id]))}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"></div>`;
     if (tall || one) return `<div class="fr${tall ? ' tall' : ''}"><span class="bl" style="background-image:url('${img}')"></span><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
     return `<div class="fr"><img src="${img}" alt="${esc(e.data.title)}" loading="lazy" decoding="async"${live(e)}></div>`;
   };
@@ -54,7 +54,7 @@ export function workFeature(work: Entry[], base: string, feedUrl: string): strin
 .hwk .cd:hover .fr img{transform:scale(1.03)}
 .hwk .fr:after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);z-index:2}
 .hwk .fr.tall img,.hwk .one .fr img{position:relative;z-index:1;object-fit:contain}
-.hwk .fr.cc{background:#070B18}.hwk .one .fr.cc img{object-fit:contain}.hwk .fr .bl{position:absolute;inset:-30px;background:center/cover;filter:blur(30px) saturate(1.3) brightness(.5)}
+.hwk .fr.cc{background:#070B18}.hwk .one .fr.cc img{object-fit:cover}.hwk .fr .bl{position:absolute;inset:-30px;background:center/cover;filter:blur(30px) saturate(1.3) brightness(.5)}
 .hwk .big{grid-row:1/3}.hwk .big .fr{flex:1;min-height:0}
 .hwk .sm .fr,.hwk .half .fr{aspect-ratio:16/9}
 .hwk .half{grid-row:1/3}.hwk .g[data-n="2"]{grid-template-columns:1fr 1fr}
