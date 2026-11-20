@@ -94,12 +94,12 @@ function dots(){var g=s.querySelector('.pn .g.on'),n=g.children.length;d.classLi
 gs.forEach(function(g){g.addEventListener('scroll',dots,{passive:true})});
 function sel(b){bs.forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on)});gs.forEach(function(g){var on=g.dataset.t===b.dataset.t;g.classList.toggle('on',on);if(on)g.scrollLeft=0});dots();}
 bs.forEach(function(b){b.addEventListener('click',function(){stop();sel(b);});});
-// Tabs turn on their own every 3 s while the section is on screen (Ashah, 20 Nov 2026). A tap, click, key or sideways swipe stops it for good.
+// Tabs turn on their own every 10 s while the section is on screen (Ashah, 20 Nov 2026). A tap, click, key or sideways swipe stops it for good.
 var ti=null,done=false,seen=false;
 function tick(){if(done||!seen)return;var k=0;bs.forEach(function(x,i){if(x.classList.contains('on'))k=i});sel(bs[(k+1)%bs.length]);}
 function stop(){done=true;if(ti){clearInterval(ti);ti=null}}
 ['pointerdown','touchstart','keydown','wheel'].forEach(function(e){s.addEventListener(e,function(ev){if(e!=='wheel'||s.querySelector('.pn').contains(ev.target)&&Math.abs(ev.deltaX)>Math.abs(ev.deltaY))stop()},{passive:true})});
-if(bs.length>1&&'IntersectionObserver' in window){new IntersectionObserver(function(es){seen=es[0].isIntersecting;if(seen&&!ti&&!done)ti=setInterval(tick,3000);if(!seen&&ti){clearInterval(ti);ti=null}},{threshold:.3}).observe(pn);}
+if(bs.length>1&&'IntersectionObserver' in window){new IntersectionObserver(function(es){seen=es[0].isIntersecting;if(seen&&!ti&&!done)ti=setInterval(tick,10000);if(!seen&&ti){clearInterval(ti);ti=null}},{threshold:.3}).observe(pn);}
 fit();dots();window.addEventListener('resize',fit);window.addEventListener('load',fit);s.querySelectorAll('img').forEach(function(i){if(!i.complete)i.addEventListener('load',fit,{once:true})});
 // Field Notes: the first slide of the latest Field Notes carousel, live from Instagram (same rule as /work/)
 var lv=s.querySelectorAll('img[data-live-cover]');if(lv.length&&${JSON.stringify(feedUrl)}){fetch(${JSON.stringify(feedUrl)}).then(function(r){return r.json()}).then(function(dt){var ps=Array.isArray(dt)?dt:(dt.posts||[]);var end=Date.parse('2026-11-09T00:00:00+11:00');var c=ps.filter(function(p){return p.mediaType==='CAROUSEL_ALBUM'&&!(p.timestamp&&Date.parse(p.timestamp)>=end)})[0];if(!c)return;var k=(c.children&&c.children[0])||c;var src=(k.sizes&&k.sizes.large&&k.sizes.large.mediaUrl)||k.mediaUrl||k.thumbnailUrl;if(!src)return;lv.forEach(function(i){i.src=src;var b=i.parentNode.querySelector('.bl');if(b)b.style.backgroundImage="url('"+src+"')"})}).catch(function(){})}
