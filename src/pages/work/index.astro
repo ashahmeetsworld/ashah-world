@@ -10,7 +10,7 @@ const work = (await getCollection('work', (e) => !e.data.draft)).sort((a, b) => 
 const CATS = ['Brand Identity', 'Art Direction', 'Creative Strategy'].filter((c) => work.some((w) => w.data.category === c));
 const tabs = ['All', ...CATS];
 ---
-<Base title="Work" description="Selected work by Ashah Meets World: creative direction, worldbuilding and content systems.">
+<Base bare title="Work" description="Selected work by Ashah Meets World: creative direction, worldbuilding and content systems.">
   <section class="ph">
     <div class="stars" aria-hidden="true"></div>
     <div class="wrap row">

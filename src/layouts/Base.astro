@@ -14,8 +14,9 @@ import MobileNav from '../components/MobileNav.astro';
 import site from '../data/site.json';
 import { u } from '../lib/url';
 
-interface Props { title?: string; description?: string; image?: string; bodyClass?: string; }
-const { title, description = site.description, image = '/images/work/brand-deck/01.webp', bodyClass } = Astro.props;
+// bare (20 Nov 2026, Ashah, the work pages): no Work / Contact nav at the top or the phone's floating nav; the A·M·W mark goes home; the footer keeps Resources, Book A Session, The Work and the socials
+interface Props { title?: string; description?: string; image?: string; bodyClass?: string; bare?: boolean; }
+const { title, description = site.description, image = '/images/work/brand-deck/01.webp', bodyClass, bare = false } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(u(image), Astro.site);
@@ -39,10 +40,10 @@ const ogImage = new URL(u(image), Astro.site);
     <link rel="preload" href={dmSans} as="font" type="font/woff2" crossorigin />
   </head>
   <body class={bodyClass}>
-    <Header />
+    <Header bare={bare} />
     <main><slot /></main>
-    <Footer />
-    <MobileNav />
+    <Footer bare={bare} />
+    {!bare && <MobileNav />}
     <script is:inline>
       // Every new page opens at the top (back/forward still returns you to where you were; #anchors still jump).
       (function () {
