@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Apply for a Session v2.0 (23 Nov 2026): Ashah asked for the Apply form reworked top to bottom, borrowing from prep look C,
-to fit the free Brand Strategy Session offer, the flywheel (referrals count, so a friend gets credit) and the prep form that
-follows a booking (Apply asks about fit; the prep form asks for the numbers, so nothing is asked twice).
-A hidden preview at /session/apply-v2/ until he says swap. APPLY_V2_ENDPOINTS (comma-separated) sets where answers go;
-empty = preview mode, nothing is sent. The live form is still /session/apply/ (build.py).
+"""Apply for a Session v2.0, LIVE at /session/apply/ since 23 Nov 2026 (Ashah: "both look great. happy to make them both live").
+His rework of the Apply form, borrowing from prep look C, fitted to the free Brand Strategy Session, the flywheel (referrals count,
+so a friend gets credit) and the prep form that follows a booking (Apply asks about fit; the prep form asks for the numbers).
+Writes apply.html. The head and base styles come from apply-head.html (the v1.1 form's, snapshot 23 Nov 2026).
+Answers go where the live form already sends them (read back from apply.html), unless APPLY_ENDPOINTS (comma-separated) is set.
+The Control Room /apply route only keeps the fields it knows, so the new answers are folded into those for it (see CR below).
 python3 src/session/apply_v2.py src/session"""
-import os, sys, json
+import os, sys, json, re
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'src/session'
-EP = [u for u in os.environ.get('APPLY_V2_ENDPOINTS', '').split(',') if u.strip()]
-apply = open(os.path.join(OUT, 'apply.html')).read()
-HEAD = apply.split('</style>')[0].replace('<title>Apply for a Session · Ashah Meets World</title>',
-                                         '<title>Apply for a Session · Ashah Meets World</title><meta name="robots" content="noindex">')
+def live_endpoints():
+    try:
+        m = re.search(r',E=(\[.*?\]);', open(os.path.join(OUT, 'apply.html')).read())
+        return json.loads(m.group(1)) if m else []
+    except FileNotFoundError:
+        return []
+EP = [u.strip() for u in os.environ.get('APPLY_ENDPOINTS', '').split(',') if u.strip()] or live_endpoints()
+HEAD = open(os.path.join(OUT, 'apply-head.html')).read()
 PILLARS = ['Identity', 'Storytelling', 'Product', 'Campaigns', 'Ecosystem', 'Continuity']  # the Session scorecard's order
 
 CSS = '''
@@ -64,7 +69,7 @@ TAPS = [
 s = '<a class="mk" href="__BASE__/session/">A·M·W</a><form class="apply" novalidate><div class="aw">'
 s += ('<div class="hero2"><h1 class="ser">What’s holding your brand <br><em>back right now?</em></h1>'
       '<textarea name="stuck" placeholder="Be specific. This is where we start." required></textarea>'
-      '<p>A free 45-minute Brand Strategy Session, five a month. About eight minutes to apply. I read every one myself and reply within three days.</p></div>')
+      '<p>A free 45-minute Brand Strategy Session, ten a month. About eight minutes to apply. I read every one myself and reply within three days.</p></div>')
 s += f'<div class="blk"><h2 class="ser">{["Six","Seven","Eight","Nine"][len(TAPS)-6]} quick taps</h2><p>Ranges are fine.</p><div class="grid">'
 s += ''.join(card(l, f, h) for l, f, h in TAPS) + '</div></div>'
 s += ('<div class="blk"><h2 class="ser">In your words</h2><p>A line or two each.</p><div class="words">'
@@ -94,8 +99,12 @@ if(bad){bad.focus();bad.scrollIntoView({block:'center',behavior:'smooth'});say('
 if(!f.querySelector('input[name=deal]').checked){f.querySelector('.deal').scrollIntoView({block:'center',behavior:'smooth'});say('Tick “Deal.” and it’s on its way.');return}
 var d={},fd=new FormData(f);fd.forEach(function(v,k){if(v)d[k]=d[k]?d[k]+', '+v:v});d._subject='Session application: '+(d.brand||d.name||'');d._template='table';d._captcha='false';
 var b=f.querySelector('.go');b.disabled=true;b.textContent='Sending…';
-try{if(E.length){var rs=await Promise.allSettled(E.map(function(u){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)}).then(function(r){if(!r.ok)throw 0})}));if(!rs.some(function(x){return x.status==='fulfilled'}))throw 0}
+var c=Object.assign({},d);c.oneline=[d.kind,d.oneline].filter(Boolean).join(' · ');c.ready=d.walk;c.src=[d.src,d.sentby&&'sent by '+d.sentby].filter(Boolean).join(' · ');
+try{if(E.length){var rs=await Promise.allSettled(E.map(function(u){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(/workers\\.dev\\/apply/.test(u)?c:d)}).then(function(r){if(!r.ok)throw 0})}));if(!rs.some(function(x){return x.status==='fulfilled'}))throw 0}
 document.body.classList.add('sent');scrollTo(0,0)}catch(x){b.disabled=false;b.textContent='Send my application';say('That didn’t send. Try once more in a moment.')}})})();</script>'''.replace('__EP__', json.dumps(EP))
 
-open(os.path.join(OUT, 'apply-v2.html'), 'w').write(HEAD + CSS + '</style></head><body>' + s + JS + '</body></html>')
-print('apply-v2.html', 'sends' if EP else 'preview')
+# CR: the Control Room's /apply route keeps only its own field list (name, email, role, city, brand, link, oneline, age, budget,
+# team, stuck, tried, pillars, win, drop, ready, src, else), so its copy gets kind in oneline, walk in ready and sentby in src.
+# The inbox email gets every answer as it is.
+open(os.path.join(OUT, 'apply.html'), 'w').write(HEAD + CSS + '</style></head><body>' + s + JS + '</body></html>')
+print('apply.html sends to', len(EP), 'endpoints' if EP else 'nowhere (preview)')
