@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Session prep form, two looks to try (23 Nov 2026): B = one question a screen, C = aim first, then six taps.
-Hidden preview pages, not linked anywhere: /session/prep-b/ and /session/prep-c/.
-PREP_ENDPOINTS (comma-separated) sets where answers go. Empty = preview mode: the form confirms without sending.
+"""Session prep form (23 Nov 2026). Ashah picked B (one question a screen): it is the real form at /session/prep/,
+sending to the same place as the Apply form. Cal.com sends people here after they book and adds ?startTime=&attendeeName=&email=
+to the link, so the form knows the day ("See you Thursday") and skips the email step.
+The two looks he tried stay as hidden previews that send nothing: /session/prep-b/ and /session/prep-c/.
 python3 src/session/prep.py src/session"""
 import os, sys, json
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'src/session'
-EP = [u for u in os.environ.get('PREP_ENDPOINTS', '').split(',') if u.strip()]
 apply = open(os.path.join(OUT, 'apply.html')).read()
+# the Apply form's inbox endpoint only, so answers land in the same inbox. Its Control Room /apply route is for applications, not prep answers.
+EP_REAL = [u for u in json.loads(apply.split("E=", 1)[1].split(";", 1)[0]) if 'formsubmit.co' in u]
 HEAD = apply.split('</style>')[0]  # same head, fonts and form styles as the Apply form
 HEAD = HEAD.replace('<title>Apply for a Session · Ashah Meets World</title>', '<title>Before we meet · Ashah Meets World</title><meta name="robots" content="noindex">')
 
@@ -22,24 +24,29 @@ def chips(k, opts, mx):
     t = 'checkbox' if mx > 1 else 'radio'
     return '<div class="opts">' + ''.join(f'<label><input type="{t}" name="{k}" value="{o}"><span>{o}</span></label>' for o in opts) + '</div>'
 
-# shared send script: reads ?name=&email=&brand= from the Cal.com link, so they never type them twice
+# shared send script: reads the Cal.com link (?attendeeName=&email=&startTime=), so they never type their email twice
+# and the form can say which day they booked
 SEND = '''<script>(function(){var E=__EP__,f=document.querySelector('form.prep'),P=new URLSearchParams(location.search);
-['name','email','brand'].forEach(function(k){var v=P.get(k),i=f.querySelector('[name="'+k+'"]');if(v&&i){i.value=v;var w=i.closest('.who');if(w&&k==='email')w.classList.add('known')}});
+var V={name:P.get('attendeeName')||P.get('name'),email:P.get('email'),brand:P.get('brand')};
+['name','email','brand'].forEach(function(k){var v=V[k],i=f.querySelector('[name="'+k+'"]');if(v&&i){i.value=v;var w=i.closest('.who');if(w&&k==='email')w.classList.add('known')}});
+var st=P.get('startTime'),t=st?new Date(st):null;if(t&&!isNaN(t)){var day=t.toLocaleDateString('en-AU',{weekday:'long'}),dm=t.toLocaleDateString('en-AU',{day:'numeric',month:'long'}),h=t.getHours(),m=t.getMinutes(),tm=(h%12||12)+(m?':'+('0'+m).slice(-2):'')+(h<12?'am':'pm'),lab=day+' '+dm+', '+tm;
+f.querySelector('[name="booked"]').value=lab;document.querySelectorAll('.when').forEach(function(w){w.querySelector('b').textContent=lab;w.hidden=false});document.querySelectorAll('.seeday').forEach(function(w){w.textContent='See you '+day+'.'})}
 f.querySelectorAll('input[type=checkbox]').forEach(function(c){c.addEventListener('change',function(){var g=f.querySelectorAll('input[name="'+c.name+'"]:checked');if(g.length>2)c.checked=false})});
 window.prepSend=async function(){var d={},fd=new FormData(f);fd.forEach(function(v,k){if(v)d[k]=d[k]?d[k]+', '+v:v});d._subject='Session prep: '+(d.brand||d.name||d.email||'');d._template='table';d._captcha='false';
 var b=f.querySelector('.go');if(b){b.disabled=true;b.textContent='Sending…'}
 try{if(E.length){var rs=await Promise.allSettled(E.map(function(u){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)}).then(function(r){if(!r.ok)throw 0})}));if(!rs.some(function(x){return x.status==='fulfilled'}))throw 0}
 document.body.classList.add('sent');scrollTo(0,0)}catch(x){if(b){b.disabled=false;b.textContent='Send'}var m=f.querySelector('.err')||f.appendChild(document.createElement('p'));m.className='err';m.textContent='That didn’t send. Try once more in a moment.'}};
-f.addEventListener('submit',function(e){e.preventDefault();prepSend()})})();</script>'''.replace('__EP__', json.dumps(EP))
-NOTE = '' if EP else '<p class="pv">Preview. Answers aren’t sent anywhere yet.</p>'
-HID = '<input type="hidden" name="name"><input type="hidden" name="brand">'
-THANKS = '''<div class="thanks" role="status" aria-live="polite"><h1 class="ser">That’s everything.<br><em>See you soon.</em></h1><p>I’ll read this before we meet, so we start where it matters.</p><a class="aurb" href="__BASE__/">Back to the world</a></div>'''
+f.addEventListener('submit',function(e){e.preventDefault();prepSend()})})();</script>'''
+HID = '<input type="hidden" name="name"><input type="hidden" name="brand"><input type="hidden" name="booked">'
+WHEN = '<p class="when" hidden>You’re booked for <b></b>.</p>'
+THANKS = '''<div class="thanks" role="status" aria-live="polite"><h1 class="ser">That’s everything.<br><em class="seeday">See you soon.</em></h1><p>I’ll read this before we meet, so we start where it matters.</p><a class="aurb" href="__BASE__/">Back to the world</a></div>'''
 BASECSS = '''
 .thanks{display:none;text-align:center;padding:200px 24px 0}.thanks h1{font-size:64px;line-height:1.02;margin-bottom:22px}.thanks p{font-size:18px;line-height:1.65;color:#D9DDF0;margin:0 auto 40px;max-width:520px}
 body.sent form,body.sent .stage{display:none}body.sent .thanks{display:block}
 .err{color:#F2B48C;text-align:center;margin-top:16px}.pv{color:#8F97BC;font-size:12px;text-align:center;margin-top:26px;letter-spacing:.04em}
 .go{border:0;cursor:pointer;font-family:'DM Sans'}.go:disabled{opacity:.6}
 .who.known{display:none}
+.when{color:#AEB6D6;font-size:15px;margin-bottom:18px}.when b{color:#F6F1E7;font-weight:500}
 '''
 
 # ---------------- B: one question a screen ----------------
@@ -60,7 +67,7 @@ B_CSS = BASECSS + '''
 body.sent .dots,body.sent .bar{display:none}
 @media (max-width:600px){.step h2{font-size:40px;margin-bottom:24px}.dots{top:58px}.stage{padding-top:110px}.step .opts span{padding:14px}}
 '''
-steps = [('obj', f'<h2 class="ser">What’s the one thing you want from our <em>45 minutes?</em></h2><textarea name="objective" placeholder="One line is plenty."></textarea>', 'next')]
+steps = [('obj', f'{WHEN}<h2 class="ser">What’s the one thing you want from our <em>45 minutes?</em></h2><textarea name="objective" placeholder="One line is plenty."></textarea>', 'next')]
 for k, l, o, mx in Q:
     words = l.rsplit(' ', 2)
     h = f'{words[0]} <em>{" ".join(words[1:])}</em>'
@@ -71,17 +78,21 @@ b = f'<a class="mk" href="__BASE__/">A·M·W</a><div class="dots">' + ''.join('<
 b += '<form class="prep" novalidate>' + HID + '<div class="stage">'
 for i, (k, inner, mode) in enumerate(steps):
     b += f'<div class="step{" who" if k=="who" else ""}" data-mode="{mode}">{inner}</div>'
-b += '</div><div class="bar"><button type="button" class="back">Back</button><span class="count"></span><button type="button" class="aurb go">Next</button></div>' + NOTE + '</form>' + THANKS
+b += '</div><div class="bar"><button type="button" class="back">Back</button><span class="count"></span><button type="button" class="aurb go">Next</button></div>' + '__NOTE__</form>' + THANKS
 B_JS = '''<script>(function(){var f=document.querySelector('form.prep'),S=[].slice.call(f.querySelectorAll('.step')),D=[].slice.call(document.querySelectorAll('.dots i')),bk=f.querySelector('.back'),go=f.querySelector('.go'),ct=f.querySelector('.count'),i=0;
 function live(){return S.filter(function(s){return !s.classList.contains('known')})}
 function show(){var L=live();L.forEach(function(s,j){s.classList.toggle('on',j===i)});D.forEach(function(d,j){d.style.display=j<L.length?'':'none';d.classList.toggle('on',j<=i)});
-var m=L[i].dataset.mode;bk.hidden=i===0;ct.textContent=(i+1)+' of '+L.length+(m==='tap'?' · tap to go on':'');go.style.visibility=m==='tap'?'hidden':'visible';go.textContent=i===L.length-1?'Send':'Next';var t=L[i].querySelector('textarea,input[type=email]');if(t&&innerWidth>600)setTimeout(function(){t.focus()},300)}
+var last=i===L.length-1,m=last?'next':L[i].dataset.mode;bk.hidden=i===0;ct.textContent=(i+1)+' of '+L.length+(m==='tap'?' · tap to go on':'');go.style.visibility=m==='tap'?'hidden':'visible';go.textContent=i===L.length-1?'Send':'Next';var t=L[i].querySelector('textarea,input[type=email]');if(t&&innerWidth>600)setTimeout(function(){t.focus()},300)}
 function next(){var L=live();if(i<L.length-1){i++;show()}else prepSend()}
 go.addEventListener('click',next);bk.addEventListener('click',function(){if(i>0){i--;show()}});
-S.forEach(function(s){if(s.dataset.mode==='tap')s.querySelectorAll('input').forEach(function(x){x.addEventListener('change',function(){setTimeout(next,260)})})});
+S.forEach(function(s){if(s.dataset.mode==='tap')s.querySelectorAll('input').forEach(function(x){x.addEventListener('change',function(){var L=live();if(L.indexOf(s)<L.length-1)setTimeout(next,260)})})});
 f.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();next()}});
 setTimeout(show,0)})();</script>'''
-open(os.path.join(OUT, 'prep-b.html'), 'w').write(HEAD + B_CSS + '</style></head><body>' + b + SEND + B_JS + '</body></html>')
+def page(css, body, ep, js=''):
+    note = '' if ep else '<p class="pv">Preview. Answers aren’t sent anywhere yet.</p>'
+    return HEAD + css + '</style></head><body>' + body.replace('__NOTE__', note) + SEND.replace('__EP__', json.dumps(ep)) + js + '</body></html>'
+open(os.path.join(OUT, 'prep.html'), 'w').write(page(B_CSS, b, EP_REAL, B_JS))   # the real one (Ashah's pick, 23 Nov 2026)
+open(os.path.join(OUT, 'prep-b.html'), 'w').write(page(B_CSS, b, [], B_JS))      # preview, sends nothing
 
 # ---------------- C: aim first, then six taps ----------------
 C_CSS = BASECSS + '''
@@ -100,11 +111,11 @@ C_CSS = BASECSS + '''
 @media (max-width:700px){.grid{grid-template-columns:1fr}.hero2 h1{font-size:44px}.cw{padding:110px 18px 80px}}
 '''
 c = '<a class="mk" href="__BASE__/">A·M·W</a><form class="prep" novalidate>' + HID + '<div class="cw stage">'
-c += f'<div class="hero2"><h1 class="ser">What do you want<br><em>from our 45 minutes?</em></h1><textarea name="objective" placeholder="One line is plenty."></textarea><p>This is where we start.</p></div>'
+c += f'<div class="hero2">{WHEN}<h1 class="ser">What do you want<br><em>from our 45 minutes?</em></h1><textarea name="objective" placeholder="One line is plenty."></textarea><p>This is where we start.</p></div>'
 c += '<div class="taps"><h2 class="ser">Six quick taps</h2><p>Ranges are fine.</p><div class="grid">'
 for k, l, o, mx in Q:
     c += f'<div class="card"><span class="l">{l}</span>' + ('<small>Pick up to two.</small>' if mx > 1 else '') + chips(k, o, mx) + '</div>'
 c += '</div></div><div class="who who2"><span class="l">Your email, so I can match this to your booking</span><input type="email" name="email"></div>'
-c += '<div class="sendc"><button type="submit" class="aurb go">Send, see you soon</button></div>' + NOTE + '</div></form>' + THANKS
-open(os.path.join(OUT, 'prep-c.html'), 'w').write(HEAD + C_CSS + '</style></head><body>' + c + SEND + '</body></html>')
-print('prep-b.html, prep-c.html', 'live' if EP else 'preview')
+c += '<div class="sendc"><button type="submit" class="aurb go">Send, see you soon</button></div>' + '__NOTE__</div></form>' + THANKS
+open(os.path.join(OUT, 'prep-c.html'), 'w').write(page(C_CSS, c, []))           # preview, sends nothing
+print('prep.html (sends to', len(EP_REAL), 'endpoint), prep-b.html + prep-c.html (previews)')
