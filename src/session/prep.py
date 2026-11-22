@@ -4,12 +4,12 @@ sending to the same place as the Apply form. Cal.com sends people here after the
 to the link, so the form knows the day ("See you Thursday") and skips the email step.
 The two looks he tried stay as hidden previews that send nothing: /session/prep-b/ and /session/prep-c/.
 python3 src/session/prep.py src/session"""
-import os, sys, json
+import os, sys, json, re
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'src/session'
 apply = open(os.path.join(OUT, 'apply.html')).read()
 # the Apply form's inbox endpoint only, so answers land in the same inbox. Its Control Room /apply route is for applications, not prep answers.
-EP_REAL = [u for u in json.loads(apply.split("E=", 1)[1].split(";", 1)[0]) if 'formsubmit.co' in u]
-HEAD = apply.split('</style>')[0]  # same head, fonts and form styles as the Apply form
+EP_REAL = [u for u in json.loads(re.search(r',E=(\[.*?\]);', apply).group(1)) if 'formsubmit.co' in u]
+HEAD = open(os.path.join(OUT, 'apply-head.html')).read()  # same head, fonts and form styles as the Apply form (v1.1 snapshot)
 HEAD = HEAD.replace('<title>Apply for a Session · Ashah Meets World</title>', '<title>Before we meet · Ashah Meets World</title><meta name="robots" content="noindex">')
 
 OBJ = 'What’s the one thing you want from our 45 minutes?'
