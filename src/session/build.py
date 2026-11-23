@@ -115,7 +115,7 @@ C_CSS='''
 .beam3{display:flex;justify-content:center;gap:56px;margin-top:44px;position:relative}
 .beam3:before{content:'';position:absolute;left:12%;right:12%;top:7px;height:1px;background:linear-gradient(90deg,#FFE2C2,#7FD8F0,#A996FF);box-shadow:0 0 10px #7FD8F0}
 .beam3 div{position:relative;padding-top:30px;width:200px}.beam3 i{position:absolute;left:50%;top:0;width:15px;height:15px;margin-left:-7px;border-radius:50%;background:#FFF3E0;box-shadow:0 0 12px 3px rgba(255,226,194,.8),0 0 40px 10px rgba(242,180,140,.45)}
-.beam3 b{display:block;font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:26px;margin-bottom:8px}.beam3 span{font-size:14px;color:#C9CFEA;line-height:1.55;display:block}
+.beam3.getin{width:fit-content;margin-left:auto;margin-right:auto;gap:64px}.beam3.getin b{white-space:nowrap}.beam3.getin:before{left:100px;right:100px}.beam3 b{display:block;font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-size:26px;margin-bottom:8px}.beam3 span{font-size:14px;color:#C9CFEA;line-height:1.55;display:block}
 .ring{display:grid;grid-template-columns:repeat(3,max-content);justify-content:center;justify-items:start;gap:18px 72px;margin-top:34px;font-family:'Cormorant Garamond';font-style:italic;font-size:30px;color:#F7F5F0}
 
 @media (max-width:600px){.scene{min-height:640px;padding:90px 18px}.scene h2{font-size:42px}.beam3{flex-direction:column;gap:26px;align-items:center}.beam3:before{display:none}.ring{font-size:24px}}
@@ -127,7 +127,7 @@ def C():
   s+=sc('popsky','45 minutes.<br><em>Three turns of the beam.</em>','<div class="beam3">'+''.join(f'<div><i></i><b>{a}</b><span>{b}</span></div>' for a,b in THREE)+'</div>')
   s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We read all six, so you see the whole picture.</p><div class="ring">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div>')
   s+=sc('','What you leave with.',f'<p>{LEAVE}</p><p style="margin-top:16px">{AFTER}</p>')
-  s+=sc('','How you get in.','<div class="beam3" style="gap:24px">'+''.join(f'<div style="width:180px"><i></i><b>{a}</b><span>{b}</span></div>' for a,b in STEPS)+'</div>')
+  s+=sc('','How you get in.','<div class="beam3 getin">'+''.join(f'<div><i></i><b>{a}</b>'+(f'<span>{b}</span>' if b else '')+'</div>' for a,b in STEPS)+'</div>')
   s+=END+TAIL
   return HEAD('The Session · Ashah Meets World',C_CSS)+s
 
