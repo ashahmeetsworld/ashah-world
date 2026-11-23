@@ -43,7 +43,7 @@ PCOL={'Identity':'#F2CF9A','Storytelling':'#B9A4FF','Product':'#F2A47A','Ecosyst
 PC=lambda p:f' style="color:{PCOL[p]};text-shadow:0 0 18px {PCOL[p]}66"><i class="orb" style="background:{PCOL[p]};box-shadow:0 0 10px 2px {PCOL[p]}99,0 0 26px 6px {PCOL[p]}44"></i'
 WB={'Identity':'identity','Storytelling':'storytelling','Product':'product','Ecosystem':'ecosystem','Continuity':'continuity','Campaigns':'campaigns'}
 THREE=[('Where you are','We read your brand across six pillars, and find what’s carrying it and what’s holding it back.'),('Where it’s going','The world your brand could be. What people would step into, and the gap between here and there.'),('The one move','The single change that closes the gap first, and exactly how to make it.')]
-STEPS=[('Apply','A short form, about eight minutes. Tell me about your brand and where it’s stuck.'),('I read it','I read every application myself. You hear back within three days.'),('Pick a time','Your acceptance email holds the link to book your 45 minutes. Then five minutes of prep, so we go straight to depth.'),('The Session','One on one, on a recorded video call. Bring the thing you’re stuck on. That’s where we start.'),('Your pack','The next day, your Session Pack lands in your inbox.')]
+STEPS=[('Apply','A short form, about eight minutes. Tell me about your brand and where you want it to go.'),('I read it','I read every application myself. You hear back within three days.'),('Pick a time','Your acceptance email holds the link to book your 45 minutes. Then five minutes of prep, so we go straight to depth.'),('The Session','One on one, on a recorded video call. Bring the one thing you most want to move. That’s where we start.'),('Your pack','The next day, your Session Pack lands in your inbox.')]
 WHO='For founders building a brand with culture at its centre. Labels, studios, venues, artists. People don’t just buy from you, they want to belong to what you’re making. You’re ready to make that world as strong as the product.'
 LEAVE='The next day, your Session Pack lands in your inbox. I rewatch our call and build it around your brand alone: the read across all six pillars, where your brand should be going, and the one move, laid out step by step so you can start that week.'
 AFTER='Then the path is yours. Walk it on your own with the pack, or with me, month by month.'  # 23 Nov 2026: the Season offer is retired
@@ -68,7 +68,7 @@ def A():
   s=HERO+'<div class="path">'
   s+=f'<div class="stop"><h2 class="ser">Who it’s for.</h2><p>{WHO}</p></div>'
   s+='<div class="stop"><h2 class="ser">45 minutes, three turns of the beam.</h2><div class="trio">'+''.join(f'<div><b>{a}</b><p>{b}</p></div>' for a,b in THREE)+'</div></div>'
-  s+='<div class="stop"><h2 class="ser">Six pillars, one read.</h2><p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="pills">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div></div>'
+  s+='<div class="stop"><h2 class="ser">Six pillars, one read.</h2><p>Every brand that lasts is built on the same six. We read all six, so you see the whole picture.</p><div class="pills">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div></div>'
   s+=f'<div class="stop"><h2 class="ser">What you leave with.</h2><p>{LEAVE}</p><p style="margin-top:18px">{AFTER}</p></div>'
   s+='<div class="stop" style="padding-bottom:40px"><h2 class="ser">How you get in.</h2><div class="steps">'+''.join(f'<div><b>{a}</b><p>{b}</p></div>' for a,b in STEPS)+'</div></div>'
   s+='</div>'+END+TAIL
@@ -125,7 +125,7 @@ def C():
   s=HERO
   s+=sc('window','Who it’s for.',f'<p>{WHO}</p>')
   s+=sc('popsky','45 minutes.<br><em>Three turns of the beam.</em>','<div class="beam3">'+''.join(f'<div><i></i><b>{a}</b><span>{b}</span></div>' for a,b in THREE)+'</div>')
-  s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We look at all of them, so nothing gets missed.</p><div class="ring">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div>')
+  s+=sc('','Six pillars, <em>one read.</em>','<p>Every brand that lasts is built on the same six. We read all six, so you see the whole picture.</p><div class="ring">'+''.join(f'<span{PC(p)}>{p}</span>' for p in PILLARS)+'</div>')
   s+=sc('','What you leave with.',f'<p>{LEAVE}</p><p style="margin-top:16px">{AFTER}</p>')
   s+=sc('','How you get in.','<div class="beam3" style="gap:24px">'+''.join(f'<div style="width:200px"><i></i><b>{a}</b><span>{b}</span></div>' for a,b in STEPS)+'</div>')
   s+=END+TAIL
