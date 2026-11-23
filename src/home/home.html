@@ -69,6 +69,7 @@
 .aur{border:0;border-radius:999px;padding:14px 30px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:#06081A;background:linear-gradient(90deg,#8FB3F6,#9EA1FB 50%,#A498FE 75%,#B49AE9);animation:glowp 4s ease-in-out infinite;box-shadow:0 0 24px rgba(127,216,240,.55),0 0 60px rgba(169,150,255,.35)}
 @keyframes aurora{to{background-position:300% 0}}@keyframes drift{to{transform:translateX(30px) scaleY(1.15)}}
 .pop .xx{position:absolute;top:14px;right:18px;color:#C9CFEA;z-index:2}
+.pop .go{display:inline-block;text-decoration:none;padding:15px 34px}
 /* B poolside */
 .pool{position:relative;height:120px;background:linear-gradient(180deg,#9EDCF2 0,#5AA6DC 10%,#2D5DB0 45%,#28307E 75%,#2A1F62);}
 .pool:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 22px,rgba(230,247,255,.16) 22px 23px);animation:ripple 5s ease-in-out infinite}
@@ -331,16 +332,17 @@ box.classList.add('on');box.dispatchEvent(new Event('igready'))}).catch(function
 <linearGradient id="pr-b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A996FF" stop-opacity="0"/><stop offset=".45" stop-color="#A996FF" stop-opacity=".55"/><stop offset=".8" stop-color="#7C5CFF" stop-opacity=".35"/><stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/></linearGradient>
 <filter id="pr-f" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter></defs>
 <g filter="url(#pr-f)"><path d="M180 300 C 260 200, 380 120, 520 70 S 720 20, 820 30 L 840 90 C 720 90, 600 140, 500 190 S 330 300, 300 330 Z" fill="url(#pr-a)"/>
-<path d="M320 320 C 420 230, 520 170, 640 140 S 800 120, 860 130 L 860 200 C 760 200, 640 240, 560 300 Z" fill="url(#pr-b)"/></g></svg></div><div class="pshade"></div><span class="xx" role="button" aria-label="Close" style="cursor:pointer">×</span><div class="body"><div class="k">Before you go <b>further.</b></div><p class="sub">One letter a month: what I'm building, and what it's teaching me. Notes on taste, culture and the creative life.</p><div class="em" data-signup="popup"><input type="email" name="EMAIL" required autocomplete="email" placeholder="your@email.com" aria-label="Your email"><a class="aur" href="#" role="button">Join</a></div></div></div></div><script>
-/* Letters pop-up rules (Ashah, 17 Nov 2026): never after sign-up; shows once a visit at most, about halfway down;
-   after a close it waits 3 visits before asking again; after 2 closes it stops for good. */
-(function(){var K='amw-letters',st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+<path d="M320 320 C 420 230, 520 170, 640 140 S 800 120, 860 130 L 860 200 C 760 200, 640 240, 560 300 Z" fill="url(#pr-b)"/></g></svg></div><div class="pshade"></div><span class="xx" role="button" aria-label="Close" style="cursor:pointer">×</span><div class="body"><div class="k">Before you go <b>further.</b></div><p class="sub">Let's look at your brand together. One free 45-minute Session, and you leave with the one move that closes the gap.</p><a class="aur go" href="__BASE__/session/apply/">Apply for a Session</a></div></div></div><script>
+/* Session pop-up (23 Nov 2026, was the Letters pop-up). Same rules: never after they tap Apply; shows once a visit at most,
+   about halfway down; after a close it waits 3 visits before asking again; after 2 closes it stops for good. */
+(function(){var K='amw-session-pop',st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
 st.visits=(st.visits||0)+1;save();
 if(st.joined||(st.closes||0)>=2)return; if(st.closedAt&&st.visits-st.closedAt<3)return;
 var pop=document.querySelector('.pop'),shown=false;
 function show(){if(shown)return;shown=true;document.body.classList.add('show','pa')}
 addEventListener('scroll',function(){var h=document.documentElement;if(h.scrollTop/(h.scrollHeight-innerHeight)>.45)show()},{passive:true});
+pop.querySelector('.go').addEventListener('click',function(){st.joined=true;save()});
 pop.querySelector('.xx').addEventListener('click',function(){document.body.classList.remove('show');st.closes=(st.closes||0)+1;st.closedAt=st.visits;save()});
 })();</script><script>(function(){var q=(location.search.match(/amb=([abc])/)||[])[1]||'a';var sec=document.querySelector('.init');if(!q||!sec)return;var a=document.createElement('div');a.className='amb';sec.prepend(a);var R=Math.random,ph=innerWidth<600,h='';
 function ff(n,cols){for(var i=0;i<n;i++){var s=(3+R()*4).toFixed(1),c=cols[i%cols.length];h+='<i class="ff" style="left:'+(R()*100)+'%;top:'+(15+R()*80)+'%;width:'+s+'px;height:'+s+'px;background:'+c+';box-shadow:0 0 8px 2px '+c+'88,0 0 22px 6px '+c+'33;--d:'+(10+R()*12)+'s;--b:'+(3+R()*4)+'s;--dl:-'+(R()*10)+'s;--x:'+(R()*80-40)+'px;--y:'+(-30-R()*70)+'px"></i>'}}
