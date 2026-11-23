@@ -1,6 +1,6 @@
 ---
 title: Field Notes
-summary: A value-carousel series that decodes brands, campaigns and cultural moments, built as a batchable content system in one visual world.
+summary: Carousels that decode brands, campaigns and cultural moments, and hand you the lesson inside. All lit in the same world.
 client: Ashah Meets World
 year: 2026
 skill: Ecosystem Design

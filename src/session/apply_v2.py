@@ -69,6 +69,13 @@ TAPS = [
 s = '<a class="mk" href="__BASE__/session/">A·M·W</a><form class="apply" novalidate><div class="aw">'
 s += ('<div class="hero2"><h1 class="ser">What’s holding your brand <br><em>back right now?</em></h1>'
       '<textarea name="stuck" placeholder="Be specific. This is where we start." required></textarea>'
+      # Headline A/B test (Ashah, 23 Nov 2026): half see A (holding back), half see B (a year from now). Sticky per browser.
+      # The pick rides along as "headline" (A or B) in the inbox email, and as a [A]/[B] tag on stuck in the Control Room copy.
+      '<input type="hidden" name="headline" value="A">'
+      '<script>(function(){var k="amw-apply-headline",v;try{v=localStorage.getItem(k)}catch(e){}'
+      'if(v!=="A"&&v!=="B"){v=Math.random()<.5?"A":"B";try{localStorage.setItem(k,v)}catch(e){}}'
+      'if(v==="B"){var h=document.querySelector(".hero2 h1");if(h)h.innerHTML="Where do you want your brand <br><em>a year from now?</em>"}'
+      'var i=document.querySelector("input[name=headline]");if(i)i.value=v})();</script>'
       '<p>A free 45-minute Brand Strategy Session, ten a month. About eight minutes to apply. I read every one myself and reply within three days.</p></div>')
 s += f'<div class="blk"><h2 class="ser">{["Six","Seven","Eight","Nine"][len(TAPS)-6]} quick taps</h2><p>Ranges are fine.</p><div class="grid">'
 s += ''.join(card(l, f, h) for l, f, h in TAPS) + '</div></div>'
@@ -99,7 +106,7 @@ if(bad){bad.focus();bad.scrollIntoView({block:'center',behavior:'smooth'});say('
 if(!f.querySelector('input[name=deal]').checked){f.querySelector('.deal').scrollIntoView({block:'center',behavior:'smooth'});say('Tick “Deal.” and it’s on its way.');return}
 var d={},fd=new FormData(f);fd.forEach(function(v,k){if(v)d[k]=d[k]?d[k]+', '+v:v});d._subject='Session application: '+(d.brand||d.name||'');d._template='table';d._captcha='false';
 var b=f.querySelector('.go');b.disabled=true;b.textContent='Sending…';
-var c=Object.assign({},d);c.oneline=[d.kind,d.oneline].filter(Boolean).join(' · ');c.ready=d.walk;c.src=[d.src,d.sentby&&'sent by '+d.sentby].filter(Boolean).join(' · ');
+var c=Object.assign({},d);c.oneline=[d.kind,d.oneline].filter(Boolean).join(' · ');c.ready=d.walk;c.stuck='['+(d.headline||'A')+'] '+(d.stuck||'');c.src=[d.src,d.sentby&&'sent by '+d.sentby].filter(Boolean).join(' · ');
 try{if(E.length){var rs=await Promise.allSettled(E.map(function(u){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(/workers\\.dev\\/apply/.test(u)?c:d)}).then(function(r){if(!r.ok)throw 0})}));if(!rs.some(function(x){return x.status==='fulfilled'}))throw 0}
 document.body.classList.add('sent');scrollTo(0,0)}catch(x){b.disabled=false;b.textContent='Send my application';say('That didn’t send. Try once more in a moment.')}})})();</script>'''.replace('__EP__', json.dumps(EP))
 
