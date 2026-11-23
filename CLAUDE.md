@@ -127,3 +127,6 @@ The site is currently a personal brand and portfolio. The paid offer is archived
 - `src/session/build.py` now writes only `session.html`: `python3 src/session/build.py src/session __BASE__`. Never run its old `F()` into `apply.html`.
 - Sessions (Ashah, 23 Nov 2026): free Brand Strategy Session, ten a month, one per brand, "All I ask back is honest feedback." The Season offer is retired: after the Session they walk it on their own with the pack, or with him, month by month.
 - Letters are monthly (the weekly A·M·W letter ended 22 Nov 2026): the home door box and pop-up, the workbook pages and the email sources in `public/email/src/` say "a month". Brevo keeps its own copies of those emails (loaded from these files by htmlUrl), so a wording change needs a refresh in Brevo too, with his OK.
+
+## Orbit page removed (23 Nov 2026)
+Ashah: "/orbit page should be removed altogether." `/orbit/` now redirects home (`src/pages/orbit.astro`, like Passage). The old page source, its built HTML and the sample hub (`hub-demo.html`) are kept in `archive/orbit/`. The Orbit pairing section on `/lucid/` is gone too. `public/os/` downloads stay, because links in emails already sent still point at them.
