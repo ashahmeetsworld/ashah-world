@@ -4,9 +4,14 @@ name: Instagram posting robot
 # Runs on GitHub's servers, so it works with no Claude usage and the PC off.
 # Schedule: scripts/ig-post/slots.json (Melbourne time). Already-live slots: scripts/ig-post/posted.json. Media and captions: branch nov-orbit-swap.
 # It checks Instagram first, so a post that is already live is never posted twice.
+# v2.0 (28 Nov 2026): stays awake up to 5.5 h and posts each slot on the minute, catches up missed
+# slots up to 7 days late, then starts the next run itself. Public repo, so the minutes are free.
 on:
   schedule:
-    - cron: "*/10 * * * *" # GitHub can start these late; a slot stays postable for 24 h
+    - cron: "*/10 * * * *" # backup only: GitHub starts these hours late, so each run keeps its own clock and starts the next run itself
+  push: # adding or changing slots starts the robot straight away
+    branches: [main]
+    paths: ["scripts/ig-post/**", ".github/workflows/ig-post.yml"]
   workflow_dispatch:
     inputs:
       only:
@@ -20,6 +25,7 @@ on:
 
 permissions:
   contents: read
+  actions: write # lets each run start the next one, so posting never waits on GitHub's timer
 
 concurrency:
   group: ig-post
@@ -28,7 +34,7 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
         with:
